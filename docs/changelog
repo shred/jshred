@@ -1,5 +1,12 @@
-CHANGELOG -- $Id: changelog,v 1.11 2004/07/20 14:00:47 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.15 2004/08/18 06:36:03 shred Exp $
 
+
+R6 (2004-08-18)
+  * NoListSelectionModel added.
+  * JHistoryTextField added.
+  * XMLWriter got convenience methods for adding parameters to an
+    element.
+  * XMLWriter now writes much shorter and more readable XML.
 
 R5 (2004-07-20)
   * Added findbugs config file.

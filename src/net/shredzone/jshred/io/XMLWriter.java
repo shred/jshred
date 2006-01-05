@@ -49,17 +49,27 @@ import java.util.*;
 import org.xml.sax.*;
 
 /**
- * A writer for cleanly formatted XML output.
+ * A very simple writer for cleanly formatted XML output.
+ * <p>
+ * This writer will do for creating many XML files, but please note
+ * that it is not perfect at all. It does not support namespace, DTDs
+ * and it is unable to read DOM structures as in the <code>org.w3c.dom</code>
+ * package. And last but not least it does not validate your XML against
+ * a DTD.
+ * <p>
+ * What it <em>does</em> is indention of the text, proper escaping
+ * of XML special chars and correct charset encoding.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: XMLWriter.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: XMLWriter.java,v 1.4 2004/08/18 06:36:03 shred Exp $
  */
 public class XMLWriter extends BufferedWriter {
-  private String indent    = "  ";
-  private String charset   = "UTF-8";
-  private int    level     = 0;
-  private Stack  sElements = new Stack();
-  StringBuffer   bTag      = new StringBuffer();
+  private String indent     = "  ";
+  private String charset    = "UTF-8";
+  private int    level      = 0;
+  private Stack  sElements  = new Stack();
+  private StringBuffer bTag = new StringBuffer();
+  private String store      = null;
 
   /**
    * Create a new XMLWriter basing on a Writer.
@@ -144,12 +154,55 @@ public class XMLWriter extends BufferedWriter {
   }
 
   /**
-   * Start a new XML element.
+   * Start a new XML element. There are no attributes added to this
+   * element.
    *
    * @param   element     Element name
    */
   public void startElement( String element ) throws IOException {
-    startElement( element, null );
+    startElement( element, (Attributes) null );
+  }
+
+  /**
+   * Start a new XML element with attributes. This method will take proper care
+   * for excaping all chars within the attribute values.
+   * <p>
+   * This is a convenience call that accepts one attribute and its
+   * value.
+   *
+   * @param   element     Element name
+   * @param   attr        Attribute name
+   * @param   val         Attribute value
+   * @since   R6
+   */
+  public void startElement( String element, String attr, String val ) throws IOException {
+    org.xml.sax.helpers.AttributesImpl xmla = new org.xml.sax.helpers.AttributesImpl();
+    xmla.addAttribute( "", "", attr, "CDATA", val );
+    startElement( element, xmla );
+  }
+
+  /**
+   * Start a new XML element with attributes. This method will take proper care
+   * for excaping all chars within the attribute values.
+   * <p>
+   * This is a convenience call that accepts a Map with the attribute
+   * name as key and its value as corresponding attribute value. For
+   * both the key and value <code>toString()</code> is used to get
+   * the string that is written to the XML file.
+   *
+   * @param   element     Element name
+   * @param   attrs       Map with attributes and corresponding values
+   * @since   R6
+   */
+  public void startElement( String element, Map attrs ) throws IOException {
+    org.xml.sax.helpers.AttributesImpl xmla = new org.xml.sax.helpers.AttributesImpl();
+    Iterator it = attrs.keySet().iterator();
+    while( it.hasNext() ) {
+      Object key = it.next();
+      Object val = attrs.get( key );
+      xmla.addAttribute( "", "", key.toString(), "CDATA", val.toString() );
+    }
+    startElement( element, xmla );
   }
 
   /**
@@ -188,15 +241,34 @@ public class XMLWriter extends BufferedWriter {
     if( element==null ) {
       throw new IOException("Too many elements closed");
     }
-    level--;
-    if( bTag.length() > 0 ) {
-      write( "<" );
+    if( store!=null && bTag.length() > 0 ) {
+      level--;
+      write( '<' );
       write( bTag.toString() );
-      write( "/>" );
+      write( '>' );
+      write( escape( store ) );
+      write( "</" );
+      write( element );
+      write( '>' );
+      store = null;
       bTag = new StringBuffer();
     }else {
-      writeIndent();
-      write( "</" + element + '>' );
+      if( store!=null ) {
+        writeIndent();
+        write( escape( store ) );
+        newLine();
+        store = null;
+      }
+      level--;
+      if( bTag.length() > 0 ) {
+        write( '<' );
+        write( bTag.toString() );
+        write( "/>" );
+        bTag = new StringBuffer();
+      }else {
+        writeIndent();
+        write( "</" + element + '>' );
+      }
     }
     newLine();
   }
@@ -213,12 +285,17 @@ public class XMLWriter extends BufferedWriter {
     //--- Ignore empty container ---
     content = content.trim();
     if( content.equals("") ) return;
-
-    //--- Write it ---
-    flushTag();
-    writeIndent();
-    write( escape( content ) );
-    newLine();
+    
+    if( store==null ) {
+      //--- Temporary store it ---
+      store = content;
+    }else {
+      //--- Write it ---
+      flushTag();
+      writeIndent();
+      write( escape( content ) );
+      newLine();
+    }
   }
 
   /**
@@ -264,6 +341,12 @@ public class XMLWriter extends BufferedWriter {
       write( ">" );
       newLine();
       bTag = new StringBuffer();
+    }
+    if( store!=null ) {
+      writeIndent();
+      write( escape( store ) );
+      newLine();
+      store = null;
     }
   }
 }
