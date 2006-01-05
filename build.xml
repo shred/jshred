@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- jedit :mode=xml:tabSize=2:noTabs=true:folding=none: -->
+
+<!-- jshred Ant Build File -->
+<!-- Copyright (c) 2004 Richard "Shred" Körber -->
+<!-- All Rights Reserved. -->
+<!-- Released under MPL 1.1/GPL 2.0/LGPL 2.1 -->
+<!-- $Id: build.xml,v 1.3 2004/06/21 19:44:29 shred Exp $ -->
+
+<project name="jshred" default="dist" basedir=".">
+  <description>
+    A free collection of useful classes.
+  </description>
+  
+  <!-- Global Properties -->
+  <property name="src"       location="src"/>
+  <property name="build"     location="build"/>
+  <property name="dist"      location="dist"/>
+  <property name="doc"       location="docs"/>
+
+  <!-- Classpath -->
+  <path id="project.class.path">
+    <!-- TODO: include all *.jar in lib -->
+    <pathelement path="${java.class.path}/"/>
+  </path>
+  
+  <!-- Targets -->
+  <target name="init" description="Initialize project">
+    <tstamp/>
+    <mkdir dir="${build}"/>
+    <mkdir dir="${dist}"/>
+  </target>
+  
+  <target name="keygen" description="Generate keypair">
+    <genkey alias="shred" storepass="secret" validity="3653" keystore=".keystore">
+      <dname>
+        <param name="CN" value="shred"/>
+        <param name="O"  value="shredzone.net"/>
+        <param name="C"  value="DE"/>
+      </dname>
+    </genkey>
+  </target>
+  
+  <target name="compile" depends="init" description="Compile source">
+    <!-- Compile from src to build -->
+    <javac srcdir="${src}" destdir="${build}" deprecation="on" optimize="on">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+  
+  <target name="dist" depends="compile" description="Create a JAR file">
+    <!-- Create a JAR file there -->
+    <jar jarfile="${dist}/jshred.jar" basedir="${build}" compress="true">
+      <manifest>
+        <attribute name="Built-By" value="${user.name}"/>
+      </manifest>
+    </jar>
+    <!-- Sign it -->
+    <signjar jar="${dist}/jshred.jar" alias="shred" storepass="secret" keystore=".keystore"/>
+  </target>
+  
+  <target name="javadoc" depends="init" description="Build Javadoc">
+    <javadoc packagenames="net.shredzone.jshred.*"
+             sourcepath="${src}"
+             destdir="${doc}/api"
+             author="true"
+             version="true"
+             charset="UTF-8"
+             windowtitle="jshred">
+      <bottom><![CDATA[<i>Copyright &copy; 2004 Richard "Shred" Körber</i>]]></bottom>
+    </javadoc>
+  </target>
+  
+  <target name="clean" description="Cleanup">
+    <!-- Delete target directories -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+    <delete dir="${doc}/api"/>
+  </target>
+  
+</project>
