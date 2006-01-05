@@ -48,7 +48,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import javax.swing.event.*;
 import java.io.Serializable;
 
 /**
@@ -56,7 +55,7 @@ import java.io.Serializable;
  * SortableTableModel and allows to select columns to be sorted.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java,v 1.3 2004/07/20 14:00:48 shred Exp $
+ * @version $Id: SortTableHeader.java,v 1.4 2004/08/23 23:49:15 shred Exp $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
   private boolean pressed;        // Mouse is pressed
@@ -360,5 +359,3 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

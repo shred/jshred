@@ -60,7 +60,7 @@ import java.util.prefs.*;
  * This class is thread safe.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHistoryTextField.java,v 1.2 2004/08/13 07:10:19 shred Exp $
+ * @version $Id: JHistoryTextField.java,v 1.5 2004/09/21 15:58:57 shred Exp $
  * @since   R6
  */
 public class JHistoryTextField extends JComponent {
@@ -136,7 +136,7 @@ public class JHistoryTextField extends JComponent {
       }
     });
   }
-  
+
   /**
    * Set the maximum history size. If a new entry would exceed the
    * limit, the least recently used entry will be removed from the
@@ -353,13 +353,7 @@ public class JHistoryTextField extends JComponent {
       
       //--- Recall the current history ---
       String[] keys =prefs.keys();
-      Arrays.sort( keys, new Comparator() {
-        public int compare( Object o1, Object o2 ) {
-          int i1 = Integer.parseInt( o1.toString() );
-          int i2 = Integer.parseInt( o2.toString() );
-          return i1-i2;
-        }
-      });
+      Arrays.sort( keys, new HTFComparator() );
       int max = Math.min( keys.length, histSize );
       for( int ix=0; ix<max; ix++ ) {
         jCombo.addItem( prefs.get( keys[ix], "" ) );
@@ -408,7 +402,18 @@ public class JHistoryTextField extends JComponent {
       l.actionPerformed( e );
     }
   }
+
+/*----------------------------------------------------------------------------*/
+  
+  /**
+   * This comparator compares two integer values of a string representation.
+   */
+  private static class HTFComparator implements Comparator {
+    public int compare( Object o1, Object o2 ) {
+      int i1 = Integer.parseInt( o1.toString() );
+      int i2 = Integer.parseInt( o2.toString() );
+      return i1-i2;
+    }
+  }
   
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

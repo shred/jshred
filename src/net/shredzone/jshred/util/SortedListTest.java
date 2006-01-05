@@ -42,31 +42,70 @@
  * ***** END LICENSE BLOCK *****
  */
 
-package net.shredzone.jshred.swing;
+package net.shredzone.jshred.util;
 
-import javax.swing.*;
-import java.awt.*;
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 /**
- * This JButton is to be used in toolbars. It takes care that the button never
- * has a text, never gets the focus and has no borders.
+ * A jUnit test case for SortedList.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java,v 1.3 2004/08/23 23:49:15 shred Exp $
+ * @since   R7
+ * @version $Id: SortedListTest.java,v 1.1 2004/09/27 07:42:34 shred Exp $
  */
-public class JToolbarButton extends JButton {
+public class SortedListTest extends TestCase {
 
-  /**
-   * Creates a new JToolbarButton for a certain action.
-   *
-   * @param   a     Action
+  /*
+   * Class under test for boolean add(Object)
    */
-  public JToolbarButton( Action a ) {
-    super( a );
-    setText( "" );
-    setRequestFocusEnabled( false );
-    setFocusable( false );
-    setMargin( new Insets( 0,0,0,0 ) );
+  public void testAddObject() {
+    SortedList list = new SortedList();
+    list.add("Mike");
+    list.add("Charlie");
+    list.add("Alpha");
+    list.add("Tango");
+    list.add("Foxtrot");
+    list.add("Zulu");
+    list.add("Charlie");    // <-- a duplicate!
+    
+    Assert.assertEquals( list.size(), 6 );
+    
+    Assert.assertEquals( "Alpha", list.get(0) );
+    Assert.assertEquals( "Charlie", list.get(1) );
+    Assert.assertEquals( "Foxtrot", list.get(2) );
+    Assert.assertEquals( "Mike", list.get(3) );
+    Assert.assertEquals( "Tango", list.get(4) );
+    Assert.assertEquals( "Zulu", list.get(5) );
+  }
+
+  /*
+   * Class under test for boolean contains(Object)
+   */
+  public void testContainsObject() {
+    SortedList list = new SortedList();
+    list.add("Mike");
+    list.add("Charlie");
+    list.add("Alpha");
+    list.add("Tango");
+    
+    Assert.assertTrue( list.contains("Charlie") );
+    Assert.assertFalse( list.contains("Bravo") );
+  }
+
+  /*
+   * Class under test for int indexOf(Object)
+   */
+  public void testIndexOfObject() {
+    SortedList list = new SortedList();
+    list.add("Alpha");      // 0
+    list.add("Charlie");    // 1
+    list.add("Mike");       // 2
+    list.add("Tango");      // 3
+    
+    Assert.assertEquals( list.indexOf("Charlie"), 1 );
+    Assert.assertEquals( list.indexOf("Tango"), 3 );
+    Assert.assertEquals( list.indexOf("Bravo"), -1 );
   }
 
 }

@@ -45,7 +45,6 @@
 package net.shredzone.jshred.swing;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -58,7 +57,7 @@ import javax.swing.border.*;
  * aligned layout.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java,v 1.4 2004/07/20 14:08:55 shred Exp $
+ * @version $Id: JLabelGroup.java,v 1.5 2004/08/23 23:49:15 shred Exp $
  */
 public class JLabelGroup extends JPanel {
   private Component   comp;
@@ -245,5 +244,3 @@ public class JLabelGroup extends JPanel {
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

@@ -55,7 +55,7 @@ import java.io.Serializable;
  * care about a proper scaling of the Action icon to a nice menu size.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: MenuActionProxy.java,v 1.4 2004/07/20 14:00:48 shred Exp $
+ * @version $Id: MenuActionProxy.java,v 1.5 2004/08/23 23:49:15 shred Exp $
  */
 public class MenuActionProxy implements Action, Serializable {
   private final Action master;
@@ -140,5 +140,3 @@ public class MenuActionProxy implements Action, Serializable {
     master.actionPerformed( e );
   }
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

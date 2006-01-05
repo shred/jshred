@@ -44,7 +44,6 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
 
@@ -54,7 +53,7 @@ import java.awt.image.*;
  * will stay black. Transparency is honored.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: BrightFilter.java,v 1.3 2004/07/20 09:07:05 shred Exp $
+ * @version $Id: BrightFilter.java,v 1.4 2004/08/23 23:49:15 shred Exp $
  */
 public class BrightFilter extends RGBImageFilter {
   private int p;
@@ -132,5 +131,3 @@ public class BrightFilter extends RGBImageFilter {
     return( rgb&0xFF000000 | red<<16 | green<<8 | blue );
   }
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

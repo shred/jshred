@@ -44,7 +44,6 @@
 
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -59,7 +58,7 @@ import javax.swing.table.*;
  * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.5 2004/07/20 14:00:47 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.6 2004/08/23 23:49:15 shred Exp $
  */
 public class JSortedTable extends JTable {
 
@@ -130,5 +129,3 @@ public class JSortedTable extends JTable {
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

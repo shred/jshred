@@ -44,7 +44,6 @@
 
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
 import javax.swing.*;
 
 /**
@@ -57,7 +56,7 @@ import javax.swing.*;
  * For the documentation, also see the DefaultListSelectionModel JavaDoc.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: NoListSelectionModel.java,v 1.1 2004/08/11 06:45:48 shred Exp $
+ * @version $Id: NoListSelectionModel.java,v 1.2 2004/08/23 23:49:15 shred Exp $
  * @since   R6
  */
 public class NoListSelectionModel extends DefaultListSelectionModel {
@@ -108,5 +107,3 @@ public class NoListSelectionModel extends DefaultListSelectionModel {
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

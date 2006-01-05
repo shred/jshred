@@ -44,15 +44,32 @@
 
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.table.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLayeredPane;
+import javax.swing.JMenu;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.4 2004/07/20 14:00:48 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.7 2004/09/27 21:09:52 shred Exp $
  */
 public class SwingUtils {
 
@@ -267,6 +284,38 @@ public class SwingUtils {
     }
   }
 
-}
+  /**
+   * Set the confirmation button for a JDialog.
+   * 
+   * @param   dialog        JDialog to set the confirmation button for
+   * @param   confirm       Confirmation JButton.
+   * @since   R7
+   */
+  public static void setDialogConfirmKey( JDialog dialog, JButton confirm ) {
+    dialog.getRootPane().setDefaultButton( confirm );
+  }
+  
+  /**
+   * Set the cancel button for a JDialog. Pressing the Escape key will
+   * then also trigger that JButton.
+   * 
+   * @param   dialog        JDialog to set the cancel button for
+   * @param   cancel        Cancel JButton.
+   * @since   R7
+   */
+  public static void setDialogCancelKey( JDialog dialog, JButton cancel ) {
+    final JButton fCancel = cancel;
+    final String name = "CancelAction";
+    
+    JLayeredPane lp = dialog.getLayeredPane();
+    lp.getActionMap().put( name, new AbstractAction( name ) {
+      public void actionPerformed( ActionEvent e ) {
+        fCancel.doClick();
+      }
+    });
+    
+    KeyStroke stroke = KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 );
+    lp.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( stroke, name );
+  }
 
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */
+}

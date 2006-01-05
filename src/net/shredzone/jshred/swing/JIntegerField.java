@@ -53,7 +53,7 @@ import java.awt.*;
  * supply this obligatory input field.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JIntegerField.java,v 1.3 2004/07/20 14:00:47 shred Exp $
+ * @version $Id: JIntegerField.java,v 1.4 2004/08/23 23:49:15 shred Exp $
  * @since   R2
  */
 public class JIntegerField extends JTextField {
@@ -154,5 +154,3 @@ public class JIntegerField extends JTextField {
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

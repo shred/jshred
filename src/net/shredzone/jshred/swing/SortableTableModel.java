@@ -44,10 +44,7 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
 import javax.swing.table.*;
-import javax.swing.event.*;
-import java.util.*;
 
 /**
  * The SortableTableModel extends a TableModel by methods that are
@@ -58,7 +55,7 @@ import java.util.*;
  * take care for the sorting.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModel.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: SortableTableModel.java,v 1.3 2004/08/23 23:49:15 shred Exp $
  */
 public interface SortableTableModel extends TableModel {
 
@@ -85,5 +82,3 @@ public interface SortableTableModel extends TableModel {
   public boolean isDescending();
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

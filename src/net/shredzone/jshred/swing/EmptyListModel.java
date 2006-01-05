@@ -44,29 +44,58 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
 
 /**
- * This JButton is to be used in toolbars. It takes care that the button never
- * has a text, never gets the focus and has no borders.
+ * This is just a mere empty ListModel which will never have any entries.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java,v 1.3 2004/08/23 23:49:15 shred Exp $
+ * @since   R7
+ * @version $Id: EmptyListModel.java,v 1.1 2004/09/21 07:20:37 shred Exp $
  */
-public class JToolbarButton extends JButton {
+public final class EmptyListModel implements ListModel {
 
   /**
-   * Creates a new JToolbarButton for a certain action.
-   *
-   * @param   a     Action
+   * Get the size. It's always 0.
+   * 
+   * @return  Size
+   * @see javax.swing.ListModel#getSize()
    */
-  public JToolbarButton( Action a ) {
-    super( a );
-    setText( "" );
-    setRequestFocusEnabled( false );
-    setFocusable( false );
-    setMargin( new Insets( 0,0,0,0 ) );
+  public int getSize() {
+    return 0;
+  }
+
+  /**
+   * Get an element. Should never be called since the list is empty.
+   * Will always return null.
+   * 
+   * @param   index       Index
+   * @return  Always null
+   * @see javax.swing.ListModel#getElementAt(int)
+   */
+  public Object getElementAt( int index ) {
+    return null;
+  }
+
+  /**
+   * Add a listener. Since this list will always be empty, the listeners
+   * are just ignored.
+   * 
+   * @param   l       ListDataListener to be ignored.
+   * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
+   */
+  public void addListDataListener( ListDataListener l ) {
+  }
+
+  /**
+   * Remove a listener. Since this list will always be empty, the listeners
+   * are just ignored.
+   * 
+   * @param   l       ListDataListener to be ignored.
+   * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
+   */
+  public void removeListDataListener( ListDataListener l ) {
   }
 
 }

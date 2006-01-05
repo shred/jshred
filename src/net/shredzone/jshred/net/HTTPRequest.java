@@ -76,7 +76,7 @@ import javax.swing.ProgressMonitor;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java,v 1.6 2004/07/20 14:00:47 shred Exp $
+ * @version $Id: HTTPRequest.java,v 1.7 2004/08/23 23:49:16 shred Exp $
  */
 public class HTTPRequest {
 
@@ -745,5 +745,3 @@ public class HTTPRequest {
 
   }
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

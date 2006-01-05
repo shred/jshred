@@ -1,5 +1,16 @@
-CHANGELOG -- $Id: changelog,v 1.15 2004/08/18 06:36:03 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.22 2004/09/27 13:17:23 shred Exp $
 
+
+R7 (2004-09-27)
+  * Switched from JEdit to Eclipse. Findbugs is used as Eclipse plugin.
+  * JRememberOptionPane added.
+  * SortedList added.
+  * EmptyListModel and EmptyTreeModel added.
+  * Fixed some Findbugs reports.
+  * SwingUtils: adding confirm and cancel buttons to JDialogs.
+  * Added a jUnit test, more will follow. The jUnit test case classes
+    are not part of the jshred.jar. Anyhow you have to copy junit.jar
+    to your ant lib directory for compilation.
 
 R6 (2004-08-18)
   * NoListSelectionModel added.
@@ -42,6 +53,4 @@ R2 (2004-06-22)
 R1 (2004-06-21)
   * Initial public release
   * Released under MPL 1.1/GPL 2.0/LGPL 2.1 tri license
-
-# jedit :mode=text:tabSize=2:noTabs=true:maxLineLen=72:
 

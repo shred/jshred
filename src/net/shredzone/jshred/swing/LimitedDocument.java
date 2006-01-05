@@ -50,7 +50,7 @@ import javax.swing.text.*;
  * This PlainDocument will limit the input to a certain length.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: LimitedDocument.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: LimitedDocument.java,v 1.3 2004/08/23 23:49:15 shred Exp $
  */
 public class LimitedDocument extends PlainDocument {
   private int maxLength = -1;   // Maximum length
@@ -86,5 +86,3 @@ public class LimitedDocument extends PlainDocument {
     }
   }
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

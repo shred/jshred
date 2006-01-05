@@ -51,7 +51,7 @@ import javax.swing.border.*;
  * A recessed 1px border, like often used in status bars.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: TinyBorder.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: TinyBorder.java,v 1.3 2004/08/23 23:49:15 shred Exp $
  */
 public class TinyBorder extends AbstractBorder {
 
@@ -114,5 +114,3 @@ public class TinyBorder extends AbstractBorder {
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

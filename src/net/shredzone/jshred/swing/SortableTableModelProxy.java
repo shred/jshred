@@ -44,7 +44,6 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.event.*;
 import java.util.*;
@@ -72,7 +71,7 @@ import java.io.Serializable;
  * the SortTableModelProxy constructor.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java,v 1.4 2004/07/20 14:00:48 shred Exp $
+ * @version $Id: SortableTableModelProxy.java,v 1.5 2004/08/23 23:49:15 shred Exp $
  */
 public class SortableTableModelProxy implements SortableTableModel, TableModelListener, Serializable {
   static final long serialVersionUID = -668922708936078948L;
@@ -391,5 +390,3 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
 	}
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

@@ -61,7 +61,7 @@ import org.xml.sax.*;
  * of XML special chars and correct charset encoding.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: XMLWriter.java,v 1.4 2004/08/18 06:36:03 shred Exp $
+ * @version $Id: XMLWriter.java,v 1.5 2004/08/23 23:49:16 shred Exp $
  */
 public class XMLWriter extends BufferedWriter {
   private String indent     = "  ";
@@ -350,5 +350,3 @@ public class XMLWriter extends BufferedWriter {
     }
   }
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

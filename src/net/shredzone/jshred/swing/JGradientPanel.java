@@ -52,7 +52,7 @@ import java.awt.*;
  * the direction and the starting and ending color.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JGradientPanel.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: JGradientPanel.java,v 1.3 2004/08/23 23:49:16 shred Exp $
  */
 public class JGradientPanel extends JPanel {
   public static final boolean VERTICAL   = true;
@@ -177,5 +177,3 @@ public class JGradientPanel extends JPanel {
   }
 
 }
-
-/* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */
