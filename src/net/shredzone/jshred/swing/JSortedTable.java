@@ -59,7 +59,7 @@ import javax.swing.table.*;
  * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.4 2004/07/15 16:55:42 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.5 2004/07/20 14:00:47 shred Exp $
  */
 public class JSortedTable extends JTable {
 
@@ -100,6 +100,7 @@ public class JSortedTable extends JTable {
    * appropriate column header.
    *
    * @param   columnIndex     Column to be sorted.
+   * @since   R4
    */
   public void sortByColumn( int columnIndex ) {
     SortableTableModel model = (SortableTableModel) getModel();

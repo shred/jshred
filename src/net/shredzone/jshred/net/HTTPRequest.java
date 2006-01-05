@@ -76,7 +76,7 @@ import javax.swing.ProgressMonitor;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java,v 1.5 2004/07/15 16:55:42 shred Exp $
+ * @version $Id: HTTPRequest.java,v 1.6 2004/07/20 14:00:47 shred Exp $
  */
 public class HTTPRequest {
 
@@ -567,6 +567,7 @@ public class HTTPRequest {
    * if it did not contain a charset, null is returned.
    *
    * @return    Charset of the response, or null
+   * @since     R4
    */
   public String getCharset() {
     String encoding = null;
@@ -601,6 +602,7 @@ public class HTTPRequest {
    * @throws    UnsupportedEncodingException    if the encoding given
    *            by the server, is not known to this Java platform.
    * @throws    IOException     if an I/O exception occured
+   * @since     R4
    */
   public Reader getContentReader()
   throws UnsupportedEncodingException, IOException {

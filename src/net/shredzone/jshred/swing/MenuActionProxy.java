@@ -48,15 +48,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
+import java.io.Serializable;
 
 /**
  * The MenuActionProxy proxies Actions to be used in menus. It takes
  * care about a proper scaling of the Action icon to a nice menu size.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: MenuActionProxy.java,v 1.3 2004/06/24 14:18:44 shred Exp $
+ * @version $Id: MenuActionProxy.java,v 1.4 2004/07/20 14:00:48 shred Exp $
  */
-public class MenuActionProxy implements Action {
+public class MenuActionProxy implements Action, Serializable {
   private final Action master;
   private Dimension dim;
 

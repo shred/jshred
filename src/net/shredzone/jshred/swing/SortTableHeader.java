@@ -49,13 +49,14 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.event.*;
+import java.io.Serializable;
 
 /**
  * This is a JTableHeader that shows the currently sorted column of a
  * SortableTableModel and allows to select columns to be sorted.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: SortTableHeader.java,v 1.3 2004/07/20 14:00:48 shred Exp $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
   private boolean pressed;        // Mouse is pressed
@@ -233,7 +234,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
    * This is a TableCellRenderer that shows the selection and sorting
    * state of each column, according to the SortTableHeader.
    */
-  private class SortTableCellRenderer implements TableCellRenderer {
+  private class SortTableCellRenderer implements TableCellRenderer, Serializable {
     private TableCellRenderer parent;
 
     /**
@@ -299,7 +300,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   /**
    * Draws an arrow icon, either up or down.
    */
-  private static class ArrowIcon implements Icon {
+  private static class ArrowIcon implements Icon, Serializable {
     private boolean up;
 
     /**

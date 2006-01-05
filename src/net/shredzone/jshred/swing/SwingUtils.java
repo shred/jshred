@@ -52,7 +52,7 @@ import javax.swing.table.*;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.3 2004/07/01 13:44:08 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.4 2004/07/20 14:00:48 shred Exp $
  */
 public class SwingUtils {
 
@@ -218,6 +218,7 @@ public class SwingUtils {
    * @param   table       JTable to be adjusted
    * @param   minwidth    Minimum width of each table cell, in pixels.
    * @param   maxwidth    Maximum width of each table cell, in pixels.
+   * @since   R4
    */
   public static void spreadColumns( JTable table, int minwidth, int maxwidth ) {
     JTableHeader header = table.getTableHeader();

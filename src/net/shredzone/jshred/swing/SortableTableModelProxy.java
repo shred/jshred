@@ -48,6 +48,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.event.*;
 import java.util.*;
+import java.io.Serializable;
 
 /**
  * The SortTableModelProxy wraps another TableModel, and allows to sort
@@ -71,9 +72,11 @@ import java.util.*;
  * the SortTableModelProxy constructor.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java,v 1.3 2004/06/23 12:21:15 shred Exp $
+ * @version $Id: SortableTableModelProxy.java,v 1.4 2004/07/20 14:00:48 shred Exp $
  */
-public class SortableTableModelProxy implements SortableTableModel, TableModelListener {
+public class SortableTableModelProxy implements SortableTableModel, TableModelListener, Serializable {
+  static final long serialVersionUID = -668922708936078948L;
+  
   private final TableModel master;
   private int currentColumn = 0;
   private boolean currentDesc = false;
@@ -195,6 +198,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
    * 
    * @param     row             Row number of this model
    * @return    Row number of the row in the master TableModel.
+   * @since     R3
    */
   public int mapRow( int row ) {
     return indexMap[row].intValue();
@@ -206,6 +210,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
    * 
    * @param     row             Row number of the master TableModel
    * @return    Appropriate current row number of this model.
+   * @since     R3
    */
   public int unmapRow( int row ) {
     for( int ix=0; ix<indexMap.length; ix++ ) {

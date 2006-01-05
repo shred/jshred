@@ -1,4 +1,13 @@
-CHANGELOG -- $Id: changelog,v 1.10 2004/07/15 16:58:18 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.11 2004/07/20 14:00:47 shred Exp $
+
+
+R5 (2004-07-20)
+  * Added findbugs config file.
+  * Findbugs found an unused variable in BrightFilter, now removed.
+  * JLabelGroup allows to override the label constructor, and offers
+    a method to read the label component.
+  * @since now used in JavaDoc.
+  * Checked the Serializable state of all classes.
 
 R4 (2004-07-15)
   * SwingUtils.spreadColumns() now also supports a minimum cell width

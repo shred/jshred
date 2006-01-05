@@ -58,7 +58,7 @@ import javax.swing.border.*;
  * aligned layout.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: JLabelGroup.java,v 1.4 2004/07/20 14:08:55 shred Exp $
  */
 public class JLabelGroup extends JPanel {
   private Component   comp;
@@ -83,7 +83,7 @@ public class JLabelGroup extends JPanel {
    * @param   pred      Predecessor JLabelGroup instance, or null
    */
   public JLabelGroup( Component c, String text, JLabelGroup pred ) {
-    this( c, new JLabel( SwingUtils.getMenuName( text ) ), pred );
+    this( c, createDefaultLabel( SwingUtils.getMenuName( text ), null ), pred );
     Character keycode = SwingUtils.getMenuShortcut( text );
     if( keycode != null ) setMnemonic( keycode.charValue() );
   }
@@ -97,7 +97,7 @@ public class JLabelGroup extends JPanel {
    * @param   pred      Predecessor JLabelGroup instance, or null
    */
   public JLabelGroup( Component c, String text, Icon icon, JLabelGroup pred ) {
-    this( c, new JLabel( text, icon, JLabel.WEST ), pred );
+    this( c, createDefaultLabel( text, icon ), pred );
   }
 
   /**
@@ -213,6 +213,34 @@ public class JLabelGroup extends JPanel {
   public void setMnemonic( int code ) {
     if( label instanceof JLabel ) {
       ((JLabel) label).setDisplayedMnemonic( code );
+    }
+  }
+  
+  /**
+   * Get the JComponent that is used as a label for this JLabelGroup.
+   * Usually this is a JLabel, but you should not rely on this!
+   *
+   * @return  JComponent used as a label.
+   * @since   R5
+   */
+  public JComponent getLabel() {
+    return label;
+  }
+  
+  /**
+   * Create the default JComponent used as a label, if one of the
+   * text constructors is used.
+   *
+   * @param   text          Label text
+   * @param   icon          Icon to be used, or null
+   * @return  JComponent showing the text and the icon
+   * @since   R5
+   */
+  protected static JComponent createDefaultLabel( String text, Icon icon ) {
+    if( icon!=null ) {
+      return new JLabel( text, icon, JLabel.WEST );
+    }else { 
+      return new JLabel( text );
     }
   }
 
