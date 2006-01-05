@@ -65,19 +65,18 @@ import javax.swing.ProgressMonitor;
  *   Reader input = req.getReader();
  * </pre>
  * <p>
+ * All parameters will be sent UTF-8 encoded, as proposed by W3C.
+ * <p>
  * GET requests are limited in their length. This class will not take
  * care to keep within the allowed length. If you are in doubt, you
  * should use POST request.
- * <p>
- * The result is not parsed in any way. You will get HTTP headers and
- * content, and have to split it up yourself.
  * <p>
  * It is possible to pass a ProgressMonitor which will be used to show how
  * many data has been transfered to the server. This is especially useful
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java,v 1.3 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: HTTPRequest.java,v 1.5 2004/07/15 16:55:42 shred Exp $
  */
 public class HTTPRequest {
 
@@ -139,21 +138,24 @@ public class HTTPRequest {
    * only be evaluated when <code>doRequest()</code> is invoked, NOT
    * at the time you have passed the parameter here. Keep this in mind!
    * <p>
+   * If a null was passed as value, the parameter is not sent at all.
+   * <p>
    * Note that a parameter can only be passed once. If you add it again,
    * it will replace the previous parameter with the same name. Also take
    * care not to exceed the limits of a GET request. Use POST if you
    * are in doubt.
    * <p>
-   * All parameter names and values are urlencoded automatically. You
-   * don't need to encode it yourself.
+   * HTTPRequest will take care for proper encoding of the parameter
+   * names and values. You won't need to urlencode them.
    *
    * @param   name          Parameter name
-   * @param   value         Parameter value
+   * @param   value         Parameter value, may be null
    */
   public void addParameter( String name, Object value ) {
-    if(name==null || value==null)
-      throw new NullPointerException("You must provide name and value");
-    hmParam.put( name, value );
+    if( name==null )
+      throw new NullPointerException("You must provide a name");
+    if( value!=null )
+      hmParam.put( name, value );
   }
 
   /**
@@ -169,8 +171,8 @@ public class HTTPRequest {
   /**
    * Convenience call to add a boolean parameter to the HTTPRequest.
    * If the boolean value is false, no parameter will be sent at all.
-   * If the boolean value was true, a "1" is transferred to the server.
-   * This method simulates a HTML checkbox somehow.
+   * If the boolean value was true, a "1" is transferred as parameter
+   * value to the server. This method somehow simulates a HTML checkbox.
    *
    * @param   name          Parameter name
    * @param   value         Parameter value
@@ -185,7 +187,8 @@ public class HTTPRequest {
    * to upload files to the server. The file will be sent using the
    * mime type "application/octet-stream". The file is not kept in
    * memory, but sent using a data stream during transmission, so
-   * HTTPRequest is also able to upload large files.
+   * HTTPRequest is also able to upload large files with a small
+   * memory print.
    *
    * @param   name          Parameter name
    * @param   file          File to be sent
@@ -258,15 +261,16 @@ public class HTTPRequest {
    * <code>doRequest()</code> connected to the server, the transfer
    * string is shown as a note. During transmission, a value between
    * min and max is shown according to the process of the transmission.
-   * After transmission, max will be the current value of the
+   * After transmission, max will always be the current value of the
    * ProgressMonitor.
    * <p>
    * You can use min and max if the HTTPRequest is just one step in
    * a chain of several steps to be shown in the ProgressMonitor.
    * <p>
-   * Note that currently the response transfer will not be shown
-   * in the ProgressMonitor. This is because the HTTPRequest class
-   * does not know the size of the response in advance.
+   * Note that the response transfer is not included in the
+   * ProgressMonitor. This is because there is no way to find out the
+   * response size from the server before the request has been entirely
+   * sent to it.
    *
    * @param   monitor       ProgressMonitor to be used.
    * @param   transfer      Message to be shown after connection.
@@ -308,22 +312,22 @@ public class HTTPRequest {
 
       // Get Content Type
       if( hmStream.isEmpty() ) {
-        connect.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );
+        connect.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded; charset=\"utf-8\"" );
       }else {
-        connect.setRequestProperty( "Content-Type", "multipart/form-data, boundary="+boundary );
+        // See RFC 2388 for multipart/form-data
+        connect.setRequestProperty( "Content-Type", "multipart/form-data; boundary="+boundary );
       }
 
       // Send parameters
       OutputStream out = connect.getOutputStream();
-      PrintStream ps = new PrintStream( out );
       if( hmStream.isEmpty() ) {
         StringBuffer data = new StringBuffer();
         createParamString( data );
-        ps.print( data.toString() );
+        out.write( UTF8encode( data.toString() ) );
       }else {
-        createMultipart( ps );
+        createMultipart( out );
       }
-      ps.flush();
+      out.flush();
 
     }else {
       //--- GET -----------------------------------------
@@ -386,7 +390,7 @@ public class HTTPRequest {
    * Set the ProgressMonitor between min and max according to the
    * relation between current and max.
    *
-   * @param   current       Current counter (0 bis max)
+   * @param   current       Current counter (0 to max)
    * @param   max           Maximum expected counter value
    */
   private void monitorSetRelation( int current, int max ) {
@@ -406,10 +410,11 @@ public class HTTPRequest {
 
   /**
    * Create a "multipart/form-data" request as described in RFC 1867.
+   * The data sent to the output stream will be UTF-8 encoded.
    *
-   * @param   ps        PrintStream, which will receive the output
+   * @param   out       OutputStream, which will receive the output
    */
-  private void createMultipart( PrintStream ps ) throws IOException {
+  private void createMultipart( OutputStream out ) throws IOException {
     String key;
     Iterator it;
 
@@ -424,13 +429,15 @@ public class HTTPRequest {
 
       key = it.next().toString();
 
-      ps.print( "--" );
-      ps.println( boundary );
-      ps.print( "Content-Disposition: form-data; name=\"" );
-      ps.print( URLencode( key ) );
-      ps.println( '"');
-      ps.println();
-      ps.println( hmParam.get( key ).toString() );
+      StringBuffer buff = new StringBuffer();
+      buff.append( "--" );
+      buff.append( boundary );
+      buff.append( "\r\nContent-Disposition: form-data; name=\"" );
+      buff.append( URLencode( key ) );
+      buff.append( "\"\r\nContent-Type: text/plain; charset=\"utf-8\"\r\n\r\n" );
+      buff.append( hmParam.get( key ).toString() );
+      buff.append( "\r\n" );
+      out.write( UTF8encode( buff.toString() ) );
     }
 
     //--- Now send the streams ---
@@ -441,36 +448,40 @@ public class HTTPRequest {
       key = it.next().toString();
       DataProvider provider = (DataProvider) hmStream.get( key );
 
-      ps.print( "--" );
-      ps.println( boundary );
-      ps.print( "Content-Disposition: form-data; name=\"" );
-      ps.print( URLencode( key ) );
-      ps.print( "\"; filename=\"" );
-      ps.print( URLencode( provider.getFileName() ) );
-      ps.println( '"' );
-      ps.print( "Content-Type: " );
-      ps.println( provider.getMimeType() );
-      ps.println();
-      provider.sendFile( ps );
-      ps.println();
+      StringBuffer buff = new StringBuffer();
+      buff.append( "--" );
+      buff.append( boundary );
+      buff.append( "\r\nContent-Disposition: form-data; name=\"" );
+      buff.append( URLencode( key ) );
+      buff.append( "\"; filename=\"" );
+      buff.append( URLencode( provider.getFileName() ) );
+      buff.append( "\"\r\nContent-Type: " );
+      buff.append( provider.getMimeType() );
+      buff.append( "\r\n\r\n" );
+      out.write( UTF8encode( buff.toString() ) );
+      provider.sendFile( out );
+      out.write( "\r\n".getBytes() );
     }
 
     //--- Close the container ---
     monitorSetRelation( counter, paramCnt );        // Finish monitor
     if( !( hmParam.isEmpty() && hmStream.isEmpty() ) ) {
-      ps.print( "--" );
-      ps.print( boundary );
-      ps.println( "--" );
+      StringBuffer buff = new StringBuffer();
+      buff.append( "--" );
+      buff.append( boundary );
+      buff.append( "--\r\n" );
+      out.write( UTF8encode( buff.toString() ) );
     }
 
-    ps.flush();
+    out.flush();
   }
 
   /**
    * Create a parameter string with the given parameters. The string
    * will have the format "name1=val1&name2=val2&name3=val3", where
    * names and values are URLEncoded. The provided StringBuffer will
-   * be filled with the parameters.
+   * be filled with the parameters. Note that there is no check whether
+   * the parameter string exceeds the maximum size.
    *
    * @param   dest          StringBuffer to be filled
    */
@@ -489,11 +500,7 @@ public class HTTPRequest {
   }
 
   /**
-   * URLEncode the provided String. Since JDK1.4, the URLEncoder.encode()
-   * method is deprecated. The replacement might throw an exception which
-   * does not come in quite handy here. This method will invoke the JDK1.4
-   * method with "UTF-8" as encoding (which should always work), and will
-   * use the deprecated method if this fails.
+   * URLEncode the provided String.
    *
    * @param     msg       String to be encoded
    * @return    Encoded string
@@ -502,7 +509,27 @@ public class HTTPRequest {
     try {
       return URLEncoder.encode( msg, "UTF-8" );
     }catch( Throwable t ) {
-      return URLEncoder.encode( msg );    // Fallback to JDK1.3
+      // According to Sun's java.nio.charset.Charset javadoc, every
+      // Java platform must implement "UTF-8", so we should never reach
+      // the catch block! Anyhow a (deprecated) fallback is provided here.
+      return URLEncoder.encode( msg );
+    }
+  }
+  
+  /**
+   * Get an UTF8 encoded byte array of the given string.
+   *
+   * @param     msg       String to be encoded
+   * @return    UTF8 encoded byte array
+   */
+  private byte[] UTF8encode( String msg ) {
+    try {
+      return msg.getBytes( "UTF-8" );
+    }catch( Throwable t ) {
+      // According to Sun's java.nio.charset.Charset javadoc, every
+      // Java platform must implement "UTF-8", so we should never reach
+      // the catch block! Anyhow a fallback is provided here.
+      return msg.getBytes();
     }
   }
 
@@ -519,8 +546,12 @@ public class HTTPRequest {
 
   /**
    * Return the server's response in a Reader after a <code>doRequest</code>.
+   * <p>
+   * This method ignores the content encoding sent by the server. The
+   * local machine's encoding is used instead.
    *
-   * @return    Reader or null
+   * @return      Reader or null if an error occured.
+   * @deprecated  Use getContentReader() instead.
    */
   public Reader getReader() {
     try {
@@ -528,6 +559,54 @@ public class HTTPRequest {
     }catch( IOException e ) {
       return null;
     }
+  }
+
+  /**
+   * Get the charset of the response. This method will try to evaluate
+   * the "ContentType" header. If there was no ContentType header, or
+   * if it did not contain a charset, null is returned.
+   *
+   * @return    Charset of the response, or null
+   */
+  public String getCharset() {
+    String encoding = null;
+    String type = connect.getContentType();
+    if( type!=null ) {
+      type = type.toUpperCase();
+      int cspos = type.indexOf( "CHARSET=" );
+      int csend = type.indexOf( ';', cspos );
+      if( cspos>=0 ) {
+        if( csend>=0 ) {
+          encoding = type.substring( cspos+8, csend ).trim();
+        }else {
+          encoding = type.substring( cspos+8 ).trim();
+        }
+        int len = encoding.length();
+        if(   ( encoding.charAt(0)=='"' || encoding.charAt(0)=='\'' )
+           && ( encoding.charAt(len-1)=='"' || encoding.charAt(len-1)=='\'' ) ) {
+          encoding = encoding.substring(1,len-1).trim();
+        }
+      }
+    }
+    return encoding;
+  }
+  
+  /**
+   * Return a reader to the response body after a <code>doRequest</code>.
+   * The content charset sent by the server is used. If the given
+   * charset is not known, an exception will be raised. If no charset
+   * was given, "ISO-8859-1" is assumed.
+   *
+   * @return    Reader to the response body.
+   * @throws    UnsupportedEncodingException    if the encoding given
+   *            by the server, is not known to this Java platform.
+   * @throws    IOException     if an I/O exception occured
+   */
+  public Reader getContentReader()
+  throws UnsupportedEncodingException, IOException {
+    String encoding = getCharset();
+    if( encoding==null ) encoding = "ISO-8859-1";
+    return new InputStreamReader( connect.getInputStream(), encoding );
   }
 
 /*------------------------------------------------------------------------*/

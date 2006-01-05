@@ -59,7 +59,7 @@ import javax.swing.table.*;
  * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.3 2004/06/23 12:21:15 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.4 2004/07/15 16:55:42 shred Exp $
  */
 public class JSortedTable extends JTable {
 
@@ -90,6 +90,23 @@ public class JSortedTable extends JTable {
       super.setModel( model );
     }else {
       throw new IllegalArgumentException( "You must provide a SortableTableModel" );
+    }
+  }
+  
+  /**
+   * Sort by a certain column. If this is the currently sorted column,
+   * the sort order will be toggled. Otherwise the given column will
+   * be sorted ascendingly. This method simulates a mouse click on the
+   * appropriate column header.
+   *
+   * @param   columnIndex     Column to be sorted.
+   */
+  public void sortByColumn( int columnIndex ) {
+    SortableTableModel model = (SortableTableModel) getModel();
+    if( model.getSortedColumn() != columnIndex ) {
+      model.sortByColumn( columnIndex, false );
+    }else {
+      model.sortByColumn( columnIndex, !model.isDescending() );
     }
   }
   

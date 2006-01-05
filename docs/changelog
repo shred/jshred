@@ -1,4 +1,13 @@
-CHANGELOG -- $Id: changelog,v 1.6 2004/06/27 15:46:34 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.10 2004/07/15 16:58:18 shred Exp $
+
+R4 (2004-07-15)
+  * SwingUtils.spreadColumns() now also supports a minimum cell width
+  * HTTPRequest now correctly sends UTF-8 encoded requests (as proposed
+    by W3C) instead of using the local encoding.
+  * HTTPRequest: getContentReader() now correctly handles the server's
+    content encoding. getReader() is deprecated from now on.
+  * HTTPRequest: added method to query result content charset
+  * JSortedTable: added method to sort a column
 
 R3 (2004-06-27)
   * MenuActionProxy now does not scale icon if its size is already

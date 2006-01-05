@@ -52,7 +52,7 @@ import javax.swing.table.*;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.3 2004/07/01 13:44:08 shred Exp $
  */
 public class SwingUtils {
 
@@ -198,6 +198,28 @@ public class SwingUtils {
    * @param   maxwidth    Maximum width of each table cell, in pixels.
    */
   public static void spreadColumns( JTable table, int maxwidth ) {
+    spreadColumns( table, 0, maxwidth );
+  }
+
+  /**
+   * Adjust each column of a JTable to show its entire content. The
+   * cell width is limited to the given maximum width, though. The
+   * minimum cell width is either the size of the title, or the given
+   * minimum width, whatever is bigger.
+   * <p>
+   * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code>
+   * to the appropriate table before invoking this method.
+   * <p>
+   * <b>WARNING:</b> In order to find out the maximum cell widths, this
+   * method will scan the entire table model! This will result in a major
+   * performance penalty for large models, and especial for dynamic models
+   * which will get their content from external sources.
+   *
+   * @param   table       JTable to be adjusted
+   * @param   minwidth    Minimum width of each table cell, in pixels.
+   * @param   maxwidth    Maximum width of each table cell, in pixels.
+   */
+  public static void spreadColumns( JTable table, int minwidth, int maxwidth ) {
     JTableHeader header = table.getTableHeader();
     TableCellRenderer defaultHeaderRenderer = null;
 
@@ -222,7 +244,7 @@ public class SwingUtils {
           column.getHeaderValue(),
           false, false, -1, i
         );
-        width = c.getPreferredSize().width;
+        width = Math.max(minwidth, c.getPreferredSize().width);
       }
 
       for( int row=rowCount-1; row>=0; row-- ) {
