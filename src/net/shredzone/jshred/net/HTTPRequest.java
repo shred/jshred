@@ -76,7 +76,7 @@ import javax.swing.ProgressMonitor;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java,v 1.7 2004/08/23 23:49:16 shred Exp $
+ * @version $Id: HTTPRequest.java,v 1.9 2005/12/27 14:18:59 shred Exp $
  */
 public class HTTPRequest {
 
@@ -305,7 +305,7 @@ public class HTTPRequest {
         throw new RuntimeException( "No HTTP connection" );
       }
       connect = (HttpURLConnection)con;
-      connect.setUseCaches( false );      // No caching, since it's probably a CGI call
+      connect.setUseCaches( false );      // No caching, since it's most likely a CGI call
       connect.setDoOutput( true );
 
       monitorConnected();                 // Inform ProgressMonitor
@@ -509,9 +509,14 @@ public class HTTPRequest {
     try {
       return URLEncoder.encode( msg, "UTF-8" );
     }catch( Throwable t ) {
-      // According to Sun's java.nio.charset.Charset javadoc, every
+      // Note that encode(String, String) is since JDK1.4! Also,
+      // according to Sun's java.nio.charset.Charset javadoc, every
       // Java platform must implement "UTF-8", so we should never reach
       // the catch block! Anyhow a (deprecated) fallback is provided here.
+
+      /*TODO: Elevate jshred's minimum requirements to JDK1.4, and remove
+       * this deprecated code line.
+       */
       return URLEncoder.encode( msg );
     }
   }

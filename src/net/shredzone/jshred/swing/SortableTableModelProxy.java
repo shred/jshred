@@ -71,7 +71,7 @@ import java.io.Serializable;
  * the SortTableModelProxy constructor.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java,v 1.5 2004/08/23 23:49:15 shred Exp $
+ * @version $Id: SortableTableModelProxy.java,v 1.6 2005/12/27 14:18:59 shred Exp $
  */
 public class SortableTableModelProxy implements SortableTableModel, TableModelListener, Serializable {
   static final long serialVersionUID = -668922708936078948L;
@@ -303,6 +303,9 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
    * as well as to this SortTableModelProxy. The listener will be notified
    * whenever the master TableModel, or the column to be sorted, was
    * changed.
+   * <p>
+   * Note: there is no way to add a weak listener reference, since the master
+   * TableModel does not permit adding such references.
    *
    * @param   l       TableModelListener
    */

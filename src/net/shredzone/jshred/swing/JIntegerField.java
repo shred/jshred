@@ -53,18 +53,19 @@ import java.awt.*;
  * supply this obligatory input field.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JIntegerField.java,v 1.5 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: JIntegerField.java,v 1.6 2005/08/08 13:06:56 shred Exp $
  * @since   R2
  */
 public class JIntegerField extends JTextField {
   private static final long serialVersionUID = 3834875767225332529L;
+  private static final IntegerFilter filter = new IntegerFilter();
 
   /**
    * Create a new JIntegerField.
    */
   public JIntegerField() {
     PlainDocument doc = new PlainDocument();
-    doc.setDocumentFilter( new IntegerFilter() );
+    doc.setDocumentFilter( filter );
     setDocument( doc );
   }
 

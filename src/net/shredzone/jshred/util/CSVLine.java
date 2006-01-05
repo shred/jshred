@@ -57,7 +57,7 @@ import java.util.*;
  * will result in a valid CSV line that can be written out.
  * <p>
  * The CSV format is: Each row ends with a newline. A row consists of
- * one ore more columns, each separated by a delimiter character. If
+ * one or more columns, each separated by a delimiter character. If
  * one column contains the delimiter character, the entire column must
  * be quoted in double quotes. If the column also contains the quote
  * character, then the quote characters within the column must be doubled.
@@ -65,7 +65,7 @@ import java.util.*;
  * CSVLine inherits the List interface for easier access.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: CSVLine.java,v 1.4 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: CSVLine.java,v 1.5 2005/12/27 14:18:59 shred Exp $
  */
 public class CSVLine extends ArrayList {
   private static final long serialVersionUID = 3544948840219359284L;

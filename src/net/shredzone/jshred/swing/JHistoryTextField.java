@@ -45,8 +45,11 @@
 package net.shredzone.jshred.swing;
 
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.ref.WeakReference;
 import java.util.*;
 import java.util.prefs.*;
 
@@ -60,7 +63,7 @@ import java.util.prefs.*;
  * This class is thread safe.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHistoryTextField.java,v 1.6 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: JHistoryTextField.java,v 1.9 2005/12/27 14:18:59 shred Exp $
  * @since   R6
  */
 public class JHistoryTextField extends JComponent {
@@ -70,6 +73,7 @@ public class JHistoryTextField extends JComponent {
   private boolean   autoSelect = true;
   private String    nodeName   = null;
   private final Set sListener  = new HashSet();
+  private String    oldtext = "";
   
   /**
    * Create a new JHistoryTextField. The history will only be stored
@@ -114,26 +118,27 @@ public class JHistoryTextField extends JComponent {
     }
 
     //--- Add an ActionListener ---
-    jCombo.addActionListener( new ActionListener() {
+    jCombo.getEditor().addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
+        String cmd = e.getActionCommand();
+        String newtext = jCombo.getEditor().getItem().toString();
+
         //--- Remember the entry ---
-        addHistory( getText() );
+        addHistory( newtext );
 
         //--- Mark all the text ---
         if( autoSelect )
           jCombo.getEditor().selectAll();
         
         //--- Notify everyone about a new text ---
-        if( e.getActionCommand().equals("comboBoxChanged") ) {
-          ActionEvent e2 = new ActionEvent(
-            JHistoryTextField.this,
-            ActionEvent.ACTION_PERFORMED,
-            "textChanged",
-            e.getWhen(),
-            e.getModifiers()
-          );
-          fireActionEvent( e2 );
-        }
+        final ActionEvent e2 = new ActionEvent(
+          JHistoryTextField.this,
+          ActionEvent.ACTION_PERFORMED,
+          "textChanged",
+          e.getWhen(),
+          e.getModifiers()
+        );
+        fireActionEvent( e2 );
       }
     });
   }
@@ -369,7 +374,38 @@ public class JHistoryTextField extends JComponent {
    * @param   l       ActionListener to be added.
    */
   public void addActionListener( ActionListener l ) {
-    sListener.add( l );
+    addActionListener( l, false );
+  }
+
+    /**
+   * Add an ActionListener. It will be invoked if a new text has
+   * been entered. If it was already added, nothing will happen.
+   *
+   * @param l       ActionListener to be added.
+   * @param weakly  Add the listener by WeakReference
+   * @since R12
+   */
+  public void addActionListener( ActionListener l, boolean weakly ) {
+    //--- Check if the Listener is already added weakly ---
+    for (
+        Iterator it = sListener.iterator();
+        it.hasNext();
+        ) {
+      final Object next = it.next();
+      if( next instanceof WeakReference ) {
+        final WeakReference wr = (WeakReference) next;
+        if (wr.get() == l) {
+          return;
+        }
+      }
+    }
+    
+    //--- Add the Listener ---
+    if( weakly ) {
+      sListener.add( new WeakReference( l ) );
+    }else {
+      sListener.add( l );
+    }
   }
   
   /**
@@ -379,16 +415,49 @@ public class JHistoryTextField extends JComponent {
    * @param   l       ActionListener to be removed.
    */
   public void removeActionListener( ActionListener l ) {
+    //--- Remove weak reference ---
+    for (
+        Iterator it = sListener.iterator();
+        it.hasNext();
+        ) {
+      final Object next = it.next();
+      if( next instanceof WeakReference ) {
+        final WeakReference wr = (WeakReference) next;
+        if (wr.get() == l) {
+          it.remove();
+          break;
+        }
+      }
+    }
+    
+    //--- Remove standard reference ---
     sListener.remove( l );
   }
   
   /**
    * Get an array of all ActionListeners currently set.
    *
-   * @return  ActionListeners
+   * @return  ActionListeners, entries may be null
    */
   public ActionListener[] getActionListeners() {
-    return (ActionListener[]) sListener.toArray( new ActionListener[sListener.size()] );
+    ActionListener[] result = new ActionListener[sListener.size()];
+    
+    int ix = 0;
+    for (
+        Iterator it = sListener.iterator();
+        it.hasNext();
+        ) {
+      final Object next = it.next();
+      if( next instanceof WeakReference ) {
+        final WeakReference wr = (WeakReference) next;
+        result[ix] = (ActionListener) wr.get();
+      }else {
+        result[ix] = (ActionListener) next;
+      }
+      ix++;
+    }
+    
+    return result;
   }
   
   /**
@@ -397,10 +466,21 @@ public class JHistoryTextField extends JComponent {
    * @param   e       The ActionEvent to be broadcasted.
    */
   protected void fireActionEvent( ActionEvent e ) {
-    Iterator it = sListener.iterator();
-    while( it.hasNext() ) {
-      ActionListener l = (ActionListener) it.next();
-      l.actionPerformed( e );
+    for (
+        Iterator it = sListener.iterator();
+        it.hasNext();
+        ) {
+      final Object next = it.next();
+      final ActionListener l = (ActionListener) (
+          next instanceof WeakReference ?
+          ((WeakReference) next).get():
+          next
+      );
+      if (l != null) {
+        l.actionPerformed( e );
+      }else {
+        it.remove();
+      }
     }
   }
 

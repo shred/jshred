@@ -46,6 +46,7 @@ package net.shredzone.jshred.swing;
 
 import javax.swing.*;
 import javax.swing.table.*;
+import java.awt.Rectangle;
 
 /**
  * This is a JTable which allows the user to sort each column in
@@ -58,7 +59,7 @@ import javax.swing.table.*;
  * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.7 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.9 2005/12/21 13:45:24 shred Exp $
  */
 public class JSortedTable extends JTable {
   private static final long serialVersionUID = 3256728372624110384L;
@@ -86,11 +87,30 @@ public class JSortedTable extends JTable {
    * @param     model     TableModel
    */
   public void setModel( TableModel model ) {
-    if( model instanceof SortableTableModel ) {
-      super.setModel( model );
-    }else {
+    if(!( model instanceof SortableTableModel )) {
       throw new IllegalArgumentException( "You must provide a SortableTableModel" );
     }
+
+    //--- Remember current column ---
+    int column = 0;
+    boolean desc = false;
+    SortableTableModel current = (SortableTableModel) getModel();
+    if( current!=null ) {
+      column = current.getSortedColumn();
+      desc = current.isDescending();
+    }
+    
+    //--- Set new model ---
+    super.setModel( model );
+    
+    //--- Sort by this column ---
+    SortableTableModel newmodel = (SortableTableModel) model;
+    if( column >= newmodel.getColumnCount() ) {
+      // Column does not exist any more. Use first column.
+      column = 0;
+      desc = false;
+    }
+    newmodel.sortByColumn( column, desc );
   }
   
   /**
@@ -98,16 +118,50 @@ public class JSortedTable extends JTable {
    * the sort order will be toggled. Otherwise the given column will
    * be sorted ascendingly. This method simulates a mouse click on the
    * appropriate column header.
+   * <p>
+   * Since R11, the selection will be kept if the SortableTableModelProxy
+   * is used.
    *
    * @param   columnIndex     Column to be sorted.
    * @since   R4
    */
   public void sortByColumn( int columnIndex ) {
-    SortableTableModel model = (SortableTableModel) getModel();
+    //--- Proxy? ---
+    final SortableTableModel model = (SortableTableModel) getModel();
+    SortableTableModelProxy proxy = null;
+    if( model instanceof SortableTableModelProxy ) {
+      proxy = (SortableTableModelProxy) model;
+    }
+    
+    //--- Remember all selected indices ---
+    int[] rows = null;
+    if( proxy!=null ) {
+      rows = getSelectedRows();
+      for( int ix=0; ix<rows.length; ix++ ) {
+        rows[ix] = proxy.mapRow( rows[ix] );
+      }
+    }
+
+    //--- Change sort order ---
     if( model.getSortedColumn() != columnIndex ) {
       model.sortByColumn( columnIndex, false );
     }else {
       model.sortByColumn( columnIndex, !model.isDescending() );
+    }
+
+    //--- Restore the selection ---
+    clearSelection();
+    if( proxy!=null && rows!=null ) {
+      for( int ix=0; ix<rows.length; ix++ ) {
+        int row = proxy.unmapRow( rows[ix] );
+        addRowSelectionInterval( row, row );
+        if( ix==0 ) {
+          Rectangle cellRect = getCellRect( row, 0, false );
+          if( cellRect!=null ) {
+            scrollRectToVisible( cellRect );
+          }          
+        }
+      }
     }
   }
   

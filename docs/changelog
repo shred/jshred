@@ -1,5 +1,30 @@
-CHANGELOG -- $Id: changelog,v 1.39 2005/02/09 18:56:08 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.49 2005/12/27 22:53:36 shred Exp $
 
+
+R12 (2005-12-27)
+  * NOTE: R12 is the last release that is JDK1.3 compatible. Starting from
+    R13, at least JDK1.4 will be required.
+  * Reduced memory consumption of JIntegerFilter.
+  * JHistoryTextField will not trigger an event if a selection was made from
+    the combobox or the component just lost the focus.
+  * BUGFIX: JToolbarButton uses setContentAreaFilled() instead of
+    setOpaque() like it is required in the JDK docs.
+  * SwingUtils' setMenuKey() now only sets correct mnemonics.
+  * BUGFIX: JImageViewer was only usable in Java5.
+  * BUGFIX: If a JSortedTable model was changed, it was shown in the model
+    sequence, even though it was internally thought as sorted by a column.
+  * BUGFIX: JCollapsiblePanel didn't revalidate the GUI, thus on collapse
+    only the content was hidden, but no space was given free.
+  * JCollapsiblePanel now remembers the collapse state optionally. Requires
+    JDK1.4 or later.
+  * Offered a way to add weak listener references.
+  * Added ArrowIcon class which can be used to paint small arrows.
+
+R11 (2005-04-04)
+  * NOTE: R11 was not released to the public
+  * JSortedTable now keeps the selection if SortableTableModelProxy is used.
+  * SwingUtils.spreadColumns() will keep a minimum size of 0 for Boolean
+    columns.
 
 R10 (2005-02-09)
   * The JLAFSelector now recognizes JGoodies LAF if available.

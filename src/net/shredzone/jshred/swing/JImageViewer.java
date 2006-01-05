@@ -75,7 +75,7 @@ import javax.swing.JComponent;
  * in a JScrollPane.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java,v 1.4 2005/01/24 10:08:07 shred Exp $
+ * @version $Id: JImageViewer.java,v 1.5 2005/09/05 14:28:16 shred Exp $
  * @since   R9
  */
 public class JImageViewer extends JComponent {
@@ -370,7 +370,7 @@ public class JImageViewer extends JComponent {
    */
   public void setZoomFactor( float zoom ) {
     if( this.zoom!=zoom ) {
-      firePropertyChange( "zoom", this.zoom, zoom );
+      firePropertyChange( "zoom", new Float(this.zoom), new Float(zoom) );
       this.zoom = zoom;
       revalidate();
       repaint();

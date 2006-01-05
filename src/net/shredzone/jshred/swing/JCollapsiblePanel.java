@@ -45,11 +45,13 @@
 package net.shredzone.jshred.swing;
 
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -62,18 +64,32 @@ import java.util.Set;
  * <p>
  * JCollapsiblePanel can be used to allow the user to hide unimportant parts
  * of the GUI if there is only little space available.
+ * <p>
+ * Due to a bug this component was not really functional until R12.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JCollapsiblePanel.java,v 1.2 2005/01/11 19:37:40 shred Exp $
+ * @version $Id: JCollapsiblePanel.java,v 1.6 2005/12/27 14:18:59 shred Exp $
  * @since   R9
  */
 public class JCollapsiblePanel extends JPanel {
   private static final long serialVersionUID = 3546645386727994681L;
+  private final static java.util.prefs.Preferences prefs;
   
+  static {
+    java.util.prefs.Preferences created = null;
+    try {
+      created = java.util.prefs.Preferences.userNodeForPackage( JCollapsiblePanel.class );
+    }catch( Throwable t ) {
+      // Fallback for JDK 1.3. We don't have preferences there.
+    }
+    prefs = created;
+  }
+
   protected Component content;
   private JToggleButton jbToggle;
   private Icon iconCollapsed;
   private Icon iconExpanded;
+  private String id;            // unique id for remembering the collapse state
   private final Set sListener = new HashSet();
   
   /**
@@ -102,7 +118,7 @@ public class JCollapsiblePanel extends JPanel {
   public JCollapsiblePanel( String title, Component comp ) {
     this( title, comp, true );
   }
-  
+
   /**
    * Creates a JCollapsiblePanel with the given title and Component, using
    * the given expanded state initially.
@@ -112,7 +128,33 @@ public class JCollapsiblePanel extends JPanel {
    * @param expanded  Initial state, true: expanded, false: collapsed
    */
   public JCollapsiblePanel( String title, Component comp, boolean expanded ) {
+    this( title, comp, expanded, null );
+  }
+  
+  /**
+   * Creates a JCollapsiblePanel with the given title and Component, using
+   * the given expanded state initially.
+   * <p>
+   * With the given id, the collapse state is remembered for the next time
+   * the application is started. If there is no state remembered, the given
+   * default "expanded" state will be used instead. Note that this feature
+   * requires at least JDK 1.4.
+   * 
+   * @param title     Title
+   * @param comp      Component to be used as content
+   * @param expanded  Initial state, true: expanded, false: collapsed
+   * @param id        Unique identifier to remember the collapse state.
+   *                  Pass null if the state shall not be remembered.
+   * @since R12
+   */
+  public JCollapsiblePanel( String title, Component comp, boolean expanded, String id ) {
     content = comp;
+    this.id = id;
+
+    //--- Check the preferences ---
+    if( id!=null && prefs!=null ) {
+      expanded = prefs.getBoolean( "state."+id, expanded );
+    }
     
     //--- Create the toggle button ---
     jbToggle = new JToggleButton( title );
@@ -123,20 +165,19 @@ public class JCollapsiblePanel extends JPanel {
     jbToggle.setMargin( new Insets(0,0,0,0) );
     jbToggle.setHorizontalTextPosition( JToggleButton.RIGHT );
     jbToggle.setHorizontalAlignment( JToggleButton.LEFT );
+    jbToggle.setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
     jbToggle.addActionListener( new Listener() );
     
     //--- Initialize the button ---
-    setCollapsedIcon( new ArrowIcon( true ) );
-    setExpandedIcon( new ArrowIcon( false ) );
+    setCollapsedIcon( new ArrowIcon( 7,7, SwingConstants.EAST ) );
+    setExpandedIcon( new ArrowIcon( 7,7, SwingConstants.SOUTH ) );
     
     //--- Assemble the GUI ---
     setLayout( new BorderLayout() );
-    if( content!=null )
+    if( content!=null ) {
       add( content, BorderLayout.CENTER );
+    }
     add( jbToggle,  BorderLayout.NORTH );
-    
-    //--- Set a border around it ---
-    setBorder( BorderFactory.createLoweredBevelBorder() );
     
     //--- Set the expanded state ---
     setExpanded( expanded );
@@ -208,8 +249,23 @@ public class JCollapsiblePanel extends JPanel {
    */
   public void setExpanded( boolean b ) {
     jbToggle.setSelected( b );
-    if( content!=null )
+    doExpand( b );
+  }
+  
+  /**
+   * Internal method that does the actual collapsing and expanding of the
+   * content.
+   * 
+   * @param b       true: expand, false: collapse
+   */
+  private void doExpand( boolean b ) {
+    if( content!=null ) {
       content.setVisible( b );
+      revalidate();
+    }
+    if( id!=null && prefs!=null ) {
+      prefs.putBoolean( "state."+id, b );
+    }
   }
   
   /**
@@ -250,7 +306,7 @@ public class JCollapsiblePanel extends JPanel {
     firePropertyChange( "content", content, comp );
     if( comp!=null ) {
       add( comp, BorderLayout.CENTER );
-      comp.setVisible( isExpanded() );
+      doExpand( isExpanded() );
     }
     content = comp;
   }
@@ -271,7 +327,38 @@ public class JCollapsiblePanel extends JPanel {
    * @param l     ActionListener to be added
    */
   public void addActionListener( ActionListener l ) {
-    sListener.add( l );
+    addActionListener( l, false );
+  }
+
+  /**
+   * Add an ActionListener. It will be invoked when the collapsed/expanded
+   * state was changed.
+   * 
+   * @param l       ActionListener to be added
+   * @param weakly  Add the listener by WeakReference
+   * @since R12
+   */
+  public void addActionListener( ActionListener l, boolean weakly ) {
+    //--- Check if the Listener is already added weakly ---
+    for (
+        Iterator it = sListener.iterator();
+        it.hasNext();
+        ) {
+      final Object next = it.next();
+      if( next instanceof WeakReference ) {
+        final WeakReference wr = (WeakReference) next;
+        if (wr.get() == l) {
+          return;
+        }
+      }
+    }
+    
+    //--- Add the Listener ---
+    if( weakly ) {
+      sListener.add( new WeakReference( l ) );
+    }else {
+      sListener.add( l );
+    }
   }
 
   /**
@@ -280,6 +367,22 @@ public class JCollapsiblePanel extends JPanel {
    * @param l     ActionListener to be removed
    */
   public void removeActionListener( ActionListener l ) {
+    //--- Remove weak reference ---
+    for (
+        Iterator it = sListener.iterator();
+        it.hasNext();
+        ) {
+      final Object next = it.next();
+      if( next instanceof WeakReference ) {
+        final WeakReference wr = (WeakReference) next;
+        if (wr.get() == l) {
+          it.remove();
+          break;
+        }
+      }
+    }
+    
+    //--- Remove standard reference ---
     sListener.remove( l );
   }
   
@@ -293,7 +396,7 @@ public class JCollapsiblePanel extends JPanel {
     public void actionPerformed( ActionEvent e ) {
       if( content!=null ) {
         //--- Change visibility ---
-        content.setVisible( jbToggle.isSelected() );
+        doExpand( jbToggle.isSelected() );
         
         //--- Copy the event ---
         ActionEvent event = new ActionEvent(
@@ -305,78 +408,24 @@ public class JCollapsiblePanel extends JPanel {
         );
         
         //--- Notify everyone ---
-        Iterator it = sListener.iterator();
-        while( it.hasNext() ) {
-          ActionListener l = (ActionListener) it.next();
-          l.actionPerformed( event );
+        for (
+            Iterator it = sListener.iterator();
+            it.hasNext();
+            ) {
+          final Object next = it.next();
+          final ActionListener l = (ActionListener) (
+              next instanceof WeakReference ?
+              ((WeakReference) next).get():
+              next
+          );
+          if (l != null) {
+            l.actionPerformed( e );
+          }else {
+            it.remove();
+          }
         }
+
       }
-    }
-  }
-  
-/*----------------------------------------------------------------------------*/
-
-  /**
-   * Draws a collapse handle. This is a triangle either pointing down or to
-   * the right.
-   */
-  private static class ArrowIcon implements Icon, Serializable {
-    private static final long serialVersionUID = 3760566403421712949L;
-    private boolean collapsed;
-
-    /**
-     * Create a new ArrowIcon.
-     *
-     * @param   collapsed    true: Array is right, false: Array is down
-     */
-    public ArrowIcon( boolean collapsed ) {
-      this.collapsed = collapsed;
-    }
-
-    /**
-     * Paint this icon
-     *
-     * @param   c       Component (for reference)
-     * @param   g       Graphics context
-     * @param   x       X position
-     * @param   y       Y position
-     */
-    public void paintIcon( Component c, Graphics g, int x, int y ) {
-      //--- Create an arrow polygon ---
-      int pX[] = new int[3];
-      int pY[] = new int[3];
-      if( collapsed ) {
-        pX[0] = x  ; pY[0] = y  ;
-        pX[1] = x  ; pY[1] = y+6;
-        pX[2] = x+3; pY[2] = y+3;
-      }else {
-        pX[0] = x  ; pY[0] = y+2;
-        pX[1] = x+3; pY[1] = y+5;
-        pX[2] = x+6; pY[2] = y+2;
-      }
-
-      //--- Draw it ---
-      g.setColor( c.getForeground() );
-      g.drawPolygon( pX, pY, pX.length );
-      g.fillPolygon( pX, pY, pX.length );
-    }
-
-    /**
-     * Width is fixed to 7 pixel.
-     *
-     * @return    Icon width
-     */
-    public int getIconWidth() {
-      return 7;
-    }
-
-    /**
-     * Width is fixed to 7 pixel.
-     *
-     * @return    Icon height
-     */
-    public int getIconHeight() {
-      return 7;
     }
   }
 

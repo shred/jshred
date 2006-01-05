@@ -74,7 +74,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.10 2005/01/18 14:00:14 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.12 2005/08/08 13:06:56 shred Exp $
  */
 public class SwingUtils {
 
@@ -120,8 +120,12 @@ public class SwingUtils {
     Character stroke = getMenuShortcut( menu );
 
     action.putValue( Action.NAME, name );
-    if( stroke != null )
-      action.putValue( Action.MNEMONIC_KEY, new Integer( (int)stroke.charValue() ));
+    if( stroke!=null ) {
+      char ch = Character.toUpperCase( stroke.charValue() );
+      if( (ch>='0' && ch<='9') || (ch>='A' && ch<='Z') ) {
+        action.putValue( Action.MNEMONIC_KEY, new Integer( ch ) );
+      }
+    }
   }
 
   /**
@@ -254,6 +258,8 @@ public class SwingUtils {
     int margin = columns.getColumnMargin();
     int rowCount = data.getRowCount();
     for( int i=columns.getColumnCount()-1; i>=0; i-- ) {
+      boolean cbOnly = table.getColumnClass( i ).equals( Boolean.class );
+      
       TableColumn column = columns.getColumn(i);
       int columnIndex = column.getModelIndex();
       int width = -1;
@@ -267,7 +273,11 @@ public class SwingUtils {
           column.getHeaderValue(),
           false, false, -1, i
         );
-        width = Math.max(minwidth, c.getPreferredSize().width);
+        if( cbOnly ) {
+          width = c.getPreferredSize().width;
+        }else {
+          width = Math.max(minwidth, c.getPreferredSize().width);
+        }
       }
 
       for( int row=rowCount-1; row>=0; row-- ) {

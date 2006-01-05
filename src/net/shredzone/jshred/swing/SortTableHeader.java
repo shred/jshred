@@ -55,7 +55,7 @@ import java.io.Serializable;
  * SortableTableModel and allows to select columns to be sorted.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java,v 1.5 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: SortTableHeader.java,v 1.9 2005/12/27 14:18:59 shred Exp $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
   private static final long serialVersionUID = 3256728372658124082L;
@@ -82,8 +82,8 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     super( cm );
 
     //--- Initialize the default iconset ---
-    iconAsc = new ArrowIcon( false );
-    iconDesc = new ArrowIcon( true );
+    iconAsc = new ArrowIcon( 7,6, SwingConstants.SOUTH );
+    iconDesc = new ArrowIcon( 7,6, SwingConstants.NORTH );
 
     //--- Set the default renderer ---
     setDefaultRenderer( new SortTableCellRenderer( createDefaultRenderer() ) );
@@ -174,11 +174,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
 
         //--- Change sort order ---
         if( sortingAllowed && column>=0 && column<columnModel.getColumnCount() ) {
-          if( column==sortmodel.getSortedColumn() ) {
-            sortmodel.sortByColumn( column, !sortmodel.isDescending() );
-          }else {
-            sortmodel.sortByColumn( column, false );
-          }
+          ((JSortedTable) table).sortByColumn( column );
         }
       }
     }
@@ -293,71 +289,6 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
 
       //--- Return the manipulated Component ---
       return c;
-    }
-  }
-
-/*--------------------------------------------------------------------*/
-
-  /**
-   * Draws an arrow icon, either up or down.
-   */
-  private static class ArrowIcon implements Icon, Serializable {
-    private static final long serialVersionUID = 3257844398484896053L;
-    private boolean up;
-
-    /**
-     * Create a new ArrowIcon.
-     *
-     * @param   up      true: Array is up, false: Array is down
-     */
-    public ArrowIcon( boolean up ) {
-      this.up = up;
-    }
-
-    /**
-     * Paint this icon
-     *
-     * @param   c       Component (for reference)
-     * @param   g       Graphics context
-     * @param   x       X position
-     * @param   y       Y position
-     */
-    public void paintIcon( Component c, Graphics g, int x, int y ) {
-      //--- Create an arrow polygon ---
-      int pX[] = new int[3];
-      int pY[] = new int[3];
-      if( up ) {
-        pX[0] = x  ; pY[0] = y+5;
-        pX[1] = x+3; pY[1] = y+2;
-        pX[2] = x+6; pY[2] = y+5;
-      }else {
-        pX[0] = x  ; pY[0] = y+2;
-        pX[1] = x+3; pY[1] = y+5;
-        pX[2] = x+6; pY[2] = y+2;
-      }
-
-      //--- Draw it ---
-      g.setColor( c.getForeground() );
-      g.drawPolygon( pX, pY, pX.length );
-      g.fillPolygon( pX, pY, pX.length );
-    }
-
-    /**
-     * Width is fixed to 7 pixel.
-     *
-     * @return    Icon width
-     */
-    public int getIconWidth() {
-      return 7;
-    }
-
-    /**
-     * Width is fixed to 6 pixel.
-     *
-     * @return    Icon height
-     */
-    public int getIconHeight() {
-      return 6;
     }
   }
 
