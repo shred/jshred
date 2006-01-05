@@ -64,7 +64,7 @@ import javax.swing.JPanel;
  * invoked.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JRememberOptionPane.java,v 1.4 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: JRememberOptionPane.java,v 1.5 2005/02/01 11:18:29 shred Exp $
  * @since   R7
  */
 public class JRememberOptionPane extends JOptionPane {
@@ -218,6 +218,33 @@ public class JRememberOptionPane extends JOptionPane {
    */
   public static void forget( String key ) {
     prefs.remove( key );
+  }
+  
+  /**
+   * Forget all the keys starting with the given base. The user will be asked
+   * again next time the appropriate dialogs are opened. If no matching keys
+   * were found, nothing will happen.
+   * <p>
+   * If you pass null as base, the user will be asked again for all
+   * JRememberDialogs in <em>all</em> applications. It is strongly discouraged
+   * to pass null!
+   * 
+   * @param   base      Base of the keys to be forgotten, null will forget all
+   *    keys, even for other applications.
+   * @since R10
+   */
+  public static void forgetAll( String base ) {
+    try {
+      if( base!=null ) {
+        final String[] keys = prefs.keys();
+        for( int ix=0; ix<keys.length; ix++ ) {
+          if( keys[ix].startsWith(base) )
+            prefs.remove( keys[ix] );
+        }
+      }else {
+        prefs.clear();
+      }
+    }catch( BackingStoreException e ) {}
   }
  
 }

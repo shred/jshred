@@ -1,5 +1,11 @@
-CHANGELOG -- $Id: changelog,v 1.36 2005/01/27 22:37:06 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.39 2005/02/09 18:56:08 shred Exp $
 
+
+R10 (2005-02-09)
+  * The JLAFSelector now recognizes JGoodies LAF if available.
+  * JRememberOptionPane now has a function to forget multiple keys.
+  * BUGFIX: Accidentally the library was compiled against JDK1.5 only.
+    Ooops... :)
 
 R9 (2005-01-27)
   * Added JCollapsiblePane.

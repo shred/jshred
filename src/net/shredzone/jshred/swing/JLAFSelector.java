@@ -67,7 +67,7 @@ import javax.swing.UIManager;
  * <code>setSmallArea(true)</code> for future compatibility.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLAFSelector.java,v 1.4 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: JLAFSelector.java,v 1.5 2005/01/28 10:21:37 shred Exp $
  * @since   R8
  */
 public class JLAFSelector extends JPanel {
@@ -84,15 +84,34 @@ public class JLAFSelector extends JPanel {
     }
     
     //--- Add Kunststoff if available ---
+    attemptAdd( "com.incors.plaf.kunststoff.KunststoffLookAndFeel", "Kunststoff" );
+
+    //--- Add JGoodies if available ---
+    attemptAdd( "com.jgoodies.looks.windows.WindowsLookAndFeel", "JGoodies Windows");
+    attemptAdd( "com.jgoodies.looks.plastic.PlasticLookAndFeel", "JGoodies Plastic");
+    attemptAdd( "com.jgoodies.looks.plastic.Plastic3DLookAndFeel", "JGoodies Plastic 3D");
+    attemptAdd( "com.jgoodies.looks.plastic.PlasticXPLookAndFeel", "JGoodies Plastic XP");
+  }
+
+  /**
+   * Tries to add a LAF class to the selector. If the class is not available,
+   * nothing will happen.
+   * 
+   * @param classname   LAF class name
+   * @param label       Human readable name to be added if the class is available
+   * @since R10
+   */
+  private static void attemptAdd( String classname, String label ) {
     try {
-      String ksClass = "com.incors.plaf.kunststoff.KunststoffLookAndFeel";
-      Class clazz = Class.forName( ksClass );
+      Class clazz = Class.forName( classname );
       if( clazz!=null ) {
-        mLAFs.put( ksClass, "Kunststoff" );
+        mLAFs.put( classname, label );
       }
     }catch( ClassNotFoundException e ) {}
   }
 
+  
+  
   /**
    * Create a new Look and Feel selector.
    */
