@@ -55,10 +55,11 @@ import java.awt.*;
  * to the left, and going to the current background color to the right.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHeadline.java,v 1.1 2004/10/08 11:49:56 shred Exp $
+ * @version $Id: JHeadline.java,v 1.2 2005/01/11 19:37:41 shred Exp $
  * @since   R8
  */
 public class JHeadline extends JGradientPanel {
+  private static final long serialVersionUID = 3618137866132074806L;
   private final JLabel jlTitle;
   private final JLabel jlDesc;
   private final JLabel jlIcon;

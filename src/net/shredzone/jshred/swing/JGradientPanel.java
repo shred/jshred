@@ -52,9 +52,10 @@ import java.awt.*;
  * the direction and the starting and ending color.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JGradientPanel.java,v 1.3 2004/08/23 23:49:16 shred Exp $
+ * @version $Id: JGradientPanel.java,v 1.6 2005/01/19 09:35:09 shred Exp $
  */
 public class JGradientPanel extends JPanel {
+  private static final long serialVersionUID = 4123386540283015480L;
   public static final boolean VERTICAL   = true;
   public static final boolean HORIZONTAL = false;
   public static final Color   BACKGROUND = null;
@@ -156,7 +157,7 @@ public class JGradientPanel extends JPanel {
    * @param   g       Graphics context
    */
   public void paint( Graphics g ) {
-    Graphics2D g2 = (Graphics2D) g;
+    Graphics2D g2 = (Graphics2D) g.create();
 
     //--- Create Gradient Paint ---
     Color top    = ( cTop!=BACKGROUND    ? cTop    : getBackground());
@@ -171,6 +172,8 @@ public class JGradientPanel extends JPanel {
 
     //--- Fill Background ---
     g2.fillRect(0,0, getWidth(), getHeight());
+
+    g2.dispose();
 
     //--- Paint Components ---
     super.paint(g);

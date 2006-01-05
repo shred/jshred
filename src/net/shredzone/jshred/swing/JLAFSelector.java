@@ -67,10 +67,11 @@ import javax.swing.UIManager;
  * <code>setSmallArea(true)</code> for future compatibility.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLAFSelector.java,v 1.3 2004/12/05 22:28:11 shred Exp $
+ * @version $Id: JLAFSelector.java,v 1.4 2005/01/11 19:37:41 shred Exp $
  * @since   R8
  */
 public class JLAFSelector extends JPanel {
+  private static final long serialVersionUID = 3689916188578691125L;
   private final JComboBox jcbSelector;
   private final static Map mLAFs = new HashMap();
   private boolean small = false;

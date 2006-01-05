@@ -46,10 +46,17 @@ package net.shredzone.jshred.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Pageable;
@@ -58,6 +65,7 @@ import java.awt.print.PrinterException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -74,10 +82,11 @@ import javax.swing.JPanel;
  * does not need to be able to give random access to all the pages.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JPrintPreview.java,v 1.4 2004/12/05 22:17:50 shred Exp $
+ * @version $Id: JPrintPreview.java,v 1.7 2005/01/19 12:25:44 shred Exp $
  * @since   R8
  */
 public class JPrintPreview extends JPanel {
+  private static final long serialVersionUID = 3256723966038390833L;
   private final static int SHADOW_X = 4;      // Shadow X size
   private final static int SHADOW_Y = 4;      // Shadow Y size
   private final static int BORDER_SIZE = 3;   // Size of the border around the page
@@ -89,7 +98,10 @@ public class JPrintPreview extends JPanel {
   private PageFormat format = null;
   private final JLabel jlContent;
   private boolean lowMem = false;
-  
+
+  private transient int rectX, rectY, mouseX, mouseY;
+  private transient Cursor  oldCursor;
+
   /**
    * Create an empty JPrintPreview pane. It will show nothing.
    */
@@ -99,6 +111,54 @@ public class JPrintPreview extends JPanel {
     jlContent.setHorizontalAlignment( JLabel.CENTER );
     add( jlContent, BorderLayout.CENTER );
     setBorder( BorderFactory.createEmptyBorder( BORDER_SIZE,BORDER_SIZE,BORDER_SIZE,BORDER_SIZE ) );
+    
+    MouseListener lMouse = new MouseAdapter() {
+      public void mousePressed( MouseEvent e ) {
+        final Rectangle rv = getVisibleRect();
+
+        //--- Remember the rectangle when the mouse was pressed ---
+        rectX  = rv.x;
+        rectY  = rv.y;
+
+        //--- Remember the mouse position relative to it ---
+        mouseX = e.getX()-rv.x;
+        mouseY = e.getY()-rv.y;
+
+        //--- Set the cursor ---
+        oldCursor = getCursor();
+        if( rv.width<getWidth() || rv.height<getHeight() ) {
+          setCursor( Cursor.getPredefinedCursor( Cursor.MOVE_CURSOR ) );
+        }
+      }
+      
+      public void mouseReleased( MouseEvent e ) {
+        //--- Restore the cursor ---
+        setCursor( oldCursor );
+      }
+    };
+    
+    MouseMotionListener lMotion = new MouseMotionAdapter() {
+      public void mouseDragged( MouseEvent e ) {
+        Rectangle rv = new Rectangle( getVisibleRect() );
+        //--- Compute the mouse delta movement ---
+        // This are the number of pixels the mouse has been moved
+        // on the viewport.
+        int dX = mouseX - (e.getX()-rv.x);
+        int dY = mouseY - (e.getY()-rv.y);
+        
+        //--- Compute the new rectangle ---
+        // This is the position of the rectangle when the mouse was
+        // clicked, added by the delta mouse move since then.
+        rv.x = rectX + dX;
+        rv.y = rectY + dY;
+        
+        //--- Make visible ---
+        ((JComponent) e.getSource()).scrollRectToVisible( rv );
+      }
+    };
+    
+    jlContent.addMouseListener( lMouse );
+    jlContent.addMouseMotionListener( lMotion );
   }
   
   /**
@@ -289,6 +349,8 @@ public class JPrintPreview extends JPanel {
 
     //--- Draw the content ---
     int stat = cPrintable.print( g2d, cFormat, currentPage );
+    g2d.dispose();
+
     if( stat == Printable.NO_SUCH_PAGE )
       throw new PrinterException("Page "+currentPage+": NO_SUCH_PAGE");
     

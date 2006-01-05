@@ -1,5 +1,13 @@
-CHANGELOG -- $Id: changelog,v 1.29 2004/12/05 22:17:50 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.36 2005/01/27 22:37:06 shred Exp $
 
+
+R9 (2005-01-27)
+  * Added JCollapsiblePane.
+  * Added serial UIDs where necessary.
+  * Added JImageViewer.
+  * BUGFIX: forgot some Graphics.dispose().
+  * JPrintPreview can now be dragged with the mouse inside a JScrollPane.
+  * Added JScrollableImageViewer, which implements the Scrollable interface.
 
 R8 (2004-12-05)
   * Added JHeadline.

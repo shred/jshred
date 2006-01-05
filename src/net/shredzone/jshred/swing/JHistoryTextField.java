@@ -60,10 +60,11 @@ import java.util.prefs.*;
  * This class is thread safe.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHistoryTextField.java,v 1.5 2004/09/21 15:58:57 shred Exp $
+ * @version $Id: JHistoryTextField.java,v 1.6 2005/01/11 19:37:41 shred Exp $
  * @since   R6
  */
 public class JHistoryTextField extends JComponent {
+  private static final long serialVersionUID = 3688784791113577272L;
   private JComboBox jCombo;
   private int       histSize;
   private boolean   autoSelect = true;

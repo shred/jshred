@@ -74,7 +74,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.8 2004/10/19 11:46:57 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.10 2005/01/18 14:00:14 shred Exp $
  */
 public class SwingUtils {
 
@@ -314,6 +314,7 @@ public class SwingUtils {
     
     JLayeredPane lp = dialog.getLayeredPane();
     lp.getActionMap().put( name, new AbstractAction( name ) {
+      private static final long serialVersionUID = 3760844579897030200L;
       public void actionPerformed( ActionEvent e ) {
         fCancel.doClick();
       }
@@ -358,4 +359,67 @@ public class SwingUtils {
     return result;
   }
 
+  /**
+   * Compute a Dimension that has the same aspect ratio as the first Dimension,
+   * but does not exceed any part of the second Dimension. The returned
+   * Dimension will also never be larger than the aspect Dimension.
+   * 
+   * @param   aspect      Dimension to keep the aspect ratio
+   * @param   max         Maximum dimensions
+   * @return  The scaled dimension
+   * @since   R9
+   */
+  public static Dimension scaleAspect( Dimension aspect, Dimension max ) {
+    final Dimension dim = new Dimension(0,0);
+
+    if( aspect.width>0 && aspect.height>0 && max.width>0 && max.height>0 ) {
+      dim.width  = aspect.width;
+      dim.height = aspect.height;
+      
+      if( dim.width > max.width ) {
+        dim.height = ( dim.height * max.width ) / dim.width;
+        dim.width  = max.width;
+      }
+      
+      if( dim.height > max.height ) {
+        dim.width  = ( dim.width * max.height ) / dim.height;
+        dim.height = max.height;
+      }
+    }
+    
+    return dim;
+  }
+
+  /**
+   * Compute a Dimension that has the same aspect ratio as the first Dimension,
+   * but uses as much of the Maximum dimensions as possible, without exceeding
+   * it. The returned Dimension may be larger than the aspect Dimension.
+   * 
+   * @param   aspect      Dimension to keep the aspect ratio
+   * @param   max         Maximum dimensions
+   * @return  The scaled dimension
+   * @since   R9
+   */
+  public static Dimension scaleAspectMax( Dimension aspect, Dimension max ) {
+    Dimension maxCopy = new Dimension(0,0);
+    
+    if( aspect.width>0 && aspect.height>0 && max.width>0 && max.height>0 ) {
+      if( aspect.width > aspect.height ) {
+        // Landscape
+        
+        maxCopy.width  = max.width;
+        maxCopy.height = max.width * aspect.height / aspect.width;
+      }else {
+        // Portrait
+        
+        maxCopy.height = max.height;
+        maxCopy.width  = max.height * aspect.width / aspect.height;
+      }
+      
+      maxCopy = scaleAspect( maxCopy, max );
+    }
+   
+    return maxCopy;
+  }
+  
 }

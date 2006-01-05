@@ -52,9 +52,10 @@ import java.awt.*;
  * has a text, never gets the focus and has no borders.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java,v 1.5 2004/11/29 14:45:46 shred Exp $
+ * @version $Id: JToolbarButton.java,v 1.6 2005/01/11 19:37:41 shred Exp $
  */
 public class JToolbarButton extends JButton {
+  private static final long serialVersionUID = 3905246710308417843L;
 
   /**
    * Creates a new basic JToolbarButton.

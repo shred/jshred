@@ -58,9 +58,10 @@ import javax.swing.table.*;
  * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.6 2004/08/23 23:49:15 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.7 2005/01/11 19:37:41 shred Exp $
  */
 public class JSortedTable extends JTable {
+  private static final long serialVersionUID = 3256728372624110384L;
 
   /**
    * Create a new, empty JSortedTable.

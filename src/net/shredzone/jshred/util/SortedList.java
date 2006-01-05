@@ -64,9 +64,10 @@ import java.util.Iterator;
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
  * @since   R7
- * @version $Id: SortedList.java,v 1.3 2004/09/27 07:42:34 shred Exp $
+ * @version $Id: SortedList.java,v 1.4 2005/01/11 19:37:41 shred Exp $
  */
 public class SortedList extends ArrayList {
+  private static final long serialVersionUID = 3257003263499972657L;
   private Comparator comparator = null;     // Comparator to be used
   
   /**

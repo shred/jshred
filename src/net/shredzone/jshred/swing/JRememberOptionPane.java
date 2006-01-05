@@ -64,10 +64,11 @@ import javax.swing.JPanel;
  * invoked.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JRememberOptionPane.java,v 1.3 2004/09/27 21:09:52 shred Exp $
+ * @version $Id: JRememberOptionPane.java,v 1.4 2005/01/11 19:37:41 shred Exp $
  * @since   R7
  */
 public class JRememberOptionPane extends JOptionPane {
+  private static final long serialVersionUID = 3544392526023898161L;
   private static Preferences prefs = Preferences.userNodeForPackage( JRememberOptionPane.class );
 
   /**

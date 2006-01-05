@@ -56,10 +56,11 @@ import javax.swing.*;
  * For the documentation, also see the DefaultListSelectionModel JavaDoc.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: NoListSelectionModel.java,v 1.2 2004/08/23 23:49:15 shred Exp $
+ * @version $Id: NoListSelectionModel.java,v 1.3 2005/01/11 19:37:41 shred Exp $
  * @since   R6
  */
 public class NoListSelectionModel extends DefaultListSelectionModel {
+  private static final long serialVersionUID = 3976735869820483376L;
 
   /**
    * A value for the selectionMode property: no list index can be

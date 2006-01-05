@@ -55,9 +55,10 @@ import java.io.Serializable;
  * SortableTableModel and allows to select columns to be sorted.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java,v 1.4 2004/08/23 23:49:15 shred Exp $
+ * @version $Id: SortTableHeader.java,v 1.5 2005/01/11 19:37:41 shred Exp $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
+  private static final long serialVersionUID = 3256728372658124082L;
   private boolean pressed;        // Mouse is pressed
   private boolean dragged;        // Mouse is being dragged
   private boolean sortingAllowed = true;  // Sorting allowed?
@@ -234,6 +235,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
    * state of each column, according to the SortTableHeader.
    */
   private class SortTableCellRenderer implements TableCellRenderer, Serializable {
+    private static final long serialVersionUID = 3256437023551468342L;
     private TableCellRenderer parent;
 
     /**
@@ -300,6 +302,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
    * Draws an arrow icon, either up or down.
    */
   private static class ArrowIcon implements Icon, Serializable {
+    private static final long serialVersionUID = 3257844398484896053L;
     private boolean up;
 
     /**
