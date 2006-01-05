@@ -1,5 +1,15 @@
-CHANGELOG -- $Id: changelog,v 1.22 2004/09/27 13:17:23 shred Exp $
+CHANGELOG -- $Id: changelog,v 1.29 2004/12/05 22:17:50 shred Exp $
 
+
+R8 (2004-12-05)
+  * Added JHeadline.
+  * BUGFIX: JToolbarButton was opaque, which looked strange on some
+    Look and Feels.
+  * Added convenience methods to copy Strings to and paste Strings from
+    the system's default clipboard.
+  * Added JPrintPreview class which can be used to preview Printables.
+  * Added JToolbarButton constructors for empty and icon buttons.
+  * Added JLAFSelector class which allows to select a LAF.
 
 R7 (2004-09-27)
   * Switched from JEdit to Eclipse. Findbugs is used as Eclipse plugin.

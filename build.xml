@@ -5,9 +5,9 @@
 <!-- Copyright (c) 2004 Richard "Shred" Körber -->
 <!-- All Rights Reserved. -->
 <!-- Released under MPL 1.1/GPL 2.0/LGPL 2.1 -->
-<!-- $Id: build.xml,v 1.6 2004/09/27 07:42:34 shred Exp $ -->
+<!-- $Id: build.xml,v 1.7 2004/09/29 18:13:54 shred Exp $ -->
 
-<project name="jshred" default="dist" basedir=".">
+<project name="jshred" default="build" basedir=".">
   <description>
     A free collection of useful classes.
   </description>

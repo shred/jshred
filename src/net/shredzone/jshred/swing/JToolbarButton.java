@@ -52,9 +52,30 @@ import java.awt.*;
  * has a text, never gets the focus and has no borders.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java,v 1.3 2004/08/23 23:49:15 shred Exp $
+ * @version $Id: JToolbarButton.java,v 1.5 2004/11/29 14:45:46 shred Exp $
  */
 public class JToolbarButton extends JButton {
+
+  /**
+   * Creates a new basic JToolbarButton.
+   * 
+   * @since   R8
+   */
+  public JToolbarButton() {
+    super();
+    init();
+  }
+
+  /**
+   * Creates a new JToolbarButton with an icon.
+   * 
+   * @param   icon      Icon to be used.
+   * @since   R8
+   */
+  public JToolbarButton( Icon icon ) {
+    super( icon );
+    init();
+  }
 
   /**
    * Creates a new JToolbarButton for a certain action.
@@ -63,10 +84,18 @@ public class JToolbarButton extends JButton {
    */
   public JToolbarButton( Action a ) {
     super( a );
+    init();
+  }
+  
+  /**
+   * Initialize all parameters for a JToolbarButton.
+   */
+  private void init() {
     setText( "" );
     setRequestFocusEnabled( false );
     setFocusable( false );
     setMargin( new Insets( 0,0,0,0 ) );
+    setOpaque( false );
   }
 
 }

@@ -47,6 +47,11 @@ package net.shredzone.jshred.swing;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -69,7 +74,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.7 2004/09/27 21:09:52 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.8 2004/10/19 11:46:57 shred Exp $
  */
 public class SwingUtils {
 
@@ -316,6 +321,41 @@ public class SwingUtils {
     
     KeyStroke stroke = KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 );
     lp.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( stroke, name );
+  }
+  
+  /**
+   * Copy the given String content to the system's default clipboard.
+   * 
+   * @param   content       String content to be copied to the clipboard.
+   * @since   R8
+   */
+  public static void copyToClipboard( String content ) {
+    StringSelection selection = new StringSelection( content );
+    Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+    clip.setContents( selection, selection );
+  }
+
+  /**
+   * Get a String content from the system's default clipboard. If the
+   * clipboard is empty, or if it does not contain a String, then null
+   * will be returned. On some systems null will also be returned if the
+   * clipboard is currently accessed by another application.
+   * <p>
+   * The requestor parameter is currently unused (up to JDK1.5.0). Anyhow
+   * please pass a reference to the invoking class (usually <code>this</code>).
+   * 
+   * @param   requestor       Requestor, usually <code>this</code>.
+   * @return  The String currently found in the clipboard, or null.
+   * @since   R8
+   */
+  public static String pasteFromClipboard( Object requestor ) {
+    Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+    Transferable trans = clip.getContents( requestor );
+    String result = null;
+    try {
+      result = (String) trans.getTransferData( DataFlavor.stringFlavor );
+    }catch( Exception e ) {}
+    return result;
   }
 
 }
