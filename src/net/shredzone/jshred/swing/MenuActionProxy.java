@@ -54,7 +54,7 @@ import java.beans.*;
  * care about a proper scaling of the Action icon to a nice menu size.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: MenuActionProxy.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: MenuActionProxy.java,v 1.3 2004/06/24 14:18:44 shred Exp $
  */
 public class MenuActionProxy implements Action {
   private final Action master;
@@ -105,9 +105,11 @@ public class MenuActionProxy implements Action {
     //--- Scale icon ---
     if( key.equals( SMALL_ICON ) && ( val instanceof ImageIcon ) ) {
       ImageIcon icon = (ImageIcon) val;
-      Image img = icon.getImage();
-      img = img.getScaledInstance( dim.width, dim.height, Image.SCALE_SMOOTH );
-      val = new ImageIcon( img );
+      if( icon.getIconWidth()!=dim.width || icon.getIconHeight()!=dim.height ) {
+        Image img = icon.getImage();
+        img = img.getScaledInstance( dim.width, dim.height, Image.SCALE_SMOOTH );
+        val = new ImageIcon( img );
+      }
     }
 
     return val;

@@ -51,20 +51,17 @@ import javax.swing.table.*;
 /**
  * This is a JTable which allows the user to sort each column in
  * ascending or descending order. Everything you have to do to is just
- * to use the <code>JSortedTable</code> instead of a <code>JTable</code>.
+ * to use the <code>JSortedTable</code> instead of a <code>JTable</code>,
+ * and pass a <code>SortableTableModel</code> to it.
  * <p>
- * This table works either with the classic TableModel and also with
- * the SortableTableModel. If you provide a classic TableModel, it will
- * be internally wrapped by a SortableTableModelProxy. Anyhow this
- * proxy is rather memory hungry, especially for tables with many rows.
- * If you have a fast and better way to sort your TableModel, you should
- * implement the SortableTableModel yourself.
+ * If you want to use a classic TableModel, you can wrap it using the
+ * <code>SortableTableModelProxy</code> object, and then pass the
+ * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.3 2004/06/23 12:21:15 shred Exp $
  */
 public class JSortedTable extends JTable {
-  private SortableTableModel model;       // The table model
 
   /**
    * Create a new, empty JSortedTable.
@@ -74,19 +71,28 @@ public class JSortedTable extends JTable {
   }
 
   /**
-   * Create a new JSortedTable with the given TableModel.
+   * Create a new JSortedTable with the given SortableTableModel.
    *
-   * @param   model       TableModel to be used.
+   * @param   model       SortableTableModel to be used.
    */
-  public JSortedTable( TableModel model ) {
-    super();
-    if( model instanceof SortableTableModel ) {
-      setModel( (SortableTableModel) model );
-    }else {
-      setModel( model );
-    }
+  public JSortedTable( SortableTableModel model ) {
+    super( model );
   }
 
+  /**
+   * Set the TableModel to be used. You must pass a SortableTableModel
+   * here, otherwise you'll get an InvalidArgumentException.
+   *
+   * @param     model     TableModel
+   */
+  public void setModel( TableModel model ) {
+    if( model instanceof SortableTableModel ) {
+      super.setModel( model );
+    }else {
+      throw new IllegalArgumentException( "You must provide a SortableTableModel" );
+    }
+  }
+  
   /**
    * Create the default JTableHeader instance.
    *
@@ -97,22 +103,12 @@ public class JSortedTable extends JTable {
   }
 
   /**
-   * Set a TableModel. It will be wrapped by a SortableTableModelProxy.
+   * Get the default TableModel. It is always a SortableTableModel!
    *
-   * @param     model     TableModel to be used
+   * @return    SortableTableModel
    */
-  public void setModel( TableModel model ) {
-    setModel( new SortableTableModelProxy( model ) );
-  }
-
-  /**
-   * Set a SortableTableModel.
-   *
-   * @param     model     SortableTableModel to be used
-   */
-  public void setModel( SortableTableModel model ) {
-    this.model = model;
-    super.setModel( model );
+  protected TableModel createDefaultDataModel() {
+    return new SortableTableModelProxy( super.createDefaultDataModel() );
   }
 
 }

@@ -71,7 +71,7 @@ import java.util.*;
  * the SortTableModelProxy constructor.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java,v 1.2 2004/06/22 21:57:45 shred Exp $
+ * @version $Id: SortableTableModelProxy.java,v 1.3 2004/06/23 12:21:15 shred Exp $
  */
 public class SortableTableModelProxy implements SortableTableModel, TableModelListener {
   private final TableModel master;
@@ -156,7 +156,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
    * @return    true: is editable
    */
   public boolean isCellEditable( int rowIndex, int columnIndex ) {
-    return master.isCellEditable( indexMap[rowIndex].intValue(), columnIndex );
+    return master.isCellEditable( mapRow(rowIndex), columnIndex );
   }
 
   /**
@@ -168,7 +168,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
    * @return    The value of this cell.
    */
   public Object getValueAt( int rowIndex, int columnIndex ) {
-    return master.getValueAt( indexMap[rowIndex].intValue(), columnIndex );
+    return master.getValueAt( mapRow(rowIndex), columnIndex );
   }
 
   /**
@@ -182,11 +182,37 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
    * @param     columnIndex     Column
    */
   public void setValueAt( Object aValue, int rowIndex, int columnIndex ) {
-    master.setValueAt( aValue, indexMap[rowIndex].intValue(), columnIndex );
+    master.setValueAt( aValue, mapRow(rowIndex), columnIndex );
     if( columnIndex==currentColumn ) {
       resort();
       fireTableDataChanged();
     }
+  }
+  
+  /**
+   * Map a row number to the appropriate row number in the master
+   * TableModel.
+   * 
+   * @param     row             Row number of this model
+   * @return    Row number of the row in the master TableModel.
+   */
+  public int mapRow( int row ) {
+    return indexMap[row].intValue();
+  }
+
+  /**
+   * Map a row number of the master TableModel to the current row
+   * number of the SortableTableModel.
+   * 
+   * @param     row             Row number of the master TableModel
+   * @return    Appropriate current row number of this model.
+   */
+  public int unmapRow( int row ) {
+    for( int ix=0; ix<indexMap.length; ix++ ) {
+      if( indexMap[ix].intValue() == row )
+        return ix;
+    }
+    throw new IndexOutOfBoundsException( "row is not in table model" );
   }
 
   /**

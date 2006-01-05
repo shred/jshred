@@ -5,7 +5,7 @@
 <!-- Copyright (c) 2004 Richard "Shred" Körber -->
 <!-- All Rights Reserved. -->
 <!-- Released under MPL 1.1/GPL 2.0/LGPL 2.1 -->
-<!-- $Id: build.xml,v 1.3 2004/06/21 19:44:29 shred Exp $ -->
+<!-- $Id: build.xml,v 1.5 2004/06/27 15:46:34 shred Exp $ -->
 
 <project name="jshred" default="dist" basedir=".">
   <description>
@@ -41,14 +41,14 @@
     </genkey>
   </target>
   
-  <target name="compile" depends="init" description="Compile source">
+  <target name="build" depends="init" description="Build application">
     <!-- Compile from src to build -->
-    <javac srcdir="${src}" destdir="${build}" deprecation="on" optimize="on">
+    <javac srcdir="${src}" destdir="${build}" deprecation="off" optimize="on">
       <classpath refid="project.class.path"/>
     </javac>
   </target>
   
-  <target name="dist" depends="compile" description="Create a JAR file">
+  <target name="dist" depends="build" description="Create a JAR file">
     <!-- Create a JAR file there -->
     <jar jarfile="${dist}/jshred.jar" basedir="${build}" compress="true">
       <manifest>
