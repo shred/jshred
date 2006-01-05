@@ -77,7 +77,7 @@ import javax.swing.ProgressMonitor;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java,v 1.1.1.1 2004/06/21 11:51:45 shred Exp $
+ * @version $Id: HTTPRequest.java,v 1.3 2004/06/22 21:57:45 shred Exp $
  */
 public class HTTPRequest {
 
@@ -101,7 +101,7 @@ public class HTTPRequest {
   private String            transferNote;   // String to show while transmission
   private int               monitorMin;     // Minimum Monitor value
   private int               monitorMax;     // Maximum Monitor value
-  
+
   /**
    * Create a new HTTPRequest using GET.
    *
@@ -120,7 +120,7 @@ public class HTTPRequest {
   public HTTPRequest( URL url, boolean post ) {
     this.getUrl = url;
     this.post   = post;
-    
+
     //--- Initialize parameter hashes ---
     hmParam  = new HashMap();
     hmStream = new HashMap();
@@ -128,7 +128,7 @@ public class HTTPRequest {
     monitor  = null;
 
     //--- Create a boundary string ---
-    String bcomp = "---------------------bp";
+    String bcomp = "---------------------bd";
     bcomp += String.valueOf( Math.floor( Math.random() * 10000000 ) );
     boundary = bcomp;
   }
@@ -194,7 +194,7 @@ public class HTTPRequest {
   throws FileNotFoundException {
     addDataProvider( name, new FileProvider( file ) );
   }
-  
+
   /**
    * Add a file to the HTTPRequest. You must use POST requests in order
    * to upload files to the server. The file is not kept in
@@ -217,7 +217,7 @@ public class HTTPRequest {
    * HTTPRequest is also able to upload large files.
    *
    * @param   name          Parameter name
-   * @param   provider      Source for the data to be uploaded 
+   * @param   provider      Source for the data to be uploaded
    */
   public void addDataProvider( String name, DataProvider provider ) {
     if( !isPost() )
@@ -225,10 +225,10 @@ public class HTTPRequest {
 
     if( name==null || provider==null )
       throw new NullPointerException( "No name or provider given" );
-    
+
     hmStream.put( name, provider );
   }
-  
+
   /**
    * Return if the request will be sent in POST or GET mode.
    *
@@ -279,7 +279,7 @@ public class HTTPRequest {
     this.monitorMin   = min;
     this.monitorMax   = max;
   }
-  
+
   /**
    * Send the request to the server. You cannot reuse the request after
    * it has been sent. If you have previously set a ProgressMonitor, it
@@ -292,7 +292,7 @@ public class HTTPRequest {
   public int doRequest() throws IOException, MalformedURLException {
     if( connect != null )
       throw new RuntimeException( "already connected" );
-    
+
     if( isPost() ) {
       //--- POST ----------------------------------------
       // Create Connection
@@ -303,9 +303,9 @@ public class HTTPRequest {
       connect = (HttpURLConnection)con;
       connect.setUseCaches( false );      // No caching, since it's probably a CGI call
       connect.setDoOutput( true );
-      
+
       monitorConnected();                 // Inform ProgressMonitor
-      
+
       // Get Content Type
       if( hmStream.isEmpty() ) {
         connect.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );
@@ -350,9 +350,9 @@ public class HTTPRequest {
 
       monitorConnected();                 // Inform ProgressMonitor
     }
-    
+
     monitorDone();                        // Set ProgressMonitor to the max value
-    
+
     //--- Get HTTP Response ---
     return connect.getResponseCode();
   }
@@ -381,7 +381,7 @@ public class HTTPRequest {
       monitor.setProgress( monitorMax );
     }
   }
-  
+
   /**
    * Set the ProgressMonitor between min and max according to the
    * relation between current and max.
@@ -391,7 +391,7 @@ public class HTTPRequest {
    */
   private void monitorSetRelation( int current, int max ) {
     if( monitor==null ) return;             // No monitor was set
-    
+
     if( max>0 ) {
       // Use rule of three. If current==0, monitorMin will be set,
       // for current==max, monitorMax will be set, everything else
@@ -403,7 +403,7 @@ public class HTTPRequest {
       monitor.setProgress( monitorMax );
     }
   }
-  
+
   /**
    * Create a "multipart/form-data" request as described in RFC 1867.
    *
@@ -412,18 +412,18 @@ public class HTTPRequest {
   private void createMultipart( PrintStream ps ) throws IOException {
     String key;
     Iterator it;
-    
+
     //--- Count all parameters ---
     int paramCnt = hmParam.size() + hmStream.size();
     int counter = 0;
-  
+
     //--- First send all the simple parameters ---
     it = hmParam.keySet().iterator();
     while( it.hasNext() ) {
       monitorSetRelation( counter++, paramCnt );    // Set monitor
-      
+
       key = it.next().toString();
-      
+
       ps.print( "--" );
       ps.println( boundary );
       ps.print( "Content-Disposition: form-data; name=\"" );
@@ -432,7 +432,7 @@ public class HTTPRequest {
       ps.println();
       ps.println( hmParam.get( key ).toString() );
     }
-    
+
     //--- Now send the streams ---
     it = hmStream.keySet().iterator();
     while( it.hasNext() ) {
@@ -440,7 +440,7 @@ public class HTTPRequest {
 
       key = it.next().toString();
       DataProvider provider = (DataProvider) hmStream.get( key );
-      
+
       ps.print( "--" );
       ps.println( boundary );
       ps.print( "Content-Disposition: form-data; name=\"" );
@@ -454,7 +454,7 @@ public class HTTPRequest {
       provider.sendFile( ps );
       ps.println();
     }
-    
+
     //--- Close the container ---
     monitorSetRelation( counter, paramCnt );        // Finish monitor
     if( !( hmParam.isEmpty() && hmStream.isEmpty() ) ) {
@@ -462,10 +462,10 @@ public class HTTPRequest {
       ps.print( boundary );
       ps.println( "--" );
     }
-    
+
     ps.flush();
   }
-  
+
   /**
    * Create a parameter string with the given parameters. The string
    * will have the format "name1=val1&name2=val2&name3=val3", where
@@ -550,14 +550,14 @@ public class HTTPRequest {
      * @return    MimeType
      */
     public String getMimeType();
-    
+
     /**
      * Return the file name of the file.
      *
      * @return    Dateiname
      */
     public String getFileName();
-    
+
     /**
      * Commands this FileProvider to send its data to the given
      * OutputStream.
@@ -568,9 +568,9 @@ public class HTTPRequest {
      * @throws  IOException   if transmission failed
      */
     public void sendFile( OutputStream out ) throws IOException;
-    
+
   }
-  
+
 /*------------------------------------------------------------------------*/
 
   /**
@@ -587,7 +587,7 @@ public class HTTPRequest {
      * The InputStream
      */
     protected final InputStream in;
-    
+
     /**
      * Create a new InputStreamProvider.
      *
@@ -596,7 +596,7 @@ public class HTTPRequest {
     public InputStreamProvider( InputStream in ) {
       this.in = in;
     }
-    
+
     /**
      * Transfers the InputStream to the OutputStream by copying it.
      *
@@ -608,9 +608,9 @@ public class HTTPRequest {
         out.write( (byte) data );
       }
     }
-    
+
   }
-  
+
 /*------------------------------------------------------------------------*/
 
   /**
@@ -619,7 +619,7 @@ public class HTTPRequest {
   public static class FileProvider extends InputStreamProvider {
     protected File file;
     protected String mimetype;
-    
+
     /**
      * Create a new FileProvider with an "application/octet-stream"
      * mime type.
@@ -630,7 +630,7 @@ public class HTTPRequest {
     throws FileNotFoundException {
       this( file, "application/octet-stream" );
     }
-    
+
     /**
      * Create a new FileProvider with the given mime type.
      *
@@ -643,7 +643,7 @@ public class HTTPRequest {
       this.file = file;
       this.mimetype = mimetype;
     }
-      
+
     /**
      * Return the MimeType of the file.
      *
@@ -652,7 +652,7 @@ public class HTTPRequest {
     public String getMimeType() {
       return mimetype;
     }
-    
+
     /**
      * Return the file name of the file.
      *
@@ -661,7 +661,7 @@ public class HTTPRequest {
     public String getFileName() {
       return file.getName();
     }
- 
+
   }
 }
 

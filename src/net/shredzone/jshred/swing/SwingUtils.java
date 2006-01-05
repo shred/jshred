@@ -52,7 +52,7 @@ import javax.swing.table.*;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: SwingUtils.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class SwingUtils {
 
@@ -170,7 +170,7 @@ public class SwingUtils {
     }
     return null;
   }
-  
+
   /**
    * Adjust each column of a JTable to show its entire content. There
    * is no maximum cell width given, which could result in unreadable
@@ -212,10 +212,10 @@ public class SwingUtils {
       TableColumn column = columns.getColumn(i);
       int columnIndex = column.getModelIndex();
       int width = -1;
-      
+
       TableCellRenderer h = column.getHeaderRenderer();
       if( h==null ) h = defaultHeaderRenderer;
-            
+
       if( h!=null) {
         Component c = h.getTableCellRendererComponent(
           table,
@@ -224,7 +224,7 @@ public class SwingUtils {
         );
         width = c.getPreferredSize().width;
       }
-       
+
       for( int row=rowCount-1; row>=0; row-- ) {
         TableCellRenderer r = table.getCellRenderer( row, i );
         Component c = r.getTableCellRendererComponent(

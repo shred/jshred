@@ -54,7 +54,7 @@ import java.awt.image.*;
  * will stay black. Transparency is honored.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: BrightFilter.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: BrightFilter.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class BrightFilter extends RGBImageFilter {
   private int p;
@@ -62,7 +62,7 @@ public class BrightFilter extends RGBImageFilter {
   private int redMul;
   private int greenMul;
   private int blueMul;
-  
+
   /**
    * Creates a brightened image. A default factor of 40 and the
    * brightening color <code>Color.WHITE</code> will be used.
@@ -76,7 +76,7 @@ public class BrightFilter extends RGBImageFilter {
     Image brightImage = Toolkit.getDefaultToolkit().createImage(prod);
     return brightImage;
   }
-    
+
   /**
    * Creates a BrightFilter. The given factor and the brightening color
    * <code>Color.WHITE</code> will be used.
@@ -97,15 +97,15 @@ public class BrightFilter extends RGBImageFilter {
   public BrightFilter( int p, Color color ) {
     this.p = p;
     this.color = color;
-    
+
     int rgb  = color.getRGB();
     redMul   = ( (rgb>>16) & 0xFF );
     greenMul = ( (rgb>> 8) & 0xFF );
     blueMul  = ( (rgb    ) & 0xFF );
-    
+
     canFilterIndexColorModel = true;
   }
-    
+
   /**
    * The filter method itself.
    *
@@ -119,17 +119,17 @@ public class BrightFilter extends RGBImageFilter {
     int red   = (rgb>>16)&0xFF;
     int green = (rgb>> 8)&0xFF;
     int blue  = (rgb    )&0xFF;
-    
+
     //--- Compute the new color values ---
     red   = (100*red   - p*red   + p*redMul  ) / 100;
     green = (100*green - p*green + p*greenMul) / 100;
     blue  = (100*blue  - p*blue  + p*blueMul ) / 100;
-    
+
     //--- Clipping ---
     red   = ( red<0   ? 0 : ( red>255   ? 255 : red   ) );
     green = ( green<0 ? 0 : ( green>255 ? 255 : green ) );
     blue  = ( blue<0  ? 0 : ( blue>255  ? 255 : blue  ) );
-    
+
     //--- Compose new color ---
     return( rgb&0xFF000000 | red<<16 | green<<8 | blue );
   }

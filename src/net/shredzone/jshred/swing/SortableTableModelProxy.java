@@ -71,7 +71,7 @@ import java.util.*;
  * the SortTableModelProxy constructor.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: SortableTableModelProxy.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class SortableTableModelProxy implements SortableTableModel, TableModelListener {
   private final TableModel master;
@@ -79,7 +79,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   private boolean currentDesc = false;
   private Integer[] indexMap;
   private Set sListener = new HashSet();
-  
+
   /**
    * Create a new SortableTableModelProxy for a master TableModel. The
    * object will give a modified view to the master TableModel that allows
@@ -94,7 +94,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
     rebuildIndexMap();
     master.addTableModelListener( this );
   }
-  
+
   /**
    * Get the master table that is connected to this SortableTableModelProxy.
    *
@@ -103,7 +103,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public TableModel getMasterTable() {
     return master;
   }
-  
+
   /**
    * Get the number of rows. This call is forwarded to the master
    * TableModel.
@@ -113,7 +113,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public int getRowCount() {
     return master.getRowCount();
   }
-  
+
   /**
    * Get the number of columns. This call is forwarded to the master
    * TableModel.
@@ -123,7 +123,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public int getColumnCount() {
     return master.getColumnCount();
   }
-  
+
   /**
    * Get the column name of a certain column. This call is forwarded
    * to the master TableModel.
@@ -134,7 +134,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public String getColumnName( int columnIndex ) {
     return master.getColumnName( columnIndex );
   }
-  
+
   /**
    * Get the column name of a certain column. This call is forwarded
    * to the master TableModel.
@@ -145,7 +145,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public Class getColumnClass( int columnIndex ) {
     return master.getColumnClass( columnIndex );
   }
-  
+
   /**
    * Check if a cell is editable. This call is forwarded to the
    * master TableModel after the row has been mapped according to the
@@ -158,7 +158,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public boolean isCellEditable( int rowIndex, int columnIndex ) {
     return master.isCellEditable( indexMap[rowIndex].intValue(), columnIndex );
   }
-  
+
   /**
    * Get a cell value. This call is forwarded to the master TableModel
    * after the row has been mapped according to the sort order.
@@ -170,7 +170,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public Object getValueAt( int rowIndex, int columnIndex ) {
     return master.getValueAt( indexMap[rowIndex].intValue(), columnIndex );
   }
-  
+
   /**
    * Set a cell value. This call is forwarded to the master TableModel
    * after the row has been mapped according to the sort order. If the
@@ -188,7 +188,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
       fireTableDataChanged();
     }
   }
-  
+
   /**
    * Sort by a certain column, ascending.
    *
@@ -197,7 +197,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public void sortByColumn( int columnIndex ) {
     sortByColumn( columnIndex, false );
   }
-  
+
   /**
    * Sort by a certain column, descending.
    *
@@ -206,7 +206,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public void sortByColumnDesc( int columnIndex ) {
     sortByColumn( columnIndex, true );
   }
-  
+
   /**
    * Sort by a certain column in the given order.
    *
@@ -219,7 +219,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
     resort();
 		fireTableDataChanged();
   }
-  
+
   /**
    * Get the index of the column that is currently sorted.
    *
@@ -228,7 +228,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public int getSortedColumn() {
     return currentColumn;
   }
-  
+
   /**
    * Get the current sort order.
    *
@@ -237,7 +237,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
   public boolean isDescending() {
     return currentDesc;
   }
-  
+
   /**
    * Sort the entire TableModel again.
    */
@@ -245,7 +245,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
     ColumnComparator comp = new ColumnComparator( currentColumn, currentDesc );
     Arrays.sort( indexMap, comp );
   }
-  
+
   /**
    * Rebuild the internal index map array. This is always required when
    * the master TableModel changed its number of rows.
@@ -257,7 +257,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
       indexMap[ix] = new Integer(ix);
     }
   }
-  
+
   /**
    * Internal TableModelListener implementation, do not use!
    *
@@ -267,7 +267,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
     rebuildIndexMap();
     resort();
   }
-  
+
   /**
    * Add a TableModelListener. It will be added to the master TableModel
    * as well as to this SortTableModelProxy. The listener will be notified
@@ -280,7 +280,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
     master.addTableModelListener( l );
     sListener.add( l );
   }
-  
+
   /**
    * Remove a TableModelListener. If it was not added, nothing will
    * happen. Make sure that you use the proxy <code>removeTableModelListener()</code>
@@ -292,7 +292,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
     master.removeTableModelListener( l );
     sListener.remove( l );
   }
-  
+
   /**
    * Notify all TableModelListeners that the sort order was changed.
    */
@@ -314,7 +314,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
 	private class ColumnComparator implements Comparator {
     private final int column;       // Column to sort at
     private final boolean desc;     // true: descending
-    
+
     /**
      * Create a new ColumnComparator for a certain column.
      *
@@ -325,7 +325,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
       this.column = column;
       this.desc   = desc;
     }
-    
+
     /**
      * Compare two objects. This are Integers containing the row numbers
      * to be sorted.
@@ -338,7 +338,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
       //--- Get the row numbers ---
 			final Integer i1 = (Integer) o1;
 			final Integer i2 = (Integer) o2;
-      
+
       //--- Get the table cell objects ---
       final Object d1 = master.getValueAt( (desc ? i2 : i1).intValue(), column );
       final Object d2 = master.getValueAt( (desc ? i1 : i2).intValue(), column );
@@ -347,7 +347,7 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
       if( d1==null && d2==null )  return 0;
       if( d1==null )              return 1;
       if( d2==null )              return -1;
-      
+
       try {
         //--- Try to compare Comparables ---
         Comparable c1 = (Comparable) d1;

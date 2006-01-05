@@ -52,10 +52,10 @@ import java.awt.*;
  * has a text, never gets the focus and has no borders.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: JToolbarButton.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class JToolbarButton extends JButton {
-  
+
   /**
    * Creates a new JToolbarButton for a certain action.
    *
@@ -68,7 +68,7 @@ public class JToolbarButton extends JButton {
     setFocusable( false );
     setMargin( new Insets( 0,0,0,0 ) );
   }
-   
+
 }
 
 /* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

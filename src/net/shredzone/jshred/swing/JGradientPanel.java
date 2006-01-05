@@ -52,17 +52,17 @@ import java.awt.*;
  * the direction and the starting and ending color.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JGradientPanel.java,v 1.1 2004/06/21 14:18:13 shred Exp $
+ * @version $Id: JGradientPanel.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class JGradientPanel extends JPanel {
   public static final boolean VERTICAL   = true;
   public static final boolean HORIZONTAL = false;
   public static final Color   BACKGROUND = null;
-  
+
   private Color cTop = null;
   private Color cBottom = null;
   private boolean vertical = true;
-  
+
   /**
    * Create a vertical JGradientPanel with the given top and bottom
    * color. If null is given as color, the standard background color
@@ -90,7 +90,7 @@ public class JGradientPanel extends JPanel {
     this.vertical = vertical;
     setOpaque( false );
   }
-  
+
   /**
    * Change the top/left color. null means to use the background color
    * instead.
@@ -101,7 +101,7 @@ public class JGradientPanel extends JPanel {
     this.cTop = top;
     repaint();
   }
-  
+
   /**
    * Get the current top/left color.
    *
@@ -110,7 +110,7 @@ public class JGradientPanel extends JPanel {
   public Color getColorTop() {
     return cTop;
   }
-  
+
   /**
    * Change the bottom/right color. null means to use the background color
    * instead.
@@ -121,7 +121,7 @@ public class JGradientPanel extends JPanel {
     this.cBottom = bottom;
     repaint();
   }
-  
+
   /**
    * Get the current bottom/right color.
    *
@@ -140,7 +140,7 @@ public class JGradientPanel extends JPanel {
     this.vertical = vertical;
     repaint();
   }
-  
+
   /**
    * Get the gradient direction.
    *
@@ -149,7 +149,7 @@ public class JGradientPanel extends JPanel {
   public boolean isVertical() {
     return vertical;
   }
-  
+
   /**
    * Paint the gradient and the components.
    *
@@ -157,7 +157,7 @@ public class JGradientPanel extends JPanel {
    */
   public void paint( Graphics g ) {
     Graphics2D g2 = (Graphics2D) g;
-   
+
     //--- Create Gradient Paint ---
     Color top    = ( cTop!=BACKGROUND    ? cTop    : getBackground());
     Color bottom = ( cBottom!=BACKGROUND ? cBottom : getBackground());
@@ -168,14 +168,14 @@ public class JGradientPanel extends JPanel {
       gp = new GradientPaint( 0f,0f,top, getWidth(),0f,bottom );
     }
     g2.setPaint(gp);
-      
+
     //--- Fill Background ---
     g2.fillRect(0,0, getWidth(), getHeight());
-    
+
     //--- Paint Components ---
-    super.paint(g); 
+    super.paint(g);
   }
 
 }
-  
+
 /* jedit :mode=java:tabSize=2:noTabs=true:folding=java:maxLineLen=72: */

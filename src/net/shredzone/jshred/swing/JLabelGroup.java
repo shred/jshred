@@ -58,7 +58,7 @@ import javax.swing.border.*;
  * aligned layout.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: JLabelGroup.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class JLabelGroup extends JPanel {
   private Component   comp;
@@ -112,7 +112,7 @@ public class JLabelGroup extends JPanel {
     this.comp  = c;
     this.label = label;
     this.pred  = pred;
-    
+
     setVerticalAlignment( SwingConstants.CENTER );
     if( label instanceof JLabel ) {
       ((JLabel) label).setLabelFor( comp );
@@ -193,7 +193,7 @@ public class JLabelGroup extends JPanel {
   public void rearrange() {
     setMinimumWidth( getMaximumWidth() );
   }
-  
+
   /**
    * Set a mnemonic key for this label.
    *

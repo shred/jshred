@@ -55,7 +55,7 @@ import javax.swing.event.*;
  * SortableTableModel and allows to select columns to be sorted.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: SortTableHeader.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
   private boolean pressed;        // Mouse is pressed
@@ -71,7 +71,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   public SortTableHeader() {
     super(null);
   }
-  
+
   /**
    * Create a new SortTableHeader with the given TableColumnModel
    *
@@ -79,11 +79,11 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
    */
   public SortTableHeader( TableColumnModel cm ) {
     super( cm );
-    
+
     //--- Initialize the default iconset ---
     iconAsc = new ArrowIcon( false );
     iconDesc = new ArrowIcon( true );
-    
+
     //--- Set the default renderer ---
     setDefaultRenderer( new SortTableCellRenderer( createDefaultRenderer() ) );
 
@@ -91,7 +91,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     addMouseListener( this );
     addMouseMotionListener( this );
   }
-  
+
   /**
    * Set if the user is allowed to sort columns by clicking on their
    * headline.
@@ -101,7 +101,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   public void setSortingAllowed( boolean b ) {
     sortingAllowed = b;
   }
-  
+
   /**
    * Find out if sorting is allowed.
    *
@@ -110,7 +110,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   public boolean isSortingAllowed() {
     return sortingAllowed;
   }
-  
+
   /**
    * Set the icon for ascending order.
    *
@@ -119,7 +119,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   public void setIconAsc( Icon icon ) {
     iconAsc = icon;
   }
-  
+
   /**
    * Get the current icon for ascending order.
    *
@@ -128,7 +128,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
   public Icon getIconAsc() {
     return iconAsc;
   }
-  
+
   /**
    * Set the icon for descending order.
    *
@@ -170,7 +170,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
       if( model instanceof SortableTableModel ) {
         SortableTableModel sortmodel = (SortableTableModel) model;
         int column = table.convertColumnIndexToModel( pressedIndex );
-        
+
         //--- Change sort order ---
         if( sortingAllowed && column>=0 && column<columnModel.getColumnCount() ) {
           if( column==sortmodel.getSortedColumn() ) {
@@ -235,7 +235,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
    */
   private class SortTableCellRenderer implements TableCellRenderer {
     private TableCellRenderer parent;
-    
+
     /**
      * Create a new SortTableCellRenderer. A parent TableCellRenderer
      * is given, its result will be manipulated. Usually you will pass
@@ -246,7 +246,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     public SortTableCellRenderer( TableCellRenderer parent ) {
       this.parent = parent;
     }
-    
+
     /**
      * Get a Component that renders the table cell.
      *
@@ -261,7 +261,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     public Component getTableCellRendererComponent( JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column ) {
       //--- Get the original Component ---
       Component c = parent.getTableCellRendererComponent( table, value, isSelected, hasFocus, row, column );
-      
+
       //--- It should be a JLabel ---
       if( c instanceof JLabel ) {
         JLabel cl = (JLabel) c;
@@ -270,7 +270,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         if( pressed && pressedIndex==column ) {
           cl.setBackground( cl.getBackground().darker() );
         }
-        
+
         //--- Show the sorting state ---
         TableModel model = table.getModel();
         if( model instanceof SortableTableModel ) {
@@ -288,12 +288,12 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
           }
         }
       }
-      
+
       //--- Return the manipulated Component ---
       return c;
     }
   }
-  
+
 /*--------------------------------------------------------------------*/
 
   /**
@@ -310,7 +310,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     public ArrowIcon( boolean up ) {
       this.up = up;
     }
-    
+
     /**
      * Paint this icon
      *
@@ -332,7 +332,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         pX[1] = x+3; pY[1] = y+5;
         pX[2] = x+6; pY[2] = y+2;
       }
-      
+
       //--- Draw it ---
       g.setColor( c.getForeground() );
       g.drawPolygon( pX, pY, pX.length );
@@ -347,7 +347,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     public int getIconWidth() {
       return 7;
     }
-    
+
     /**
      * Width is fixed to 6 pixel.
      *

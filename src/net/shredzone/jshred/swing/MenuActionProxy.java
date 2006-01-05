@@ -54,12 +54,12 @@ import java.beans.*;
  * care about a proper scaling of the Action icon to a nice menu size.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: MenuActionProxy.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: MenuActionProxy.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class MenuActionProxy implements Action {
   private final Action master;
   private Dimension dim;
-  
+
   /**
    * Creates a new MenuActionProxy. The default icon dimensions
    * (16x16) are used.
@@ -80,7 +80,7 @@ public class MenuActionProxy implements Action {
     master = a;
     this.dim = dim;
   }
-  
+
   /**
    * Set new Icon dimensions for the menu icon. Default is 16x16 pixels.
    *
@@ -89,7 +89,7 @@ public class MenuActionProxy implements Action {
   public void setIconDimension( Dimension dim ) {
     this.dim = dim;
   }
-  
+
   /**
    * Get the current dimension of the menu icon.
    *
@@ -98,7 +98,7 @@ public class MenuActionProxy implements Action {
    public Dimension getIconDimension() {
      return dim;
    }
-  
+
    public Object getValue( String key ) {
     Object val = master.getValue( key );
 
@@ -109,30 +109,30 @@ public class MenuActionProxy implements Action {
       img = img.getScaledInstance( dim.width, dim.height, Image.SCALE_SMOOTH );
       val = new ImageIcon( img );
     }
-    
+
     return val;
   }
-  
+
   public void putValue( String key, Object value ) {
     master.putValue( key, value );
   }
-  
+
   public void setEnabled( boolean b ) {
     master.setEnabled( b );
   }
-  
+
   public boolean isEnabled() {
     return master.isEnabled();
   }
-  
+
   public void addPropertyChangeListener( PropertyChangeListener listener ) {
     master.addPropertyChangeListener( listener );
   }
-  
+
   public void removePropertyChangeListener(PropertyChangeListener listener) {
     master.removePropertyChangeListener( listener );
   }
-  
+
   public void actionPerformed( ActionEvent e ) {
     master.actionPerformed( e );
   }

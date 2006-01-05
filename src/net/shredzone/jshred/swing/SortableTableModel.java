@@ -58,7 +58,7 @@ import java.util.*;
  * take care for the sorting.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModel.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: SortableTableModel.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public interface SortableTableModel extends TableModel {
 
@@ -69,14 +69,14 @@ public interface SortableTableModel extends TableModel {
    * @param     desc            true: descending, false: ascending
    */
   public void sortByColumn( int columnIndex, boolean desc );
-  
+
   /**
    * Get the index of the column that is currently sorted.
    *
    * @return    Currently sorted column.
    */
   public int getSortedColumn();
-  
+
   /**
    * Get the current sort order.
    *

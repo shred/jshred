@@ -50,7 +50,7 @@ import javax.swing.text.*;
  * This PlainDocument will limit the input to a certain length.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: LimitedDocument.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: LimitedDocument.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class LimitedDocument extends PlainDocument {
   private int maxLength = -1;   // Maximum length
@@ -75,7 +75,7 @@ public class LimitedDocument extends PlainDocument {
   public void insertString( int offs, String str, AttributeSet a )
   throws BadLocationException {
     if( str==null ) return;
-    
+
     if(   (maxLength==-1)
        || ((getLength() + str.length()) <= maxLength)) {
       //--- Maximum length was not reached ---

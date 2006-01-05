@@ -52,7 +52,7 @@ import org.xml.sax.*;
  * A writer for cleanly formatted XML output.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: XMLWriter.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: XMLWriter.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class XMLWriter extends BufferedWriter {
   private String indent    = "  ";
@@ -60,7 +60,7 @@ public class XMLWriter extends BufferedWriter {
   private int    level     = 0;
   private Stack  sElements = new Stack();
   StringBuffer   bTag      = new StringBuffer();
-  
+
   /**
    * Create a new XMLWriter basing on a Writer.
    *
@@ -72,7 +72,7 @@ public class XMLWriter extends BufferedWriter {
       charset = ( (OutputStreamWriter)out ).getEncoding();
     }
   }
-  
+
   /**
    * Create a new XMLWriter basing on an OutputStream. The OutputStream will
    * receive UTF-8 encoded data.
@@ -84,7 +84,7 @@ public class XMLWriter extends BufferedWriter {
   public XMLWriter( OutputStream out ) throws UnsupportedEncodingException {
     this( new OutputStreamWriter( out, "UTF-8" ) );
   }
-  
+
   /**
    * Set the indention string. This string is used to indent lines according
    * to their nesting. Defaults to two spaces, but you can also set several
@@ -97,7 +97,7 @@ public class XMLWriter extends BufferedWriter {
   public void setIndent( String indent ) {
     this.indent = indent;
   }
-  
+
   /**
    * Set the encoding used by this writer. The XMLWriter tries to find out the
    * proper encoding itself. If an OutputStream is used, encoding will always
@@ -112,7 +112,7 @@ public class XMLWriter extends BufferedWriter {
   public void setEncoding( String encoding ) {
     this.charset = encoding;
   }
-  
+
   /**
    * Indent by one level
    */
@@ -132,7 +132,7 @@ public class XMLWriter extends BufferedWriter {
     newLine();
     newLine();
   }
-  
+
   /**
    * Finish an XML document.
    */
@@ -142,7 +142,7 @@ public class XMLWriter extends BufferedWriter {
       throw new IOException("Still open elements");
     }
   }
-  
+
   /**
    * Start a new XML element.
    *
@@ -151,7 +151,7 @@ public class XMLWriter extends BufferedWriter {
   public void startElement( String element ) throws IOException {
     startElement( element, null );
   }
-  
+
   /**
    * Start a new XML element with attributes. This method will take proper care
    * for excaping all chars within the attribute values.
@@ -164,7 +164,7 @@ public class XMLWriter extends BufferedWriter {
     sElements.push( element );
     writeIndent();
     bTag.append( element );
-    
+
     //--- Append attributes ---
     if( attr!=null && attr.getLength()>0 ) {
       int cnt = attr.getLength();
@@ -200,7 +200,7 @@ public class XMLWriter extends BufferedWriter {
     }
     newLine();
   }
-  
+
   /**
    * Write the content of an XML container. Leading and trailing spaces will
    * be trimmed. Empty contents will be ignored. You can invoke this method
@@ -213,14 +213,14 @@ public class XMLWriter extends BufferedWriter {
     //--- Ignore empty container ---
     content = content.trim();
     if( content.equals("") ) return;
-    
+
     //--- Write it ---
     flushTag();
     writeIndent();
     write( escape( content ) );
     newLine();
   }
-  
+
   /**
    * Write a comment. Content will be escaped properly.
    *
@@ -230,7 +230,7 @@ public class XMLWriter extends BufferedWriter {
     //--- Ignore comment ---
     comment = comment.trim();
     if( comment.equals("") ) return;
-    
+
     //--- Write it ---
     flushTag();
     writeIndent();

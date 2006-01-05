@@ -61,18 +61,18 @@ import javax.swing.table.*;
  * implement the SortableTableModel yourself.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.1.1.1 2004/06/21 11:51:44 shred Exp $
+ * @version $Id: JSortedTable.java,v 1.2 2004/06/22 21:57:45 shred Exp $
  */
 public class JSortedTable extends JTable {
   private SortableTableModel model;       // The table model
-  
+
   /**
    * Create a new, empty JSortedTable.
    */
   public JSortedTable() {
     super();
   }
-  
+
   /**
    * Create a new JSortedTable with the given TableModel.
    *
@@ -86,7 +86,7 @@ public class JSortedTable extends JTable {
       setModel( model );
     }
   }
-  
+
   /**
    * Create the default JTableHeader instance.
    *
@@ -95,7 +95,7 @@ public class JSortedTable extends JTable {
   protected JTableHeader createDefaultTableHeader() {
     return new SortTableHeader( columnModel );
   }
-  
+
   /**
    * Set a TableModel. It will be wrapped by a SortableTableModelProxy.
    *
