@@ -1,4 +1,4 @@
-CHANGELOG -- $Id: changelog 75 2006-02-10 08:17:27Z shred $
+CHANGELOG -- $Id: changelog 77 2006-02-10 09:00:26Z shred $
 
 
 
@@ -6,6 +6,10 @@ CHANGELOG -- $Id: changelog 75 2006-02-10 08:17:27Z shred $
   * Added junit to the project, so there are no Eclipse SDK dependency
     issues any more.
   * Forgot some serialVersionUIDs.
+  * Added UncloseableInputStream and UncloseableOutputStream.
+  * HTTPRequest: a DataProvider now cannot unintentionally close the
+    OutputStream.
+  * HTTPRequest now gives access to the InputStream for binary results.
 
 R12 (2005-12-27)
   * NOTE: R12 is the last release that is JDK1.3 compatible. Starting from

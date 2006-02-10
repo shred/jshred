@@ -44,10 +44,26 @@
 
 package net.shredzone.jshred.net;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.swing.ProgressMonitor;
+
+import net.shredzone.jshred.io.UncloseableOutputStream;
 
 /**
  * This class sends a HTTP request to a server, and returns an InputStream
@@ -62,7 +78,7 @@ import javax.swing.ProgressMonitor;
  *   req.addParameter( "user", username );
  *   req.addParameter( "email", email );
  *   req.doRequest();
- *   Reader input = req.getReader();
+ *   Reader input = req.getContentReader();
  * </pre>
  * <p>
  * All parameters will be sent UTF-8 encoded, as proposed by W3C.
@@ -76,7 +92,7 @@ import javax.swing.ProgressMonitor;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java 75 2006-02-10 08:17:27Z shred $
+ * @version $Id: HTTPRequest.java 77 2006-02-10 09:00:26Z shred $
  */
 public class HTTPRequest {
 
@@ -459,7 +475,11 @@ public class HTTPRequest {
       buff.append( provider.getMimeType() );
       buff.append( "\r\n\r\n" );
       out.write( UTF8encode( buff.toString() ) );
-      provider.sendFile( out );
+
+      // Make sure the DataProvider cannot accidentally close the
+      // OutputStream. This would invalidate the entire request.
+      provider.sendFile( new UncloseableOutputStream( out ) );
+      
       out.write( "\r\n".getBytes() );
     }
 
@@ -508,16 +528,8 @@ public class HTTPRequest {
   private String URLencode( String msg ) {
     try {
       return URLEncoder.encode( msg, "UTF-8" );
-    }catch( Throwable t ) {
-      // Note that encode(String, String) is since JDK1.4! Also,
-      // according to Sun's java.nio.charset.Charset javadoc, every
-      // Java platform must implement "UTF-8", so we should never reach
-      // the catch block! Anyhow a (deprecated) fallback is provided here.
-
-      /*TODO: Elevate jshred's minimum requirements to JDK1.4, and remove
-       * this deprecated code line.
-       */
-      return URLEncoder.encode( msg );
+    }catch( UnsupportedEncodingException ex ) {
+      throw new InternalError("This VM does not support UTF-8");
     }
   }
   
@@ -530,11 +542,8 @@ public class HTTPRequest {
   private byte[] UTF8encode( String msg ) {
     try {
       return msg.getBytes( "UTF-8" );
-    }catch( Throwable t ) {
-      // According to Sun's java.nio.charset.Charset javadoc, every
-      // Java platform must implement "UTF-8", so we should never reach
-      // the catch block! Anyhow a fallback is provided here.
-      return msg.getBytes();
+    }catch( UnsupportedEncodingException ex ) {
+      throw new InternalError("This VM does not support UTF-8");
     }
   }
 
@@ -549,6 +558,17 @@ public class HTTPRequest {
     return connect;
   }
 
+  /**
+   * Return the server's response in an InputStream after a <code>doRequest</code>.
+   * 
+   * @return    InputStream of the server's response.
+   * @throws  IOException  if the InputStream could not be opened.
+   * @since R13
+   */
+  public InputStream getResult() throws IOException {
+    return connect.getInputStream();
+  }
+  
   /**
    * Return the server's response in a Reader after a <code>doRequest</code>.
    * <p>
