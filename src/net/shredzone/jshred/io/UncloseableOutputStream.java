@@ -54,7 +54,7 @@ import java.io.OutputStream;
  * that the method is unable to close your stream unintentionally.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id$
+ * @version $Id: UncloseableOutputStream.java 79 2006-02-10 09:08:01Z shred $
  * @since R13
  */
 public class UncloseableOutputStream extends FilterOutputStream {
