@@ -54,7 +54,7 @@ import java.io.InputStream;
  * that the method is unable to close your stream unintentionally.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id$
+ * @version $Id: UncloseableInputStream.java 78 2006-02-10 09:07:28Z shred $
  * @since R13
  */
 public class UncloseableInputStream extends FilterInputStream {
