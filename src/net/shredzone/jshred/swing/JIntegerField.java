@@ -1,7 +1,7 @@
 /*
  * jshred -- Shred's Toolbox
  *
- * Copyright (c) 2004 Richard "Shred" KÃ¶rber
+ * Copyright (c) 2004 Richard "Shred" Körber
  *   http://www.shredzone.net/go/jshred
  *
  *-----------------------------------------------------------------------
@@ -53,7 +53,7 @@ import java.awt.*;
  * supply this obligatory input field.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JIntegerField.java 75 2006-02-10 08:17:27Z shred $
+ * @version $Id: JIntegerField.java 76 2006-02-10 08:27:42Z shred $
  * @since   R2
  */
 public class JIntegerField extends JTextField {
