@@ -65,7 +65,7 @@ import java.util.*;
  * CSVLine inherits the List interface for easier access.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: CSVLine.java,v 1.5 2005/12/27 14:18:59 shred Exp $
+ * @version $Id: CSVLine.java 75 2006-02-10 08:17:27Z shred $
  */
 public class CSVLine extends ArrayList {
   private static final long serialVersionUID = 3544948840219359284L;

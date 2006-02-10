@@ -44,17 +44,21 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import javax.swing.event.ListDataListener;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import javax.swing.Icon;
+import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 
 /**
  * This Panel shows a Component with a headline above it. The user can click
@@ -68,7 +72,7 @@ import java.util.Set;
  * Due to a bug this component was not really functional until R12.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JCollapsiblePanel.java,v 1.6 2005/12/27 14:18:59 shred Exp $
+ * @version $Id: JCollapsiblePanel.java 75 2006-02-10 08:17:27Z shred $
  * @since   R9
  */
 public class JCollapsiblePanel extends JPanel {

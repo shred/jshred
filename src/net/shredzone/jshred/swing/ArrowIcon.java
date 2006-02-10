@@ -44,27 +44,23 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import javax.swing.event.ListDataListener;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.io.Serializable;
-import java.lang.ref.WeakReference;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+
+import javax.swing.Icon;
+import javax.swing.SwingConstants;
 
 /**
  * This is an icon of a little arrow pointing in one of the four directions,
  * either solid or outlined.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: ArrowIcon.java,v 1.1 2005/12/27 14:18:59 shred Exp $
+ * @version $Id: ArrowIcon.java 75 2006-02-10 08:17:27Z shred $
  * @since   R12
  */
 public class ArrowIcon implements Icon, Serializable {
+  private static final long serialVersionUID = 2798342355992018833L;
   private final int direction;
   private final boolean solid;
   private final int width;

@@ -50,7 +50,7 @@ import javax.swing.text.*;
  * This PlainDocument will limit the input to a certain length.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: LimitedDocument.java,v 1.4 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: LimitedDocument.java 75 2006-02-10 08:17:27Z shred $
  */
 public class LimitedDocument extends PlainDocument {
   private static final long serialVersionUID = 3258131358084904248L;

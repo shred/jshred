@@ -64,7 +64,7 @@ import javax.swing.JPanel;
  * invoked.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JRememberOptionPane.java,v 1.5 2005/02/01 11:18:29 shred Exp $
+ * @version $Id: JRememberOptionPane.java 75 2006-02-10 08:17:27Z shred $
  * @since   R7
  */
 public class JRememberOptionPane extends JOptionPane {

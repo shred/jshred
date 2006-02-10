@@ -57,7 +57,7 @@ import javax.swing.border.*;
  * aligned layout.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java,v 1.6 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: JLabelGroup.java 75 2006-02-10 08:17:27Z shred $
  */
 public class JLabelGroup extends JPanel {
   private static final long serialVersionUID = 4120855451547482167L;

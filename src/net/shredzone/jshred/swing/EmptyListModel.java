@@ -52,7 +52,7 @@ import javax.swing.event.ListDataListener;
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
  * @since   R7
- * @version $Id: EmptyListModel.java,v 1.1 2004/09/21 07:20:37 shred Exp $
+ * @version $Id: EmptyListModel.java 75 2006-02-10 08:17:27Z shred $
  */
 public final class EmptyListModel implements ListModel {
 

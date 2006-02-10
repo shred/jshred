@@ -5,7 +5,7 @@
 <!-- Copyright (c) 2004 Richard "Shred" Körber -->
 <!-- All Rights Reserved. -->
 <!-- Released under MPL 1.1/GPL 2.0/LGPL 2.1 -->
-<!-- $Id: build.xml,v 1.9 2005/12/13 14:02:53 shred Exp $ -->
+<!-- $Id: build.xml 75 2006-02-10 08:17:27Z shred $ -->
 
 <project name="jshred" default="build" basedir=".">
   <description>
@@ -17,10 +17,14 @@
   <property name="build"     location="build"/>
   <property name="dist"      location="dist"/>
   <property name="doc"       location="docs"/>
+  <property name="lib"       location="lib"/>
 
   <!-- Classpath -->
   <path id="project.class.path">
-    <!-- TODO: include all *.jar in lib -->
+  	<fileset dir="${lib}">
+  	  <include name="**/*.jar"/>
+  	</fileset>
+  	<pathelement location="${build}"/>
     <pathelement path="${java.class.path}/"/>
   </path>
   
@@ -68,7 +72,7 @@
              version="true"
              charset="UTF-8"
              windowtitle="jshred">
-      <bottom><![CDATA[<i>Copyright &copy; 2004 Richard "Shred" Körber</i>]]></bottom>
+      <bottom><![CDATA[<i>Copyright &copy; 2006 Richard "Shred" Körber</i>]]></bottom>
     </javadoc>
   </target>
   

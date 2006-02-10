@@ -53,7 +53,7 @@ import javax.swing.tree.TreePath;
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
  * @since   R7
- * @version $Id: EmptyTreeModel.java,v 1.1 2004/09/21 07:20:37 shred Exp $
+ * @version $Id: EmptyTreeModel.java 75 2006-02-10 08:17:27Z shred $
  */
 public final class EmptyTreeModel implements TreeModel {
 

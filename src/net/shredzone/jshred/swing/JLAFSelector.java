@@ -67,7 +67,7 @@ import javax.swing.UIManager;
  * <code>setSmallArea(true)</code> for future compatibility.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLAFSelector.java,v 1.5 2005/01/28 10:21:37 shred Exp $
+ * @version $Id: JLAFSelector.java 75 2006-02-10 08:17:27Z shred $
  * @since   R8
  */
 public class JLAFSelector extends JPanel {

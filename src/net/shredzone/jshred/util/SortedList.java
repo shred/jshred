@@ -64,7 +64,7 @@ import java.util.Iterator;
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
  * @since   R7
- * @version $Id: SortedList.java,v 1.4 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: SortedList.java 75 2006-02-10 08:17:27Z shred $
  */
 public class SortedList extends ArrayList {
   private static final long serialVersionUID = 3257003263499972657L;

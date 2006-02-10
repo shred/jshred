@@ -82,7 +82,7 @@ import javax.swing.JPanel;
  * does not need to be able to give random access to all the pages.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JPrintPreview.java,v 1.7 2005/01/19 12:25:44 shred Exp $
+ * @version $Id: JPrintPreview.java 75 2006-02-10 08:17:27Z shred $
  * @since   R8
  */
 public class JPrintPreview extends JPanel {

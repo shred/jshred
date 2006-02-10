@@ -71,7 +71,7 @@ import java.io.Serializable;
  * the SortTableModelProxy constructor.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java,v 1.6 2005/12/27 14:18:59 shred Exp $
+ * @version $Id: SortableTableModelProxy.java 75 2006-02-10 08:17:27Z shred $
  */
 public class SortableTableModelProxy implements SortableTableModel, TableModelListener, Serializable {
   static final long serialVersionUID = -668922708936078948L;

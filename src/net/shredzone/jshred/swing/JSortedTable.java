@@ -59,7 +59,7 @@ import java.awt.Rectangle;
  * <code>SortableTableModelProxy</code> to this class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java,v 1.9 2005/12/21 13:45:24 shred Exp $
+ * @version $Id: JSortedTable.java 75 2006-02-10 08:17:27Z shred $
  */
 public class JSortedTable extends JTable {
   private static final long serialVersionUID = 3256728372624110384L;

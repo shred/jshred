@@ -66,7 +66,7 @@ import javax.swing.SwingConstants;
  * left corner, instead of being centered like in the JImageViewer class.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JScrollableImageViewer.java,v 1.1 2005/01/24 10:08:08 shred Exp $
+ * @version $Id: JScrollableImageViewer.java 75 2006-02-10 08:17:27Z shred $
  * @since   R9
  */
 public class JScrollableImageViewer extends JImageViewer implements Scrollable {

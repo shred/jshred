@@ -53,7 +53,7 @@ import java.awt.image.*;
  * will stay black. Transparency is honored.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: BrightFilter.java,v 1.4 2004/08/23 23:49:15 shred Exp $
+ * @version $Id: BrightFilter.java 75 2006-02-10 08:17:27Z shred $
  */
 public class BrightFilter extends RGBImageFilter {
   private int p;

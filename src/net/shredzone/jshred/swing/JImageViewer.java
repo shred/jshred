@@ -75,7 +75,7 @@ import javax.swing.JComponent;
  * in a JScrollPane.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java,v 1.5 2005/09/05 14:28:16 shred Exp $
+ * @version $Id: JImageViewer.java 75 2006-02-10 08:17:27Z shred $
  * @since   R9
  */
 public class JImageViewer extends JComponent {

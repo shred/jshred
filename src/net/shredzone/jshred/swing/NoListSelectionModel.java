@@ -56,7 +56,7 @@ import javax.swing.*;
  * For the documentation, also see the DefaultListSelectionModel JavaDoc.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: NoListSelectionModel.java,v 1.3 2005/01/11 19:37:41 shred Exp $
+ * @version $Id: NoListSelectionModel.java 75 2006-02-10 08:17:27Z shred $
  * @since   R6
  */
 public class NoListSelectionModel extends DefaultListSelectionModel {

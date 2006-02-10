@@ -52,7 +52,7 @@ import junit.framework.TestCase;
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
  * @since   R7
- * @version $Id: SortedListTest.java,v 1.1 2004/09/27 07:42:34 shred Exp $
+ * @version $Id: SortedListTest.java 75 2006-02-10 08:17:27Z shred $
  */
 public class SortedListTest extends TestCase {
 

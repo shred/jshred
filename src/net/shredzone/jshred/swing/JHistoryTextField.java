@@ -44,14 +44,22 @@
 
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import javax.swing.event.ListDataListener;
-
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.ref.WeakReference;
-import java.util.*;
-import java.util.prefs.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 
 /**
  * This is some kind of JTextField with a JComboBox. Text can be entered
@@ -63,7 +71,7 @@ import java.util.prefs.*;
  * This class is thread safe.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHistoryTextField.java,v 1.9 2005/12/27 14:18:59 shred Exp $
+ * @version $Id: JHistoryTextField.java 75 2006-02-10 08:17:27Z shred $
  * @since   R6
  */
 public class JHistoryTextField extends JComponent {

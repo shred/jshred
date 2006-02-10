@@ -55,7 +55,7 @@ import java.io.Serializable;
  * SortableTableModel and allows to select columns to be sorted.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java,v 1.9 2005/12/27 14:18:59 shred Exp $
+ * @version $Id: SortTableHeader.java 75 2006-02-10 08:17:27Z shred $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
   private static final long serialVersionUID = 3256728372658124082L;

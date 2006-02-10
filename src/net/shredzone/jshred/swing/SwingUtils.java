@@ -74,7 +74,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java,v 1.12 2005/08/08 13:06:56 shred Exp $
+ * @version $Id: SwingUtils.java 75 2006-02-10 08:17:27Z shred $
  */
 public class SwingUtils {
 

@@ -1,5 +1,11 @@
-CHANGELOG -- $Id: changelog,v 1.49 2005/12/27 22:53:36 shred Exp $
+CHANGELOG -- $Id: changelog 75 2006-02-10 08:17:27Z shred $
 
+
+
+  * Switched to Subversion
+  * Added junit to the project, so there are no Eclipse SDK dependency
+    issues any more.
+  * Forgot some serialVersionUIDs.
 
 R12 (2005-12-27)
   * NOTE: R12 is the last release that is JDK1.3 compatible. Starting from
