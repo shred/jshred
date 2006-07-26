@@ -1,7 +1,8 @@
-CHANGELOG -- $Id: changelog 77 2006-02-10 09:00:26Z shred $
+CHANGELOG -- $Id: changelog 104 2006-07-26 06:39:53Z shred $
 
 
-
+R13 (2006-07-26)
+  * Removed all JDK1.3 compatibilty code.
   * Switched to Subversion
   * Added junit to the project, so there are no Eclipse SDK dependency
     issues any more.
@@ -10,6 +11,9 @@ CHANGELOG -- $Id: changelog 77 2006-02-10 09:00:26Z shred $
   * HTTPRequest: a DataProvider now cannot unintentionally close the
     OutputStream.
   * HTTPRequest now gives access to the InputStream for binary results.
+  * HTTPRequest: forgot to explicitely set POST request method. It was
+    still working because of some internal Java magic.
+  * JImageViewer is now Printable.
 
 R12 (2005-12-27)
   * NOTE: R12 is the last release that is JDK1.3 compatible. Starting from

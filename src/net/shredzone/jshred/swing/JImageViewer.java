@@ -59,6 +59,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -73,12 +75,14 @@ import javax.swing.JComponent;
  * <p>
  * As an extra feature, the image can be dragged with the mouse if JImage is
  * in a JScrollPane.
+ * <p>
+ * This class also implements the Printable interface since R13.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java 75 2006-02-10 08:17:27Z shred $
+ * @version $Id: JImageViewer.java 104 2006-07-26 06:39:53Z shred $
  * @since   R9
  */
-public class JImageViewer extends JComponent {
+public class JImageViewer extends JComponent implements Printable {
   private static final long serialVersionUID = 3690198762949851445L;
 
   /**
@@ -512,32 +516,98 @@ public class JImageViewer extends JComponent {
       }
 
       //--- Set scaling quality ---
-      switch( quality ) {
-        case QUALITY_FAST:
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_INTERPOLATION      , RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED      ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_RENDERING          , RenderingHints.VALUE_RENDER_SPEED                   ) );
-          break;
-
-        case QUALITY_SMOOTH:
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_INTERPOLATION      , RenderingHints.VALUE_INTERPOLATION_BILINEAR         ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED      ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_RENDERING          , RenderingHints.VALUE_RENDER_QUALITY                 ) );
-          break;
-
-        case QUALITY_BEST:
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_INTERPOLATION      , RenderingHints.VALUE_INTERPOLATION_BICUBIC          ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY    ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_RENDERING          , RenderingHints.VALUE_RENDER_QUALITY                 ) );
-          g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ANTIALIASING       , RenderingHints.VALUE_ANTIALIAS_ON                   ) );
-          break;
-      }
+      setQuality( g2d, quality );
       
       //--- Draw the image ---
       g2d.drawImage( image, 0,0, dim.width,dim.height, this );
       
       //--- We're done ---
       g2d.dispose();
+    }
+  }
+  
+  /**
+   * Print this image. It will be printed on a single page, scaled to consume
+   * the entire paper (keeping the border).
+   *
+   * @param   graphics      Graphics context
+   * @param   pageFormat    Page format to be used
+   * @param   pageIndex     Page index.
+   * @return  PAGE_EXISTS oder NO_SUCH_PAGE
+   * @since R13
+   */
+  public int print( Graphics graphics, PageFormat pageFormat, int pageIndex ) {
+    final Graphics2D g2d = (Graphics2D) graphics;
+    
+    if( pageIndex!=0 ) {
+      return Printable.NO_SUCH_PAGE;
+    }
+
+    //--- Do nothing if there is no image ---
+    if( image==null ) {
+      return Printable.PAGE_EXISTS;
+    }
+    
+    int imgW = image.getWidth( this );
+    int imgH = image.getHeight( this );
+    if( imgW==0 || imgH==0 ) {
+      return Printable.PAGE_EXISTS;
+    }
+    
+    //--- Set Scaling and Clipping ---
+    double scaleW = pageFormat.getImageableWidth() / imgW;
+    double scaleH = pageFormat.getImageableHeight() / imgH;
+    double scale = Math.min(scaleW, scaleH);
+    g2d.scale( scale, scale );
+    g2d.setClip(
+      (int) (pageFormat.getImageableX()      / scale),
+      (int) (pageFormat.getImageableY()      / scale),
+      (int) (pageFormat.getImageableWidth()  / scale),
+      (int) (pageFormat.getImageableHeight() / scale)
+    );
+
+    //--- Translate ---
+    g2d.translate(
+      g2d.getClipBounds().getX(),
+      g2d.getClipBounds().getY()
+    );
+
+    //--- Set scaling quality ---
+    setQuality( g2d, quality );
+
+    //--- Draw the image ---
+    g2d.drawImage( image, 0,0, this );
+      
+    return Printable.PAGE_EXISTS;
+  }
+
+  /**
+   * Set the rendering hints according to the quality.
+   * 
+   * @param g2d     Graphics2D to set the rendering hints.
+   * @param quality Quality desired.
+   * @since R13
+   */
+  protected void setQuality( Graphics2D g2d, int quality ) {
+    switch( quality ) {
+      case QUALITY_FAST:
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_INTERPOLATION      , RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED      ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_RENDERING          , RenderingHints.VALUE_RENDER_SPEED                   ) );
+        break;
+
+      case QUALITY_SMOOTH:
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_INTERPOLATION      , RenderingHints.VALUE_INTERPOLATION_BILINEAR         ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED      ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_RENDERING          , RenderingHints.VALUE_RENDER_QUALITY                 ) );
+        break;
+
+      case QUALITY_BEST:
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_INTERPOLATION      , RenderingHints.VALUE_INTERPOLATION_BICUBIC          ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY    ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_RENDERING          , RenderingHints.VALUE_RENDER_QUALITY                 ) );
+        g2d.addRenderingHints( new RenderingHints( RenderingHints.KEY_ANTIALIASING       , RenderingHints.VALUE_ANTIALIAS_ON                   ) );
+        break;
     }
   }
 

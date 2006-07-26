@@ -92,7 +92,7 @@ import net.shredzone.jshred.io.UncloseableOutputStream;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java 77 2006-02-10 09:00:26Z shred $
+ * @version $Id: HTTPRequest.java 104 2006-07-26 06:39:53Z shred $
  */
 public class HTTPRequest {
 
@@ -321,6 +321,7 @@ public class HTTPRequest {
         throw new RuntimeException( "No HTTP connection" );
       }
       connect = (HttpURLConnection)con;
+      connect.setRequestMethod( "POST" );
       connect.setUseCaches( false );      // No caching, since it's most likely a CGI call
       connect.setDoOutput( true );
 
@@ -366,6 +367,7 @@ public class HTTPRequest {
         throw new RuntimeException( "No HTTP connection" );
       }
       connect = (HttpURLConnection)con;
+      connect.setRequestMethod( "GET" );
       connect.setUseCaches( false );      // CGI call, no caching!
 
       monitorConnected();                 // Inform ProgressMonitor
