@@ -1,5 +1,7 @@
-CHANGELOG -- $Id: changelog 104 2006-07-26 06:39:53Z shred $
+CHANGELOG -- $Id: changelog 115 2006-11-15 15:22:07Z shred $
 
+
+  * Added EmptyTableModel
 
 R13 (2006-07-26)
   * Removed all JDK1.3 compatibilty code.
