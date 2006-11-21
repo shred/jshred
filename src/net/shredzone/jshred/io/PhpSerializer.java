@@ -119,7 +119,7 @@ public class PhpSerializer extends FilterWriter {
    */
   public void serialize( boolean b ) throws IOException {
     write( "b:" );
-    write( b ? 1 : 0 );
+    write( b ? "1" : "0" );
     write( ";" );
   }
   
@@ -246,7 +246,7 @@ public class PhpSerializer extends FilterWriter {
       serializeNull();
     }else {
       write( "a:" );
-      write( c.size() );
+      write( String.valueOf( c.size() ) );
       write( ":{" );
       long cnt=0;
       Iterator it = c.iterator();
@@ -282,7 +282,7 @@ public class PhpSerializer extends FilterWriter {
       serializeNull();
     }else {
       write( "a:" );
-      write( m.size() );
+      write( String.valueOf( m.size() ) );
       write( ":{" );
       Iterator it = m.keySet().iterator();
       while( it.hasNext() ) {
@@ -295,7 +295,7 @@ public class PhpSerializer extends FilterWriter {
           write("s:0:\"\";");
         }else if( key instanceof Boolean ) {
           write("i:");
-          write( ((Boolean) key).booleanValue() ? 1 : 0 );
+          write( ((Boolean) key).booleanValue() ? "1" : "0" );
           write(";");
         }else if( key instanceof Number ) {
           if( key instanceof Float || key instanceof Double || key instanceof BigDecimal ) {
@@ -318,8 +318,8 @@ public class PhpSerializer extends FilterWriter {
   
   /**
    * Serialize an Object. If the object is found to be an instance of
-   * String, Character, Number, Collection or Map, or if the object is
-   * an array, the appropriate <code>serialize()</code> method is used.
+   * String, Character, Boolean, Number, Collection or Map, or if the object
+   * is an array, the appropriate <code>serialize()</code> method is used.
    * In all other cases, the object's <code>toString()</code> result
    * is serialized as a string.
    * <p>
@@ -340,6 +340,10 @@ public class PhpSerializer extends FilterWriter {
       serialize( (Map) o );
     }else if( o instanceof Object[] ) {
       serialize( (Object[]) o );
+    }else if( o instanceof Boolean ) {
+      serialize( ((Boolean) o).booleanValue() );
+    }else if( o instanceof Character ) {
+      serialize( ((Character) o).charValue() );
     }else {
       serialize( o.toString() );
     }
