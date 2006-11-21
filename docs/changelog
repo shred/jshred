@@ -1,7 +1,8 @@
-CHANGELOG -- $Id: changelog 115 2006-11-15 15:22:07Z shred $
+CHANGELOG -- $Id: changelog 116 2006-11-21 09:00:41Z shred $
 
-
+R14
   * Added EmptyTableModel
+  * Added PhpSerializer
 
 R13 (2006-07-26)
   * Removed all JDK1.3 compatibilty code.
