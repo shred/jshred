@@ -1,8 +1,9 @@
-CHANGELOG -- $Id: changelog 116 2006-11-21 09:00:41Z shred $
+CHANGELOG -- $Id: changelog 118 2006-12-20 14:45:37Z shred $
 
 R14
   * Added EmptyTableModel
   * Added PhpSerializer
+  * Napkin L&F added to the JLAFSelector (http://napkinlaf.sourceforge.net/)
 
 R13 (2006-07-26)
   * Removed all JDK1.3 compatibilty code.

@@ -67,7 +67,7 @@ import javax.swing.UIManager;
  * <code>setSmallArea(true)</code> for future compatibility.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLAFSelector.java 75 2006-02-10 08:17:27Z shred $
+ * @version $Id: JLAFSelector.java 118 2006-12-20 14:45:37Z shred $
  * @since   R8
  */
 public class JLAFSelector extends JPanel {
@@ -86,6 +86,9 @@ public class JLAFSelector extends JPanel {
     //--- Add Kunststoff if available ---
     attemptAdd( "com.incors.plaf.kunststoff.KunststoffLookAndFeel", "Kunststoff" );
 
+    //--- Add Napkin if available ---
+    attemptAdd( "net.sourceforge.napkinlaf.NapkinLookAndFeel", "Napkin Style" );
+    
     //--- Add JGoodies if available ---
     attemptAdd( "com.jgoodies.looks.windows.WindowsLookAndFeel", "JGoodies Windows");
     attemptAdd( "com.jgoodies.looks.plastic.PlasticLookAndFeel", "JGoodies Plastic");
