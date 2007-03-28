@@ -52,7 +52,7 @@ import java.awt.*;
  * has a text, never gets the focus and has no borders.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java 75 2006-02-10 08:17:27Z shred $
+ * @version $Id: JToolbarButton.java 121 2007-03-28 14:10:41Z shred $
  */
 public class JToolbarButton extends JButton {
   private static final long serialVersionUID = 3905246710308417843L;
@@ -68,6 +68,29 @@ public class JToolbarButton extends JButton {
   }
 
   /**
+   * Creates a new JToolbarButton with a title.
+   * 
+   * @param   title     Title to be used
+   * @since   R14
+   */
+  public JToolbarButton( String title ) {
+    super( title );
+    init();
+  }
+  
+  /**
+   * Creates a new JToolbarButton with a title and an icon.
+   * 
+   * @param   title     Title to be used
+   * @param   icon      Icon to be used.
+   * @since   R14
+   */
+  public JToolbarButton( String title, Icon icon ) {
+    super( title, icon );
+    init();
+  }
+  
+  /**
    * Creates a new JToolbarButton with an icon.
    * 
    * @param   icon      Icon to be used.
@@ -76,23 +99,36 @@ public class JToolbarButton extends JButton {
   public JToolbarButton( Icon icon ) {
     super( icon );
     init();
+    setText("");
+  }
+
+  /**
+   * Creates a new JToolbarButton for a certain action. The Action's text is
+   * not displayed.
+   *
+   * @param   a     Action
+   */
+  public JToolbarButton( Action a ) {
+    this(a, false);
   }
 
   /**
    * Creates a new JToolbarButton for a certain action.
    *
    * @param   a     Action
+   * @param   keep  true: Keep the action text.
+   * @since   R14
    */
-  public JToolbarButton( Action a ) {
+  public JToolbarButton( Action a, boolean keep ) {
     super( a );
     init();
+    if(!keep) setText("");
   }
-  
+
   /**
    * Initialize all parameters for a JToolbarButton.
    */
   private void init() {
-    setText( "" );
     setRequestFocusEnabled( false );
     setFocusable( false );
     setMargin( new Insets( 0,0,0,0 ) );
