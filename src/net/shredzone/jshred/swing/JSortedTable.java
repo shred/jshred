@@ -1,45 +1,20 @@
 /*
  * jshred -- Shred's Toolbox
  *
- * Copyright (c) 2004 Richard "Shred" Körber
+ * Copyright (c) 2008 Richard "Shred" Körber
  *   http://www.shredzone.net/go/jshred
- *
  *-----------------------------------------------------------------------
- * ***** BEGIN LICENSE BLOCK *****
- * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * The contents of this file are subject to the Mozilla Public License Version
- * 1.1 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
- *
- * Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
- * for the specific language governing rights and limitations under the
- * License.
- *
- * The Original Code is JSHRED.
- *
- * The Initial Developer of the Original Code is
- * Richard "Shred" Körber.
- * Portions created by the Initial Developer are Copyright (C) 2004
- * the Initial Developer. All Rights Reserved.
- *
- * Contributor(s):
- *
- * Alternatively, the contents of this file may be used under the terms of
- * either the GNU General Public License Version 2 or later (the "GPL"), or
- * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
- * in which case the provisions of the GPL or the LGPL are applicable instead
- * of those above. If you wish to allow use of your version of this file only
- * under the terms of either the GPL or the LGPL, and not to allow others to
- * use your version of this file under the terms of the MPL, indicate your
- * decision by deleting the provisions above and replace them with the notice
- * and other provisions required by the GPL or the LGPL. If you do not delete
- * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.
- *
- * ***** END LICENSE BLOCK *****
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package net.shredzone.jshred.swing;
@@ -49,138 +24,149 @@ import javax.swing.table.*;
 import java.awt.Rectangle;
 
 /**
- * This is a JTable which allows the user to sort each column in
- * ascending or descending order. Everything you have to do to is just
- * to use the <code>JSortedTable</code> instead of a <code>JTable</code>,
- * and pass a <code>SortableTableModel</code> to it.
+ * This is a {@link JTable} which allows the user to sort each column in
+ * ascending or descending order. Everything you have to do to is just to use
+ * the {@link JSortedTable} instead of a {@link JTable}, and pass a
+ * {@link SortableTableModel} to it.
  * <p>
- * If you want to use a classic TableModel, you can wrap it using the
- * <code>SortableTableModelProxy</code> object, and then pass the
- * <code>SortableTableModelProxy</code> to this class.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java 75 2006-02-10 08:17:27Z shred $
+ * If you want to use a classic {@link TableModel}, you can wrap it using the
+ * {@link SortableTableModelProxy} object, and then pass the
+ * {@link SortableTableModelProxy} to this class.
+ * <p>
+ * Starting with Java 1.6, Swing brings an own implementation for sortable
+ * table, which may be preferable to this solution.
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @version $Id: JSortedTable.java 169 2008-07-10 22:01:03Z shred $
  */
 public class JSortedTable extends JTable {
-  private static final long serialVersionUID = 3256728372624110384L;
+    private static final long serialVersionUID = 3256728372624110384L;
 
-  /**
-   * Create a new, empty JSortedTable.
-   */
-  public JSortedTable() {
-    super();
-  }
-
-  /**
-   * Create a new JSortedTable with the given SortableTableModel.
-   *
-   * @param   model       SortableTableModel to be used.
-   */
-  public JSortedTable( SortableTableModel model ) {
-    super( model );
-  }
-
-  /**
-   * Set the TableModel to be used. You must pass a SortableTableModel
-   * here, otherwise you'll get an InvalidArgumentException.
-   *
-   * @param     model     TableModel
-   */
-  public void setModel( TableModel model ) {
-    if(!( model instanceof SortableTableModel )) {
-      throw new IllegalArgumentException( "You must provide a SortableTableModel" );
+    /**
+     * Create a new, empty JSortedTable.
+     */
+    public JSortedTable() {
+        super();
     }
 
-    //--- Remember current column ---
-    int column = 0;
-    boolean desc = false;
-    SortableTableModel current = (SortableTableModel) getModel();
-    if( current!=null ) {
-      column = current.getSortedColumn();
-      desc = current.isDescending();
-    }
-    
-    //--- Set new model ---
-    super.setModel( model );
-    
-    //--- Sort by this column ---
-    SortableTableModel newmodel = (SortableTableModel) model;
-    if( column >= newmodel.getColumnCount() ) {
-      // Column does not exist any more. Use first column.
-      column = 0;
-      desc = false;
-    }
-    newmodel.sortByColumn( column, desc );
-  }
-  
-  /**
-   * Sort by a certain column. If this is the currently sorted column,
-   * the sort order will be toggled. Otherwise the given column will
-   * be sorted ascendingly. This method simulates a mouse click on the
-   * appropriate column header.
-   * <p>
-   * Since R11, the selection will be kept if the SortableTableModelProxy
-   * is used.
-   *
-   * @param   columnIndex     Column to be sorted.
-   * @since   R4
-   */
-  public void sortByColumn( int columnIndex ) {
-    //--- Proxy? ---
-    final SortableTableModel model = (SortableTableModel) getModel();
-    SortableTableModelProxy proxy = null;
-    if( model instanceof SortableTableModelProxy ) {
-      proxy = (SortableTableModelProxy) model;
-    }
-    
-    //--- Remember all selected indices ---
-    int[] rows = null;
-    if( proxy!=null ) {
-      rows = getSelectedRows();
-      for( int ix=0; ix<rows.length; ix++ ) {
-        rows[ix] = proxy.mapRow( rows[ix] );
-      }
+    /**
+     * Create a new JSortedTable with the given {@link SortableTableModel}.
+     * 
+     * @param model
+     *            {@link SortableTableModel} to be used.
+     */
+    public JSortedTable(SortableTableModel model) {
+        super(model);
     }
 
-    //--- Change sort order ---
-    if( model.getSortedColumn() != columnIndex ) {
-      model.sortByColumn( columnIndex, false );
-    }else {
-      model.sortByColumn( columnIndex, !model.isDescending() );
-    }
-
-    //--- Restore the selection ---
-    clearSelection();
-    if( proxy!=null && rows!=null ) {
-      for( int ix=0; ix<rows.length; ix++ ) {
-        int row = proxy.unmapRow( rows[ix] );
-        addRowSelectionInterval( row, row );
-        if( ix==0 ) {
-          Rectangle cellRect = getCellRect( row, 0, false );
-          if( cellRect!=null ) {
-            scrollRectToVisible( cellRect );
-          }          
+    /**
+     * Set the {@link TableModel} to be used. You must pass a
+     * {@link SortableTableModel} here, otherwise you'll get an
+     * {@link InvalidArgumentException}.
+     * 
+     * @param model
+     *            A {@link SortableTableModel}
+     */
+    @Override
+    public void setModel(TableModel model) {
+        if (!(model instanceof SortableTableModel)) {
+            throw new IllegalArgumentException("You must provide a SortableTableModel");
         }
-      }
-    }
-  }
-  
-  /**
-   * Create the default JTableHeader instance.
-   *
-   * @return    Default JTableHeader
-   */
-  protected JTableHeader createDefaultTableHeader() {
-    return new SortTableHeader( columnModel );
-  }
 
-  /**
-   * Get the default TableModel. It is always a SortableTableModel!
-   *
-   * @return    SortableTableModel
-   */
-  protected TableModel createDefaultDataModel() {
-    return new SortableTableModelProxy( super.createDefaultDataModel() );
-  }
+        // --- Remember current column ---
+        int column = 0;
+        boolean desc = false;
+        SortableTableModel current = (SortableTableModel) getModel();
+        if (current != null) {
+            column = current.getSortedColumn();
+            desc = current.isDescending();
+        }
+
+        // --- Set new model ---
+        super.setModel(model);
+
+        // --- Sort by this column ---
+        SortableTableModel newmodel = (SortableTableModel) model;
+        if (column >= newmodel.getColumnCount()) {
+            // Column does not exist any more. Use first column.
+            column = 0;
+            desc = false;
+        }
+        newmodel.sortByColumn(column, desc);
+    }
+
+    /**
+     * Sort by a certain column. If this is the currently sorted column, the
+     * sort order will be reversed. Otherwise the given column will be sorted
+     * ascendingly. This method simulates a mouse click on the appropriate
+     * column header.
+     * <p>
+     * Since R11, the selection will be kept if the
+     * {@link SortableTableModelProxy} is used.
+     * 
+     * @param columnIndex
+     *            Column to be sorted.
+     * @since R4
+     */
+    public void sortByColumn(int columnIndex) {
+        // --- Proxy? ---
+        final SortableTableModel model = (SortableTableModel) getModel();
+        SortableTableModelProxy proxy = null;
+        if (model instanceof SortableTableModelProxy) {
+            proxy = (SortableTableModelProxy) model;
+        }
+
+        // --- Remember all selected indices ---
+        int[] rows = null;
+        if (proxy != null) {
+            rows = getSelectedRows();
+            for (int ix = 0; ix < rows.length; ix++) {
+                rows[ix] = proxy.mapRow(rows[ix]);
+            }
+        }
+
+        // --- Change sort order ---
+        if (model.getSortedColumn() != columnIndex) {
+            model.sortByColumn(columnIndex, false);
+        } else {
+            model.sortByColumn(columnIndex, !model.isDescending());
+        }
+
+        // --- Restore the selection ---
+        clearSelection();
+        if (proxy != null && rows != null) {
+            for (int ix = 0; ix < rows.length; ix++) {
+                int row = proxy.unmapRow(rows[ix]);
+                addRowSelectionInterval(row, row);
+                if (ix == 0) {
+                    Rectangle cellRect = getCellRect(row, 0, false);
+                    if (cellRect != null) {
+                        scrollRectToVisible(cellRect);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Create the default {@link JTableHeader} instance.
+     * 
+     * @return Default {@link JTableHeader}
+     */
+    @Override
+    protected JTableHeader createDefaultTableHeader() {
+        return new SortTableHeader(columnModel);
+    }
+
+    /**
+     * Get the default {@link TableModel}. It is always a
+     * {@link SortableTableModel}!
+     * 
+     * @return {@link SortableTableModel}
+     */
+    @Override
+    protected TableModel createDefaultDataModel() {
+        return new SortableTableModelProxy(super.createDefaultDataModel());
+    }
 
 }

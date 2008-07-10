@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- jedit :mode=xml:tabSize=2:noTabs=true:folding=none: -->
 
 <!-- jshred Ant Build File -->
-<!-- Copyright (c) 2004 Richard "Shred" Körber -->
+<!-- Copyright (c) 2008 Richard "Shred" Körber -->
 <!-- All Rights Reserved. -->
-<!-- Released under MPL 1.1/GPL 2.0/LGPL 2.1 -->
-<!-- $Id: build.xml 75 2006-02-10 08:17:27Z shred $ -->
+<!-- Released under Apache License 2.0 -->
+<!-- $Id: build.xml 169 2008-07-10 22:01:03Z shred $ -->
 
 <project name="jshred" default="build" basedir=".">
   <description>
@@ -39,7 +38,7 @@
     <genkey alias="shred" storepass="secret" validity="3653" keystore=".keystore">
       <dname>
         <param name="CN" value="shred"/>
-        <param name="O"  value="shredzone.net"/>
+        <param name="O"  value="shredzone.org"/>
         <param name="C"  value="DE"/>
       </dname>
     </genkey>
@@ -47,8 +46,7 @@
   
   <target name="build" depends="init" description="Build application">
     <!-- Compile from src to build -->
-  	<echo>One deprecation error is intentional...</echo>
-    <javac srcdir="${src}" destdir="${build}" deprecation="off" optimize="on" source="1.3" target="1.1">
+    <javac srcdir="${src}" destdir="${build}" deprecation="on" optimize="on" source="1.5" target="1.5">
       <classpath refid="project.class.path"/>
     </javac>
   </target>
@@ -72,7 +70,7 @@
              version="true"
              charset="UTF-8"
              windowtitle="jshred">
-      <bottom><![CDATA[<i>Copyright &copy; 2006 Richard "Shred" Körber</i>]]></bottom>
+      <bottom><![CDATA[<i>Copyright &copy; 2008 Richard "Shred" Körber</i>]]></bottom>
     </javadoc>
   </target>
   
