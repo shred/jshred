@@ -1,4 +1,4 @@
-CHANGELOG -- $Id: changelog 167 2008-07-10 14:59:00Z shred $
+CHANGELOG -- $Id: changelog 168 2008-07-10 15:02:16Z shred $
 
 
 R15
@@ -8,7 +8,7 @@ R15
     GPL/LGPL/MPL tri-license, please stay with R14.
   * Removed all deprecated code and JDK 1.4 compatibility code
   * Added Generics support
-  
+  * Added ListenerManager to easily manage all kind of listeners
 
 R14 (2008-07-10)
   * NOTE: R14 is the last release that is JDK1.4 compatible. Starting from
