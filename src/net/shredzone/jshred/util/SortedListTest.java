@@ -49,63 +49,63 @@ import junit.framework.TestCase;
 
 /**
  * A jUnit test case for SortedList.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @since   R7
- * @version $Id: SortedListTest.java 75 2006-02-10 08:17:27Z shred $
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @since R7
+ * @version $Id: SortedListTest.java 167 2008-07-10 14:59:00Z shred $
  */
 public class SortedListTest extends TestCase {
 
-  /*
-   * Class under test for boolean add(Object)
-   */
-  public void testAddObject() {
-    SortedList list = new SortedList();
-    list.add("Mike");
-    list.add("Charlie");
-    list.add("Alpha");
-    list.add("Tango");
-    list.add("Foxtrot");
-    list.add("Zulu");
-    list.add("Charlie");    // <-- a duplicate!
-    
-    Assert.assertEquals( list.size(), 6 );
-    
-    Assert.assertEquals( "Alpha", list.get(0) );
-    Assert.assertEquals( "Charlie", list.get(1) );
-    Assert.assertEquals( "Foxtrot", list.get(2) );
-    Assert.assertEquals( "Mike", list.get(3) );
-    Assert.assertEquals( "Tango", list.get(4) );
-    Assert.assertEquals( "Zulu", list.get(5) );
-  }
+    /*
+     * Class under test for boolean add(Object)
+     */
+    public void testAddObject() {
+        SortedList<String> list = new SortedList<String>();
+        list.add("Mike");
+        list.add("Charlie");
+        list.add("Alpha");
+        list.add("Tango");
+        list.add("Foxtrot");
+        list.add("Zulu");
+        list.add("Charlie");    // <-- a duplicate!
 
-  /*
-   * Class under test for boolean contains(Object)
-   */
-  public void testContainsObject() {
-    SortedList list = new SortedList();
-    list.add("Mike");
-    list.add("Charlie");
-    list.add("Alpha");
-    list.add("Tango");
-    
-    Assert.assertTrue( list.contains("Charlie") );
-    Assert.assertFalse( list.contains("Bravo") );
-  }
+        Assert.assertEquals(list.size(), 6);
 
-  /*
-   * Class under test for int indexOf(Object)
-   */
-  public void testIndexOfObject() {
-    SortedList list = new SortedList();
-    list.add("Alpha");      // 0
-    list.add("Charlie");    // 1
-    list.add("Mike");       // 2
-    list.add("Tango");      // 3
-    
-    Assert.assertEquals( list.indexOf("Charlie"), 1 );
-    Assert.assertEquals( list.indexOf("Tango"), 3 );
-    Assert.assertEquals( list.indexOf("Bravo"), -1 );
-  }
+        Assert.assertEquals("Alpha", list.get(0));
+        Assert.assertEquals("Charlie", list.get(1));
+        Assert.assertEquals("Foxtrot", list.get(2));
+        Assert.assertEquals("Mike", list.get(3));
+        Assert.assertEquals("Tango", list.get(4));
+        Assert.assertEquals("Zulu", list.get(5));
+    }
+
+    /*
+     * Class under test for boolean contains(Object)
+     */
+    public void testContainsObject() {
+        SortedList<String> list = new SortedList<String>();
+        list.add("Mike");
+        list.add("Charlie");
+        list.add("Alpha");
+        list.add("Tango");
+
+        Assert.assertTrue(list.contains("Charlie"));
+        Assert.assertFalse(list.contains("Bravo"));
+    }
+
+    /*
+     * Class under test for int indexOf(Object)
+     */
+    public void testIndexOfObject() {
+        SortedList<String> list = new SortedList<String>();
+        list.add("Alpha");      // 0
+        list.add("Charlie");    // 1
+        list.add("Mike");       // 2
+        list.add("Tango");      // 3
+
+        Assert.assertEquals(list.indexOf("Charlie"), 1);
+        Assert.assertEquals(list.indexOf("Tango"), 3);
+        Assert.assertEquals(list.indexOf("Bravo"), -1);
+    }
 
 }

@@ -78,7 +78,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 163 2008-07-10 10:23:15Z shred $
+ * @version $Id: SwingUtils.java 167 2008-07-10 14:59:00Z shred $
  */
 public class SwingUtils {
 
@@ -443,13 +443,13 @@ public class SwingUtils {
    * @return  Collection of all Components and sub Components.
    * @since R14
    */
-  public static Collection getComponentsRecursive(Component comp) {
-    List result = new ArrayList();
+  public static Collection<Component> getComponentsRecursive(Component comp) {
+    List<Component> result = new ArrayList<Component>();
     getComponentsRecursiveHelper(result, comp);
     return result;
   }
   
-  private static void getComponentsRecursiveHelper(List result, Component comp) {
+  private static void getComponentsRecursiveHelper(List<Component> result, Component comp) {
     if (comp instanceof Container) {
       Component[] children = ((Container) comp).getComponents();
       for (int ix = 0; ix < children.length; ix++) {

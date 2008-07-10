@@ -48,54 +48,58 @@ import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
 /**
- * This is just a mere empty ListModel which will never have any entries.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @since   R7
- * @version $Id: EmptyListModel.java 75 2006-02-10 08:17:27Z shred $
+ * This is just a mere empty {@link ListModel} which will never have any
+ * entries.
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @since R7
+ * @version $Id: EmptyListModel.java 167 2008-07-10 14:59:00Z shred $
  */
 public final class EmptyListModel implements ListModel {
 
-  /**
-   * Get the size. It's always 0.
-   * 
-   * @return  Size
-   * @see javax.swing.ListModel#getSize()
-   */
-  public int getSize() {
-    return 0;
-  }
+    /**
+     * Get the size. It's always 0.
+     * 
+     * @return Size
+     * @see javax.swing.ListModel#getSize()
+     */
+    public int getSize() {
+        return 0;
+    }
 
-  /**
-   * Get an element. Should never be called since the list is empty.
-   * Will always return null.
-   * 
-   * @param   index       Index
-   * @return  Always null
-   * @see javax.swing.ListModel#getElementAt(int)
-   */
-  public Object getElementAt( int index ) {
-    return null;
-  }
+    /**
+     * Get an element. Should never be called since the list is empty. Will
+     * always return null.
+     * 
+     * @param index
+     *            Index
+     * @return Always null
+     * @see javax.swing.ListModel#getElementAt(int)
+     */
+    public Object getElementAt(int index) {
+        return null;
+    }
 
-  /**
-   * Add a listener. Since this list will always be empty, the listeners
-   * are just ignored.
-   * 
-   * @param   l       ListDataListener to be ignored.
-   * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
-   */
-  public void addListDataListener( ListDataListener l ) {
-  }
+    /**
+     * Add a listener. Since this list will always be empty, the listeners are
+     * just ignored.
+     * 
+     * @param l
+     *            @{link ListDataListener} to be ignored.
+     * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
+     */
+    public void addListDataListener(ListDataListener l) {
+    }
 
-  /**
-   * Remove a listener. Since this list will always be empty, the listeners
-   * are just ignored.
-   * 
-   * @param   l       ListDataListener to be ignored.
-   * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
-   */
-  public void removeListDataListener( ListDataListener l ) {
-  }
+    /**
+     * Remove a listener. Since this list will always be empty, the listeners
+     * are just ignored.
+     * 
+     * @param l
+     *            @{link ListDataListener} to be ignored.
+     * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
+     */
+    public void removeListDataListener(ListDataListener l) {
+    }
 
 }

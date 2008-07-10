@@ -1,4 +1,14 @@
-CHANGELOG -- $Id: changelog 163 2008-07-10 10:23:15Z shred $
+CHANGELOG -- $Id: changelog 167 2008-07-10 14:59:00Z shred $
+
+
+R15
+  * NOTE: There were major changes in the R15's API. If you upgrade to R15,
+    compile time errors may occur.
+  * NOTE: Since R15, the Apache License is used! If your code requires the
+    GPL/LGPL/MPL tri-license, please stay with R14.
+  * Removed all deprecated code and JDK 1.4 compatibility code
+  * Added Generics support
+  
 
 R14 (2008-07-10)
   * NOTE: R14 is the last release that is JDK1.4 compatible. Starting from

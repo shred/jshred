@@ -49,110 +49,123 @@ import javax.swing.text.*;
 import java.awt.*;
 
 /**
- * A JTextField that only allows to enter digits. I wonder why Sun didn't
- * supply this obligatory input field.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JIntegerField.java 76 2006-02-10 08:27:42Z shred $
- * @since   R2
+ * A {@link JTextField} that only allows to enter digits. I wonder why Sun
+ * didn't supply this obligatory input field.
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @version $Id: JIntegerField.java 167 2008-07-10 14:59:00Z shred $
+ * @since R2
  */
 public class JIntegerField extends JTextField {
-  private static final long serialVersionUID = 3834875767225332529L;
-  private static final IntegerFilter filter = new IntegerFilter();
-
-  /**
-   * Create a new JIntegerField.
-   */
-  public JIntegerField() {
-    PlainDocument doc = new PlainDocument();
-    doc.setDocumentFilter( filter );
-    setDocument( doc );
-  }
-
-  /**
-   * Create a new JIntegerField and set an integer.
-   *
-   * @param   value       Value to be set
-   */
-  public JIntegerField( int value ) {
-    this();
-    setInteger( value );
-  }
-
-  /**
-   * Set an integer
-   *
-   * @param   value       Value to be set
-   */
-  public void setInteger( int value ) {
-    setText( String.valueOf( value ) );
-  }
-
-  /**
-   * Get the current value, as integer.
-   *
-   * @return    integer
-   */
-  public int getInteger() {
-    return Integer.parseInt( getText() );
-  }
-
-
-/*--------------------------------------------------------------------*/
-  /**
-   * A DocumentFilter that only allows digits.
-   */
-  public static class IntegerFilter extends DocumentFilter {
+    private static final long serialVersionUID = 3834875767225332529L;
+    private static final IntegerFilter filter = new IntegerFilter();
 
     /**
-     * String to be inserted into the Document. If it does not contain
-     * digits only, the insertion will be refused and a beep will sound.
-     * Everything matching <code>Character.isDigit()</code> will be
-     * accepted as a valid digit.
-     *
-     * @param fb          FilterBypass
-     * @param offset      Insert offset
-     * @param string      String to be inserted
-     * @param attr        Attribute
-     * @throws BadLocationException  Bad position
+     * Create a new JIntegerField.
      */
-    public void insertString( DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr )
-    throws BadLocationException {
-      int len = string.length();
-      for(int ix=0; ix<len; ix++) {
-        if( !Character.isDigit( string.charAt(ix) ) ) {
-          Toolkit.getDefaultToolkit().beep();
-          return;
-        }
-      }
-      super.insertString( fb, offset, string, attr );
+    public JIntegerField() {
+        PlainDocument doc = new PlainDocument();
+        doc.setDocumentFilter(filter);
+        setDocument(doc);
     }
 
     /**
-     * String to be replaced with parts of the Document. If it does not
-     * contain digits only, the insertion will be refused and a beep
-     * will sound.
-     * Everything matching <code>Character.isDigit()</code> will be
-     * accepted as a valid digit.
-     *
-     * @param fb          FilterBypass
-     * @param offset      Replacement offset
-     * @param length      Length to be replaced
-     * @param string      String to be replaced
-     * @param attrs       Attribute
-     * @throws BadLocationException  Bad position
+     * Create a new JIntegerField and set an integer.
+     * 
+     * @param value
+     *            Value to be set
      */
-    public void replace( DocumentFilter.FilterBypass fb, int offset, int length, String string, AttributeSet attrs )
-    throws BadLocationException {
-      int len = string.length();
-      for(int ix=0; ix<len; ix++) {
-        if( !Character.isDigit( string.charAt(ix) ) ) {
-          Toolkit.getDefaultToolkit().beep();
-          return;
-        }
-      }
-      super.replace( fb, offset, length, string, attrs );
+    public JIntegerField(int value) {
+        this();
+        setInteger(value);
     }
-  }
+
+    /**
+     * Set an integer
+     * 
+     * @param value
+     *            Value to be set
+     */
+    public void setInteger(int value) {
+        setText(String.valueOf(value));
+    }
+
+    /**
+     * Get the current value, as integer.
+     * 
+     * @return integer
+     */
+    public int getInteger() {
+        return Integer.parseInt(getText());
+    }
+
+/* -------------------------------------------------------------------- */
+    /**
+     * A DocumentFilter that only allows digits.
+     */
+    public static class IntegerFilter extends DocumentFilter {
+
+        /**
+         * String to be inserted into the Document. If it does not contain
+         * digits only, the insertion will be refused and a beep will sound.
+         * Everything matching <code>Character.isDigit()</code> will be accepted
+         * as a valid digit.
+         * 
+         * @param fb
+         *            FilterBypass
+         * @param offset
+         *            Insert offset
+         * @param string
+         *            String to be inserted
+         * @param attr
+         *            Attribute
+         * @throws BadLocationException
+         *             Bad position
+         */
+        @Override
+        public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr)
+        throws BadLocationException {
+            int len = string.length();
+            for (int ix = 0; ix < len; ix++) {
+                if (!Character.isDigit(string.charAt(ix))) {
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            super.insertString(fb, offset, string, attr);
+        }
+
+        /**
+         * String to be replaced with parts of the {@link Document}. If it does not
+         * contain digits only, the insertion will be refused and a beep will
+         * sound. Everything matching {@link Character#isDigit(char)} will be
+         * accepted as a valid digit.
+         * 
+         * @param fb
+         *            FilterBypass
+         * @param offset
+         *            Replacement offset
+         * @param length
+         *            Length to be replaced
+         * @param string
+         *            String to be replaced
+         * @param attrs
+         *            Attribute
+         * @throws BadLocationException
+         *             Bad position
+         */
+        @Override
+        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String string, AttributeSet attrs)
+        throws BadLocationException {
+            int len = string.length();
+            for (int ix = 0; ix < len; ix++) {
+                if (!Character.isDigit(string.charAt(ix))) {
+                    Toolkit.getDefaultToolkit().beep();
+                    return;
+                }
+            }
+            super.replace(fb, offset, length, string, attrs);
+        }
+    }
 
 }
