@@ -45,6 +45,7 @@
 package net.shredzone.jshred.swing;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Toolkit;
@@ -54,6 +55,9 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -74,7 +78,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 75 2006-02-10 08:17:27Z shred $
+ * @version $Id: SwingUtils.java 163 2008-07-10 10:23:15Z shred $
  */
 public class SwingUtils {
 
@@ -430,6 +434,48 @@ public class SwingUtils {
     }
    
     return maxCopy;
+  }
+  
+  /**
+   * Recursively get a Collection of all Components in a Component.
+   * 
+   * @param comp    Root component
+   * @return  Collection of all Components and sub Components.
+   * @since R14
+   */
+  public static Collection getComponentsRecursive(Component comp) {
+    List result = new ArrayList();
+    getComponentsRecursiveHelper(result, comp);
+    return result;
+  }
+  
+  private static void getComponentsRecursiveHelper(List result, Component comp) {
+    if (comp instanceof Container) {
+      Component[] children = ((Container) comp).getComponents();
+      for (int ix = 0; ix < children.length; ix++) {
+        getComponentsRecursiveHelper(result, children[ix]);
+      }
+    }
+    result.add(comp);
+  }
+  
+  /**
+   * Recursively enables a Component and all its subcomponents. Usually if
+   * you disable a Container, only the container itself is disabled, but not
+   * the children Components.
+   * 
+   * @param comp    Root component
+   * @param enable  enable flag
+   * @since R14
+   */
+  public static void enableRecursive(Component comp, boolean enable) {
+    if (comp instanceof Container) {
+      Component[] children = ((Container) comp).getComponents();
+      for (int ix = 0; ix < children.length; ix++) {
+        enableRecursive(children[ix], enable);
+      }
+    }
+    comp.setEnabled(enable);
   }
   
 }

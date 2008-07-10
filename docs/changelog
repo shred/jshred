@@ -1,10 +1,16 @@
-CHANGELOG -- $Id: changelog 121 2007-03-28 14:10:41Z shred $
+CHANGELOG -- $Id: changelog 163 2008-07-10 10:23:15Z shred $
 
-R14
+R14 (2008-07-10)
+  * NOTE: R14 is the last release that is JDK1.4 compatible. Starting from
+    R15, at least JDK1.5 will be required. This also involves major API
+    changes.
   * Added EmptyTableModel
   * Added PhpSerializer
   * Napkin L&F added to the JLAFSelector (http://napkinlaf.sourceforge.net/)
   * JToolbarButton constructor now also supports button titles.
+  * SwingUtils now offers method to get a recursive list of Components, as
+    well as a method to enable a Component recursively.
+  * Removed the wizard package for now.
 
 R13 (2006-07-26)
   * Removed all JDK1.3 compatibilty code.
