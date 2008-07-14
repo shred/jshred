@@ -1,4 +1,4 @@
-CHANGELOG -- $Id: changelog 169 2008-07-10 22:01:03Z shred $
+CHANGELOG -- $Id: changelog 170 2008-07-14 08:50:20Z shred $
 
 
 R15
@@ -9,6 +9,9 @@ R15
   * Removed all deprecated code and JDK 1.4 compatibility code
   * Added Generics support
   * Added ListenerManager to easily manage all kind of listeners
+  * SwingUtils.setDialogConfirmKey() and SwingUtils.setDialogCancelKey() now
+    work with the RootPaneContainer (which is the correct interface for this
+    purpose) and have been renamed.
 
 R14 (2008-07-10)
   * NOTE: R14 is the last release that is JDK1.4 compatible. Starting from

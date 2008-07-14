@@ -36,13 +36,16 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.RootPaneContainer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -53,7 +56,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 169 2008-07-10 22:01:03Z shred $
+ * @version $Id: SwingUtils.java 170 2008-07-14 08:50:20Z shred $
  */
 public class SwingUtils {
 
@@ -304,32 +307,32 @@ public class SwingUtils {
     }
 
     /**
-     * Set the confirmation button for a {@link JDialog}. Usually the
+     * Set the confirmation button for a {@link RootPaneContainer}. Usually the
      * confirmation button has a broader frame, so the user can identify the
      * default confirmation option of a dialog. Pressing the return key will
      * usually result in triggering that button.
      * 
      * @param dialog
-     *            {@link JDialog} to set the confirmation button for
+     *            {@link RootPaneContainer} to set the confirmation button for
      * @param confirm
      *            Confirmation {@link JButton}.
      * @since R7
      */
-    public static void setDialogConfirmKey(JDialog dialog, JButton confirm) {
+    public static void setConfirmKey(RootPaneContainer dialog, JButton confirm) {
         dialog.getRootPane().setDefaultButton(confirm);
     }
 
     /**
-     * Set the cancel button for a {@link JDialog}. Pressing the escape key
-     * will also trigger that {@link JButton}.
+     * Set the cancel button for a {@link RootPaneContainer}. Pressing the
+     * escape key will also trigger that {@link JButton}.
      * 
      * @param dialog
-     *            {@link JDialog} to set the cancel button for
+     *            {@link RootPaneContainer} to set the cancel button for
      * @param cancel
      *            Cancel {@link JButton}.
      * @since R7
      */
-    public static void setDialogCancelKey(JDialog dialog, JButton cancel) {
+    public static void setCancelKey(RootPaneContainer dialog, JButton cancel) {
         final JButton fCancel = cancel;
         final String name = "CancelAction";
 
