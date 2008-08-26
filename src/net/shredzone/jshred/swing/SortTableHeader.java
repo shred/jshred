@@ -30,7 +30,7 @@ import java.io.Serializable;
  * {@link SortableTableModel} and allows to select columns to be sorted.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java 169 2008-07-10 22:01:03Z shred $
+ * @version $Id: SortTableHeader.java 203 2008-08-26 13:04:09Z shred $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 3256728372658124082L;
@@ -152,11 +152,19 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
             if (model instanceof SortableTableModel) {
                 int column = table.convertColumnIndexToModel(pressedIndex);
 
-                // --- Change sort order ---
-                if (sortingAllowed && column >= 0
-                        && column < columnModel.getColumnCount()) {
+                do {
+                    if (! sortingAllowed) break;
+                  
+                    if (column < 0 || column >= columnModel.getColumnCount()) break;
+                  
+                    if (model instanceof ExtendedSortableTableModel) {
+                        if (! ((ExtendedSortableTableModel) model).isColumnSortable(column)) {
+                            break;
+                        }
+                    }
+                  
                     ((JSortedTable) table).sortByColumn(column);
-                }
+                } while (false);
             }
         }
         pressed = false;

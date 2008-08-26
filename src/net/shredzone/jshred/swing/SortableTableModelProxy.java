@@ -46,9 +46,9 @@ import java.io.Serializable;
  * {@link TableModel} to the SortTableModelProxy constructor.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java 169 2008-07-10 22:01:03Z shred $
+ * @version $Id: SortableTableModelProxy.java 203 2008-08-26 13:04:09Z shred $
  */
-public class SortableTableModelProxy implements SortableTableModel, TableModelListener, Serializable {
+public class SortableTableModelProxy implements ExtendedSortableTableModel, TableModelListener, Serializable {
     static final long serialVersionUID = -668922708936078948L;
 
     private final TableModel master;
@@ -385,6 +385,22 @@ public class SortableTableModelProxy implements SortableTableModel, TableModelLi
                 return d1.toString().compareTo(d2.toString());
             }
         }
+    }
+
+    /**
+     * Returns <code>true</code> if a column is sortable. This method always
+     * returns <code>true</code>. It can be overridden to avoid sorting of
+     * different columns.
+     * 
+     * @param
+     *    columnIndex       Column index to check
+     * @return
+     *    Always <code>true</code>
+     * @since R15
+     */
+    @Override
+    public boolean isColumnSortable(int columnIndex) {
+      return true;
     }
 
 }

@@ -37,7 +37,7 @@ import java.awt.Rectangle;
  * table, which may be preferable to this solution.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java 169 2008-07-10 22:01:03Z shred $
+ * @version $Id: JSortedTable.java 203 2008-08-26 13:04:09Z shred $
  */
 public class JSortedTable extends JTable {
     private static final long serialVersionUID = 3256728372624110384L;
@@ -109,6 +109,13 @@ public class JSortedTable extends JTable {
      * @since R4
      */
     public void sortByColumn(int columnIndex) {
+        // --- Sorting allowed? ---
+        if (getModel() instanceof ExtendedSortableTableModel) {
+            ExtendedSortableTableModel ext = (ExtendedSortableTableModel) getModel();
+            if (!ext.isColumnSortable(columnIndex))
+                return;
+        }
+      
         // --- Proxy? ---
         final SortableTableModel model = (SortableTableModel) getModel();
         SortableTableModelProxy proxy = null;

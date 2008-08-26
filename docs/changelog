@@ -1,4 +1,4 @@
-CHANGELOG -- $Id: changelog 170 2008-07-14 08:50:20Z shred $
+CHANGELOG -- $Id: changelog 203 2008-08-26 13:04:09Z shred $
 
 
 R15
@@ -12,6 +12,8 @@ R15
   * SwingUtils.setDialogConfirmKey() and SwingUtils.setDialogCancelKey() now
     work with the RootPaneContainer (which is the correct interface for this
     purpose) and have been renamed.
+  * Added ExtendedSortableTableModel, which allows to sort only certain
+    columns.
 
 R14 (2008-07-10)
   * NOTE: R14 is the last release that is JDK1.4 compatible. Starting from
