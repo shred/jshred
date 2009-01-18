@@ -46,7 +46,7 @@ import java.io.Serializable;
  * {@link TableModel} to the SortTableModelProxy constructor.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java 203 2008-08-26 13:04:09Z shred $
+ * @version $Id: SortableTableModelProxy.java 239 2009-01-18 14:52:51Z shred $
  */
 public class SortableTableModelProxy implements ExtendedSortableTableModel, TableModelListener, Serializable {
     static final long serialVersionUID = -668922708936078948L;
@@ -398,7 +398,6 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      *    Always <code>true</code>
      * @since R15
      */
-    @Override
     public boolean isColumnSortable(int columnIndex) {
       return true;
     }

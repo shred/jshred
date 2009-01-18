@@ -66,7 +66,7 @@ import net.shredzone.jshred.io.UncloseableOutputStream;
  * for file uploads.
  *
  * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java 169 2008-07-10 22:01:03Z shred $
+ * @version $Id: HTTPRequest.java 239 2009-01-18 14:52:51Z shred $
  */
 public class HTTPRequest {
 
@@ -688,7 +688,6 @@ public class HTTPRequest {
          * @param out
          *            {@link OutputStream} to be filled
          */
-        @Override
         public void sendFile(OutputStream out) throws IOException {
             int data;
             while ((data = in.read()) >= 0) {
