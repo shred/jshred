@@ -6,6 +6,26 @@
     <packaging>pom</packaging>
     <name>jShred java library</name>
     <version>16</version>
+    <description>Java library</description>
+    <url>http://jshred.shredzone.org</url>
+    <inceptionYear>2004</inceptionYear>
+    <issueManagement>
+    	<system>Redmine</system>
+    	<url>http://www.shredzone.org/projects/jshred/issues</url>
+    </issueManagement>
+    <ciManagement>
+    	<system>Continuum</system>
+    	<url>http://continuum.shredzone.org</url>
+    </ciManagement>
+    <scm>
+    	<connection>scm:svn:http://svn.shredzone.org/trunk/jshred/</connection>
+    	<developerConnection>scm:svn:http://svn.shredzone.org/trunk/jshred/</developerConnection>
+    	<url>http://svn.shredzone.org/</url>
+    </scm>
+    <organization>
+    	<name>shredzone.org</name>
+    	<url>http://www.shredzone.org</url>
+    </organization>
     <build>
         <plugins>
             <plugin>
