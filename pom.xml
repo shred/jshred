@@ -19,7 +19,7 @@
     </ciManagement>
     <scm>
     	<connection>scm:svn:http://svn.shredzone.org/trunk/jshred/</connection>
-    	<developerConnection>scm:svn:http://svn.shredzone.org/trunk/jshred/</developerConnection>
+    	<developerConnection>scm:svn:https://svn.shredzone.org/trunk/jshred/</developerConnection>
     	<url>http://svn.shredzone.org/</url>
     </scm>
     <organization>
