@@ -2,8 +2,7 @@
  * jshred -- Shred's Toolbox
  *
  * Copyright (c) 2008 Richard "Shred" Körber
- *   http://www.shredzone.net/go/jshred
- *-----------------------------------------------------------------------
+ *   http://jshred.shredzone.org-------------------------------------------------------------------
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -54,7 +53,7 @@ import javax.swing.JComponent;
  * This class also implements the {@link Printable} interface since R13.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java 243 2009-01-18 15:05:21Z shred $
+ * @version $Id: JImageViewer.java 256 2009-02-10 22:56:35Z shred $
  * @since R9
  */
 public class JImageViewer extends JComponent implements Printable {

@@ -2,8 +2,7 @@
  * jshred -- Shred's Toolbox
  *
  * Copyright (c) 2008 Richard "Shred" Körber
- *   http://www.shredzone.net/go/jshred
- *-----------------------------------------------------------------------
+ *   http://jshred.shredzone.org-------------------------------------------------------------------
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +27,7 @@ import org.junit.Test;
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R7
- * @version $Id: SortedListTest.java 246 2009-01-18 15:11:06Z shred $
+ * @version $Id: SortedListTest.java 256 2009-02-10 22:56:35Z shred $
  */
 public class SortedListTest {
 

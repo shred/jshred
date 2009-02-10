@@ -2,8 +2,7 @@
  * jshred -- Shred's Toolbox
  *
  * Copyright (c) 2008 Richard "Shred" Körber
- *   http://www.shredzone.net/go/jshred
- *-----------------------------------------------------------------------
+ *   http://jshred.shredzone.org-------------------------------------------------------------------
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
