@@ -40,6 +40,7 @@
     <modules>
     	<module>jshred-swing</module>
     	<module>jshred-util</module>
+    	<module>jshred-web</module>
     </modules>
     <dependencies>
         <dependency>
