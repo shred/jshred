@@ -1,53 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.shredzone</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred</artifactId>
     <packaging>pom</packaging>
-    <name>jShred java library</name>
+    <name>jShred</name>
     <version>16</version>
-    <description>Java library</description>
-    <url>http://jshred.shredzone.org</url>
+    <description>jShred Java library</description>
+    <url>http://www.shredzone.org/projects/show/jshred</url>
     <inceptionYear>2004</inceptionYear>
+    <licenses>
+        <license>
+            <name>GNU General Public License Version 3</name>
+            <url>LICENSE-GPL.txt</url>
+        </license>
+        <license>
+            <name>GNU Lesser General Public License Version 3</name>
+            <url>LICENSE-LGPL.txt</url>
+        </license>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>LICENSE-APL.txt</url>
+        </license>
+    </licenses>
     <issueManagement>
     	<system>Redmine</system>
     	<url>http://www.shredzone.org/projects/jshred/issues</url>
     </issueManagement>
-    <ciManagement>
-    	<system>Continuum</system>
-    	<url>http://continuum.shredzone.org</url>
-    </ciManagement>
-    <scm>
-    	<connection>scm:svn:http://svn.shredzone.org/trunk/jshred/</connection>
-    	<developerConnection>scm:svn:https://svn.shredzone.org/trunk/jshred/</developerConnection>
-    	<url>http://svn.shredzone.org/</url>
-    </scm>
-    <organization>
-    	<name>shredzone.org</name>
-    	<url>http://www.shredzone.org</url>
-    </organization>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <modules>
     	<module>jshred-swing</module>
     	<module>jshred-util</module>
     	<module>jshred-web</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>[4,)</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>
