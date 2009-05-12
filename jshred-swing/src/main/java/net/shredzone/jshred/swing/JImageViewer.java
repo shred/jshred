@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.Color;
@@ -44,16 +45,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 /**
- * An ImageViewer renders an image in the centre of the component. This image
- * can be scaled, and a transparency checkboard can also be drawn behind it.
+ * An ImageViewer renders an image in the centre of the component. This image can be
+ * scaled, and a transparency checkboard can also be drawn behind it.
  * <p>
- * As an extra feature, the image can be dragged with the mouse if the viewer
- * is in a JScrollPane.
+ * As an extra feature, the image can be dragged with the mouse if the viewer is in a
+ * JScrollPane.
  * <p>
  * This class also implements the {@link Printable} interface since R13.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JImageViewer.java 302 2009-05-12 22:19:11Z shred $
  * @since R9
  */
 public class JImageViewer extends JComponent implements Printable {
@@ -61,8 +62,8 @@ public class JImageViewer extends JComponent implements Printable {
 
     public enum Quality {
         /**
-         * The default quality. Usually this is about the quality of QUALITY_FAST,
-         * but may depend on the client's system and might change in future.
+         * The default quality. Usually this is about the quality of QUALITY_FAST, but may
+         * depend on the client's system and might change in future.
          */
         DEFAULT,
 
@@ -81,21 +82,21 @@ public class JImageViewer extends JComponent implements Printable {
          */
         BEST
     };
-    
+
     public enum Autoscale {
         /**
-         * No autoscaling. This is the default. Use this mode if you want to embed
-         * the JImageViewer into a JScrollPane.
+         * No autoscaling. This is the default. Use this mode if you want to embed the
+         * JImageViewer into a JScrollPane.
          */
         OFF,
-        
+
         /**
-         * Autoscaling is used. The image will only be scaled down to the size of
-         * the component, keeping its aspect ratio. If the component is larger than
-         * the image though, it will not be magnified.
+         * Autoscaling is used. The image will only be scaled down to the size of the
+         * component, keeping its aspect ratio. If the component is larger than the image
+         * though, it will not be magnified.
          */
         REDUCE,
-        
+
         /**
          * Autoscaling is used. The image will be scaled to always fill as much as
          * possible of the component, keeping its aspect ratio.
@@ -158,8 +159,7 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Create a JImageViewer showing an image that is read from the given
-     * {@link URL}.
+     * Create a JImageViewer showing an image that is read from the given {@link URL}.
      * 
      * @param url
      *            {@link URL} to read the image data from.
@@ -239,8 +239,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new {@link ImageIcon} to be shown. This is a convenience method
-     * that will just invoke {@link ImageIcon#getImage()}.
+     * Set a new {@link ImageIcon} to be shown. This is a convenience method that will
+     * just invoke {@link ImageIcon#getImage()}.
      * 
      * @param icon
      *            New {@link ImageIcon} to be shown.
@@ -250,9 +250,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new image that is to be read from the {@link InputStream}. No
-     * fancy image formats are supported, just the one that are supported
-     * by {@link ImageIO}.
+     * Set a new image that is to be read from the {@link InputStream}. No fancy image
+     * formats are supported, just the one that are supported by {@link ImageIO}.
      * 
      * @param in
      *            {@link InputStream} providing the image data.
@@ -264,9 +263,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new image that is to be read from the {@link URL}. No
-     * fancy image formats are supported, just the one that are supported
-     * by {@link ImageIO}.
+     * Set a new image that is to be read from the {@link URL}. No fancy image formats are
+     * supported, just the one that are supported by {@link ImageIO}.
      * 
      * @param url
      *            {@link URL} to read the image from.
@@ -285,11 +283,11 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Draw the transparency checkboard. The checkboard is drawn behind the
-     * image and can be seen through the transparent parts of it.
+     * Draw the transparency checkboard. The checkboard is drawn behind the image and can
+     * be seen through the transparent parts of it.
      * <p>
-     * By default, no transparency checkboard is shown since it slows down the
-     * performance and might confuse the user.
+     * By default, no transparency checkboard is shown since it slows down the performance
+     * and might confuse the user.
      * 
      * @param checkboard
      *            true: show transparency checkboard.
@@ -310,15 +308,13 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set the transparency checkboard color. By default (or if
-     * <code>null</code> is passed in here), the background color's
-     * {@link Color#brighter()} is used for the bright fields. For the dark
-     * fields, {@link #getBackground()} is always used if this component is
-     * opaque.
+     * Set the transparency checkboard color. By default (or if <code>null</code> is
+     * passed in here), the background color's {@link Color#brighter()} is used for the
+     * bright fields. For the dark fields, {@link #getBackground()} is always used if this
+     * component is opaque.
      * 
      * @param color
-     *            Checkboard {@link Color}, <code>null</code> means default
-     *            color.
+     *            Checkboard {@link Color}, <code>null</code> means default color.
      */
     public void setCheckboardColor(Color color) {
         firePropertyChange("checkboardColor", this.cbcolor, color);
@@ -329,16 +325,16 @@ public class JImageViewer extends JComponent implements Printable {
     /**
      * Get the transparency checkboard color.
      * 
-     * @return Checkboard {@link Color}, or <code>null</code> if the default
-     *         color is used.
+     * @return Checkboard {@link Color}, or <code>null</code> if the default color is
+     *         used.
      */
     public Color getCheckboardColor() {
         return cbcolor;
     }
 
     /**
-     * Set the autoscale mode. The default is {@link Autoscale#OFF}, so you
-     * can embed a JImageViewer into a {@link JScrollPane}.
+     * Set the autoscale mode. The default is {@link Autoscale#OFF}, so you can embed a
+     * JImageViewer into a {@link JScrollPane}.
      * 
      * @param autoscale
      *            The new {@link Autoscale} mode.
@@ -362,12 +358,12 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set the zoom factor for the shown image. A factor of 1.0f means that the
-     * image is shown in the original size. A factor &lt;1.0f will reduce the
-     * image, while a factor &gt;1.0f will magnify it.
+     * Set the zoom factor for the shown image. A factor of 1.0f means that the image is
+     * shown in the original size. A factor &lt;1.0f will reduce the image, while a factor
+     * &gt;1.0f will magnify it.
      * <p>
-     * <em>NOTE</em> that {@link Autoscale#OFF} must be set in order to use
-     * zooming. This might change in future releases though.
+     * <em>NOTE</em> that {@link Autoscale#OFF} must be set in order to use zooming. This
+     * might change in future releases though.
      * 
      * @param zoom
      *            Zoom factor. Default is 1.0f.
@@ -412,26 +408,21 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the final {@link Dimension} of the image after proper scaling was
-     * applied.
+     * Get the final {@link Dimension} of the image after proper scaling was applied.
      * 
-     * @return {@link Dimension} of the image to be drawn. The returned
-     *         {@link Dimension} object is a copy that can be manipulated by the
-     *         caller.
+     * @return {@link Dimension} of the image to be drawn. The returned {@link Dimension}
+     *         object is a copy that can be manipulated by the caller.
      */
     protected Dimension getScaledDimension() {
         // --- Return null if there is no image ---
-        if (image == null)
-            return null;
+        if (image == null) return null;
 
         // --- Get the default dimensions ---
-        Dimension dim = new Dimension(image.getWidth(this), image
-                .getHeight(this));
+        Dimension dim = new Dimension(image.getWidth(this), image.getHeight(this));
 
         if (autoscale != Autoscale.OFF) {
             // --- Automatically scale the image ---
-            final Dimension imgDim = new Dimension(image.getWidth(this), image
-                    .getHeight(this));
+            final Dimension imgDim = new Dimension(image.getWidth(this), image.getHeight(this));
             final Dimension cmpDim = new Dimension(getSize());
             final Insets insets = getInsets();
             cmpDim.width -= insets.left + insets.right;
@@ -454,8 +445,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get this component's minimum size. If {@link Autoscale#OFF} is set,
-     * it equals to the image size.
+     * Get this component's minimum size. If {@link Autoscale#OFF} is set, it equals to
+     * the image size.
      * 
      * @return Minimum {@link Dimension}
      */
@@ -473,8 +464,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the component's preferred size. This is always equal to the minimum
-     * size unless no image has been set.
+     * Get the component's preferred size. This is always equal to the minimum size unless
+     * no image has been set.
      * 
      * @return Preferred dimensions
      */
@@ -488,8 +479,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Paint the component. It will paint the checkerboard (if enabled) and the
-     * Image on top of it.
+     * Paint the component. It will paint the checkerboard (if enabled) and the Image on
+     * top of it.
      * 
      * @param g
      *            {@link Graphics} context.
@@ -505,21 +496,17 @@ public class JImageViewer extends JComponent implements Printable {
 
             // --- Translate to the centre ---
             g2d.translate(
-                    ((getWidth() - insets.left - insets.right - dim.width) / 2)
-                            + insets.left, ((getHeight() - insets.top
-                            - insets.bottom - dim.height) / 2)
-                            + insets.top);
+                ((getWidth() - insets.left - insets.right - dim.width) / 2) + insets.left,
+                ((getHeight() - insets.top - insets.bottom - dim.height) / 2) + insets.top);
             g2d.clipRect(0, 0, dim.width, dim.height);
 
             // --- Draw the cbcolor ---
             if (checkboard) {
-                g2d.setColor(cbcolor != null ? cbcolor : getBackground()
-                        .brighter());
+                g2d.setColor(cbcolor != null ? cbcolor : getBackground().brighter());
                 for (int x = 0; x <= (dim.width / CBSIZE); x++) {
                     for (int y = 0; y <= (dim.height / CBSIZE); y++) {
                         if (x % 2 == y % 2) {
-                            g2d.fillRect(x * CBSIZE, y * CBSIZE, CBSIZE - 1,
-                                    CBSIZE - 1);
+                            g2d.fillRect(x * CBSIZE, y * CBSIZE, CBSIZE - 1, CBSIZE - 1);
                         }
                     }
                 }
@@ -537,8 +524,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Print this image. It will be printed on a single page, scaled to consume
-     * the entire paper (keeping the border).
+     * Print this image. It will be printed on a single page, scaled to consume the entire
+     * paper (keeping the border).
      * 
      * @param graphics
      *            Graphics context
@@ -572,10 +559,11 @@ public class JImageViewer extends JComponent implements Printable {
         double scaleH = pageFormat.getImageableHeight() / imgH;
         double scale = Math.min(scaleW, scaleH);
         g2d.scale(scale, scale);
-        g2d.setClip((int) (pageFormat.getImageableX() / scale),
-                (int) (pageFormat.getImageableY() / scale), (int) (pageFormat
-                        .getImageableWidth() / scale), (int) (pageFormat
-                        .getImageableHeight() / scale));
+        g2d.setClip(
+            (int) (pageFormat.getImageableX() / scale),
+            (int) (pageFormat.getImageableY() / scale),
+            (int) (pageFormat.getImageableWidth() / scale),
+            (int) (pageFormat.getImageableHeight() / scale));
 
         // --- Translate ---
         g2d.translate(g2d.getClipBounds().getX(), g2d.getClipBounds().getY());
@@ -601,42 +589,22 @@ public class JImageViewer extends JComponent implements Printable {
     protected void setQuality(Graphics2D g2d, Quality quality) {
         switch (quality) {
         case FAST:
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_INTERPOLATION,
-                    RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_ALPHA_INTERPOLATION,
-                    RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_RENDERING,
-                    RenderingHints.VALUE_RENDER_SPEED));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED));
             break;
 
         case SMOOTH:
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_INTERPOLATION,
-                    RenderingHints.VALUE_INTERPOLATION_BILINEAR));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_ALPHA_INTERPOLATION,
-                    RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_RENDERING,
-                    RenderingHints.VALUE_RENDER_QUALITY));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
             break;
 
         case BEST:
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_INTERPOLATION,
-                    RenderingHints.VALUE_INTERPOLATION_BICUBIC));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_ALPHA_INTERPOLATION,
-                    RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_RENDERING,
-                    RenderingHints.VALUE_RENDER_QUALITY));
-            g2d.addRenderingHints(new RenderingHints(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON));
             break;
         }
     }

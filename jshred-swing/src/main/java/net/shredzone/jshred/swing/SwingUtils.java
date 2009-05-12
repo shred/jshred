@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.Component;
@@ -55,20 +56,18 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: SwingUtils.java 302 2009-05-12 22:19:11Z shred $
  */
 public class SwingUtils {
 
     /**
      * There are only static methods, nothing to be constructed.
      */
-    private SwingUtils() {
-    }
+    private SwingUtils() {}
 
     /**
-     * Set the width of a {@link JComponent} to its minimum. Use this to stack
-     * multiple {@link JTextField} and {@link JComboBox} in a {@link BoxLayout}
-     * along the x axis.
+     * Set the width of a {@link JComponent} to its minimum. Use this to stack multiple
+     * {@link JTextField} and {@link JComboBox} in a {@link BoxLayout} along the x axis.
      * 
      * @param comp
      *            {@link JComponent} to be minimized.
@@ -76,14 +75,12 @@ public class SwingUtils {
     public static void setMinimumWidth(JComponent comp) {
         int width = comp.getMinimumSize().width;
         comp.setMaximumSize(new Dimension(width, comp.getMaximumSize().height));
-        comp.setPreferredSize(new Dimension(width,
-                comp.getPreferredSize().height));
+        comp.setPreferredSize(new Dimension(width, comp.getPreferredSize().height));
     }
 
     /**
-     * Set the height of a {@link JComponent} to its minimum. Use this to stack
-     * multiple {@link JTextField} and {@link JComboBox} in a {@link BoxLayout}
-     * along the y axis.
+     * Set the height of a {@link JComponent} to its minimum. Use this to stack multiple
+     * {@link JTextField} and {@link JComboBox} in a {@link BoxLayout} along the y axis.
      * 
      * @param comp
      *            {@link JComponent} to be minimized.
@@ -91,24 +88,22 @@ public class SwingUtils {
     public static void setMinimumHeight(JComponent comp) {
         int height = comp.getMinimumSize().height;
         comp.setMaximumSize(new Dimension(comp.getMaximumSize().width, height));
-        comp.setPreferredSize(new Dimension(comp.getPreferredSize().width,
-                height));
+        comp.setPreferredSize(new Dimension(comp.getPreferredSize().width, height));
     }
 
     /**
-     * Set the <code>NAME</code> and <code>MNEMONIC_KEY</code> of an
-     * {@link Action} to the menu string. The menu string (with stripped
-     * underscore) will be the <code>NAME</code>, and the first character after
-     * the underscore will be the <code>MNEMONIC_KEY</code>.
+     * Set the <code>NAME</code> and <code>MNEMONIC_KEY</code> of an {@link Action} to the
+     * menu string. The menu string (with stripped underscore) will be the
+     * <code>NAME</code>, and the first character after the underscore will be the
+     * <code>MNEMONIC_KEY</code>.
      * <p>
-     * Example: <tt>"_Undo"</t> results to a <code>NAME<code> <tt>"Undo"</tt>
-     * and a <code>MNEMONIC_KEY</code> of <tt>"U"</tt>.
+     * Example: <tt>"_Undo"</t> results to a <code>NAME<code> <tt>"Undo"</tt> and a
+     * <code>MNEMONIC_KEY</code> of <tt>"U"</tt>.
      * <p>
      * If no underscore was found, <code>MNEMONIC_KEY</code> is unchanged.
      * 
      * @param action
-     *            Action to set <code>NAME</code> and <code>MNEMONIC_KEY</code>
-     *            for
+     *            Action to set <code>NAME</code> and <code>MNEMONIC_KEY</code> for
      * @param menu
      *            Menu name
      */
@@ -127,8 +122,8 @@ public class SwingUtils {
 
     /**
      * Get the name of a menu. The result is the given menu name, with the first
-     * underscore being stripped. Subsequent underscores will be ignored. You
-     * can escape underscores by doubling them.
+     * underscore being stripped. Subsequent underscores will be ignored. You can escape
+     * underscores by doubling them.
      * 
      * @param menu
      *            Menu name
@@ -137,18 +132,17 @@ public class SwingUtils {
     public static String getMenuName(String menu) {
         int i = menu.indexOf("_");
         while (i >= 0) {
-            if (i == menu.length() - 1)
-                return menu;                // Last char cannot be a shortcut
-            if (menu.charAt(i + 1) != '_')  // No double underscore -> found!
-                return menu.substring(0, i) + menu.substring(i + 1); // Remove underscore
-            i = menu.indexOf("_", i + 2);   // Also skip the second underscore
+            if (i == menu.length() - 1) return menu; // Last char cannot be a shortcut
+            if (menu.charAt(i + 1) != '_') // No double underscore -> found!
+            return menu.substring(0, i) + menu.substring(i + 1); // Remove underscore
+            i = menu.indexOf("_", i + 2); // Also skip the second underscore
         }
-        return menu;                        // Nothing was found
+        return menu; // Nothing was found
     }
 
     /**
-     * Get the shortcut of a menu. The first char after an underscore will be
-     * returned. Underscores can be doubled to escape them.
+     * Get the shortcut of a menu. The first char after an underscore will be returned.
+     * Underscores can be doubled to escape them.
      * 
      * @param menu
      *            Menu name
@@ -158,19 +152,16 @@ public class SwingUtils {
         int i = menu.indexOf("_");
         char mnemo;
         while (i >= 0) {
-            if (i == menu.length() - 1)
-                break;                      // Last char cannot be a shortcut
+            if (i == menu.length() - 1) break; // Last char cannot be a shortcut
             mnemo = menu.charAt(i + 1);
-            if (mnemo != '_')
-                return new Character(mnemo); // Key was found
-            i = menu.indexOf("_", i + 2);    // Also skip the second underscore
+            if (mnemo != '_') return new Character(mnemo); // Key was found
+            i = menu.indexOf("_", i + 2); // Also skip the second underscore
         }
         return null;
     }
 
     /**
-     * Create a {@link JMenu} from a title. An underscore marks the menu
-     * shortcut.
+     * Create a {@link JMenu} from a title. An underscore marks the menu shortcut.
      * 
      * @param title
      *            Menu title
@@ -186,8 +177,8 @@ public class SwingUtils {
     }
 
     /**
-     * Get the {@link Frame} of a {@link Component}. If the {@link Component}
-     * was not shown in a frame, <code>null</code> will be returned.
+     * Get the {@link Frame} of a {@link Component}. If the {@link Component} was not
+     * shown in a frame, <code>null</code> will be returned.
      * 
      * @param comp
      *            {@link Component}
@@ -195,17 +186,16 @@ public class SwingUtils {
      */
     public static Frame getComponentFrame(Component comp) {
         while (comp != null) {
-            if (comp instanceof Frame)
-                return (Frame) comp;
+            if (comp instanceof Frame) return (Frame) comp;
             comp = comp.getParent();
         }
         return null;
     }
 
     /**
-     * Adjust each column of a {@link JTable} to show its entire content. There
-     * is no maximum cell width given, which could result in unreadable tables
-     * on very long content.
+     * Adjust each column of a {@link JTable} to show its entire content. There is no
+     * maximum cell width given, which could result in unreadable tables on very long
+     * content.
      * 
      * @param table
      *            {@link JTable} to be adjusted
@@ -215,16 +205,16 @@ public class SwingUtils {
     }
 
     /**
-     * Adjust each column of a {@link JTable} to show its entire content. The
-     * cell width is limited to the given maximum width, though.
+     * Adjust each column of a {@link JTable} to show its entire content. The cell width
+     * is limited to the given maximum width, though.
      * <p>
-     * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code>
-     * to the appropriate table before invoking this method.
+     * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code> to the
+     * appropriate table before invoking this method.
      * <p>
-     * <b>WARNING:</b> In order to find out the maximum cell widths, this method
-     * will scan the entire table model! This will result in a major performance
-     * penalty for large models, and especial for dynamic models which will get
-     * their content from external sources.
+     * <b>WARNING:</b> In order to find out the maximum cell widths, this method will scan
+     * the entire table model! This will result in a major performance penalty for large
+     * models, and especial for dynamic models which will get their content from external
+     * sources.
      * 
      * @param table
      *            {@link JTable} to be adjusted
@@ -236,18 +226,17 @@ public class SwingUtils {
     }
 
     /**
-     * Adjust each column of a {@link JTable} to show its entire content. The
-     * cell width is limited to the given maximum width, though. The minimum
-     * cell width is either the size of the title, or the given minimum width,
-     * whatever is bigger.
+     * Adjust each column of a {@link JTable} to show its entire content. The cell width
+     * is limited to the given maximum width, though. The minimum cell width is either the
+     * size of the title, or the given minimum width, whatever is bigger.
      * <p>
-     * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code>
-     * to the appropriate table before invoking this method.
+     * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code> to the
+     * appropriate table before invoking this method.
      * <p>
-     * <b>WARNING:</b> In order to find out the maximum cell widths, this method
-     * will scan the entire table model! This will result in a major performance
-     * penalty for large models, and especial for dynamic models which will get
-     * their content from external sources.
+     * <b>WARNING:</b> In order to find out the maximum cell widths, this method will scan
+     * the entire table model! This will result in a major performance penalty for large
+     * models, and especial for dynamic models which will get their content from external
+     * sources.
      * 
      * @param table
      *            {@link JTable} to be adjusted
@@ -261,8 +250,7 @@ public class SwingUtils {
         JTableHeader header = table.getTableHeader();
         TableCellRenderer defaultHeaderRenderer = null;
 
-        if (header != null)
-            defaultHeaderRenderer = header.getDefaultRenderer();
+        if (header != null) defaultHeaderRenderer = header.getDefaultRenderer();
 
         TableColumnModel columns = table.getColumnModel();
         TableModel data = table.getModel();
@@ -276,12 +264,10 @@ public class SwingUtils {
             int width = -1;
 
             TableCellRenderer h = column.getHeaderRenderer();
-            if (h == null)
-                h = defaultHeaderRenderer;
+            if (h == null) h = defaultHeaderRenderer;
 
             if (h != null) {
-                Component c = h.getTableCellRendererComponent(table,
-                        column.getHeaderValue(), false, false, -1, i);
+                Component c = h.getTableCellRendererComponent(table, column.getHeaderValue(), false, false, -1, i);
                 if (cbOnly) {
                     width = c.getPreferredSize().width;
                 } else {
@@ -291,15 +277,13 @@ public class SwingUtils {
 
             for (int row = rowCount - 1; row >= 0; row--) {
                 TableCellRenderer r = table.getCellRenderer(row, i);
-                Component c = r.getTableCellRendererComponent(table, 
-                        data.getValueAt(row, columnIndex), false, false, row, i);
+                Component c = r.getTableCellRendererComponent(table, data.getValueAt(row, columnIndex), false, false, row, i);
                 width = Math.max(width, c.getPreferredSize().width);
             }
 
             if (width >= 0) {
                 width += margin + 5;
-                if (maxwidth > 0 && width > maxwidth)
-                    width = maxwidth;
+                if (maxwidth > 0 && width > maxwidth) width = maxwidth;
                 column.setPreferredWidth(width);
             }
         }
@@ -307,9 +291,9 @@ public class SwingUtils {
 
     /**
      * Set the confirmation button for a {@link RootPaneContainer}. Usually the
-     * confirmation button has a broader frame, so the user can identify the
-     * default confirmation option of a dialog. Pressing the return key will
-     * usually result in triggering that button.
+     * confirmation button has a broader frame, so the user can identify the default
+     * confirmation option of a dialog. Pressing the return key will usually result in
+     * triggering that button.
      * 
      * @param dialog
      *            {@link RootPaneContainer} to set the confirmation button for
@@ -322,8 +306,8 @@ public class SwingUtils {
     }
 
     /**
-     * Set the cancel button for a {@link RootPaneContainer}. Pressing the
-     * escape key will also trigger that {@link JButton}.
+     * Set the cancel button for a {@link RootPaneContainer}. Pressing the escape key will
+     * also trigger that {@link JButton}.
      * 
      * @param dialog
      *            {@link RootPaneContainer} to set the cancel button for
@@ -362,15 +346,13 @@ public class SwingUtils {
     }
 
     /**
-     * Get a String content from the system's default clipboard. If the
-     * clipboard is empty, or if it does not contain a String, then
-     * <code>null</code> will be returned. On some systems <code>null</code>
-     * will also be returned if the clipboard is currently accessed by another
-     * application.
+     * Get a String content from the system's default clipboard. If the clipboard is
+     * empty, or if it does not contain a String, then <code>null</code> will be returned.
+     * On some systems <code>null</code> will also be returned if the clipboard is
+     * currently accessed by another application.
      * <p>
-     * The requestor parameter is required by the JDK, but currently unused.
-     * Anyhow please pass a reference to the invoking class (usually
-     * <code>this</code>).
+     * The requestor parameter is required by the JDK, but currently unused. Anyhow please
+     * pass a reference to the invoking class (usually <code>this</code>).
      * 
      * @param requestor
      *            Requestor, usually <code>this</code>.
@@ -383,20 +365,19 @@ public class SwingUtils {
         String result = null;
         try {
             result = (String) trans.getTransferData(DataFlavor.stringFlavor);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
         return result;
     }
 
     /**
      * Compute a {@link Dimension} that has the same aspect ratio as the first
-     * {@link Dimension}, but does not exceed any part of the second
-     * {@link Dimension}. The returned {@link Dimension} will also never be
-     * larger than the aspect {@link Dimension}.
+     * {@link Dimension}, but does not exceed any part of the second {@link Dimension}.
+     * The returned {@link Dimension} will also never be larger than the aspect
+     * {@link Dimension}.
      * <p>
-     * This method can be used to scale down images that are bigger than the
-     * displaying pane. Smaller images are not scaled up, though, but are
-     * keeping their original size.
+     * This method can be used to scale down images that are bigger than the displaying
+     * pane. Smaller images are not scaled up, though, but are keeping their original
+     * size.
      * 
      * @param aspect
      *            {@link Dimension} to keep the aspect ratio
@@ -408,8 +389,7 @@ public class SwingUtils {
     public static Dimension scaleAspect(Dimension aspect, Dimension max) {
         final Dimension dim = new Dimension(0, 0);
 
-        if (aspect.width > 0 && aspect.height > 0 && max.width > 0
-                && max.height > 0) {
+        if (aspect.width > 0 && aspect.height > 0 && max.width > 0 && max.height > 0) {
             dim.width = aspect.width;
             dim.height = aspect.height;
 
@@ -429,12 +409,12 @@ public class SwingUtils {
 
     /**
      * Compute a {@link Dimension} that has the same aspect ratio as the first
-     * {@link Dimension}, but uses as much of the maximum {@link Dimension} as
-     * possible, without exceeding it. The returned {@link Dimension} may be
-     * larger than the aspect {@link Dimension}.
+     * {@link Dimension}, but uses as much of the maximum {@link Dimension} as possible,
+     * without exceeding it. The returned {@link Dimension} may be larger than the aspect
+     * {@link Dimension}.
      * <p>
-     * This method can be used to scale images to fit into the maximum
-     * dimensions at the best.
+     * This method can be used to scale images to fit into the maximum dimensions at the
+     * best.
      * 
      * @param aspect
      *            {@link Dimension} to keep the aspect ratio
@@ -446,8 +426,7 @@ public class SwingUtils {
     public static Dimension scaleAspectMax(Dimension aspect, Dimension max) {
         Dimension maxCopy = new Dimension(0, 0);
 
-        if (aspect.width > 0 && aspect.height > 0 && max.width > 0
-                && max.height > 0) {
+        if (aspect.width > 0 && aspect.height > 0 && max.width > 0 && max.height > 0) {
             if (aspect.width > aspect.height) {
                 // Landscape
 

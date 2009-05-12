@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import javax.swing.*;
@@ -23,13 +24,13 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * This is a headline to be used in dialogs etc. It shows a big title to the
- * left, and optionally a nice icon to the right and a description below the
- * title. The headline is colored in a gradient, starting in a certain color to
- * the left, and going to the current background color to the right.
+ * This is a headline to be used in dialogs etc. It shows a big title to the left, and
+ * optionally a nice icon to the right and a description below the title. The headline is
+ * colored in a gradient, starting in a certain color to the left, and going to the
+ * current background color to the right.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHeadline.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JHeadline.java 302 2009-05-12 22:19:11Z shred $
  * @since R8
  */
 public class JHeadline extends JGradientPanel {
@@ -47,8 +48,8 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Create a new JHeadline with the given title. {@link Color#GRAY} is used
-     * as default color.
+     * Create a new JHeadline with the given title. {@link Color#GRAY} is used as default
+     * color.
      * 
      * @param title
      *            Title to be used
@@ -58,8 +59,8 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Create a new JHeadline with the given title and icon. {@link Color#GRAY}
-     * is used as default color.
+     * Create a new JHeadline with the given title and icon. {@link Color#GRAY} is used as
+     * default color.
      * 
      * @param title
      *            Title to be used
@@ -71,8 +72,8 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Create a new JHeadline with the given title, description, icon.
-     * {@link Color#GRAY} is used as default color.
+     * Create a new JHeadline with the given title, description, icon. {@link Color#GRAY}
+     * is used as default color.
      * 
      * @param title
      *            Title to be used
@@ -135,9 +136,8 @@ public class JHeadline extends JGradientPanel {
      *            new title text, must not be <code>null</code>.
      */
     public void setTitle(String title) {
-        if (title == null)
-            throw new NullPointerException("title must not be null");
-        
+        if (title == null) throw new NullPointerException("title must not be null");
+
         jlTitle.setText(title);
     }
 
@@ -171,10 +171,8 @@ public class JHeadline extends JGradientPanel {
      * @return Current description, or <code>null</code> if there is none.
      */
     public String getDescription() {
-        if (jlDesc.isVisible())
-            return jlDesc.getText();
-        else
-            return null;
+        if (jlDesc.isVisible()) return jlDesc.getText();
+        else return null;
     }
 
     /**
@@ -198,16 +196,14 @@ public class JHeadline extends JGradientPanel {
      * @return Current {@link Icon}, or <code>null</code> if there is none.
      */
     public Icon getIcon() {
-        if (jlIcon.isVisible())
-            return jlIcon.getIcon();
-        else
-            return null;
+        if (jlIcon.isVisible()) return jlIcon.getIcon();
+        else return null;
     }
 
     /**
-     * Set the text color. The title will be shown in this color. The
-     * description will be shown in the same color, but with an alpha value of
-     * 200, so the background gradient will shine through a little.
+     * Set the text color. The title will be shown in this color. The description will be
+     * shown in the same color, but with an alpha value of 200, so the background gradient
+     * will shine through a little.
      * 
      * @param fg
      *            New foreground {@link Color}

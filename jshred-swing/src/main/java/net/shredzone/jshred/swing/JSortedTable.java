@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import javax.swing.*;
@@ -23,20 +24,19 @@ import javax.swing.table.*;
 import java.awt.Rectangle;
 
 /**
- * This is a {@link JTable} which allows the user to sort each column in
- * ascending or descending order. Everything you have to do to is just to use
- * the {@link JSortedTable} instead of a {@link JTable}, and pass a
- * {@link SortableTableModel} to it.
+ * This is a {@link JTable} which allows the user to sort each column in ascending or
+ * descending order. Everything you have to do to is just to use the {@link JSortedTable}
+ * instead of a {@link JTable}, and pass a {@link SortableTableModel} to it.
  * <p>
  * If you want to use a classic {@link TableModel}, you can wrap it using the
  * {@link SortableTableModelProxy} object, and then pass the
  * {@link SortableTableModelProxy} to this class.
  * <p>
- * Starting with Java 1.6, Swing brings an own implementation for sortable
- * table, which may be preferable to this solution.
+ * Starting with Java 1.6, Swing brings an own implementation for sortable table, which
+ * may be preferable to this solution.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JSortedTable.java 302 2009-05-12 22:19:11Z shred $
  */
 public class JSortedTable extends JTable {
     private static final long serialVersionUID = 3256728372624110384L;
@@ -59,9 +59,8 @@ public class JSortedTable extends JTable {
     }
 
     /**
-     * Set the {@link TableModel} to be used. You must pass a
-     * {@link SortableTableModel} here, otherwise you'll get an
-     * {@link InvalidArgumentException}.
+     * Set the {@link TableModel} to be used. You must pass a {@link SortableTableModel}
+     * here, otherwise you'll get an {@link InvalidArgumentException}.
      * 
      * @param model
      *            A {@link SortableTableModel}
@@ -95,13 +94,12 @@ public class JSortedTable extends JTable {
     }
 
     /**
-     * Sort by a certain column. If this is the currently sorted column, the
-     * sort order will be reversed. Otherwise the given column will be sorted
-     * ascendingly. This method simulates a mouse click on the appropriate
-     * column header.
+     * Sort by a certain column. If this is the currently sorted column, the sort order
+     * will be reversed. Otherwise the given column will be sorted ascendingly. This
+     * method simulates a mouse click on the appropriate column header.
      * <p>
-     * Since R11, the selection will be kept if the
-     * {@link SortableTableModelProxy} is used.
+     * Since R11, the selection will be kept if the {@link SortableTableModelProxy} is
+     * used.
      * 
      * @param columnIndex
      *            Column to be sorted.
@@ -111,10 +109,9 @@ public class JSortedTable extends JTable {
         // --- Sorting allowed? ---
         if (getModel() instanceof ExtendedSortableTableModel) {
             ExtendedSortableTableModel ext = (ExtendedSortableTableModel) getModel();
-            if (!ext.isColumnSortable(columnIndex))
-                return;
+            if (!ext.isColumnSortable(columnIndex)) return;
         }
-      
+
         // --- Proxy? ---
         final SortableTableModel model = (SortableTableModel) getModel();
         SortableTableModelProxy proxy = null;
@@ -165,8 +162,7 @@ public class JSortedTable extends JTable {
     }
 
     /**
-     * Get the default {@link TableModel}. It is always a
-     * {@link SortableTableModel}!
+     * Get the default {@link TableModel}. It is always a {@link SortableTableModel}!
      * 
      * @return {@link SortableTableModel}
      */

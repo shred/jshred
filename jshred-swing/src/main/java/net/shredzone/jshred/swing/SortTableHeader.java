@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.*;
@@ -29,7 +30,7 @@ import java.io.Serializable;
  * {@link SortableTableModel} and allows to select columns to be sorted.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: SortTableHeader.java 302 2009-05-12 22:19:11Z shred $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 3256728372658124082L;
@@ -58,7 +59,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         super(cm);
 
         // --- Initialize the default iconset ---
-        iconAsc  = new ArrowIcon(7, 6, SwingConstants.SOUTH);
+        iconAsc = new ArrowIcon(7, 6, SwingConstants.SOUTH);
         iconDesc = new ArrowIcon(7, 6, SwingConstants.NORTH);
 
         // --- Set the default renderer ---
@@ -152,16 +153,16 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
                 int column = table.convertColumnIndexToModel(pressedIndex);
 
                 do {
-                    if (! sortingAllowed) break;
-                  
+                    if (!sortingAllowed) break;
+
                     if (column < 0 || column >= columnModel.getColumnCount()) break;
-                  
+
                     if (model instanceof ExtendedSortableTableModel) {
-                        if (! ((ExtendedSortableTableModel) model).isColumnSortable(column)) {
+                        if (!((ExtendedSortableTableModel) model).isColumnSortable(column)) {
                             break;
                         }
                     }
-                  
+
                     ((JSortedTable) table).sortByColumn(column);
                 } while (false);
             }
@@ -199,8 +200,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
-    public void mouseClicked(MouseEvent e) {
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     /**
      * Internal MouseListener implementation, do not use!
@@ -208,8 +208,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
-    public void mouseEntered(MouseEvent e) {
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     /**
      * Internal MouseListener implementation, do not use!
@@ -217,24 +216,20 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
-    public void mouseExited(MouseEvent e) {
-    }
-
-/* -------------------------------------------------------------------- */
+    public void mouseExited(MouseEvent e) {}
 
     /**
-     * This is a TableCellRenderer that shows the selection and sorting state of
-     * each column, according to the {@link SortTableHeader}.
+     * This is a TableCellRenderer that shows the selection and sorting state of each
+     * column, according to the {@link SortTableHeader}.
      */
     private class SortTableCellRenderer implements TableCellRenderer, Serializable {
         private static final long serialVersionUID = 3256437023551468342L;
         private TableCellRenderer parent;
 
         /**
-         * Create a new SortTableCellRenderer. A parent
-         * {@link TableCellRenderer} is given, its result will be manipulated.
-         * Usually you will pass the {@link JTableHeader}'s default
-         * {@link TableCellRenderer} here.
+         * Create a new SortTableCellRenderer. A parent {@link TableCellRenderer} is
+         * given, its result will be manipulated. Usually you will pass the
+         * {@link JTableHeader}'s default {@link TableCellRenderer} here.
          * 
          * @param parent
          *            Parent {@link TableCellRenderer}
@@ -260,12 +255,9 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
          *            Column
          * @return A component that renders the table cell
          */
-        public Component getTableCellRendererComponent(JTable table,
-                Object value, boolean isSelected, boolean hasFocus, int row,
-                int column) {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             // --- Get the original Component ---
-            Component c = parent.getTableCellRendererComponent(table, value,
-                    isSelected, hasFocus, row, column);
+            Component c = parent.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
             // --- It should be a JLabel ---
             if (c instanceof JLabel) {

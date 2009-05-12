@@ -1,33 +1,34 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.*;
 import java.awt.image.*;
 
 /**
- * This filter is brighting or darking an image, e.g. for mouse over effects.
- * The brightness factor is multiplied to the image, so black will stay black.
- * Transparency is honored.
+ * This filter is brighting or darking an image, e.g. for mouse over effects. The
+ * brightness factor is multiplied to the image, so black will stay black. Transparency is
+ * honored.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: BrightFilter.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: BrightFilter.java 302 2009-05-12 22:19:11Z shred $
  */
 public class BrightFilter extends RGBImageFilter {
     private int p;
@@ -36,8 +37,8 @@ public class BrightFilter extends RGBImageFilter {
     private int blueMul;
 
     /**
-     * Creates a brightened {@link Image}. A default factor of 40 and the
-     * brightening color {@link Color#WHITE} will be used.
+     * Creates a brightened {@link Image}. A default factor of 40 and the brightening
+     * color {@link Color#WHITE} will be used.
      * 
      * @param i
      *            Source {@link Image}
@@ -62,8 +63,8 @@ public class BrightFilter extends RGBImageFilter {
     }
 
     /**
-     * Creates a BrightFilter. The given factor and the given brightening color
-     * will be used.
+     * Creates a BrightFilter. The given factor and the given brightening color will be
+     * used.
      * 
      * @param p
      *            Brightener factor
@@ -93,7 +94,7 @@ public class BrightFilter extends RGBImageFilter {
      * @return brightened RGB value
      */
     @Override
-	public int filterRGB(int x, int y, int rgb) {
+    public int filterRGB(int x, int y, int rgb) {
         // --- Decompose ---
         int red = (rgb >> 16) & 0xFF;
         int green = (rgb >> 8) & 0xFF;

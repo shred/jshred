@@ -1,22 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
+ * Copyright (C) 2009 Richard "Shred" Körber
  *   http://jshred.shredzone.org
- *-----------------------------------------------------------------------
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.Component;
@@ -27,11 +27,11 @@ import javax.swing.Icon;
 import javax.swing.SwingConstants;
 
 /**
- * This is an icon of a little arrow pointing in one of the four directions,
- * either solid or outlined.
+ * This is an icon of a little arrow pointing in one of the four directions, either solid
+ * or outlined.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: ArrowIcon.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: ArrowIcon.java 302 2009-05-12 22:19:11Z shred $
  * @since R12
  */
 public class ArrowIcon implements Icon, Serializable {
@@ -49,8 +49,8 @@ public class ArrowIcon implements Icon, Serializable {
      * @param h
      *            Arrow height
      * @param direction
-     *            Direction pointing at: one of {@link SwingConstants}' NORTH,
-     *            SOUTH, EAST or WEST.
+     *            Direction pointing at: one of {@link SwingConstants}' NORTH, SOUTH, EAST
+     *            or WEST.
      */
     public ArrowIcon(int w, int h, int direction) {
         this(w, h, direction, true);
@@ -64,16 +64,16 @@ public class ArrowIcon implements Icon, Serializable {
      * @param h
      *            Arrow height
      * @param direction
-     *            Direction pointing at: one of {@link SwingConstants}' NORTH,
-     *            SOUTH, EAST or WEST.
+     *            Direction pointing at: one of {@link SwingConstants}' NORTH, SOUTH, EAST
+     *            or WEST.
      * @param solid
      *            true: Solid, false: Outline
      */
     public ArrowIcon(int w, int h, int direction, boolean solid) {
         if (direction != SwingConstants.NORTH
-                && direction != SwingConstants.SOUTH
-                && direction != SwingConstants.EAST
-                && direction != SwingConstants.WEST) {
+            && direction != SwingConstants.SOUTH
+            && direction != SwingConstants.EAST
+            && direction != SwingConstants.WEST) {
             throw new IllegalArgumentException("Unknown direction");
         }
 
@@ -96,8 +96,8 @@ public class ArrowIcon implements Icon, Serializable {
      *            Y position
      */
     public void paintIcon(Component c, Graphics g, int x, int y) {
-        final int w = width - 1;
-        final int h = height - 1;
+        final int w  = width - 1;
+        final int h  = height - 1;
         final int wh = w / 2;
         final int hh = h / 2;
 

@@ -1,33 +1,33 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
 /**
- * This is just a mere empty {@link ListModel} which will never have any
- * entries.
+ * This is just a mere empty {@link ListModel} which will never have any entries.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R7
- * @version $Id: EmptyListModel.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: EmptyListModel.java 302 2009-05-12 22:19:11Z shred $
  */
 public final class EmptyListModel implements ListModel {
 
@@ -42,8 +42,8 @@ public final class EmptyListModel implements ListModel {
     }
 
     /**
-     * Get an element. Should never be called since the list is empty. Will
-     * always return null.
+     * Get an element. Should never be called since the list is empty. Will always return
+     * null.
      * 
      * @param index
      *            Index
@@ -55,25 +55,23 @@ public final class EmptyListModel implements ListModel {
     }
 
     /**
-     * Add a listener. Since this list will always be empty, the listeners are
-     * just ignored.
+     * Add a listener. Since this list will always be empty, the listeners are just
+     * ignored.
      * 
      * @param l
      *            {@link ListDataListener} to be ignored.
      * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
      */
-    public void addListDataListener(ListDataListener l) {
-    }
+    public void addListDataListener(ListDataListener l) {}
 
     /**
-     * Remove a listener. Since this list will always be empty, the listeners
-     * are just ignored.
+     * Remove a listener. Since this list will always be empty, the listeners are just
+     * ignored.
      * 
      * @param l
      *            {@link ListDataListener} to be ignored.
      * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
      */
-    public void removeListDataListener(ListDataListener l) {
-    }
+    public void removeListDataListener(ListDataListener l) {}
 
 }

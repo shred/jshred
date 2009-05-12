@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.BorderLayout;
@@ -34,19 +35,18 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 /**
- * This is some kind of {@link JTextField} with a {@link JComboBox}. Text can be
- * entered freely into the text field. The class keeps a history of recently
- * entered texts, which can be selected in the {@link JComboBox}. The history is
- * optionally stored as {@link Preferences} if a unique name is given to the
- * constructor.
+ * This is some kind of {@link JTextField} with a {@link JComboBox}. Text can be entered
+ * freely into the text field. The class keeps a history of recently entered texts, which
+ * can be selected in the {@link JComboBox}. The history is optionally stored as
+ * {@link Preferences} if a unique name is given to the constructor.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHistoryTextField.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JHistoryTextField.java 302 2009-05-12 22:19:11Z shred $
  * @since R6
  */
 public class JHistoryTextField extends JComponent {
     private static final long serialVersionUID = 3688784791113577272L;
-    
+
     private JComboBox jCombo;
     private int histSize;
     private boolean autoSelect = true;
@@ -54,19 +54,19 @@ public class JHistoryTextField extends JComponent {
     private final ListenerManager<ActionListener> listeners = new ListenerManager<ActionListener>();
 
     /**
-     * Create a new JHistoryTextField. The history will only be stored during
-     * the lifetime of this object.
+     * Create a new JHistoryTextField. The history will only be stored during the lifetime
+     * of this object.
      */
     public JHistoryTextField() {
         this(null);
     }
 
     /**
-     * Create a new JHistoryTextField. The history will be persistently stored
-     * using {@link Preferences}. You must provide a unique name for the history
-     * to be stored. It is strongly recommended to use the Java notation for
-     * unique names, as used in package names (i.e. your domain name in reverse
-     * notation, following a unique string of your choice).
+     * Create a new JHistoryTextField. The history will be persistently stored using
+     * {@link Preferences}. You must provide a unique name for the history to be stored.
+     * It is strongly recommended to use the Java notation for unique names, as used in
+     * package names (i.e. your domain name in reverse notation, following a unique string
+     * of your choice).
      * 
      * @param name
      *            Name which is used to persist the history.
@@ -81,7 +81,7 @@ public class JHistoryTextField extends JComponent {
         add(jCombo, BorderLayout.CENTER);
 
         // --- Set the default history size ---
-        setHistorySize(10);                 // Default is 10 entries
+        setHistorySize(10); // Default is 10 entries
 
         // --- Recall the history ---
         if (nodeName != null) {
@@ -104,28 +104,26 @@ public class JHistoryTextField extends JComponent {
                 addHistory(newtext);
 
                 // --- Mark all the text ---
-                if (autoSelect)
-                    jCombo.getEditor().selectAll();
+                if (autoSelect) jCombo.getEditor().selectAll();
 
                 // --- Notify everyone about a new text ---
                 final ActionEvent e2 = new ActionEvent(JHistoryTextField.this,
-                        ActionEvent.ACTION_PERFORMED, "textChanged",
-                        e.getWhen(), e.getModifiers());
+                                ActionEvent.ACTION_PERFORMED, "textChanged", e.getWhen(),
+                                e.getModifiers());
                 fireActionEvent(e2);
             }
         });
     }
 
     /**
-     * Set the maximum history size. If a new entry would exceed the limit, the
-     * least recently used entry will be removed from the history.
+     * Set the maximum history size. If a new entry would exceed the limit, the least
+     * recently used entry will be removed from the history.
      * 
      * @param size
      *            New history size
      */
     public void setHistorySize(int size) {
-        if (histSize < 0)
-            throw new IllegalArgumentException("size must be positive");
+        if (histSize < 0) throw new IllegalArgumentException("size must be positive");
 
         // --- Remove entries to reach the size ---
         synchronized (jCombo) {
@@ -153,9 +151,9 @@ public class JHistoryTextField extends JComponent {
     }
 
     /**
-     * Set the auto selection mode. If enabled, the entire text field will be
-     * marked after the user pressed return, so a new text entered will
-     * automatically replace the old one. This mode is turned on by default.
+     * Set the auto selection mode. If enabled, the entire text field will be marked after
+     * the user pressed return, so a new text entered will automatically replace the old
+     * one. This mode is turned on by default.
      * 
      * @param as
      *            Auto selection mode.
@@ -174,8 +172,8 @@ public class JHistoryTextField extends JComponent {
     }
 
     /**
-     * Set the text to be shown in this component. The text will also be added
-     * to the history.
+     * Set the text to be shown in this component. The text will also be added to the
+     * history.
      * 
      * @param text
      *            Text to be set.
@@ -199,17 +197,15 @@ public class JHistoryTextField extends JComponent {
     }
 
     /**
-     * Add a text to the top of the history. If the text was already within the
-     * history, it is moved to the top. After that the text will be shown in the
-     * component. The current history will be persisted if a name was given to
-     * the constructor.
+     * Add a text to the top of the history. If the text was already within the history,
+     * it is moved to the top. After that the text will be shown in the component. The
+     * current history will be persisted if a name was given to the constructor.
      * 
      * @param text
      *            Text to be added to the history.
      */
     protected void addHistory(String text) {
-        if (text == null || text.equals(""))
-            return;
+        if (text == null || text.equals("")) return;
 
         synchronized (jCombo) {
             // --- First look if the entry already exists ---
@@ -245,8 +241,8 @@ public class JHistoryTextField extends JComponent {
     }
 
     /**
-     * Get a {@link List} of the current history. The list is unmodifiable and
-     * sorted from the most recent to the least recent history entry.
+     * Get a {@link List} of the current history. The list is unmodifiable and sorted from
+     * the most recent to the least recent history entry.
      * 
      * @return {@link List} of all history entries
      */
@@ -301,8 +297,7 @@ public class JHistoryTextField extends JComponent {
      * @throws BackingStoreException
      *             if it was not possible to store the history.
      */
-    protected void storeHistory(String name)
-    throws BackingStoreException {
+    protected void storeHistory(String name) throws BackingStoreException {
         Preferences prefs = Preferences.userNodeForPackage(this.getClass());
         prefs = prefs.node(name);
 
@@ -319,8 +314,8 @@ public class JHistoryTextField extends JComponent {
     }
 
     /**
-     * Recall the history from preferences, using the given name. The current
-     * history will be replaced.
+     * Recall the history from preferences, using the given name. The current history will
+     * be replaced.
      * 
      * @param name
      *            Name the history was filed to.
@@ -346,8 +341,8 @@ public class JHistoryTextField extends JComponent {
     }
 
     /**
-     * Add an {@link ActionListener}. It will be invoked if a new text has been
-     * entered. If it was already added, nothing will happen.
+     * Add an {@link ActionListener}. It will be invoked if a new text has been entered.
+     * If it was already added, nothing will happen.
      * 
      * @param l
      *            ActionListener to be added.
@@ -377,8 +372,6 @@ public class JHistoryTextField extends JComponent {
             l.actionPerformed(e);
         }
     }
-
-/* -------------------------------------------------------------------------- */
 
     /**
      * This comparator compares two integer values of a string representation.

@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.*;
@@ -23,16 +24,15 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /**
- * A JLabelGroup is a {@link JLabel} set left to a {@link Component}. At RTL
- * systems, the label is set to the right.
+ * A JLabelGroup is a {@link JLabel} set left to a {@link Component}. At RTL systems, the
+ * label is set to the right.
  * <p>
- * Multiple JLabelGroup can be connected together. On the last instance of this
- * chain, {@link #rearrange()} will be invoked, to rearrange all {@link JLabel}s
- * within this chain to the same, maximum width. This will result into a nicely
- * aligned layout.
+ * Multiple JLabelGroup can be connected together. On the last instance of this chain,
+ * {@link #rearrange()} will be invoked, to rearrange all {@link JLabel}s within this
+ * chain to the same, maximum width. This will result into a nicely aligned layout.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JLabelGroup.java 302 2009-05-12 22:19:11Z shred $
  */
 public class JLabelGroup extends JPanel {
     private static final long serialVersionUID = 4120855451547482167L;
@@ -65,8 +65,7 @@ public class JLabelGroup extends JPanel {
     public JLabelGroup(Component c, String text, JLabelGroup pred) {
         this(c, createDefaultLabel(SwingUtils.getMenuName(text), null), pred);
         Character keycode = SwingUtils.getMenuShortcut(text);
-        if (keycode != null)
-            setMnemonic(keycode.charValue());
+        if (keycode != null) setMnemonic(keycode.charValue());
     }
 
     /**
@@ -86,8 +85,8 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Creates a new JLabelGroup label with a given label {@link JComponent}.
-     * Use this if you want to use a different label.
+     * Creates a new JLabelGroup label with a given label {@link JComponent}. Use this if
+     * you want to use a different label.
      * 
      * @param c
      *            {@link Component} to be labelled
@@ -112,8 +111,8 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Calculates the maximum label with of a JLabelGroup chain.
-     * {@link #rearrange()} will use this method to compute the width.
+     * Calculates the maximum label with of a JLabelGroup chain. {@link #rearrange()} will
+     * use this method to compute the width.
      * 
      * @return Maximum width
      */
@@ -126,8 +125,8 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Set the vertical alignment of the label, using {@link SwingConstants}.
-     * Default is {@link SwingConstants#CENTER}.
+     * Set the vertical alignment of the label, using {@link SwingConstants}. Default is
+     * {@link SwingConstants#CENTER}.
      * 
      * @param pos
      *            Alignment: TOP, CENTER or BOTTOM.
@@ -155,9 +154,9 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Recursively set the minimum width of this JLabelGroup chain. This method
-     * must be invoked on the <em>last</em> JLabelGroup of the chain. It is used
-     * by {@link #rearrange()}.
+     * Recursively set the minimum width of this JLabelGroup chain. This method must be
+     * invoked on the <em>last</em> JLabelGroup of the chain. It is used by
+     * {@link #rearrange()}.
      * 
      * @param width
      *            New minimum width
@@ -166,18 +165,17 @@ public class JLabelGroup extends JPanel {
         Dimension dim = new Dimension(width, label.getMinimumSize().height);
         label.setMinimumSize(dim);
         label.setPreferredSize(dim);
-        if (pred != null)
-            pred.setMinimumWidth(width);
+        if (pred != null) pred.setMinimumWidth(width);
         invalidate();
     }
 
     /**
-     * Rearrange the JLabelGroup chain. All labels in this chain are set to the
-     * width of the broadest label. This method must be invoked on the
-     * <em>last</em> JLabelGroup of a chain!
+     * Rearrange the JLabelGroup chain. All labels in this chain are set to the width of
+     * the broadest label. This method must be invoked on the <em>last</em> JLabelGroup of
+     * a chain!
      * <p>
-     * If further JLabelGroup objects are added later, this method must be
-     * invoked again, on the new last element of the chain.
+     * If further JLabelGroup objects are added later, this method must be invoked again,
+     * on the new last element of the chain.
      * <p>
      * All JLabelGroups are regarded, even if they are currently invisible.
      */
@@ -210,8 +208,8 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Get the {@link JComponent} that is used as a label for this JLabelGroup.
-     * Usually this is a {@link JLabel}, but you should not rely on this!
+     * Get the {@link JComponent} that is used as a label for this JLabelGroup. Usually
+     * this is a {@link JLabel}, but you should not rely on this!
      * 
      * @return {@link JComponent} used as a label.
      * @since R5

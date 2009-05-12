@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.util;
 
 import java.util.ArrayList;
@@ -25,37 +26,33 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * A SortedList is a {@link List} which sorts its elements according to a
- * certain order. The natural sorting order of the elements is used unless a
- * {@link Comparator} was given in the constructor.
+ * A SortedList is a {@link List} which sorts its elements according to a certain order.
+ * The natural sorting order of the elements is used unless a {@link Comparator} was given
+ * in the constructor.
  * <p>
- * The SortedList does not allow <code>null</code> elements or duplicate
- * elements. An element is considered equal if {@link Object#equals(Object)}
- * returns <code>true</code>.
+ * The SortedList does not allow <code>null</code> elements or duplicate elements. An
+ * element is considered equal if {@link Object#equals(Object)} returns <code>true</code>.
  * <p>
  * Note that a SortedList is not synchronized! Use
- * {@link Collections#synchronizedList(java.util.List)} if you need
- * synchronized access.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @since   R7
- * @version $Id: SortedList.java 256 2009-02-10 22:56:35Z shred $
+ * {@link Collections#synchronizedList(java.util.List)} if you need synchronized access.
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @since R7
+ * @version $Id: SortedList.java 302 2009-05-12 22:19:11Z shred $
  */
 public class SortedList<T> extends ArrayList<T> {
-  private static final long serialVersionUID = 3257003263499972657L;
+    private static final long serialVersionUID = 3257003263499972657L;
     private Comparator<T> comparator = null; // Comparator to be used
 
     /**
      * Create an empty SortedList with natural order.
      */
-    public SortedList() {
-    }
+    public SortedList() {}
 
     /**
-     * Create a new SortedList and initialize it with the given
-     * {@link Collection}. The collection entries are inserted as they are
-     * found in the {@link Collection}, and will be properly sorted in this
-     * list even if the {@link Collection} was unsorted.
+     * Create a new SortedList and initialize it with the given {@link Collection}. The
+     * collection entries are inserted as they are found in the {@link Collection}, and
+     * will be properly sorted in this list even if the {@link Collection} was unsorted.
      * 
      * @param col
      *            {@link Collection} to initialize the SortedList with.
@@ -65,9 +62,9 @@ public class SortedList<T> extends ArrayList<T> {
     }
 
     /**
-     * Create a SortedList that uses the given {@link Comparator} instead of the
-     * element's natural order. Note that once set, a {@link Comparator} cannot
-     * be changed or removed.
+     * Create a SortedList that uses the given {@link Comparator} instead of the element's
+     * natural order. Note that once set, a {@link Comparator} cannot be changed or
+     * removed.
      * 
      * @param c
      *            Comparator to be used
@@ -77,8 +74,8 @@ public class SortedList<T> extends ArrayList<T> {
     }
 
     /**
-     * Get the {@link Comparator} used for comparison, or null if natural order
-     * is to be used.
+     * Get the {@link Comparator} used for comparison, or null if natural order is to be
+     * used.
      * 
      * @return Comparator or null
      */
@@ -87,8 +84,8 @@ public class SortedList<T> extends ArrayList<T> {
     }
 
     /**
-     * Add an element to a certain index of this list. This method is not
-     * permitted in a SortedList and thus throws an exception.
+     * Add an element to a certain index of this list. This method is not permitted in a
+     * SortedList and thus throws an exception.
      * 
      * @param index
      *            Index to add an element to
@@ -96,16 +93,15 @@ public class SortedList<T> extends ArrayList<T> {
      *            Element to be added
      */
     @Override
-	public void add(int index, T element) {
+    public void add(int index, T element) {
         throw new UnsupportedOperationException("not supported");
     }
 
     /**
-     * Add an element to the SortedList. The element will be sorted to its
-     * proper position. If an equal element has already been added to this
-     * SortedList, it will be replaced by this element. A <code>null</code>
-     * element is not permitted in a SortedList, and will throw a
-     * {@link NullPointerException}.
+     * Add an element to the SortedList. The element will be sorted to its proper
+     * position. If an equal element has already been added to this SortedList, it will be
+     * replaced by this element. A <code>null</code> element is not permitted in a
+     * SortedList, and will throw a {@link NullPointerException}.
      * 
      * @param elem
      *            Element to be added.
@@ -114,10 +110,9 @@ public class SortedList<T> extends ArrayList<T> {
      * @see java.util.Collection#add(java.lang.Object)
      */
     @Override
-	public boolean add(T elem) {
+    public boolean add(T elem) {
         // --- Assert an element ---
-        if (elem == null)
-            throw new NullPointerException("null is not permitted");
+        if (elem == null) throw new NullPointerException("null is not permitted");
 
         // --- Find its position in the list ---
         int ix = approximate(elem);
@@ -139,9 +134,8 @@ public class SortedList<T> extends ArrayList<T> {
     }
 
     /**
-     * Add all elements of a {@link Collection} to the SortedList, starting at
-     * a certain index. This method is not permitted in a SortedList and thus
-     * throws an exception.
+     * Add all elements of a {@link Collection} to the SortedList, starting at a certain
+     * index. This method is not permitted in a SortedList and thus throws an exception.
      * 
      * @param index
      *            Starting index
@@ -150,14 +144,14 @@ public class SortedList<T> extends ArrayList<T> {
      * @return true if this list was changed
      */
     @Override
-	public boolean addAll(int index, Collection<? extends T> c) {
+    public boolean addAll(int index, Collection<? extends T> c) {
         throw new UnsupportedOperationException("not supported");
     }
 
     /**
-     * Add all elements of a {@link Collection} to the SortedList. The entries
-     * are inserted as they are found in the {@link Collection}, and sorted to
-     * their proper position.
+     * Add all elements of a {@link Collection} to the SortedList. The entries are
+     * inserted as they are found in the {@link Collection}, and sorted to their proper
+     * position.
      * 
      * @param c
      *            Collection to be added.
@@ -165,7 +159,7 @@ public class SortedList<T> extends ArrayList<T> {
      * @see java.util.Collection#addAll(java.util.Collection)
      */
     @Override
-	public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(Collection<? extends T> c) {
         for (T elem : c) {
             add(elem);
         }
@@ -182,24 +176,24 @@ public class SortedList<T> extends ArrayList<T> {
      * @return The previous element at the index.
      */
     @Override
-	public T set(int index, T element) {
+    public T set(int index, T element) {
         throw new UnsupportedOperationException("not supported");
     }
 
     /**
-     * Check if a SortedList contains an element. The list contains an element
-     * if the given element's {@link T#equals(Object)} returns <code>true</code>
-     * to one of the elements in this list.
+     * Check if a SortedList contains an element. The list contains an element if the
+     * given element's {@link T#equals(Object)} returns <code>true</code> to one of the
+     * elements in this list.
      * 
      * @param elem
      *            Element to be checked
      * @return true if the list contains the element
      */
     @Override
-	@SuppressWarnings("unchecked")  // ClassCastException is intentional
+    @SuppressWarnings("unchecked")
+    // ClassCastException is intentional
     public boolean contains(Object elem) {
-        if (elem == null)
-            throw new NullPointerException("null is not permitted");
+        if (elem == null) throw new NullPointerException("null is not permitted");
 
         int ix = approximate((T) elem);
         return (ix < size() && compare(get(ix), (T) elem) == 0);
@@ -213,39 +207,36 @@ public class SortedList<T> extends ArrayList<T> {
      * @return index of that element, or -1 if it was not found
      */
     @Override
-	@SuppressWarnings("unchecked")  // ClassCastException is intentional
+    @SuppressWarnings("unchecked")
+    // ClassCastException is intentional
     public int indexOf(Object elem) {
-        if (elem == null)
-            throw new NullPointerException("null is not permitted");
+        if (elem == null) throw new NullPointerException("null is not permitted");
 
         int ix = approximate((T) elem);
-        if (ix < size() && compare(get(ix), (T) elem) == 0)
-            return ix;
-        else
-            return -1;
+        if (ix < size() && compare(get(ix), (T) elem) == 0) return ix;
+        else return -1;
     }
 
     /**
-     * Get the index of the last occurance of an element. Since there are no
-     * duplicate entries in a SortedList, the result is the same as from
-     * {@link #indexOf(Object)}.
+     * Get the index of the last occurance of an element. Since there are no duplicate
+     * entries in a SortedList, the result is the same as from {@link #indexOf(Object)}.
      * 
      * @param elem
      *            Element to be found
      * @return index of that element, or -1 if it was not found
      */
     @Override
-	public int lastIndexOf(Object elem) {
+    public int lastIndexOf(Object elem) {
         return indexOf(elem);
     }
 
     /**
-     * Approximate the position of the given element in the list. The element at
-     * the returned index is either equal to the given element, or it is the next
-     * higher element. This would be the insert index for the element passed in.
+     * Approximate the position of the given element in the list. The element at the
+     * returned index is either equal to the given element, or it is the next higher
+     * element. This would be the insert index for the element passed in.
      * <p>
-     * NOTE: The returned index will be size() if the given element is higher
-     * than all current elements in the list.
+     * NOTE: The returned index will be size() if the given element is higher than all
+     * current elements in the list.
      * 
      * @param elem
      *            Element to approximate
@@ -254,13 +245,11 @@ public class SortedList<T> extends ArrayList<T> {
      */
     private int approximate(T elem) {
         // --- Empty list will always return 0 ---
-        if (isEmpty())
-            return 0;
+        if (isEmpty()) return 0;
 
         // --- Check if o is higher than the last object ---
         int size = size();
-        if (compare(get(size - 1), elem) < 0)
-            return size;
+        if (compare(get(size - 1), elem) < 0) return size;
 
         // --- Find the position ---
         int min = 0;
@@ -288,32 +277,32 @@ public class SortedList<T> extends ArrayList<T> {
             }
         }
 
-        if (compare(get(current), elem) < 0)
-            current += 1;
+        if (compare(get(current), elem) < 0) current += 1;
 
         return current;
     }
 
     /**
-     * Compares two elements. If a comparator was set, it is used for comparison.
-     * If none was set, the natural order of the objects will be compared.
+     * Compares two elements. If a comparator was set, it is used for comparison. If none
+     * was set, the natural order of the objects will be compared.
      * 
      * @param cmp
      *            Object 1
      * @param cmp2
      *            Object 2
-     * @return negative if cmp is less than cmp2, positive is cmp is greater
-     *         than cmp2, zero if cmp is equal to cmp2.
+     * @return negative if cmp is less than cmp2, positive is cmp is greater than cmp2,
+     *         zero if cmp is equal to cmp2.
      * @throws ClassCastException
      *             if the two objects were not comparable.
      */
-    @SuppressWarnings("unchecked")  // A ClassCastException is intentional
+    @SuppressWarnings("unchecked")
+    // A ClassCastException is intentional
     private int compare(T cmp, T cmp2) {
         if (comparator != null) {
             return comparator.compare(cmp, cmp2);
         } else {
-            Comparable<T> co = (Comparable<T>) cmp;     // provoke a ClassCastException
-            return co.compareTo(cmp2);                  // if cmp is not a Comparable
+            Comparable<T> co = (Comparable<T>) cmp; // provoke a ClassCastException
+            return co.compareTo(cmp2); // if cmp is not a Comparable
         }
     }
 

@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.io;
 
 import java.io.FilterWriter;
@@ -28,32 +29,28 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * PhpSerializer is a {@link Writer} that is able to write out a Java object so
- * PHP's <code>unserialize()</code> function is able to read the result
- * into a PHP variable.
+ * PhpSerializer is a {@link Writer} that is able to write out a Java object so PHP's
+ * <code>unserialize()</code> function is able to read the result into a PHP variable.
  * <p>
- * The converter tries to find appropriate data types for conversion. The
- * basic data types are as well supported as arrays, collections and maps.
+ * The converter tries to find appropriate data types for conversion. The basic data types
+ * are as well supported as arrays, collections and maps.
  * <p>
- * Do not serialize more than one object, since more is not supported by
- * PHP. If you need to pass several objects, pack them into an array and
- * then serialize that array.
+ * Do not serialize more than one object, since more is not supported by PHP. If you need
+ * to pass several objects, pack them into an array and then serialize that array.
  * <p>
- * Note that Java Objects are not serialized in a manner that could be
- * fully restored on PHP side. Try to avoid sending pure Java Objects since
- * the result is unpredictable (in best case, it's just the
- * <code>toString()</code> result that is being serialized).
+ * Note that Java Objects are not serialized in a manner that could be fully restored on
+ * PHP side. Try to avoid sending pure Java Objects since the result is unpredictable (in
+ * best case, it's just the <code>toString()</code> result that is being serialized).
  * <p>
- * Recursive references to the same object (i.e. an array with an element
- * refering to that array) are not supported yet and will lead to a stack
- * overflow.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: PhpSerializer.java 256 2009-02-10 22:56:35Z shred $
- * @since   R14
+ * Recursive references to the same object (i.e. an array with an element refering to that
+ * array) are not supported yet and will lead to a stack overflow.
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @version $Id: PhpSerializer.java 302 2009-05-12 22:19:11Z shred $
+ * @since R14
  */
 public class PhpSerializer extends FilterWriter {
-  
+
     /**
      * Create a new PhpSerializer.
      * 
@@ -75,7 +72,7 @@ public class PhpSerializer extends FilterWriter {
         write(String.valueOf(i));
         write(";");
     }
-  
+
     /**
      * Write a long.
      * 
@@ -99,7 +96,7 @@ public class PhpSerializer extends FilterWriter {
         write(b ? "1" : "0");
         write(";");
     }
-  
+
     /**
      * Write a double.
      * 
@@ -111,7 +108,7 @@ public class PhpSerializer extends FilterWriter {
         write(String.valueOf(d));
         write(";");
     }
-  
+
     /**
      * Write a float.
      * 
@@ -121,7 +118,7 @@ public class PhpSerializer extends FilterWriter {
     public void serialize(float f) throws IOException {
         serialize((double) f);
     }
-  
+
     /**
      * Write a char
      * 
@@ -131,7 +128,7 @@ public class PhpSerializer extends FilterWriter {
     public void serialize(char c) throws IOException {
         serialize(String.valueOf(c));
     }
-  
+
     /**
      * Write a char array
      * 
@@ -174,10 +171,10 @@ public class PhpSerializer extends FilterWriter {
         }
     }
 
-  /**
-     * Serialize a {@link Number}. {@link BigDecimal} and {@link BigInteger} is
-     * supported, at least on the Java side. It is not known how PHP behaves
-     * when passing very large numbers.
+    /**
+     * Serialize a {@link Number}. {@link BigDecimal} and {@link BigInteger} is supported,
+     * at least on the Java side. It is not known how PHP behaves when passing very large
+     * numbers.
      * 
      * @param n
      *            {@link Number} to write, may be null
@@ -203,8 +200,8 @@ public class PhpSerializer extends FilterWriter {
     /**
      * Serialize an array. Each element of that array is serialized.
      * <p>
-     * Note that circular references cannot currently be serialized (e.g.
-     * the array itself must not be an element of that array).
+     * Note that circular references cannot currently be serialized (e.g. the array itself
+     * must not be an element of that array).
      * 
      * @param a
      *            Array to write, may be null
@@ -216,14 +213,14 @@ public class PhpSerializer extends FilterWriter {
             serialize(Arrays.asList(a));
         }
     }
-  
-  /**
-     * Serialize a {@link Collection}. The collection's iterator is used to
-     * serialize each entry of the {@link Collection}. On PHP side, an index
-     * array is created, with the index counting from 0.
+
+    /**
+     * Serialize a {@link Collection}. The collection's iterator is used to serialize each
+     * entry of the {@link Collection}. On PHP side, an index array is created, with the
+     * index counting from 0.
      * <p>
-     * The {@link Collection} may contain <code>null</code> values and also
-     * nested arrays, collections or maps.
+     * The {@link Collection} may contain <code>null</code> values and also nested arrays,
+     * collections or maps.
      * <p>
      * Note that the {@link Collection} must not contain a reference to itself.
      * 
@@ -245,26 +242,26 @@ public class PhpSerializer extends FilterWriter {
             write("}");
         }
     }
-  
+
     /**
-     * Serialize a {@link Map}. The map's key iterator is used to serialize each entry
-     * of the Map. On PHP side, an associative array is created, with the key
-     * being the map's key, and the value being the map's appropriate value.
+     * Serialize a {@link Map}. The map's key iterator is used to serialize each entry of
+     * the Map. On PHP side, an associative array is created, with the key being the map's
+     * key, and the value being the map's appropriate value.
      * <p>
      * The {@link Map} may contain no more than one <code>null</code> key. Due to PHP
-     * limitations, the key is always resolved using <code>toString()</code>
-     * unless it is a {@link Number} object. This means that it is not possible to use
-     * collections, maps or arrays as map keys.
+     * limitations, the key is always resolved using <code>toString()</code> unless it is
+     * a {@link Number} object. This means that it is not possible to use collections,
+     * maps or arrays as map keys.
      * <p>
-     * The map's values may contain <code>null</code> and also nested arrays,
-     * collections or maps.
+     * The map's values may contain <code>null</code> and also nested arrays, collections
+     * or maps.
      * <p>
      * Note that the map must not contain a reference to itself.
      * 
      * @param m
      *            {@link Map} to write, may be null
      */
-    public void serialize(Map<?,?> m) throws IOException {
+    public void serialize(Map<?, ?> m) throws IOException {
         if (m == null) {
             serializeNull();
         } else {
@@ -283,7 +280,8 @@ public class PhpSerializer extends FilterWriter {
                     write(((Boolean) key).booleanValue() ? "1" : "0");
                     write(";");
                 } else if (key instanceof Number) {
-                    if (key instanceof Float || key instanceof Double || key instanceof BigDecimal) {
+                    if (key instanceof Float || key instanceof Double
+                        || key instanceof BigDecimal) {
                         serialize(key.toString());
                     } else {
                         write("i:");
@@ -300,17 +298,17 @@ public class PhpSerializer extends FilterWriter {
             write("}");
         }
     }
-  
+
     /**
      * Serialize an {@link Object}. If the object is found to be an instance of
      * {@link String}, {@link Character}, {@link Boolean}, {@link Number},
-     * {@link Collection} or {@link Map}, or if the object is an array, the
-     * appropriate <code>serialize()</code> method is used. In all other cases,
-     * the object's <code>toString()</code> result is serialized as a string.
+     * {@link Collection} or {@link Map}, or if the object is an array, the appropriate
+     * <code>serialize()</code> method is used. In all other cases, the object's
+     * <code>toString()</code> result is serialized as a string.
      * <p>
-     * Note that in future versions, Serializable objects may be serialized into
-     * PHP objects. For now, try to avoid to pass Serializable objects unless
-     * they are one of the basic types.
+     * Note that in future versions, Serializable objects may be serialized into PHP
+     * objects. For now, try to avoid to pass Serializable objects unless they are one of
+     * the basic types.
      * 
      * @param o
      *            Object to write, may be null
@@ -323,7 +321,7 @@ public class PhpSerializer extends FilterWriter {
         } else if (o instanceof Collection) {
             serialize((Collection<?>) o);
         } else if (o instanceof Map) {
-            serialize((Map<?,?>) o);
+            serialize((Map<?, ?>) o);
         } else if (o instanceof Object[]) {
             serialize((Object[]) o);
         } else if (o instanceof Boolean) {

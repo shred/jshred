@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.BorderLayout;
@@ -34,18 +35,18 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * This Panel shows a Component with a headline above it. The user can click on
- * the headline in order to collapse or exand the component. If the component is
- * collapsed, it will be hidden and only the headline is shown. If the component
- * is expanded, everything is shown.
+ * This Panel shows a Component with a headline above it. The user can click on the
+ * headline in order to collapse or exand the component. If the component is collapsed, it
+ * will be hidden and only the headline is shown. If the component is expanded, everything
+ * is shown.
  * <p>
- * JCollapsiblePanel can be used to allow the user to hide unimportant parts of
- * the GUI if there is only little space available.
+ * JCollapsiblePanel can be used to allow the user to hide unimportant parts of the GUI if
+ * there is only little space available.
  * <p>
  * Due to a bug this component was not really functional until R12.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JCollapsiblePanel.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JCollapsiblePanel.java 302 2009-05-12 22:19:11Z shred $
  * @since R9
  */
 public class JCollapsiblePanel extends JPanel {
@@ -77,8 +78,8 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Creates a JCollapsiblePanel with the given title and {@link Component}.
-     * The panel is initially expanded.
+     * Creates a JCollapsiblePanel with the given title and {@link Component}. The panel
+     * is initially expanded.
      * 
      * @param title
      *            Title
@@ -90,8 +91,8 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Creates a JCollapsiblePanel with the given title and {@link Component},
-     * using the given expanded state initially.
+     * Creates a JCollapsiblePanel with the given title and {@link Component}, using the
+     * given expanded state initially.
      * 
      * @param title
      *            Title
@@ -105,12 +106,12 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Creates a JCollapsiblePanel with the given title and {@link Component},
-     * using the given expanded state initially.
+     * Creates a JCollapsiblePanel with the given title and {@link Component}, using the
+     * given expanded state initially.
      * <p>
      * With the given id, the collapse state is remembered for the next time the
-     * application is started. If there is no state remembered, the given
-     * default "expanded" state will be used instead.
+     * application is started. If there is no state remembered, the given default
+     * "expanded" state will be used instead.
      * 
      * @param title
      *            Title
@@ -119,8 +120,8 @@ public class JCollapsiblePanel extends JPanel {
      * @param expanded
      *            Initial state, true: expanded, false: collapsed
      * @param id
-     *            Unique identifier to remember the collapse state. Pass
-     *            <code>null</code> if the state shall not be remembered.
+     *            Unique identifier to remember the collapse state. Pass <code>null</code>
+     *            if the state shall not be remembered.
      * @since R12
      */
     public JCollapsiblePanel(String title, Component comp, boolean expanded, String id) {
@@ -160,8 +161,8 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Set the icon to be used in the title if the component is collapsed. This
-     * is an arrow pointing to the right by default.
+     * Set the icon to be used in the title if the component is collapsed. This is an
+     * arrow pointing to the right by default.
      * 
      * @param icon
      *            New icon to be used
@@ -182,8 +183,8 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Set the icon to be used in the title if the component is expanded. This
-     * is an arrow pointing down by default.
+     * Set the icon to be used in the title if the component is expanded. This is an arrow
+     * pointing down by default.
      * 
      * @param icon
      *            New icon to be used
@@ -204,13 +205,13 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Set the enabled state. Disabling the JCollapsiblePane will only disable
-     * the title button, but not the content. I.e. the user cannot collapse the
-     * component, but can still use it.
+     * Set the enabled state. Disabling the JCollapsiblePane will only disable the title
+     * button, but not the content. I.e. the user cannot collapse the component, but can
+     * still use it.
      * <p>
-     * <em>NOTE:</em> if {@link #setEnabled(boolean)} is set to <code>false</code>
-     * while the panel is collapsed, then the user will be unable to expand and
-     * use the component.
+     * <em>NOTE:</em> if {@link #setEnabled(boolean)} is set to <code>false</code> while
+     * the panel is collapsed, then the user will be unable to expand and use the
+     * component.
      * 
      * @param b
      *            true: JCollapsiblePane is enabled, false: disabled.
@@ -222,8 +223,8 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Set the expanded state. If <code>true</code>, the {@link Component} will
-     * be shown. If <code>false</code>, the Component will be hidden.
+     * Set the expanded state. If <code>true</code>, the {@link Component} will be shown.
+     * If <code>false</code>, the Component will be hidden.
      * 
      * @param b
      *            true: expand, false: collapse
@@ -234,8 +235,7 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Internal method that does the actual collapsing and expanding of the
-     * content.
+     * Internal method that does the actual collapsing and expanding of the content.
      * 
      * @param b
      *            true: expand, false: collapse
@@ -290,7 +290,7 @@ public class JCollapsiblePanel extends JPanel {
             remove(content);
         }
         firePropertyChange("content", content, comp);
-        
+
         if (comp != null) {
             add(comp, BorderLayout.CENTER);
             doExpand(isExpanded());
@@ -308,8 +308,8 @@ public class JCollapsiblePanel extends JPanel {
     }
 
     /**
-     * Add a {@link ChangeListener}. It will be invoked when the
-     * collapsed/expanded state was changed.
+     * Add a {@link ChangeListener}. It will be invoked when the collapsed/expanded state
+     * was changed.
      * 
      * @param l
      *            {@link ChangeListener} to be added
@@ -328,19 +328,17 @@ public class JCollapsiblePanel extends JPanel {
         listener.removeListener(l);
     }
 
-/* -------------------------------------------------------------------------- */
-
     /**
-     * Private {@link ActionListener} implementation. It will be invoked when
-     * the title {@link JToggleButton} was pressed.
+     * Private {@link ActionListener} implementation. It will be invoked when the title
+     * {@link JToggleButton} was pressed.
      */
     private class Listener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (content != null) {
-                //--- Change visibility ---
+                // --- Change visibility ---
                 doExpand(jbToggle.isSelected());
 
-                //--- Notify everyone ---
+                // --- Notify everyone ---
                 ChangeEvent event = new ChangeEvent(JCollapsiblePanel.this);
                 for (ChangeListener l : listener.getListeners()) {
                     l.stateChanged(event);

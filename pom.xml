@@ -9,12 +9,12 @@
     </parent>
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred</artifactId>
-    <packaging>pom</packaging>
     <name>jShred</name>
     <version>16</version>
     <description>jShred Java library</description>
-    <url>http://www.shredzone.org/projects/show/jshred</url>
     <inceptionYear>2004</inceptionYear>
+    <packaging>pom</packaging>
+    <url>http://jshred.shredzone.org</url>
     <licenses>
         <license>
             <name>GNU General Public License Version 3</name>
@@ -29,13 +29,9 @@
             <url>LICENSE-APL.txt</url>
         </license>
     </licenses>
-    <issueManagement>
-    	<system>Redmine</system>
-    	<url>http://www.shredzone.org/projects/jshred/issues</url>
-    </issueManagement>
     <modules>
-    	<module>jshred-swing</module>
-    	<module>jshred-util</module>
-    	<module>jshred-web</module>
+        <module>jshred-swing</module>
+        <module>jshred-util</module>
+        <module>jshred-web</module>
     </modules>
 </project>

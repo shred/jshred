@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.BorderLayout;
@@ -33,18 +34,17 @@ import javax.swing.JPanel;
 
 /**
  * This is a JOptionPane which offers a CheckBox with a text like "Remember this
- * decision". If this CheckBox is checked, the JRememberOptionPane will remember
- * the answer and will give this answer immediately next time it is invoked.
+ * decision". If this CheckBox is checked, the JRememberOptionPane will remember the
+ * answer and will give this answer immediately next time it is invoked.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JRememberOptionPane.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: JRememberOptionPane.java 302 2009-05-12 22:19:11Z shred $
  * @since R7
  */
 public class JRememberOptionPane extends JOptionPane {
     private static final long serialVersionUID = 3544392526023898161L;
 
-    private static Preferences prefs = Preferences
-            .userNodeForPackage(JRememberOptionPane.class);
+    private static Preferences prefs = Preferences.userNodeForPackage(JRememberOptionPane.class);
 
     /**
      * Show a Remember dialog with a remember checkbox. This will be a
@@ -63,11 +63,9 @@ public class JRememberOptionPane extends JOptionPane {
      * @return The value selected (or remembered) by the user.
      * @throws HeadlessException
      */
-    public static int showRememberDialog(Component parentComponent,
-            Object message, String key, String title, String remember)
+    public static int showRememberDialog(Component parentComponent, Object message, String key, String title, String remember)
     throws HeadlessException {
-        return showRememberDialog(parentComponent, message, key, title,
-                remember, JOptionPane.OK_CANCEL_OPTION);
+        return showRememberDialog(parentComponent, message, key, title, remember, JOptionPane.OK_CANCEL_OPTION);
     }
 
     /**
@@ -89,27 +87,22 @@ public class JRememberOptionPane extends JOptionPane {
      * @return The value selected (or remembered) by the user.
      * @throws HeadlessException
      */
-    public static int showRememberDialog(Component parentComponent,
-            Object message, String key, String title, String remember,
-            int optionType)
+    public static int showRememberDialog(Component parentComponent, Object message, String key, String title, String remember, int optionType)
     throws HeadlessException {
-        return showRememberDialog(parentComponent, message, key, title,
-                remember, optionType, JOptionPane.QUESTION_MESSAGE, null);
+        return showRememberDialog(parentComponent, message, key, title, remember, optionType, JOptionPane.QUESTION_MESSAGE, null);
     }
 
     /**
-     * Show a Remember dialog with a remember checkbox. If the user checked the
-     * checkbox before, to remember his decision, it will return immediately
-     * that decision, without further user interaction.
+     * Show a Remember dialog with a remember checkbox. If the user checked the checkbox
+     * before, to remember his decision, it will return immediately that decision, without
+     * further user interaction.
      * <p>
-     * Note that the key must be unique for all applications. It is recommended
-     * to use the java package notation here (i.e. always start the key with
-     * your reversed domain).
+     * Note that the key must be unique for all applications. It is recommended to use the
+     * java package notation here (i.e. always start the key with your reversed domain).
      * <p>
-     * The <code>CLOSED_OPTION</code> and <code>CANCEL_OPTION</code> will never
-     * be remembered, so if the user just closes or cancels the dialog, he will
-     * be asked again next time, no matter whether he checked the checkbox or
-     * not.
+     * The <code>CLOSED_OPTION</code> and <code>CANCEL_OPTION</code> will never be
+     * remembered, so if the user just closes or cancels the dialog, he will be asked
+     * again next time, no matter whether he checked the checkbox or not.
      * 
      * @param parentComponent
      *            parent component to block
@@ -130,9 +123,7 @@ public class JRememberOptionPane extends JOptionPane {
      * @return The value selected (or remembered) by the user.
      * @throws HeadlessException
      */
-    public static int showRememberDialog(Component parentComponent,
-            Object message, String key, String title, String remember,
-            int optionType, int messageType, Icon icon)
+    public static int showRememberDialog(Component parentComponent, Object message, String key, String title, String remember, int optionType, int messageType, Icon icon)
     throws HeadlessException {
         // --- Get the remembered result ---
         int result = prefs.getInt(key, -9999);
@@ -150,8 +141,7 @@ public class JRememberOptionPane extends JOptionPane {
                     msg = new JLabel((Icon) message);
                 } else {
                     JLabel jLabel = new JLabel(message.toString());
-                    jLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10,
-                            0));
+                    jLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
                     msg = jLabel;
                 }
                 jPane.add(msg, BorderLayout.CENTER);
@@ -159,22 +149,19 @@ public class JRememberOptionPane extends JOptionPane {
             }
 
             // --- Show the dialog ---
-            result = showConfirmDialog(parentComponent, jPane, title,
-                    optionType, messageType, icon);
+            result = showConfirmDialog(parentComponent, jPane, title, optionType, messageType, icon);
 
             // --- Remember the choice ---
             // CLOSED_OPTION and CANCEL_OPTION will not be remembered though
             if (result != JOptionPane.CLOSED_OPTION
-                    && result != JOptionPane.CANCEL_OPTION
-                    && jcbRemember.isSelected()) {
+                && result != JOptionPane.CANCEL_OPTION && jcbRemember.isSelected()) {
                 prefs.putInt(key, result);
 
                 // --- Flush the prefs ---
                 // This seems to be required for some strange reasons...
                 try {
                     prefs.flush();
-                } catch (BackingStoreException e) {
-                }
+                } catch (BackingStoreException e) {}
             }
         }
 
@@ -183,9 +170,8 @@ public class JRememberOptionPane extends JOptionPane {
     }
 
     /**
-     * Forget a certain key. The user will be asked again next time the dialog
-     * is opened. Nothing will happen if there was no decision stored for the
-     * key yet.
+     * Forget a certain key. The user will be asked again next time the dialog is opened.
+     * Nothing will happen if there was no decision stored for the key yet.
      * 
      * @param key
      *            Key to forget.
@@ -195,31 +181,29 @@ public class JRememberOptionPane extends JOptionPane {
     }
 
     /**
-     * Forget all the keys starting with the given base. The user will be asked
-     * again next time the appropriate dialogs are opened. If no matching keys
-     * were found, nothing will happen.
+     * Forget all the keys starting with the given base. The user will be asked again next
+     * time the appropriate dialogs are opened. If no matching keys were found, nothing
+     * will happen.
      * <p>
-     * If you pass <code>null</code> as base, the user will be asked again for
-     * all {@link JRememberDialog}s in <em>all</em> applications. It is strongly
-     * discouraged to pass <code>null</code>!
+     * If you pass <code>null</code> as base, the user will be asked again for all
+     * {@link JRememberDialog}s in <em>all</em> applications. It is strongly discouraged
+     * to pass <code>null</code>!
      * 
      * @param base
-     *            Base of the keys to be forgotten, <code>null</code> will
-     *            forget all keys, even for other applications.
+     *            Base of the keys to be forgotten, <code>null</code> will forget all
+     *            keys, even for other applications.
      * @since R10
      */
     public static void forgetAll(String base) {
         try {
             if (base != null) {
                 for (String key : prefs.keys()) {
-                    if (key.startsWith(base))
-                        prefs.remove(key);
+                    if (key.startsWith(base)) prefs.remove(key);
                 }
             } else {
                 prefs.clear();
             }
-        } catch (BackingStoreException e) {
-        }
+        } catch (BackingStoreException e) {}
     }
 
 }

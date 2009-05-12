@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.swing;
 
 import java.awt.*;
@@ -25,7 +26,7 @@ import javax.swing.border.*;
  * A recessed 1px border, like often used in status bars.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: TinyBorder.java 256 2009-02-10 22:56:35Z shred $
+ * @version $Id: TinyBorder.java 302 2009-05-12 22:19:11Z shred $
  */
 public class TinyBorder extends AbstractBorder {
     private static final long serialVersionUID = 3761685710469805881L;
@@ -77,8 +78,7 @@ public class TinyBorder extends AbstractBorder {
     }
 
     /**
-     * Reinitialize the insets parameter with this Border's current
-     * {@link Insets}.
+     * Reinitialize the insets parameter with this Border's current {@link Insets}.
      * 
      * @param c
      *            {@link Component} for this border

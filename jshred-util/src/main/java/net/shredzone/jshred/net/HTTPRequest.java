@@ -1,21 +1,22 @@
-/*
- * jshred -- Shred's Toolbox
+/**
+ * jshred - Shred's Toolbox
  *
- * Copyright (c) 2008 Richard "Shred" Körber
- *   http://jshred.shredzone.org-------------------------------------------------------------------
+ * Copyright (C) 2009 Richard "Shred" Körber
+ *   http://jshred.shredzone.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License / GNU Lesser
+ * General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
  */
-
 package net.shredzone.jshred.net;
 
 import java.io.File;
@@ -39,40 +40,41 @@ import javax.swing.ProgressMonitor;
 import net.shredzone.jshred.io.UncloseableOutputStream;
 
 /**
- * This class sends a HTTP request to a server, and returns an
- * {@link InputStream} to the returned data.
+ * This class sends a HTTP request to a server, and returns an {@link InputStream} to the
+ * returned data.
  * <p>
  * All kind of parameters can be added to the request using
  * {@link #addParameter(String, Object)}.
  * <p>
  * Example:
+ * 
  * <pre>
- *   HTTPRequest req = new HTTPRequest(url, HTTPRequest.POST);
- *   req.addParameter("user", username);
- *   req.addParameter("email", email);
- *   req.doRequest();
- *   Reader input = req.getContentReader();
+ * HTTPRequest req = new HTTPRequest(url, HTTPRequest.POST);
+ * req.addParameter(&quot;user&quot;, username);
+ * req.addParameter(&quot;email&quot;, email);
+ * req.doRequest();
+ * Reader input = req.getContentReader();
  * </pre>
  * <p>
  * All parameters will be sent UTF-8 encoded, as proposed by W3C.
  * <p>
- * GET requests are limited in their length. This class will not take
- * care to keep within the allowed length. If you are in doubt, you
- * should use POST request.
+ * GET requests are limited in their length. This class will not take care to keep within
+ * the allowed length. If you are in doubt, you should use POST request.
  * <p>
- * It is possible to pass a {@link ProgressMonitor} which will be used to show how
- * many data has been transfered to the server. This is especially useful
- * for file uploads.
- *
- * @author  Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java 256 2009-02-10 22:56:35Z shred $
+ * It is possible to pass a {@link ProgressMonitor} which will be used to show how many
+ * data has been transfered to the server. This is especially useful for file uploads.
+ * 
+ * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * @version $Id: HTTPRequest.java 302 2009-05-12 22:19:11Z shred $
  */
 public class HTTPRequest {
 
-    public static enum Method { GET, POST }
-    
-    private HashMap<String,Object> hmParam;         // Parameter Hashmap
-    private HashMap<String,DataProvider> hmStream;  // Stream Hashmap
+    public static enum Method {
+        GET, POST
+    }
+
+    private HashMap<String, Object> hmParam;        // Parameter Hashmap
+    private HashMap<String, DataProvider> hmStream; // Stream Hashmap
     private URL getUrl;                             // Target URL
     private final Method method;                    // Method (GET or POST)
     private HttpURLConnection connect;              // Connection
@@ -105,8 +107,8 @@ public class HTTPRequest {
         this.method = method;
 
         // --- Initialize parameter hashes ---
-        hmParam = new HashMap<String,Object>();
-        hmStream = new HashMap<String,DataProvider>();
+        hmParam = new HashMap<String, Object>();
+        hmStream = new HashMap<String, DataProvider>();
         connect = null;
         monitor = null;
 
@@ -117,20 +119,19 @@ public class HTTPRequest {
     }
 
     /**
-     * Adds a parameter to the HTTPRequest. The {@link Object#toString()} result
-     * of the value is transferred to the server. The value is evaluated when
-     * {@link #doRequest()} is invoked, NOT at the time you pass the parameter
-     * here. Keep this in mind!
+     * Adds a parameter to the HTTPRequest. The {@link Object#toString()} result of the
+     * value is transferred to the server. The value is evaluated when
+     * {@link #doRequest()} is invoked, NOT at the time you pass the parameter here. Keep
+     * this in mind!
      * <p>
-     * If a <code>null</code> was passed as value, the parameter will not be
-     * sent at all.
+     * If a <code>null</code> was passed as value, the parameter will not be sent at all.
      * <p>
-     * Note that a parameter can only be passed once. If you add it again, it
-     * will replace the previous parameter with the same name. Also take care
-     * not to exceed the limits of a GET request. Use POST if you are in doubt.
+     * Note that a parameter can only be passed once. If you add it again, it will replace
+     * the previous parameter with the same name. Also take care not to exceed the limits
+     * of a GET request. Use POST if you are in doubt.
      * <p>
-     * HTTPRequest will take care for proper encoding of the parameter names and
-     * values. You won't need to urlencode them.
+     * HTTPRequest will take care for proper encoding of the parameter names and values.
+     * You won't need to urlencode them.
      * 
      * @param name
      *            Parameter name
@@ -138,19 +139,18 @@ public class HTTPRequest {
      *            Parameter value, may be null
      */
     public void addParameter(String name, Object value) {
-        if (name == null)
-            throw new NullPointerException("You must provide a name");
-        
+        if (name == null) throw new NullPointerException("You must provide a name");
+
         if (value != null) {
             hmParam.put(name, value);
         }
     }
 
     /**
-     * Convenience call to add a boolean parameter to the HTTPRequest. If the
-     * boolean value is false, no parameter will be sent at all. If the boolean
-     * value is true, a "1" is transferred as parameter value to the server.
-     * This method somehow simulates a HTML checkbox.
+     * Convenience call to add a boolean parameter to the HTTPRequest. If the boolean
+     * value is false, no parameter will be sent at all. If the boolean value is true, a
+     * "1" is transferred as parameter value to the server. This method somehow simulates
+     * a HTML checkbox.
      * 
      * @param name
      *            Parameter name
@@ -164,27 +164,25 @@ public class HTTPRequest {
     }
 
     /**
-     * Adds a {@link File} to the HTTPRequest. You must use POST requests in
-     * order to upload files to the server. The file will be sent using the
-     * mime type "application/octet-stream". The file is not kept in memory,
-     * but sent using a data stream during transmission, so HTTPRequest is
-     * also able to upload large files with a small memory print.
+     * Adds a {@link File} to the HTTPRequest. You must use POST requests in order to
+     * upload files to the server. The file will be sent using the mime type
+     * "application/octet-stream". The file is not kept in memory, but sent using a data
+     * stream during transmission, so HTTPRequest is also able to upload large files with
+     * a small memory print.
      * 
      * @param name
      *            Parameter name
      * @param file
      *            {@link File} to be sent
      */
-    public void addFile(String name, File file)
-    throws FileNotFoundException {
+    public void addFile(String name, File file) throws FileNotFoundException {
         addDataProvider(name, new FileProvider(file));
     }
 
     /**
-     * Adds a {@link File} to the HTTPRequest. You must use POST requests in
-     * order to upload files to the server. The file is not kept in memory,
-     * but sent using a data stream during transmission, so HTTPRequest is
-     * also able to upload large files.
+     * Adds a {@link File} to the HTTPRequest. You must use POST requests in order to
+     * upload files to the server. The file is not kept in memory, but sent using a data
+     * stream during transmission, so HTTPRequest is also able to upload large files.
      * 
      * @param name
      *            Parameter name
@@ -194,15 +192,14 @@ public class HTTPRequest {
      *            Mime type of the file to be transmitted
      */
     public void addFile(String name, File file, String mimetype)
-    throws FileNotFoundException {
+        throws FileNotFoundException {
         addDataProvider(name, new FileProvider(file, mimetype));
     }
 
     /**
-     * Adds a {@link DataProvider} to the HTTPRequest. You must use POST
-     * requests in order to upload files to the server. The file is not kept
-     * in memory, but sent using a data stream during transmission, so
-     * HTTPRequest is also able to upload large files.
+     * Adds a {@link DataProvider} to the HTTPRequest. You must use POST requests in order
+     * to upload files to the server. The file is not kept in memory, but sent using a
+     * data stream during transmission, so HTTPRequest is also able to upload large files.
      * 
      * @param name
      *            Parameter name
@@ -210,11 +207,9 @@ public class HTTPRequest {
      *            {@link DataProvider} of the data to be uploaded
      */
     public void addDataProvider(String name, DataProvider provider) {
-        if (!isPost())
-            throw new IllegalArgumentException("POST method is required for sending files");
+        if (!isPost()) throw new IllegalArgumentException("POST method is required for sending files");
 
-        if (name == null || provider == null)
-            throw new NullPointerException("No name or provider given");
+        if (name == null || provider == null) throw new NullPointerException("No name or provider given");
 
         hmStream.put(name, provider);
     }
@@ -227,11 +222,11 @@ public class HTTPRequest {
     public Method getMethod() {
         return method;
     }
-    
+
     /**
      * Returns true if this request uses the POST method.
      * 
-     * @return  true: uses POST method
+     * @return true: uses POST method
      */
     public boolean isPost() {
         return Method.POST.equals(method);
@@ -239,8 +234,8 @@ public class HTTPRequest {
 
     /**
      * Defines a {@link ProgressMonitor} for the transmission process. After
-     * {@link #doRequest()} connected to the server, the transfer string is
-     * shown as a note.
+     * {@link #doRequest()} connected to the server, the transfer string is shown as a
+     * note.
      * <p>
      * The {@link ProgressMonitor} will start at the left corner during start of
      * transmission, and will end in the right corner of the gauge.
@@ -256,17 +251,17 @@ public class HTTPRequest {
 
     /**
      * Defines a {@link ProgressMonitor} for the transmission process. After
-     * {@link #doRequest()} connected to the server, the transfer string is
-     * shown as a note. During transmission, a value between min and max is
-     * shown according to the process of the transmission. After transmission,
-     * max will always be the current value of the {@link ProgressMonitor}.
+     * {@link #doRequest()} connected to the server, the transfer string is shown as a
+     * note. During transmission, a value between min and max is shown according to the
+     * process of the transmission. After transmission, max will always be the current
+     * value of the {@link ProgressMonitor}.
      * <p>
-     * You can use min and max if the HTTPRequest is just one step in a chain of
-     * several steps to be shown in the {@link ProgressMonitor}.
+     * You can use min and max if the HTTPRequest is just one step in a chain of several
+     * steps to be shown in the {@link ProgressMonitor}.
      * <p>
      * Note that the response transfer is not included in the {@link ProgressMonitor}.
-     * This is because there is no way to find out the response size from the
-     * server before the request has been entirely sent to it.
+     * This is because there is no way to find out the response size from the server
+     * before the request has been entirely sent to it.
      * 
      * @param monitor
      *            {@link ProgressMonitor} to be used.
@@ -285,9 +280,8 @@ public class HTTPRequest {
     }
 
     /**
-     * Sends the request to the server. You cannot reuse the request after it has
-     * been sent. If you have previously set a {@link ProgressMonitor}, it will
-     * be used.
+     * Sends the request to the server. You cannot reuse the request after it has been
+     * sent. If you have previously set a {@link ProgressMonitor}, it will be used.
      * 
      * @return Return code of the server, see {@link HttpURLConnection}
      * @throws IOException
@@ -296,8 +290,7 @@ public class HTTPRequest {
      *             URL was malformed
      */
     public int doRequest() throws IOException, MalformedURLException {
-        if (connect != null)
-            throw new RuntimeException("already connected");
+        if (connect != null) throw new RuntimeException("already connected");
 
         if (isPost()) {
             // --- POST ----------------------------------------
@@ -319,7 +312,8 @@ public class HTTPRequest {
                 connect.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=\"utf-8\"");
             } else {
                 // See RFC 2388 for multipart/form-data
-                connect.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+                connect.setRequestProperty("Content-Type", "multipart/form-data; boundary="
+                    + boundary);
             }
 
             // Send parameters
@@ -341,12 +335,8 @@ public class HTTPRequest {
             file.append('?');
             createParamString(file);
 
-            URL url = new URL(
-                    getUrl.getProtocol(),
-                    getUrl.getHost(),
-                    (port >= 0 ? port : 80),
-                    file.toString()
-            );
+            URL url = new URL(getUrl.getProtocol(), getUrl.getHost(), (port >= 0 ? port
+                                                                                : 80), file.toString());
 
             // Create Connection
             URLConnection con = url.openConnection();
@@ -355,10 +345,10 @@ public class HTTPRequest {
             }
             connect = (HttpURLConnection) con;
             connect.setRequestMethod("GET");
-            connect.setUseCaches(false);            // CGI call, no caching!
+            connect.setUseCaches(false); // CGI call, no caching!
 
             // Inform ProgressMonitor
-            monitorConnected();                     
+            monitorConnected();
         }
 
         // Set ProgressMonitor to the max value
@@ -374,9 +364,9 @@ public class HTTPRequest {
     private void monitorConnected() {
         if (monitor != null) {
             if (transferNote != null) {
-                monitor.setNote(transferNote);  // Set TransferNote if available
+                monitor.setNote(transferNote); // Set TransferNote if available
             }
-            monitor.setProgress(monitorMin);    // Set to minimum value
+            monitor.setProgress(monitorMin); // Set to minimum value
         }
     }
 
@@ -394,8 +384,8 @@ public class HTTPRequest {
     }
 
     /**
-     * Set the {@link ProgressMonitor} between min and max according to the
-     * relation between current and max.
+     * Set the {@link ProgressMonitor} between min and max according to the relation
+     * between current and max.
      * 
      * @param current
      *            Current counter (0 to max)
@@ -403,15 +393,15 @@ public class HTTPRequest {
      *            Maximum expected counter value
      */
     private void monitorSetRelation(int current, int max) {
-        if (monitor == null)
-            return; // No monitor was set
+        if (monitor == null) return; // No monitor was set
 
         if (max > 0) {
             // Use rule of three. If current==0, monitorMin will be set,
             // for current==max, monitorMax will be set, everything else
             // is in between.
             current = Math.min(current, max);
-            monitor.setProgress(monitorMin + (((monitorMax - monitorMin) * current) / max));
+            monitor.setProgress(monitorMin
+                + (((monitorMax - monitorMin) * current) / max));
         } else {
             // Avoid division by zero
             monitor.setProgress(monitorMax);
@@ -419,8 +409,8 @@ public class HTTPRequest {
     }
 
     /**
-     * Create a "multipart/form-data" request as described in RFC 1867. The data
-     * sent to the output stream will be UTF-8 encoded.
+     * Create a "multipart/form-data" request as described in RFC 1867. The data sent to
+     * the output stream will be UTF-8 encoded.
      * 
      * @param out
      *            {@link OutputStream}, which will receive the output
@@ -484,11 +474,10 @@ public class HTTPRequest {
     }
 
     /**
-     * Create a parameter string with the given parameters. The string will have
-     * the format "name1=val1&name2=val2&name3=val3", where names and values are
-     * URLEncoded. The provided {@link StringBuilder} will be filled with the
-     * parameters. Note that there is no check whether the parameter string
-     * exceeds the maximum size.
+     * Create a parameter string with the given parameters. The string will have the
+     * format "name1=val1&name2=val2&name3=val3", where names and values are URLEncoded.
+     * The provided {@link StringBuilder} will be filled with the parameters. Note that
+     * there is no check whether the parameter string exceeds the maximum size.
      * 
      * @param dest
      *            {@link StringBuilder} to be filled
@@ -535,19 +524,19 @@ public class HTTPRequest {
     }
 
     /**
-     * Return the {@link HttpURLConnection} object after {@link #doRequest()}
-     * has been invoked.
+     * Return the {@link HttpURLConnection} object after {@link #doRequest()} has been
+     * invoked.
      * 
-     * @return {@link HttpURLConnection} or null if {@link #doRequest()} was
-     *      not invoked yet.
+     * @return {@link HttpURLConnection} or null if {@link #doRequest()} was not invoked
+     *         yet.
      */
     public HttpURLConnection getConnection() {
         return connect;
     }
 
     /**
-     * Return the server's response in an {@link InputStream} after a
-     * {@link #doRequest()}.
+     * Return the server's response in an {@link InputStream} after a {@link #doRequest()}
+     * .
      * 
      * @return {@link InputStream} of the server's response.
      * @throws IOException
@@ -559,9 +548,9 @@ public class HTTPRequest {
     }
 
     /**
-     * Get the charset of the response. This method will try to evaluate the
-     * "ContentType" header. If there was no such header, or if it did
-     * not contain a charset, null is returned.
+     * Get the charset of the response. This method will try to evaluate the "ContentType"
+     * header. If there was no such header, or if it did not contain a charset, null is
+     * returned.
      * 
      * @return Charset of the response, or null
      * @since R4
@@ -581,9 +570,7 @@ public class HTTPRequest {
                 }
                 int len = encoding.length();
                 if ((encoding.charAt(0) == '"' || encoding.charAt(0) == '\'')
-                        && (encoding.charAt(len - 1) == '"'
-                        || encoding.charAt(len - 1) == '\'')
-                   ) {
+                    && (encoding.charAt(len - 1) == '"' || encoding.charAt(len - 1) == '\'')) {
                     encoding = encoding.substring(1, len - 1).trim();
                 }
             }
@@ -592,38 +579,31 @@ public class HTTPRequest {
     }
 
     /**
-     * Return a {@link Reader} to the response body after a {@link #doRequest()}.
-     * The content charset sent by the server is used. If the given charset is
-     * not known, an exception will be raised. If no charset was given,
-     * "ISO-8859-1" is assumed.
+     * Return a {@link Reader} to the response body after a {@link #doRequest()}. The
+     * content charset sent by the server is used. If the given charset is not known, an
+     * exception will be raised. If no charset was given, "ISO-8859-1" is assumed.
      * 
      * @return {@link Reader} to the response body.
      * @throws UnsupportedEncodingException
-     *             if the encoding given by the server, is not known to this
-     *             Java platform.
+     *             if the encoding given by the server, is not known to this Java
+     *             platform.
      * @throws IOException
      *             if an I/O exception occured
      * @since R4
      */
-    public Reader getContentReader()
-    throws UnsupportedEncodingException, IOException {
+    public Reader getContentReader() throws UnsupportedEncodingException, IOException {
         String encoding = getCharset();
-        if (encoding == null)
-            encoding = "ISO-8859-1";
+        if (encoding == null) encoding = "ISO-8859-1";
         return new InputStreamReader(connect.getInputStream(), encoding);
     }
 
-/* ------------------------------------------------------------------------ */
-
     /**
-     * A DataProvider provides a data stream to be sent by the
-     * {@link HTTPRequest}. The connected server will receive it as a file
-     * upload.
+     * A DataProvider provides a data stream to be sent by the {@link HTTPRequest}. The
+     * connected server will receive it as a file upload.
      * <p>
-     * {@link #sendFile(OutputStream)} will deliver the data. It is invoked
-     * just that moment the data is required. The {@link HTTPRequest} does not
-     * store the data itself, so this mechanism also allows to send huge files
-     * with a small memory print.
+     * {@link #sendFile(OutputStream)} will deliver the data. It is invoked just that
+     * moment the data is required. The {@link HTTPRequest} does not store the data
+     * itself, so this mechanism also allows to send huge files with a small memory print.
      */
     public static interface DataProvider {
 
@@ -643,8 +623,7 @@ public class HTTPRequest {
         public String getFileName();
 
         /**
-         * Commands this FileProvider to send its data to the given
-         * {@link OutputStream}.
+         * Commands this FileProvider to send its data to the given {@link OutputStream}.
          * <p>
          * <b>IMPORTANT:</b> you must not flush or close the stream!
          * 
@@ -657,12 +636,10 @@ public class HTTPRequest {
 
     }
 
-/* ------------------------------------------------------------------------ */
-
     /**
-     * This {@link DataProvider} implementation transmits the given
-     * {@link InputStream}. It is copied to the {@link OutputStream} later,
-     * so you should prefer a way to feed the {@link OutputStream} directly.
+     * This {@link DataProvider} implementation transmits the given {@link InputStream}.
+     * It is copied to the {@link OutputStream} later, so you should prefer a way to feed
+     * the {@link OutputStream} directly.
      * <p>
      * This is an abstract class, missing the {@link #getMimeType()} and
      * {@link #getFileName()} method.
@@ -681,8 +658,7 @@ public class HTTPRequest {
         }
 
         /**
-         * Transfers the {@link InputStream} to the {@link OutputStream} by
-         * copying it.
+         * Transfers the {@link InputStream} to the {@link OutputStream} by copying it.
          * 
          * @param out
          *            {@link OutputStream} to be filled
@@ -696,25 +672,20 @@ public class HTTPRequest {
 
     }
 
-/* ------------------------------------------------------------------------ */
-
     /**
-     * This {@link DataProvider} implementation uploads a {@link File} to the
-     * server.
+     * This {@link DataProvider} implementation uploads a {@link File} to the server.
      */
     public static class FileProvider extends InputStreamProvider {
         protected File file;
         protected String mimetype;
 
         /**
-         * Create a new FileProvider with an "application/octet-stream" mime
-         * type.
+         * Create a new FileProvider with an "application/octet-stream" mime type.
          * 
          * @param file
          *            {@link File} to be sent
          */
-        public FileProvider(File file)
-        throws FileNotFoundException {
+        public FileProvider(File file) throws FileNotFoundException {
             this(file, "application/octet-stream");
         }
 
@@ -726,8 +697,7 @@ public class HTTPRequest {
          * @param mimetype
          *            Mime type of that file
          */
-        public FileProvider(File file, String mimetype)
-        throws FileNotFoundException {
+        public FileProvider(File file, String mimetype) throws FileNotFoundException {
             super(new FileInputStream(file));
             this.file = file;
             this.mimetype = mimetype;
