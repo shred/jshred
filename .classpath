@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" output="jshred-swing/target/classes" path="jshred-swing/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="jshred-swing/target/classes" path="jshred-swing/src/main/resources"/>
+	<classpathentry kind="src" output="jshred-swing/target/test-classes" path="jshred-swing/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="jshred-swing/target/test-classes" path="jshred-swing/src/test/resources"/>
+	<classpathentry kind="src" output="jshred-util/target/classes" path="jshred-util/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="jshred-util/target/classes" path="jshred-util/src/main/resources"/>
+	<classpathentry kind="src" output="jshred-util/target/test-classes" path="jshred-util/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="jshred-util/target/test-classes" path="jshred-util/src/test/resources"/>
+	<classpathentry kind="src" output="jshred-web/target/classes" path="jshred-web/src/main/java"/>
+	<classpathentry excluding="**" kind="src" output="jshred-web/target/classes" path="jshred-web/src/main/resources"/>
+	<classpathentry kind="src" output="jshred-web/target/test-classes" path="jshred-web/src/test/java"/>
+	<classpathentry excluding="**" kind="src" output="jshred-web/target/test-classes" path="jshred-web/src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
