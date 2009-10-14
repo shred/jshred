@@ -42,6 +42,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -56,7 +57,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: SwingUtils.java 354 2009-10-14 09:49:16Z shred $
  */
 public class SwingUtils {
 
@@ -186,7 +187,14 @@ public class SwingUtils {
      */
     public static Frame getComponentFrame(Component comp) {
         while (comp != null) {
-            if (comp instanceof Frame) return (Frame) comp;
+            if (comp instanceof JPopupMenu) {
+                // popup menus do not have a frame, so follow the invoker
+                comp = ((JPopupMenu) comp).getInvoker();
+                continue;
+            }
+            if (comp instanceof Frame) {
+                return (Frame) comp;
+            }
             comp = comp.getParent();
         }
         return null;
@@ -463,9 +471,8 @@ public class SwingUtils {
 
     private static void getComponentsRecursiveHelper(List<Component> result, Component comp) {
         if (comp instanceof Container) {
-            Component[] children = ((Container) comp).getComponents();
-            for (int ix = 0; ix < children.length; ix++) {
-                getComponentsRecursiveHelper(result, children[ix]);
+            for (Component element : ((Container) comp).getComponents()) {
+                getComponentsRecursiveHelper(result, element);
             }
         }
         result.add(comp);
@@ -484,9 +491,8 @@ public class SwingUtils {
      */
     public static void enableRecursive(Component comp, boolean enable) {
         if (comp instanceof Container) {
-            Component[] children = ((Container) comp).getComponents();
-            for (int ix = 0; ix < children.length; ix++) {
-                enableRecursive(children[ix], enable);
+            for (Component element : ((Container) comp).getComponents()) {
+                enableRecursive(element, enable);
             }
         }
         comp.setEnabled(enable);
