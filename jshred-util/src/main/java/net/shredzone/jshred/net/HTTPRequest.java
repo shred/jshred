@@ -20,7 +20,6 @@
 package net.shredzone.jshred.net;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,7 +64,7 @@ import net.shredzone.jshred.io.UncloseableOutputStream;
  * data has been transfered to the server. This is especially useful for file uploads.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: HTTPRequest.java 349 2009-10-14 08:54:49Z shred $
  */
 public class HTTPRequest {
 
@@ -450,7 +449,13 @@ public class HTTPRequest {
             buff.append(URLencode(provider.getFileName()));
             buff.append("\"\r\nContent-Type: ");
             buff.append(provider.getMimeType());
-            buff.append("\r\n\r\n");
+            buff.append("\r\n");
+            if (provider instanceof StreamableDataProvider) {
+                buff.append("Content-Length: ");
+                buff.append(((StreamableDataProvider) provider).getLength());
+                buff.append("\r\n");
+            }
+            buff.append("\r\n");
             out.write(UTF8encode(buff.toString()));
 
             // Make sure the DataProvider cannot accidentally close the
@@ -595,131 +600,5 @@ public class HTTPRequest {
         String encoding = getCharset();
         if (encoding == null) encoding = "ISO-8859-1";
         return new InputStreamReader(connect.getInputStream(), encoding);
-    }
-
-    /**
-     * A DataProvider provides a data stream to be sent by the {@link HTTPRequest}. The
-     * connected server will receive it as a file upload.
-     * <p>
-     * {@link #sendFile(OutputStream)} will deliver the data. It is invoked just that
-     * moment the data is required. The {@link HTTPRequest} does not store the data
-     * itself, so this mechanism also allows to send huge files with a small memory print.
-     */
-    public static interface DataProvider {
-
-        /**
-         * Return the MimeType of the file. If you are in doubt, use
-         * "application/octet-stream" here.
-         * 
-         * @return MimeType
-         */
-        public String getMimeType();
-
-        /**
-         * Return the file name of the file.
-         * 
-         * @return Dateiname
-         */
-        public String getFileName();
-
-        /**
-         * Commands this FileProvider to send its data to the given {@link OutputStream}.
-         * <p>
-         * <b>IMPORTANT:</b> you must not flush or close the stream!
-         * 
-         * @param out
-         *            {@link OutputStream}
-         * @throws IOException
-         *             if transmission failed
-         */
-        public void sendFile(OutputStream out) throws IOException;
-
-    }
-
-    /**
-     * This {@link DataProvider} implementation transmits the given {@link InputStream}.
-     * It is copied to the {@link OutputStream} later, so you should prefer a way to feed
-     * the {@link OutputStream} directly.
-     * <p>
-     * This is an abstract class, missing the {@link #getMimeType()} and
-     * {@link #getFileName()} method.
-     */
-    public static abstract class InputStreamProvider implements DataProvider {
-        protected final InputStream in;
-
-        /**
-         * Create a new InputStreamProvider.
-         * 
-         * @param in
-         *            InputStream
-         */
-        public InputStreamProvider(InputStream in) {
-            this.in = in;
-        }
-
-        /**
-         * Transfers the {@link InputStream} to the {@link OutputStream} by copying it.
-         * 
-         * @param out
-         *            {@link OutputStream} to be filled
-         */
-        public void sendFile(OutputStream out) throws IOException {
-            int data;
-            while ((data = in.read()) >= 0) {
-                out.write((byte) data);
-            }
-        }
-
-    }
-
-    /**
-     * This {@link DataProvider} implementation uploads a {@link File} to the server.
-     */
-    public static class FileProvider extends InputStreamProvider {
-        protected File file;
-        protected String mimetype;
-
-        /**
-         * Create a new FileProvider with an "application/octet-stream" mime type.
-         * 
-         * @param file
-         *            {@link File} to be sent
-         */
-        public FileProvider(File file) throws FileNotFoundException {
-            this(file, "application/octet-stream");
-        }
-
-        /**
-         * Create a new FileProvider with the given mime type.
-         * 
-         * @param file
-         *            {@link File} to be sent
-         * @param mimetype
-         *            Mime type of that file
-         */
-        public FileProvider(File file, String mimetype) throws FileNotFoundException {
-            super(new FileInputStream(file));
-            this.file = file;
-            this.mimetype = mimetype;
-        }
-
-        /**
-         * Return the MimeType of the file.
-         * 
-         * @return MimeType
-         */
-        public String getMimeType() {
-            return mimetype;
-        }
-
-        /**
-         * Return the file name of the file.
-         * 
-         * @return File name
-         */
-        public String getFileName() {
-            return file.getName();
-        }
-
     }
 }
