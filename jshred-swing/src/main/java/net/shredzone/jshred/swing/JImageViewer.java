@@ -43,6 +43,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 
 /**
  * An ImageViewer renders an image in the centre of the component. This image can be
@@ -54,7 +55,7 @@ import javax.swing.JComponent;
  * This class also implements the {@link Printable} interface since R13.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JImageViewer.java 389 2009-11-11 23:47:30Z shred $
  * @since R9
  */
 public class JImageViewer extends JComponent implements Printable {

@@ -20,6 +20,7 @@
 package net.shredzone.jshred.swing;
 
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 /**
  * This is just a mere empty {@link TableModel} which will never have any entries. It also
@@ -28,7 +29,7 @@ import javax.swing.event.TableModelListener;
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R14
- * @version $Id: EmptyTableModel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: EmptyTableModel.java 389 2009-11-11 23:47:30Z shred $
  */
 public final class EmptyTableModel implements SortableTableModel {
 

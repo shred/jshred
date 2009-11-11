@@ -19,18 +19,27 @@
  */
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.table.*;
+import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
+
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  * This is a {@link JTableHeader} that shows the currently sorted column of a
  * {@link SortableTableModel} and allows to select columns to be sorted.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: SortTableHeader.java 389 2009-11-11 23:47:30Z shred $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 3256728372658124082L;
@@ -274,7 +283,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
                     SortableTableModel sortmodel = (SortableTableModel) model;
                     int modelcolumn = table.convertColumnIndexToModel(column);
                     if (sortmodel.getSortedColumn() == modelcolumn) {
-                        cl.setHorizontalTextPosition(JLabel.LEADING);
+                        cl.setHorizontalTextPosition(SwingConstants.LEADING);
                         if (sortmodel.isDescending()) {
                             cl.setIcon(iconDesc);
                         } else {

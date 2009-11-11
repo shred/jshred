@@ -19,13 +19,16 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 
 /**
  * This {@link PlainDocument} will limit the input to a certain length.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: LimitedDocument.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: LimitedDocument.java 389 2009-11-11 23:47:30Z shred $
  */
 public class LimitedDocument extends PlainDocument {
     private static final long serialVersionUID = 3258131358084904248L;

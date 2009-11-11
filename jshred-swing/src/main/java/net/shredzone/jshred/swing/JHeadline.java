@@ -19,9 +19,15 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * This is a headline to be used in dialogs etc. It shows a big title to the left, and
@@ -30,7 +36,7 @@ import java.awt.*;
  * current background color to the right.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHeadline.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JHeadline.java 389 2009-11-11 23:47:30Z shred $
  * @since R8
  */
 public class JHeadline extends JGradientPanel {

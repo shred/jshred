@@ -19,18 +19,21 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
+
+import javax.swing.Action;
+import javax.swing.ImageIcon;
 
 /**
  * The MenuActionProxy proxies {@link Action}s to be used in menus. It takes care about a
  * proper scaling of the {@link Action} icon to a nice menu size.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: MenuActionProxy.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: MenuActionProxy.java 389 2009-11-11 23:47:30Z shred $
  */
 public class MenuActionProxy implements Action, Serializable {
     private static final long serialVersionUID = 3257285850856699190L;

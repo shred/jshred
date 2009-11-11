@@ -19,7 +19,8 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JList;
 
 /**
  * This {@link DefaultListSelectionModel} also allows that no item can be selected at all.
@@ -28,7 +29,7 @@ import javax.swing.*;
  * completely behaves like the {@link DefaultListSelectionModel}.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: NoListSelectionModel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: NoListSelectionModel.java 389 2009-11-11 23:47:30Z shred $
  * @since R6
  * @see DefaultListSelectionModel
  */

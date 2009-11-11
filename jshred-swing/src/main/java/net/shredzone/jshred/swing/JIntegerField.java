@@ -19,16 +19,21 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import javax.swing.text.*;
-import java.awt.*;
+import java.awt.Toolkit;
+
+import javax.swing.JTextField;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 
 /**
  * A {@link JTextField} that only allows to enter digits. I wonder why Sun didn't supply
  * this obligatory input field.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JIntegerField.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JIntegerField.java 389 2009-11-11 23:47:30Z shred $
  * @since R2
  */
 public class JIntegerField extends JTextField {

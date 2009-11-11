@@ -43,6 +43,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * A Swing component that renders printable pages for a printer preview. The view can be
@@ -56,7 +57,7 @@ import javax.swing.JPanel;
  * does not need to be able to give random access to all the pages.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JPrintPreview.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JPrintPreview.java 389 2009-11-11 23:47:30Z shred $
  * @since R8
  */
 public class JPrintPreview extends JPanel {
@@ -84,7 +85,7 @@ public class JPrintPreview extends JPanel {
     public JPrintPreview() {
         setLayout(new BorderLayout());
         jlContent = new JLabel();
-        jlContent.setHorizontalAlignment(JLabel.CENTER);
+        jlContent.setHorizontalAlignment(SwingConstants.CENTER);
         add(jlContent, BorderLayout.CENTER);
         setBorder(BorderFactory.createEmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
 

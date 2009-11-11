@@ -46,7 +46,7 @@ import javax.swing.event.ChangeListener;
  * Due to a bug this component was not really functional until R12.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JCollapsiblePanel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JCollapsiblePanel.java 389 2009-11-11 23:47:30Z shred $
  * @since R9
  */
 public class JCollapsiblePanel extends JPanel {
@@ -140,8 +140,8 @@ public class JCollapsiblePanel extends JPanel {
         jbToggle.setBackground(getBackground().darker());
         jbToggle.setRequestFocusEnabled(false);
         jbToggle.setMargin(new Insets(0, 0, 0, 0));
-        jbToggle.setHorizontalTextPosition(JToggleButton.RIGHT);
-        jbToggle.setHorizontalAlignment(JToggleButton.LEFT);
+        jbToggle.setHorizontalTextPosition(SwingConstants.RIGHT);
+        jbToggle.setHorizontalAlignment(SwingConstants.LEFT);
         jbToggle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jbToggle.addActionListener(new Listener());
 

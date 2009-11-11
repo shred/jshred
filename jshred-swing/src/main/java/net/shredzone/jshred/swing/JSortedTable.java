@@ -19,9 +19,11 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import javax.swing.table.*;
 import java.awt.Rectangle;
+
+import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
 
 /**
  * This is a {@link JTable} which allows the user to sort each column in ascending or
@@ -36,7 +38,7 @@ import java.awt.Rectangle;
  * may be preferable to this solution.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JSortedTable.java 389 2009-11-11 23:47:30Z shred $
  */
 public class JSortedTable extends JTable {
     private static final long serialVersionUID = 3256728372624110384L;

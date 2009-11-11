@@ -19,10 +19,14 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.table.*;
-import javax.swing.event.*;
-import java.util.*;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 /**
  * The SortTableModelProxy wraps another {@link TableModel}, and allows to sort it by one
@@ -46,7 +50,7 @@ import java.io.Serializable;
  * constructor.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: SortableTableModelProxy.java 389 2009-11-11 23:47:30Z shred $
  */
 public class SortableTableModelProxy implements ExtendedSortableTableModel, TableModelListener, Serializable {
     static final long serialVersionUID = -668922708936078948L;

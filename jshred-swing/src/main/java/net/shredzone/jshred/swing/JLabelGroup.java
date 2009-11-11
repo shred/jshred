@@ -19,9 +19,17 @@
  */
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 /**
  * A JLabelGroup is a {@link JLabel} set left to a {@link Component}. At RTL systems, the
@@ -32,7 +40,7 @@ import javax.swing.border.*;
  * chain to the same, maximum width. This will result into a nicely aligned layout.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JLabelGroup.java 389 2009-11-11 23:47:30Z shred $
  */
 public class JLabelGroup extends JPanel {
     private static final long serialVersionUID = 4120855451547482167L;
@@ -231,7 +239,7 @@ public class JLabelGroup extends JPanel {
      */
     protected static JComponent createDefaultLabel(String text, Icon icon) {
         if (icon != null) {
-            return new JLabel(text, icon, JLabel.WEST);
+            return new JLabel(text, icon, SwingConstants.WEST);
         } else {
             return new JLabel(text);
         }

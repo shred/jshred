@@ -19,15 +19,20 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * This {@link JPanel} shows a color gradient in the background. You can select the
  * direction and the starting and ending color.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JGradientPanel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JGradientPanel.java 389 2009-11-11 23:47:30Z shred $
  */
 public class JGradientPanel extends JPanel {
     private static final long serialVersionUID = 4123386540283015480L;

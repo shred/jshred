@@ -19,15 +19,18 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Insets;
+
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.JButton;
 
 /**
  * This {@link JButton} is to be used in toolbars. It takes care that the button never has
  * a text, never gets the focus and has no borders.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JToolbarButton.java 389 2009-11-11 23:47:30Z shred $
  */
 public class JToolbarButton extends JButton {
     private static final long serialVersionUID = 3905246710308417843L;

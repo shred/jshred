@@ -19,7 +19,7 @@
  */
 package net.shredzone.jshred.swing;
 
-import javax.swing.table.*;
+import javax.swing.table.TableModel;
 
 /**
  * The SortableTableModel extends a {@link TableModel} by methods that are required to
@@ -29,7 +29,7 @@ import javax.swing.table.*;
  * pass it to a {@link SortableTableModelProxy}, which will take care for the sorting.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: SortableTableModel.java 389 2009-11-11 23:47:30Z shred $
  */
 public interface SortableTableModel extends TableModel {
 

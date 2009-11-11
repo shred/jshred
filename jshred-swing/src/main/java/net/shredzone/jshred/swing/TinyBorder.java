@@ -19,14 +19,18 @@
  */
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
-import javax.swing.border.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
+
+import javax.swing.border.AbstractBorder;
 
 /**
  * A recessed 1px border, like often used in status bars.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: TinyBorder.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: TinyBorder.java 389 2009-11-11 23:47:30Z shred $
  */
 public class TinyBorder extends AbstractBorder {
     private static final long serialVersionUID = 3761685710469805881L;

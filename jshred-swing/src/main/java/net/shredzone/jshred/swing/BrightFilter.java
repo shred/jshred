@@ -19,8 +19,12 @@
  */
 package net.shredzone.jshred.swing;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 
 /**
  * This filter is brighting or darking an image, e.g. for mouse over effects. The
@@ -28,7 +32,7 @@ import java.awt.image.*;
  * honored.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: BrightFilter.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: BrightFilter.java 389 2009-11-11 23:47:30Z shred $
  */
 public class BrightFilter extends RGBImageFilter {
     private int p;
