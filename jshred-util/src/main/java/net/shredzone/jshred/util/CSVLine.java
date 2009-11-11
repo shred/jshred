@@ -19,7 +19,7 @@
  */
 package net.shredzone.jshred.util;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * This class handles one CSV line.
@@ -39,7 +39,7 @@ import java.util.*;
  * CSVLine inherits the List interface for easier access.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: CSVLine.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: CSVLine.java 390 2009-11-11 23:48:36Z shred $
  */
 public class CSVLine extends ArrayList<String> {
     private static final long serialVersionUID = 3544948840219359284L;

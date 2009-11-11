@@ -46,7 +46,7 @@ import java.util.Map;
  * array) are not supported yet and will lead to a stack overflow.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: PhpSerializer.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: PhpSerializer.java 390 2009-11-11 23:48:36Z shred $
  * @since R14
  */
 public class PhpSerializer extends FilterWriter {
@@ -318,9 +318,9 @@ public class PhpSerializer extends FilterWriter {
             serializeNull();
         } else if (o instanceof Number) {
             serialize((Number) o);
-        } else if (o instanceof Collection) {
+        } else if (o instanceof Collection<?>) {
             serialize((Collection<?>) o);
-        } else if (o instanceof Map) {
+        } else if (o instanceof Map<?, ?>) {
             serialize((Map<?, ?>) o);
         } else if (o instanceof Object[]) {
             serialize((Object[]) o);

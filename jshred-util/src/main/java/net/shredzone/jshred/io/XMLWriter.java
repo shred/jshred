@@ -19,9 +19,16 @@
  */
 package net.shredzone.jshred.io;
 
-import java.io.*;
-import java.util.*;
-import org.xml.sax.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.util.Map;
+import java.util.Stack;
+
+import org.xml.sax.Attributes;
 
 /**
  * A very simple writer for cleanly formatted XML output.
@@ -35,7 +42,7 @@ import org.xml.sax.*;
  * and correct charset encoding.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: XMLWriter.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: XMLWriter.java 390 2009-11-11 23:48:36Z shred $
  */
 public class XMLWriter extends BufferedWriter {
     private String indent = "  ";
