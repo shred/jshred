@@ -1,6 +1,6 @@
 jshred - Shred's Toolbox
 
-Copyright (C) 2009 Richard "Shred" Körber
+Copyright (C) 2010 Richard "Shred" Körber
   http://jshred.shredzone.org
 
 This program is free software: you can redistribute it and/or modify

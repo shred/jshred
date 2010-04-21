@@ -1,5 +1,7 @@
-CHANGELOG -- $Id: changelog 244 2009-01-18 15:07:54Z shred $
+CHANGELOG -- $Id: changelog 425 2010-04-21 11:31:33Z shred $
 
+R16 (2010-04-21)
+  * Due to a mistake, R15 was never released.
 
 R15
   * NOTE: There were major changes in the R15's API. If you upgrade to R15,
