@@ -4,11 +4,11 @@
     <parent>
         <artifactId>jshred</artifactId>
         <groupId>org.shredzone.jshred</groupId>
-        <version>17</version>
+        <version>18-SNAPSHOT</version>
     </parent>
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred-util</artifactId>
     <name>jShred Util</name>
-    <version>17</version>
+    <version>18-SNAPSHOT</version>
     <description>Utility module of jShred</description>
 </project>

@@ -3,11 +3,11 @@
     <parent>
         <artifactId>jshred</artifactId>
         <groupId>org.shredzone.jshred</groupId>
-        <version>17</version>
+        <version>18-SNAPSHOT</version>
     </parent>
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred-swing</artifactId>
     <name>jShred Swing</name>
-    <version>17</version>
+    <version>18-SNAPSHOT</version>
     <description>Swing module of the jShred library</description>
 </project>
