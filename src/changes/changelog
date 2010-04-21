@@ -1,4 +1,8 @@
-CHANGELOG -- $Id: changelog 425 2010-04-21 11:31:33Z shred $
+CHANGELOG -- $Id: changelog 432 2010-04-21 22:06:11Z shred $
+
+R17 (2010-04-22)
+  * Added jshred-spring with Spring utility classes
+  * Added classes for generating Spring based tag libraries
 
 R16 (2010-04-21)
   * Due to a mistake, R15 was never released.
