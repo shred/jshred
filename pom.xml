@@ -9,7 +9,7 @@
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred</artifactId>
     <name>jShred</name>
-    <version>16</version>
+    <version>17-SNAPSHOT</version>
     <description>jShred Java library</description>
     <inceptionYear>2004</inceptionYear>
     <packaging>pom</packaging>
@@ -33,10 +33,4 @@
         <module>jshred-util</module>
         <module>jshred-web</module>
     </modules>
-
-  <scm>
-    <connection>scm:svn:http://svn.shredzone.org/tags/jshred/r16</connection>
-    <developerConnection>scm:svn:https://svn.shredzone.org/tags/jshred/r16</developerConnection>
-    <url>http://svn.shredzone.org/tags/jshred/r16</url>
-  </scm>
 </project>
