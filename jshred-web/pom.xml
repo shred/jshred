@@ -5,11 +5,11 @@
     <parent>
         <artifactId>jshred</artifactId>
         <groupId>org.shredzone.jshred</groupId>
-        <version>16</version>
+        <version>16-SNAPSHOT</version>
     </parent>
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred-web</artifactId>
     <name>jShred Web</name>
-    <version>16</version>
+    <version>16-SNAPSHOT</version>
     <description>Web utility module of jShred</description>
 </project>

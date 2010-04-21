@@ -10,7 +10,7 @@
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred</artifactId>
     <name>jShred</name>
-    <version>16</version>
+    <version>16-SNAPSHOT</version>
     <description>jShred Java library</description>
     <inceptionYear>2004</inceptionYear>
     <packaging>pom</packaging>
