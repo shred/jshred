@@ -20,33 +20,50 @@
 package org.shredzone.jshred.spring.taglib;
 
 import javax.servlet.jsp.tagext.Tag;
-import org.shredzone.jshred.spring.taglib.proxy.ProxiedTag;
+import javax.servlet.jsp.tagext.TagSupport;
 
+import org.shredzone.jshred.spring.taglib.proxy.ProxiedTag;
 
 /**
  * Utility class for taglib beans.
- *
+ * 
  * @author Richard Körber {@literal <dev@shredzone.de>}
- * @version $Id: TaglibUtils.java 436 2010-08-24 16:35:25Z shred $
+ * @version $Id: TaglibUtils.java 437 2010-08-24 21:23:35Z shred $
  */
 public final class TaglibUtils {
 
     private TaglibUtils() {}
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    public static <T> T findAncestorWithType(Tag from, Class<T> clazz) {
+    /**
+     * Finds an ancestor tag of the given type. Starting from the given Tag, it traverses
+     * up the parent tags until a tag of the given type is found.
+     * <p>
+     * Use this method instead of {@link TagSupport#findAncestorWithClass(Tag, Class)}, as
+     * it is aware of proxied tag classes, while findAncestorWithClass only sees the
+     * proxy instances instead of the tag classes behind it. Furthermore, this method is
+     * also able to locate interfaces.
+     * 
+     * @param <T>
+     *            Type to find and return
+     * @param from
+     *            Tag to start from
+     * @param type
+     *            Type to find
+     * @return Ancestor of that type, or {@code null} if none was found.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T findAncestorWithType(Tag from, Class<T> type) {
         Tag parent = from.getParent();
         while (parent != null) {
             if (parent instanceof ProxiedTag) {
                 parent = ((ProxiedTag<Tag>) parent).getTargetBean();
             }
-            if (clazz.isAssignableFrom(parent.getClass())) {
+            if (type.isAssignableFrom(parent.getClass())) {
                 return (T) parent;
             }
             parent = parent.getParent();
         }
         return null;
     }
-    
 
 }

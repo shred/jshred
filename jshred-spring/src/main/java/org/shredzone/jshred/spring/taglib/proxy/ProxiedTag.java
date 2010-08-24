@@ -22,16 +22,16 @@ package org.shredzone.jshred.spring.taglib.proxy;
 import javax.servlet.jsp.tagext.JspTag;
 
 /**
- * This interface marks the Tag as proxied tag, and gives access to the
- * remote tag implementation.
- *
+ * This interface marks the Tag class as proxied tag, and gives access to the target tag
+ * implementation.
+ * 
  * @author Richard Körber {@literal <dev@shredzone.de>}
- * @version $Id: ProxiedTag.java 436 2010-08-24 16:35:25Z shred $
+ * @version $Id: ProxiedTag.java 437 2010-08-24 21:23:35Z shred $
  */
 public interface ProxiedTag<T extends JspTag> {
 
     /**
-     * Returns a reference to the implementing target bean.
+     * Returns a reference to the target bean this proxy delegates to.
      *
      * @return Target bean
      */
