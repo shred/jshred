@@ -35,9 +35,9 @@ import org.springframework.web.servlet.FrameworkServlet;
  * An abstract TagProxy implementation that offers all basic methods.
  * 
  * @author Richard Körber {@literal <dev@shredzone.de>}
- * @version $Id: AbstractTagProxy.java 430 2010-04-21 21:58:20Z shred $
+ * @version $Id: AbstractTagProxy.java 436 2010-08-24 16:35:25Z shred $
  */
-public abstract class AbstractTagProxy<T extends JspTag> implements JspTag {
+public abstract class AbstractTagProxy<T extends JspTag> implements JspTag, ProxiedTag<T> {
 
     public static final String TAGPROXY_BEANFACTORY_CACHE = AbstractTagProxy.class + ".beanFactory";
     
@@ -95,18 +95,14 @@ public abstract class AbstractTagProxy<T extends JspTag> implements JspTag {
         throw new IllegalStateException("Could not find a BeanFactory. Use a FrameworkServlet or @BeanFactoryReference.");
     }
 
-    /**
-     * Returns a reference to the implementing target bean.
-     * 
-     * @return Target bean
-     */
-    protected T getTargetBean() {
+    @Override
+    public T getTargetBean() {
         return tagImpl;
     }
 
     /**
-     * Sets a parameter in the target implementation.
-     * 
+     * Sets a TagParameter annotated parameter in the target implementation.
+     *
      * @param name
      *            Parameter name
      * @param value
