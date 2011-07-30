@@ -55,7 +55,7 @@ import javax.swing.JScrollPane;
  * This class also implements the {@link Printable} interface since R13.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: JImageViewer.java 584 2011-07-30 20:42:48Z shred $
  * @since R9
  */
 public class JImageViewer extends JComponent implements Printable {
@@ -537,6 +537,7 @@ public class JImageViewer extends JComponent implements Printable {
      * @return {@link Printable#PAGE_EXISTS} or {@link Printable#NO_SUCH_PAGE}
      * @since R13
      */
+    @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
         final Graphics2D g2d = (Graphics2D) graphics;
 

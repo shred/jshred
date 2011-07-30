@@ -41,7 +41,7 @@ import javax.swing.JTextField;
  * {@link Preferences} if a unique name is given to the constructor.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHistoryTextField.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JHistoryTextField.java 584 2011-07-30 20:42:48Z shred $
  * @since R6
  */
 public class JHistoryTextField extends JComponent {
@@ -97,6 +97,7 @@ public class JHistoryTextField extends JComponent {
 
         // --- Add an ActionListener ---
         jCombo.getEditor().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 String newtext = jCombo.getEditor().getItem().toString();
 
@@ -377,6 +378,7 @@ public class JHistoryTextField extends JComponent {
      * This comparator compares two integer values of a string representation.
      */
     private static class HTFComparator implements Comparator<String> {
+        @Override
         public int compare(String o1, String o2) {
             int i1 = Integer.parseInt(o1);
             int i2 = Integer.parseInt(o2);

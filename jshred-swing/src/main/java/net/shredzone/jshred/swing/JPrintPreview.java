@@ -21,6 +21,7 @@ package net.shredzone.jshred.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -57,7 +58,7 @@ import javax.swing.SwingConstants;
  * does not need to be able to give random access to all the pages.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JPrintPreview.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: JPrintPreview.java 584 2011-07-30 20:42:48Z shred $
  * @since R8
  */
 public class JPrintPreview extends JPanel {
@@ -338,9 +339,7 @@ public class JPrintPreview extends JPanel {
         int stat = cPrintable.print(g2d, cFormat, currentPage);
         g2d.dispose();
 
-        if (stat == Printable.NO_SUCH_PAGE) throw new PrinterException("Page "
-                                                                       + currentPage
-                                                                       + ": NO_SUCH_PAGE");
+        if (stat == Printable.NO_SUCH_PAGE) throw new PrinterException("Page " + currentPage + ": NO_SUCH_PAGE");
 
         // --- Return the image ---
         return img;
@@ -359,7 +358,7 @@ public class JPrintPreview extends JPanel {
      * Set the page number of the page to be shown. If the page does not exist, an empty
      * image will be shown instead.
      * <p>
-     * <em>NOTE:</em> some {@link Printables} are unable to give random access to the
+     * <em>NOTE:</em> some Printables are unable to give random access to the
      * printed document. You cannot go back to a page that has been printed already, or go
      * forward by more than one page.
      * 

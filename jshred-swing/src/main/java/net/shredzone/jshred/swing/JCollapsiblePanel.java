@@ -46,7 +46,7 @@ import javax.swing.event.ChangeListener;
  * Due to a bug this component was not really functional until R12.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JCollapsiblePanel.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: JCollapsiblePanel.java 584 2011-07-30 20:42:48Z shred $
  * @since R9
  */
 public class JCollapsiblePanel extends JPanel {
@@ -333,6 +333,7 @@ public class JCollapsiblePanel extends JPanel {
      * {@link JToggleButton} was pressed.
      */
     private class Listener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (content != null) {
                 // --- Change visibility ---

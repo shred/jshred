@@ -31,7 +31,7 @@ import javax.swing.SwingConstants;
  * or outlined.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: ArrowIcon.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: ArrowIcon.java 584 2011-07-30 20:42:48Z shred $
  * @since R12
  */
 public class ArrowIcon implements Icon, Serializable {
@@ -95,6 +95,7 @@ public class ArrowIcon implements Icon, Serializable {
      * @param y
      *            Y position
      */
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         final int w  = width - 1;
         final int h  = height - 1;
@@ -147,6 +148,7 @@ public class ArrowIcon implements Icon, Serializable {
      * 
      * @return Icon width
      */
+    @Override
     public int getIconWidth() {
         return width;
     }
@@ -156,6 +158,7 @@ public class ArrowIcon implements Icon, Serializable {
      * 
      * @return Icon height
      */
+    @Override
     public int getIconHeight() {
         return height;
     }

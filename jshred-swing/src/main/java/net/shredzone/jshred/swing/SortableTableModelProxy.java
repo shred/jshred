@@ -50,7 +50,7 @@ import javax.swing.table.TableModel;
  * constructor.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: SortableTableModelProxy.java 584 2011-07-30 20:42:48Z shred $
  */
 public class SortableTableModelProxy implements ExtendedSortableTableModel, TableModelListener, Serializable {
     static final long serialVersionUID = -668922708936078948L;
@@ -91,6 +91,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * 
      * @return Number of rows
      */
+    @Override
     public int getRowCount() {
         return master.getRowCount();
     }
@@ -100,6 +101,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * 
      * @return Number of columns
      */
+    @Override
     public int getColumnCount() {
         return master.getColumnCount();
     }
@@ -112,6 +114,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      *            Index
      * @return Column name
      */
+    @Override
     public String getColumnName(int columnIndex) {
         return master.getColumnName(columnIndex);
     }
@@ -124,6 +127,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      *            Index
      * @return Column name
      */
+    @Override
     public Class<?> getColumnClass(int columnIndex) {
         return master.getColumnClass(columnIndex);
     }
@@ -138,6 +142,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      *            Column
      * @return true: is editable
      */
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return master.isCellEditable(mapRow(rowIndex), columnIndex);
     }
@@ -152,6 +157,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      *            Column
      * @return The value of this cell.
      */
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return master.getValueAt(mapRow(rowIndex), columnIndex);
     }
@@ -168,6 +174,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * @param columnIndex
      *            Column
      */
+    @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         master.setValueAt(aValue, mapRow(rowIndex), columnIndex);
         if (columnIndex == currentColumn) {
@@ -232,6 +239,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * @param desc
      *            true: descending, false: ascending
      */
+    @Override
     public void sortByColumn(int columnIndex, boolean desc) {
         currentColumn = columnIndex;
         currentDesc = desc;
@@ -244,6 +252,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * 
      * @return Currently sorted column.
      */
+    @Override
     public int getSortedColumn() {
         return currentColumn;
     }
@@ -253,6 +262,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * 
      * @return true: descending, false: ascending
      */
+    @Override
     public boolean isDescending() {
         return currentDesc;
     }
@@ -283,6 +293,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * @param e
      *            TableModelEvent
      */
+    @Override
     public void tableChanged(TableModelEvent e) {
         rebuildIndexMap();
         resort();
@@ -296,6 +307,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * @param l
      *            {@link TableModelListener}
      */
+    @Override
     public void addTableModelListener(TableModelListener l) {
         master.addTableModelListener(l);
         listener.addListener(l);
@@ -309,6 +321,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * @param l
      *            {@link TableModelListener}
      */
+    @Override
     public void removeTableModelListener(TableModelListener l) {
         master.removeTableModelListener(l);
         listener.removeListener(l);
@@ -354,6 +367,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
          *            Integer 2
          * @return Sequence: positive, 0 or negative
          */
+        @Override
         @SuppressWarnings("unchecked")
         public int compare(Integer i1, Integer i2) {
             // --- Get the table cell objects ---
@@ -367,7 +381,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
 
             try {
                 // --- Try to compare Comparables ---
-                Comparable c1 = (Comparable) d1;
+                Comparable<Object> c1 = (Comparable<Object>) d1;
                 return c1.compareTo(d2);
             } catch (ClassCastException e) {
                 // --- Compare the toString representation ---
@@ -385,6 +399,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
      * @return Always <code>true</code>
      * @since R15
      */
+    @Override
     public boolean isColumnSortable(int columnIndex) {
         return true;
     }

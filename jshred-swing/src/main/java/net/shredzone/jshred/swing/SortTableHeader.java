@@ -39,7 +39,7 @@ import javax.swing.table.TableModel;
  * {@link SortableTableModel} and allows to select columns to be sorted.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: SortTableHeader.java 584 2011-07-30 20:42:48Z shred $
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 3256728372658124082L;
@@ -142,6 +142,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mousePressed(MouseEvent e) {
         pressed = true;
         pressedIndex = columnAtPoint(e.getPoint());
@@ -154,6 +155,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mouseReleased(MouseEvent e) {
         if (!dragged) {
             // --- Find the column ---
@@ -187,6 +189,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mouseDragged(MouseEvent e) {
         dragged = true;
         pressed = false;
@@ -199,6 +202,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mouseMoved(MouseEvent e) {
         dragged = false;
     }
@@ -209,6 +213,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mouseClicked(MouseEvent e) {}
 
     /**
@@ -217,6 +222,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mouseEntered(MouseEvent e) {}
 
     /**
@@ -225,6 +231,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
      * @param e
      *            MouseEvent
      */
+    @Override
     public void mouseExited(MouseEvent e) {}
 
     /**
@@ -264,6 +271,7 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
          *            Column
          * @return A component that renders the table cell
          */
+        @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             // --- Get the original Component ---
             Component c = parent.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

@@ -57,7 +57,7 @@ import javax.swing.table.TableModel;
  * This is a collection of static methods for your convenience.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 354 2009-10-14 09:49:16Z shred $
+ * @version $Id: SwingUtils.java 584 2011-07-30 20:42:48Z shred $
  */
 public class SwingUtils {
 
@@ -331,6 +331,7 @@ public class SwingUtils {
         lp.getActionMap().put(name, new AbstractAction(name) {
             private static final long serialVersionUID = 3760844579897030200L;
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 fCancel.doClick();
             }

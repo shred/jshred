@@ -41,7 +41,7 @@ import javax.swing.SwingConstants;
  * instead of being centered like in the {@link JImageViewer} class.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JScrollableImageViewer.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JScrollableImageViewer.java 584 2011-07-30 20:42:48Z shred $
  * @since R9
  */
 public class JScrollableImageViewer extends JImageViewer implements Scrollable {
@@ -108,6 +108,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
      * 
      * @return Preferred scrollable viewport dimension
      */
+    @Override
     public Dimension getPreferredScrollableViewportSize() {
         return getPreferredSize();
     }
@@ -118,6 +119,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
      * 
      * @return A small number of pixels to be scrolled.
      */
+    @Override
     public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
         return SCROLL_UNITS;
     }
@@ -129,6 +131,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
      * @return A large number of pixels to be scrolled. The default is the visible
      *         width/height (respectively) minus one unit increment.
      */
+    @Override
     public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
         int unit = getScrollableUnitIncrement(visibleRect, orientation, direction);
         int result;
@@ -146,6 +149,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
      * 
      * @return always false
      */
+    @Override
     public boolean getScrollableTracksViewportWidth() {
         return false;
     }
@@ -155,6 +159,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
      * 
      * @return always false
      */
+    @Override
     public boolean getScrollableTracksViewportHeight() {
         return false;
     }

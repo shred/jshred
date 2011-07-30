@@ -28,7 +28,7 @@ import javax.swing.tree.TreePath;
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R7
- * @version $Id: EmptyTreeModel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: EmptyTreeModel.java 584 2011-07-30 20:42:48Z shred $
  */
 public final class EmptyTreeModel implements TreeModel {
 
@@ -38,6 +38,7 @@ public final class EmptyTreeModel implements TreeModel {
      * @return Root node, which is null.
      * @see javax.swing.tree.TreeModel#getRoot()
      */
+    @Override
     public Object getRoot() {
         return null;
     }
@@ -50,6 +51,7 @@ public final class EmptyTreeModel implements TreeModel {
      * @return Child count.
      * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
      */
+    @Override
     public int getChildCount(Object parent) {
         return 0;
     }
@@ -63,6 +65,7 @@ public final class EmptyTreeModel implements TreeModel {
      * @return Always true.
      * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
      */
+    @Override
     public boolean isLeaf(Object node) {
         return true;
     }
@@ -75,6 +78,7 @@ public final class EmptyTreeModel implements TreeModel {
      *            {@link TreeModelListener} to be ignored.
      * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void addTreeModelListener(TreeModelListener l) {}
 
     /**
@@ -85,6 +89,7 @@ public final class EmptyTreeModel implements TreeModel {
      *            {@link TreeModelListener} to be ignored.
      * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
      */
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {}
 
     /**
@@ -98,6 +103,7 @@ public final class EmptyTreeModel implements TreeModel {
      * @return Always null.
      * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
      */
+    @Override
     public Object getChild(Object parent, int index) {
         return null;
     }
@@ -113,6 +119,7 @@ public final class EmptyTreeModel implements TreeModel {
      * @return Index, always -1.
      * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object, java.lang.Object)
      */
+    @Override
     public int getIndexOfChild(Object parent, Object child) {
         return -1;
     }
@@ -128,6 +135,7 @@ public final class EmptyTreeModel implements TreeModel {
      * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath,
      *      java.lang.Object)
      */
+    @Override
     public void valueForPathChanged(TreePath path, Object newValue) {}
 
 }

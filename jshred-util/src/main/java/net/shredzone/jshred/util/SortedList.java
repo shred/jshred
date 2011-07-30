@@ -38,7 +38,7 @@ import java.util.List;
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R7
- * @version $Id: SortedList.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: SortedList.java 584 2011-07-30 20:42:48Z shred $
  */
 public class SortedList<T> extends ArrayList<T> {
     private static final long serialVersionUID = 3257003263499972657L;
@@ -182,7 +182,7 @@ public class SortedList<T> extends ArrayList<T> {
 
     /**
      * Check if a SortedList contains an element. The list contains an element if the
-     * given element's {@link T#equals(Object)} returns <code>true</code> to one of the
+     * given element's equals(Object) returns <code>true</code> to one of the
      * elements in this list.
      * 
      * @param elem

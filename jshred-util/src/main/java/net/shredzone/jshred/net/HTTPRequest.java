@@ -65,7 +65,7 @@ import net.shredzone.jshred.io.UncloseableOutputStream;
  * data has been transfered to the server. This is especially useful for file uploads.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: HTTPRequest.java 350 2009-10-14 09:06:25Z shred $
+ * @version $Id: HTTPRequest.java 584 2011-07-30 20:42:48Z shred $
  */
 public class HTTPRequest {
 
@@ -663,6 +663,7 @@ public class HTTPRequest {
          * @param out
          *            {@link OutputStream} to be filled
          */
+        @Override
         public void sendFile(OutputStream out) throws IOException {
             int data;
             while ((data = in.read()) >= 0) {
@@ -708,6 +709,7 @@ public class HTTPRequest {
          * 
          * @return MimeType
          */
+        @Override
         public String getMimeType() {
             return mimetype;
         }
@@ -717,6 +719,7 @@ public class HTTPRequest {
          * 
          * @return File name
          */
+        @Override
         public String getFileName() {
             return file.getName();
         }

@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
  * proper scaling of the {@link Action} icon to a nice menu size.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: MenuActionProxy.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: MenuActionProxy.java 584 2011-07-30 20:42:48Z shred $
  */
 public class MenuActionProxy implements Action, Serializable {
     private static final long serialVersionUID = 3257285850856699190L;
@@ -86,6 +86,7 @@ public class MenuActionProxy implements Action, Serializable {
     /**
      * Delegates the invocation to the Action's {@link Action#getValue(String)} method.
      */
+    @Override
     public Object getValue(String key) {
         Object val = master.getValue(key);
 
@@ -106,6 +107,7 @@ public class MenuActionProxy implements Action, Serializable {
      * Delegates the invocation to the Action's {@link Action#putValue(String, Object)}
      * method.
      */
+    @Override
     public void putValue(String key, Object value) {
         master.putValue(key, value);
     }
@@ -113,6 +115,7 @@ public class MenuActionProxy implements Action, Serializable {
     /**
      * Delegates the invocation to the Action's {@link Action#setEnabled(boolean)} method.
      */
+    @Override
     public void setEnabled(boolean b) {
         master.setEnabled(b);
     }
@@ -120,6 +123,7 @@ public class MenuActionProxy implements Action, Serializable {
     /**
      * Delegates the invocation to the Action's {@link Action#isEnabled()} method.
      */
+    @Override
     public boolean isEnabled() {
         return master.isEnabled();
     }
@@ -128,6 +132,7 @@ public class MenuActionProxy implements Action, Serializable {
      * Delegates the invocation to the Action's
      * {@link Action#addPropertyChangeListener(PropertyChangeListener)} method.
      */
+    @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         master.addPropertyChangeListener(listener);
     }
@@ -136,6 +141,7 @@ public class MenuActionProxy implements Action, Serializable {
      * Delegates the invocation to the Action's
      * {@link Action#removePropertyChangeListener(PropertyChangeListener)} method.
      */
+    @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         master.removePropertyChangeListener(listener);
     }
@@ -144,6 +150,7 @@ public class MenuActionProxy implements Action, Serializable {
      * Delegates the invocation to the Action's
      * {@link Action#actionPerformed(ActionEvent)} method.
      */
+    @Override
     public void actionPerformed(ActionEvent e) {
         master.actionPerformed(e);
     }

@@ -25,7 +25,7 @@ import java.util.Iterator;
  * Contains all data required to show a page browser.
  * 
  * @author Richard "Shred" Körber
- * @version $Revision: 302 $
+ * @version $Revision: 584 $
  */
 public class BrowserData {
     private int pagecount;
@@ -176,6 +176,7 @@ public class BrowserData {
          * 
          * @return <code>true</code>: has more page numbers
          */
+        @Override
         public boolean hasNext() {
             return currentPage <= pageCount;
         }
@@ -185,6 +186,7 @@ public class BrowserData {
          * 
          * @return Next page number
          */
+        @Override
         public Integer next() {
             int result = currentPage;
 
@@ -211,6 +213,7 @@ public class BrowserData {
         /**
          * Unsupported operation!
          */
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }

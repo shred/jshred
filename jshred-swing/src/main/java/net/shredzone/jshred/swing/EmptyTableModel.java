@@ -29,7 +29,7 @@ import javax.swing.table.TableModel;
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R14
- * @version $Id: EmptyTableModel.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: EmptyTableModel.java 584 2011-07-30 20:42:48Z shred $
  */
 public final class EmptyTableModel implements SortableTableModel {
 
@@ -41,6 +41,7 @@ public final class EmptyTableModel implements SortableTableModel {
      *            {@link TableModelListener} to be ignored.
      * @see javax.swing.TableModel#addTableModelListener(javax.swing.event.TableModelListener)
      */
+    @Override
     public void addTableModelListener(TableModelListener l) {}
 
     /**
@@ -48,6 +49,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * 
      * @return Column class
      */
+    @Override
     public Class<?> getColumnClass(int columnIndex) {
         return Object.class;
     }
@@ -57,6 +59,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * 
      * @return Column count
      */
+    @Override
     public int getColumnCount() {
         return 0;
     }
@@ -66,6 +69,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * 
      * @return Column name
      */
+    @Override
     public String getColumnName(int columnIndex) {
         return "";
     }
@@ -75,6 +79,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * 
      * @return Row count
      */
+    @Override
     public int getRowCount() {
         return 0;
     }
@@ -88,6 +93,7 @@ public final class EmptyTableModel implements SortableTableModel {
      *            Column
      * @return Value of a cell
      */
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return null;
     }
@@ -101,6 +107,7 @@ public final class EmptyTableModel implements SortableTableModel {
      *            Column
      * @return false: Cell is not editable
      */
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
@@ -113,6 +120,7 @@ public final class EmptyTableModel implements SortableTableModel {
      *            {@link TableModelListener} to be ignored.
      * @see javax.swing.TableModel#removeTableModelListener(javax.swing.event.TableModelListener)
      */
+    @Override
     public void removeTableModelListener(TableModelListener l) {}
 
     /**
@@ -125,6 +133,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * @param columnIndex
      *            Column
      */
+    @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {}
 
     /**
@@ -132,6 +141,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * 
      * @return Sorted column.
      */
+    @Override
     public int getSortedColumn() {
         return 0;
     }
@@ -141,6 +151,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * 
      * @return Sort order.
      */
+    @Override
     public boolean isDescending() {
         return false;
     }
@@ -153,6 +164,7 @@ public final class EmptyTableModel implements SortableTableModel {
      * @param desc
      *            Descending?
      */
+    @Override
     public void sortByColumn(int columnIndex, boolean desc) {}
 
 }

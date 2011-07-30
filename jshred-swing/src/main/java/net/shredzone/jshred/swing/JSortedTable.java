@@ -38,7 +38,7 @@ import javax.swing.table.TableModel;
  * may be preferable to this solution.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java 389 2009-11-11 23:47:30Z shred $
+ * @version $Id: JSortedTable.java 584 2011-07-30 20:42:48Z shred $
  */
 public class JSortedTable extends JTable {
     private static final long serialVersionUID = 3256728372624110384L;
@@ -62,7 +62,7 @@ public class JSortedTable extends JTable {
 
     /**
      * Set the {@link TableModel} to be used. You must pass a {@link SortableTableModel}
-     * here, otherwise you'll get an {@link InvalidArgumentException}.
+     * here, otherwise you'll get an {@link IllegalArgumentException}.
      * 
      * @param model
      *            A {@link SortableTableModel}

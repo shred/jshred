@@ -27,7 +27,7 @@ import javax.swing.event.ListDataListener;
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
  * @since R7
- * @version $Id: EmptyListModel.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: EmptyListModel.java 584 2011-07-30 20:42:48Z shred $
  */
 public final class EmptyListModel implements ListModel {
 
@@ -37,6 +37,7 @@ public final class EmptyListModel implements ListModel {
      * @return Size
      * @see javax.swing.ListModel#getSize()
      */
+    @Override
     public int getSize() {
         return 0;
     }
@@ -50,6 +51,7 @@ public final class EmptyListModel implements ListModel {
      * @return Always null
      * @see javax.swing.ListModel#getElementAt(int)
      */
+    @Override
     public Object getElementAt(int index) {
         return null;
     }
@@ -62,6 +64,7 @@ public final class EmptyListModel implements ListModel {
      *            {@link ListDataListener} to be ignored.
      * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
      */
+    @Override
     public void addListDataListener(ListDataListener l) {}
 
     /**
@@ -72,6 +75,7 @@ public final class EmptyListModel implements ListModel {
      *            {@link ListDataListener} to be ignored.
      * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
      */
+    @Override
     public void removeListDataListener(ListDataListener l) {}
 
 }

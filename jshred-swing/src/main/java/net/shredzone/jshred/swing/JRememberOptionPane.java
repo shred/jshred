@@ -38,7 +38,7 @@ import javax.swing.JPanel;
  * answer and will give this answer immediately next time it is invoked.
  * 
  * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JRememberOptionPane.java 302 2009-05-12 22:19:11Z shred $
+ * @version $Id: JRememberOptionPane.java 584 2011-07-30 20:42:48Z shred $
  * @since R7
  */
 public class JRememberOptionPane extends JOptionPane {
@@ -186,8 +186,8 @@ public class JRememberOptionPane extends JOptionPane {
      * will happen.
      * <p>
      * If you pass <code>null</code> as base, the user will be asked again for all
-     * {@link JRememberDialog}s in <em>all</em> applications. It is strongly discouraged
-     * to pass <code>null</code>!
+     * {@link JRememberOptionPane}s in <em>all</em> applications. It is strongly
+     * discouraged to pass <code>null</code>!
      * 
      * @param base
      *            Base of the keys to be forgotten, <code>null</code> will forget all
