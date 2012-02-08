@@ -6,10 +6,8 @@
         <groupId>org.shredzone.jshred</groupId>
         <version>18-SNAPSHOT</version>
     </parent>
-    <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred-spring</artifactId>
     <name>jShred Spring</name>
-    <version>18-SNAPSHOT</version>
     <description>Spring module of jShred</description>
 
     <!-- Workaround that inhibits maven to use the processor while compiling the processor -->
