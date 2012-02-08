@@ -4,7 +4,7 @@
     <parent>
         <artifactId>jshred</artifactId>
         <groupId>org.shredzone.jshred</groupId>
-        <version>18</version>
+        <version>19-SNAPSHOT</version>
     </parent>
     <artifactId>jshred-web</artifactId>
     <name>jShred Web</name>
