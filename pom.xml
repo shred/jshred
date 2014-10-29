@@ -29,7 +29,6 @@
         </license>
     </licenses>
     <modules>
-        <module>jshred-spring</module>
         <module>jshred-swing</module>
         <module>jshred-util</module>
         <module>jshred-web</module>
