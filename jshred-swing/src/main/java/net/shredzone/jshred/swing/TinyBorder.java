@@ -28,29 +28,12 @@ import javax.swing.border.AbstractBorder;
 
 /**
  * A recessed 1px border, like often used in status bars.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: TinyBorder.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class TinyBorder extends AbstractBorder {
     private static final long serialVersionUID = 3761685710469805881L;
 
-    /**
-     * Paint the border.
-     * 
-     * @param c
-     *            {@link Component} to paint the border around
-     * @param g
-     *            {@link Graphics} context
-     * @param x
-     *            Left coordinate
-     * @param y
-     *            Top coordinate
-     * @param width
-     *            Width
-     * @param height
-     *            Height
-     */
     @Override
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         Color oldColor = g.getColor();
@@ -70,36 +53,17 @@ public class TinyBorder extends AbstractBorder {
         g.setColor(oldColor);
     }
 
-    /**
-     * Return the {@link Insets} of the border.
-     * 
-     * @param c
-     *            {@link Component} for this border
-     */
     @Override
     public Insets getBorderInsets(Component c) {
         return new Insets(2, 2, 2, 2);
     }
 
-    /**
-     * Reinitialize the insets parameter with this Border's current {@link Insets}.
-     * 
-     * @param c
-     *            {@link Component} for this border
-     * @param insets
-     *            The {@link Insets} to be reinitialized
-     */
     @Override
     public Insets getBorderInsets(Component c, Insets insets) {
         insets.left = insets.top = insets.right = insets.bottom = 2;
         return insets;
     }
 
-    /**
-     * Return whether or not the border is opaque.
-     * 
-     * @return opaque state
-     */
     @Override
     public boolean isBorderOpaque() {
         return true;

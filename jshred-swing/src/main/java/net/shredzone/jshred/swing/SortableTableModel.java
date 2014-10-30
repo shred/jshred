@@ -22,20 +22,20 @@ package net.shredzone.jshred.swing;
 import javax.swing.table.TableModel;
 
 /**
- * The SortableTableModel extends a {@link TableModel} by methods that are required to
- * order the model by a certain column.
+ * The {@link SortableTableModel} extends a {@link TableModel} by methods that are
+ * required to order the model by a certain column.
  * <p>
- * A simple way to use the SortableTableModel is to use a classic {@link TableModel} and
- * pass it to a {@link SortableTableModelProxy}, which will take care for the sorting.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModel.java 389 2009-11-11 23:47:30Z shred $
+ * A simple way to use the {@link SortableTableModel} is to use a classic
+ * {@link TableModel} and pass it to a {@link SortableTableModelProxy}, which will take
+ * care for the sorting.
+ *
+ * @author Richard "Shred" Körber
  */
 public interface SortableTableModel extends TableModel {
 
     /**
-     * Sort by a certain column in the given order.
-     * 
+     * Sorts by a certain column in the given order.
+     *
      * @param columnIndex
      *            Column to sort at.
      * @param desc
@@ -44,15 +44,15 @@ public interface SortableTableModel extends TableModel {
     public void sortByColumn(int columnIndex, boolean desc);
 
     /**
-     * Get the index of the column that is currently sorted.
-     * 
+     * Gets the index of the column that is currently sorted.
+     *
      * @return Currently sorted column.
      */
     public int getSortedColumn();
 
     /**
-     * Get the current sort order.
-     * 
+     * Gets the current sort order.
+     *
      * @return true: descending, false: ascending
      */
     public boolean isDescending();

@@ -35,14 +35,13 @@ import org.xml.sax.Attributes;
  * <p>
  * This writer will do for creating simple XML files, but please note that it is not
  * perfect at all. It does not support namespace, DTDs and it is unable to read DOM
- * structures as in the <code>org.w3c.dom</code> package. And last but not least it does
+ * structures as in the {@code org.w3c.dom} package. And last but not least it does
  * not validate your XML against a DTD.
  * <p>
  * What it <em>does</em> is indention of the text, proper escaping of XML special chars
  * and correct charset encoding.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: XMLWriter.java 390 2009-11-11 23:48:36Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class XMLWriter extends BufferedWriter {
     private String indent = "  ";
@@ -53,8 +52,8 @@ public class XMLWriter extends BufferedWriter {
     private String store = null;
 
     /**
-     * Create a new XMLWriter basing on a {@link Writer}.
-     * 
+     * Creates a new XMLWriter basing on a {@link Writer}.
+     *
      * @param out
      *            {@link Writer} to send the XML data to
      */
@@ -66,9 +65,9 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Create a new XMLWriter basing on an {@link OutputStream}. The {@link OutputStream}
+     * Creates a new XMLWriter basing on an {@link OutputStream}. The {@link OutputStream}
      * will receive UTF-8 encoded data.
-     * 
+     *
      * @param out
      *            {@link OutputStream} to send the XML data to
      * @throws UnsupportedEncodingException
@@ -79,13 +78,13 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Set the indention string. This string is used to indent lines according to their
+     * Sets the indention string. This string is used to indent lines according to their
      * nesting. Defaults to two spaces, but you can also set several spaces, tabs or an
      * empty string.
      * <p>
      * If you want to change the indention string, you must do so before invoking
      * {@link #startDocument()}.
-     * 
+     *
      * @param indent
      *            New Indention String
      */
@@ -94,7 +93,7 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Set the encoding used by this writer. The XMLWriter tries to find out the proper
+     * Sets the encoding used by this writer. The XMLWriter tries to find out the proper
      * encoding itself. If an @{link OutputStream} is used, encoding will always be UTF-8.
      * If an @{link OutputStreamWriter} was passed in, its current encoding will be used.
      * In any other case UTF-8 is assumed for encoding, which can be changed by using this
@@ -102,7 +101,7 @@ public class XMLWriter extends BufferedWriter {
      * <p>
      * If you want to change the encoding string, you must do so before invoking
      * {@link #startDocument()}.
-     * 
+     *
      * @param encoding
      *            New encoding
      */
@@ -111,7 +110,7 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Indent by one level
+     * Indents by one level
      */
     protected void writeIndent() throws IOException {
         for (int cnt = 0; cnt < level; cnt++) {
@@ -120,7 +119,7 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Start an XML document. The XML header will be written.
+     * Starts an XML document. The XML header will be written.
      */
     public void startDocument() throws IOException {
         if (charset.equalsIgnoreCase("UTF8")) charset = "UTF-8";
@@ -130,7 +129,7 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Finish an XML document.
+     * Finishes an XML document.
      */
     public void endDocument() throws IOException {
         flushTag();
@@ -140,8 +139,8 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Start a new XML element. There are no attributes added to this element.
-     * 
+     * Starts a new XML element. There are no attributes added to this element.
+     *
      * @param element
      *            Element name
      */
@@ -150,9 +149,9 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Start a new XML element with attributes. This method will take proper care for
+     * Starts a new XML element with attributes. This method will take proper care for
      * excaping all chars within the attribute values.
-     * 
+     *
      * @param element
      *            Element name
      * @param attr
@@ -171,11 +170,11 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Start a new XML element with attributes. This method will take proper care for
+     * Starts a new XML element with attributes. This method will take proper care for
      * excaping all chars within the attribute values.
      * <p>
      * Note that since R15, the map is required to have {@link String} keys and values.
-     * 
+     *
      * @param element
      *            Element name
      * @param attrs
@@ -192,9 +191,9 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Start a new XML element with attributes. This method will take proper care for
+     * Starts a new XML element with attributes. This method will take proper care for
      * excaping all chars within the attribute values.
-     * 
+     *
      * @param element
      *            Element name
      * @param attr
@@ -221,7 +220,7 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Close the most recent XML element. The XMLWriter recognizes empty elements and will
+     * Closes the most recent XML element. The XMLWriter recognizes empty elements and will
      * send a shortcut to the output.
      */
     public void endElement() throws IOException {
@@ -263,11 +262,11 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Write the content of an XML container. Leading and trailing spaces will be trimmed.
+     * Writes the content of an XML container. Leading and trailing spaces will be trimmed.
      * Empty contents will be ignored. You can invoke this method several times for a
      * container. Each content will then be written into a separate line. Special chars
      * will automatically be escaped.
-     * 
+     *
      * @param content
      *            Content of the current XML container
      */
@@ -289,8 +288,8 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Write a comment. Content will be escaped properly.
-     * 
+     * Writes a comment. Content will be escaped properly.
+     *
      * @param comment
      *            The comment's content.
      */
@@ -307,14 +306,14 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Escape a String so it can be used in XML context. All &amp;, &lt;, &gt; and &quot;
+     * Escapes a String so it can be used in XML context. All &amp;, &lt;, &gt; and &quot;
      * will be converted into their respective entity.
-     * 
+     *
      * @param text
      *            Text to be escaped
      * @return Escapted text
      */
-    protected String escape(String text) {
+    public static String escape(String text) {
         text = text.replaceAll("\\&", "&amp;");
         text = text.replaceAll("\\<", "&lt;");
         text = text.replaceAll("\\>", "&gt;");
@@ -323,7 +322,8 @@ public class XMLWriter extends BufferedWriter {
     }
 
     /**
-     * Flush the Tag buffer, which is used to write empty containers in their short form.
+     * Flushes the tag buffer, which is used to write empty containers in their short
+     * form.
      */
     protected void flushTag() throws IOException {
         if (bTag.length() > 0) {

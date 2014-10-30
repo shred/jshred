@@ -28,16 +28,15 @@ import javax.swing.JButton;
 /**
  * This {@link JButton} is to be used in toolbars. It takes care that the button never has
  * a text, never gets the focus and has no borders.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JToolbarButton.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class JToolbarButton extends JButton {
     private static final long serialVersionUID = 3905246710308417843L;
 
     /**
-     * Creates a new basic JToolbarButton.
-     * 
+     * Creates a new basic {@link JToolbarButton}.
+     *
      * @since R8
      */
     public JToolbarButton() {
@@ -46,8 +45,8 @@ public class JToolbarButton extends JButton {
     }
 
     /**
-     * Creates a new JToolbarButton with a title.
-     * 
+     * Creates a new {@link JToolbarButton} with a title.
+     *
      * @param title
      *            Title to be used
      * @since R14
@@ -58,8 +57,8 @@ public class JToolbarButton extends JButton {
     }
 
     /**
-     * Creates a new JToolbarButton with a title and an icon.
-     * 
+     * Creates a new {@link JToolbarButton} with a title and an icon.
+     *
      * @param title
      *            Title to be used
      * @param icon
@@ -72,8 +71,8 @@ public class JToolbarButton extends JButton {
     }
 
     /**
-     * Creates a new JToolbarButton with an icon.
-     * 
+     * Creates a new {@link JToolbarButton} with an icon.
+     *
      * @param icon
      *            Icon to be used.
      * @since R8
@@ -85,9 +84,9 @@ public class JToolbarButton extends JButton {
     }
 
     /**
-     * Creates a new JToolbarButton for a certain {@link Action}. The {@link Action}'s
-     * text is not displayed.
-     * 
+     * Creates a new {@link JToolbarButton} for a certain {@link Action}. The
+     * {@link Action}'s text is not displayed.
+     *
      * @param a
      *            {@link Action}
      */
@@ -96,8 +95,8 @@ public class JToolbarButton extends JButton {
     }
 
     /**
-     * Creates a new JToolbarButton for a certain {@link Action}.
-     * 
+     * Creates a new {@link JToolbarButton} for a certain {@link Action}.
+     *
      * @param a
      *            {@link Action}
      * @param keep
@@ -110,9 +109,6 @@ public class JToolbarButton extends JButton {
         if (!keep) setText("");
     }
 
-    /**
-     * Initialize all parameters for a JToolbarButton.
-     */
     private void init() {
         setRequestFocusEnabled(false);
         setFocusable(false);

@@ -34,9 +34,8 @@ import javax.swing.JPanel;
  * optionally a nice icon to the right and a description below the title. The headline is
  * colored in a gradient, starting in a certain color to the left, and going to the
  * current background color to the right.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JHeadline.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R8
  */
 public class JHeadline extends JGradientPanel {
@@ -47,16 +46,16 @@ public class JHeadline extends JGradientPanel {
     private boolean init = false;
 
     /**
-     * Create an empty JHeadline. {@link Color#GRAY} is used as default color.
+     * Creates an empty {@link JHeadline}. {@link Color#GRAY} is used as default color.
      */
     public JHeadline() {
         this("");
     }
 
     /**
-     * Create a new JHeadline with the given title. {@link Color#GRAY} is used as default
-     * color.
-     * 
+     * Creates a new {@link JHeadline} with the given title. {@link Color#GRAY} is used as
+     * default color.
+     *
      * @param title
      *            Title to be used
      */
@@ -65,42 +64,42 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Create a new JHeadline with the given title and icon. {@link Color#GRAY} is used as
-     * default color.
-     * 
+     * Creates a new {@link JHeadline} with the given title and icon. {@link Color#GRAY}
+     * is used as default color.
+     *
      * @param title
      *            Title to be used
      * @param icon
-     *            {@link Icon} or null
+     *            {@link Icon} or {@code null}
      */
     public JHeadline(String title, Icon icon) {
         this(title, null, icon);
     }
 
     /**
-     * Create a new JHeadline with the given title, description, icon. {@link Color#GRAY}
-     * is used as default color.
-     * 
+     * Creates a new {@link JHeadline} with the given title, description, icon.
+     * {@link Color#GRAY} is used as default color.
+     *
      * @param title
      *            Title to be used
      * @param desc
-     *            Description or null
+     *            Description or {@code null}
      * @param icon
-     *            {@link Icon} or null
+     *            {@link Icon} or {@code null}
      */
     public JHeadline(String title, String desc, Icon icon) {
         this(title, desc, icon, Color.GRAY);
     }
 
     /**
-     * Create a new JHeadline with the given title, description, icon and color.
-     * 
+     * Creates a new {@link JHeadline} with the given title, description, icon and color.
+     *
      * @param title
      *            Title to be used
      * @param desc
-     *            Description or null
+     *            Description or {@code null}
      * @param icon
-     *            {@link Icon} or null
+     *            {@link Icon} or {@code null}
      * @param color
      *            Left gradient {@link Color}
      */
@@ -136,10 +135,10 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Set a new title text.
-     * 
+     * Sets a new title text.
+     *
      * @param title
-     *            new title text, must not be <code>null</code>.
+     *            new title text, must not be {@code null}.
      */
     public void setTitle(String title) {
         if (title == null) throw new NullPointerException("title must not be null");
@@ -148,8 +147,8 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Get the current title text.
-     * 
+     * Gets the current title text.
+     *
      * @return Current title text.
      */
     public String getTitle() {
@@ -157,10 +156,10 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Set a new description.
-     * 
+     * Sets a new description.
+     *
      * @param desc
-     *            new description, <code>null</code> if there is none.
+     *            new description, {@code null} if there is none.
      */
     public void setDescription(String desc) {
         if (desc != null) {
@@ -172,9 +171,9 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Get the current description.
-     * 
-     * @return Current description, or <code>null</code> if there is none.
+     * Gets the current description.
+     *
+     * @return Current description, or {@code null} if there is none.
      */
     public String getDescription() {
         if (jlDesc.isVisible()) return jlDesc.getText();
@@ -182,10 +181,10 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Set a new {@link Icon}.
-     * 
+     * Sets a new {@link Icon}.
+     *
      * @param icon
-     *            new {@link Icon}, <code>null</code> if there is none
+     *            new {@link Icon}, {@code null} if there is none
      */
     public void setIcon(Icon icon) {
         if (icon != null) {
@@ -197,9 +196,9 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Get the current {@link Icon}
-     * 
-     * @return Current {@link Icon}, or <code>null</code> if there is none.
+     * Gets the current {@link Icon}
+     *
+     * @return Current {@link Icon}, or {@code null} if there is none.
      */
     public Icon getIcon() {
         if (jlIcon.isVisible()) return jlIcon.getIcon();
@@ -207,10 +206,10 @@ public class JHeadline extends JGradientPanel {
     }
 
     /**
-     * Set the text color. The title will be shown in this color. The description will be
+     * Sets the text color. The title will be shown in this color. The description will be
      * shown in the same color, but with an alpha value of 200, so the background gradient
      * will shine through a little.
-     * 
+     *
      * @param fg
      *            New foreground {@link Color}
      */

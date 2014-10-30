@@ -24,18 +24,14 @@ import javax.swing.event.ListDataListener;
 
 /**
  * This is just a mere empty {@link ListModel} which will never have any entries.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
+ *
+ * @author Richard "Shred" Körber
  * @since R7
- * @version $Id: EmptyListModel.java 584 2011-07-30 20:42:48Z shred $
  */
 public final class EmptyListModel implements ListModel {
 
     /**
-     * Get the size. It's always 0.
-     * 
-     * @return Size
-     * @see javax.swing.ListModel#getSize()
+     * Gets the size. It's always 0.
      */
     @Override
     public int getSize() {
@@ -43,13 +39,8 @@ public final class EmptyListModel implements ListModel {
     }
 
     /**
-     * Get an element. Should never be called since the list is empty. Will always return
-     * null.
-     * 
-     * @param index
-     *            Index
-     * @return Always null
-     * @see javax.swing.ListModel#getElementAt(int)
+     * Gets an element. Should never be called since the list is empty. Will always return
+     * {@code null}.
      */
     @Override
     public Object getElementAt(int index) {
@@ -57,23 +48,15 @@ public final class EmptyListModel implements ListModel {
     }
 
     /**
-     * Add a listener. Since this list will always be empty, the listeners are just
+     * Adds a listener. Since this list will always be empty, the listeners are just
      * ignored.
-     * 
-     * @param l
-     *            {@link ListDataListener} to be ignored.
-     * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
      */
     @Override
     public void addListDataListener(ListDataListener l) {}
 
     /**
-     * Remove a listener. Since this list will always be empty, the listeners are just
+     * Removes a listener. Since this list will always be empty, the listeners are just
      * ignored.
-     * 
-     * @param l
-     *            {@link ListDataListener} to be ignored.
-     * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
      */
     @Override
     public void removeListDataListener(ListDataListener l) {}

@@ -23,9 +23,8 @@ import java.util.Iterator;
 
 /**
  * Contains all data required to show a page browser.
- * 
+ *
  * @author Richard "Shred" Körber
- * @version $Revision: 584 $
  */
 public class BrowserData {
     private int pagecount;
@@ -36,7 +35,7 @@ public class BrowserData {
 
     /**
      * Gets the number of pages to be shown.
-     * 
+     *
      * @return Number of pages
      */
     public int getPagecount() {
@@ -57,7 +56,7 @@ public class BrowserData {
      * pagecount=812312, pagesteps=100000.
      * <p>
      * For a pagecount of 0, 0 is be returned.
-     * 
+     *
      * @return Large step increments.
      */
     public int getPagesteps() {
@@ -67,7 +66,7 @@ public class BrowserData {
 
     /**
      * Gets the page currently displayed.
-     * 
+     *
      * @return Page number currently displayed.
      */
     public int getPage() {
@@ -87,7 +86,7 @@ public class BrowserData {
     /**
      * Gets the number of entries of the result. This is only used as information to the
      * user, and has no direct impact to the browser.
-     * 
+     *
      * @return Number of entries
      */
     public long getResultcount() {
@@ -101,7 +100,7 @@ public class BrowserData {
     /**
      * Returns the URL to be loaded when another page is to be shown. This is usually the
      * URL of the page currently shown.
-     * 
+     *
      * @return Base URL
      */
     public String getBaseurl() {
@@ -115,7 +114,7 @@ public class BrowserData {
     /**
      * Returns the parameter name containing the page currently shown in this browser.
      * Usually "page".
-     * 
+     *
      * @return Page parameter name
      */
     public String getPageparam() {
@@ -134,7 +133,7 @@ public class BrowserData {
      * <p>
      * Note that the Iterator starts counting from 1 to make the result readable for
      * humans, while the browser itself counts the page starting from zero.
-     * 
+     *
      * @return Iterator that iterates through a sequence of page numbers
      */
     public Iterator<Integer> getPageIterator() {
@@ -156,7 +155,7 @@ public class BrowserData {
 
         /**
          * Create a new page number iterator.
-         * 
+         *
          * @param page
          *            Page that is currently shown, starting from 0.
          * @param steps
@@ -173,7 +172,7 @@ public class BrowserData {
 
         /**
          * Returns true if there is another page number to be shown.
-         * 
+         *
          * @return <code>true</code>: has more page numbers
          */
         @Override
@@ -183,7 +182,7 @@ public class BrowserData {
 
         /**
          * Returns the next page number in the sequence.
-         * 
+         *
          * @return Next page number
          */
         @Override
@@ -222,7 +221,7 @@ public class BrowserData {
          * Propose the next general page. This is the next page of the given step rate.
          * (E.g. if the current page is 184 and the step rate is 100, the next proposed
          * page is 200).
-         * 
+         *
          * @param current
          *            Current page
          * @return Next proposed page
@@ -234,7 +233,7 @@ public class BrowserData {
         /**
          * Proposes the next page on the left side of the scale. This are the first
          * {@link #BORDER_PAGES} number of pages.
-         * 
+         *
          * @param current
          *            Current page
          * @return Next proposed page
@@ -250,7 +249,7 @@ public class BrowserData {
         /**
          * Proposes the next page on the right side of the scale. This are the last
          * {@link #BORDER_PAGES} number of pages.
-         * 
+         *
          * @param current
          *            Current page
          * @return Next proposed page
@@ -267,7 +266,7 @@ public class BrowserData {
          * Proposes a number of pages around the current page number, with the current
          * page number being in the center. Usually there are {@link #CENTER_PAGES} pages
          * each to the left and right of the current page number.
-         * 
+         *
          * @param current
          *            Current page
          * @return Next proposed page

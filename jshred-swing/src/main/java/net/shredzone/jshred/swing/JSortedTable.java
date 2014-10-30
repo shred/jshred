@@ -36,23 +36,22 @@ import javax.swing.table.TableModel;
  * <p>
  * Starting with Java 1.6, Swing brings an own implementation for sortable table, which
  * may be preferable to this solution.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JSortedTable.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class JSortedTable extends JTable {
     private static final long serialVersionUID = 3256728372624110384L;
 
     /**
-     * Create a new, empty JSortedTable.
+     * Creates a new, empty {@link JSortedTable}.
      */
     public JSortedTable() {
         super();
     }
 
     /**
-     * Create a new JSortedTable with the given {@link SortableTableModel}.
-     * 
+     * Creates a new {@link JSortedTable} with the given {@link SortableTableModel}.
+     *
      * @param model
      *            {@link SortableTableModel} to be used.
      */
@@ -61,9 +60,9 @@ public class JSortedTable extends JTable {
     }
 
     /**
-     * Set the {@link TableModel} to be used. You must pass a {@link SortableTableModel}
+     * Sets the {@link TableModel} to be used. You must pass a {@link SortableTableModel}
      * here, otherwise you'll get an {@link IllegalArgumentException}.
-     * 
+     *
      * @param model
      *            A {@link SortableTableModel}
      */
@@ -96,13 +95,13 @@ public class JSortedTable extends JTable {
     }
 
     /**
-     * Sort by a certain column. If this is the currently sorted column, the sort order
+     * Sorts by a certain column. If this is the currently sorted column, the sort order
      * will be reversed. Otherwise the given column will be sorted ascendingly. This
      * method simulates a mouse click on the appropriate column header.
      * <p>
      * Since R11, the selection will be kept if the {@link SortableTableModelProxy} is
      * used.
-     * 
+     *
      * @param columnIndex
      *            Column to be sorted.
      * @since R4
@@ -153,21 +152,11 @@ public class JSortedTable extends JTable {
         }
     }
 
-    /**
-     * Create the default {@link JTableHeader} instance.
-     * 
-     * @return Default {@link JTableHeader}
-     */
     @Override
     protected JTableHeader createDefaultTableHeader() {
         return new SortTableHeader(columnModel);
     }
 
-    /**
-     * Get the default {@link TableModel}. It is always a {@link SortableTableModel}!
-     * 
-     * @return {@link SortableTableModel}
-     */
     @Override
     protected TableModel createDefaultDataModel() {
         return new SortableTableModelProxy(super.createDefaultDataModel());

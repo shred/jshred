@@ -30,9 +30,8 @@ import java.awt.image.RGBImageFilter;
  * This filter is brighting or darking an image, e.g. for mouse over effects. The
  * brightness factor is multiplied to the image, so black will stay black. Transparency is
  * honored.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: BrightFilter.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class BrightFilter extends RGBImageFilter {
     private int p;
@@ -43,7 +42,7 @@ public class BrightFilter extends RGBImageFilter {
     /**
      * Creates a brightened {@link Image}. A default factor of 40 and the brightening
      * color {@link Color#WHITE} will be used.
-     * 
+     *
      * @param i
      *            Source {@link Image}
      * @return Brightened {@link Image}
@@ -56,22 +55,22 @@ public class BrightFilter extends RGBImageFilter {
     }
 
     /**
-     * Creates a BrightFilter. The given factor and the brightening color
+     * Creates a {@link BrightFilter}. The given factor and the brightening color
      * {@link Color#WHITE} will be used.
-     * 
+     *
      * @param p
-     *            Brightener factor
+     *            Brightness factor
      */
     public BrightFilter(int p) {
         this(p, Color.WHITE);
     }
 
     /**
-     * Creates a BrightFilter. The given factor and the given brightening color will be
-     * used.
-     * 
+     * Creates a {@link BrightFilter}. The given factor and the given brightening color
+     * will be used.
+     *
      * @param p
-     *            Brightener factor
+     *            Brightness factor
      * @param color
      *            {@link Color}
      */
@@ -86,17 +85,6 @@ public class BrightFilter extends RGBImageFilter {
         canFilterIndexColorModel = true;
     }
 
-    /**
-     * The filter method itself.
-     * 
-     * @param x
-     *            X coordinate
-     * @param y
-     *            Y coordinate
-     * @param rgb
-     *            RGB value
-     * @return brightened RGB value
-     */
     @Override
     public int filterRGB(int x, int y, int rgb) {
         // --- Decompose ---
@@ -117,4 +105,5 @@ public class BrightFilter extends RGBImageFilter {
         // --- Compose new color ---
         return (rgb & 0xFF000000 | red << 16 | green << 8 | blue);
     }
+
 }

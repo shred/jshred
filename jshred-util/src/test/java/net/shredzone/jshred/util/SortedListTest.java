@@ -19,22 +19,17 @@
  */
 package net.shredzone.jshred.util;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * A jUnit test case for SortedList.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
+ * A jUnit test case for {@link SortedList}.
+ *
+ * @author Richard "Shred" Körber
  * @since R7
- * @version $Id: SortedListTest.java 302 2009-05-12 22:19:11Z shred $
  */
 public class SortedListTest {
 
-    /**
-     * Class under test for boolean add(Object)
-     */
     @Test
     public void testAddObject() {
         SortedList<String> list = new SortedList<String>();
@@ -56,9 +51,6 @@ public class SortedListTest {
         Assert.assertEquals("Zulu", list.get(5));
     }
 
-    /**
-     * Class under test for boolean contains(Object)
-     */
     @Test
     public void testContainsObject() {
         SortedList<String> list = new SortedList<String>();
@@ -71,9 +63,6 @@ public class SortedListTest {
         Assert.assertFalse(list.contains("Bravo"));
     }
 
-    /**
-     * Class under test for int indexOf(Object)
-     */
     @Test
     public void testIndexOfObject() {
         SortedList<String> list = new SortedList<String>();

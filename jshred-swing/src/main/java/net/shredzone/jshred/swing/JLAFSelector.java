@@ -38,11 +38,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
  * Currently this is just a {@link JComboBox} which allows to select a Look and Feel from
  * the system's list of Look and Feels. Future releases will also add another
  * {@link JComboBox} for different auxiliary looks, and a preview area. If you only have
- * limited space available in your GUI, you are advised to pass <code>true</code> to
+ * limited space available in your GUI, you are advised to pass {@code true} to
  * {@link #setSmallView(boolean)} for future compatibility.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLAFSelector.java 302 2009-05-12 22:19:11Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R8
  */
 public class JLAFSelector extends JPanel {
@@ -74,7 +73,7 @@ public class JLAFSelector extends JPanel {
     /**
      * Tries to add a LAF class to the selector. If the class is not available, nothing
      * will happen.
-     * 
+     *
      * @param classname
      *            LAF class name
      * @param label
@@ -90,7 +89,7 @@ public class JLAFSelector extends JPanel {
     }
 
     /**
-     * Create a new Look and Feel selector.
+     * Creates a new Look and Feel selector.
      */
     public JLAFSelector() {
         setLayout(new BorderLayout());
@@ -103,15 +102,15 @@ public class JLAFSelector extends JPanel {
     }
 
     /**
-     * Set the currently used Look and Feel.
+     * Sets the currently used Look and Feel.
      */
     public void setCurrentLAF() {
         setSelectedLAF(UIManager.getLookAndFeel());
     }
 
     /**
-     * Set a Look and Feel as current selection, by passing a {@link LookAndFeel} object.
-     * 
+     * Sets a Look and Feel as current selection, by passing a {@link LookAndFeel} object.
+     *
      * @param laf
      *            {@link LookAndFeel} object to set.
      */
@@ -120,8 +119,8 @@ public class JLAFSelector extends JPanel {
     }
 
     /**
-     * Set a Look and Feel as current selection, by passing a {@link LookAndFeelInfo}.
-     * 
+     * Sets a Look and Feel as current selection, by passing a {@link LookAndFeelInfo}.
+     *
      * @param lafinfo
      *            {@link LookAndFeelInfo} object to set.
      */
@@ -130,10 +129,10 @@ public class JLAFSelector extends JPanel {
     }
 
     /**
-     * Set a Look and Feel as current selection, by passing a class name. The class name
+     * Sets a Look and Feel as current selection, by passing a class name. The class name
      * does not necessarily need to exist or be a valid {@link LookAndFeel} class.
      * Alternatively you can also pass the name of a LookAndFeel.
-     * 
+     *
      * @param classname
      *            {@link LookAndFeel} class name to set.
      */
@@ -158,8 +157,8 @@ public class JLAFSelector extends JPanel {
     }
 
     /**
-     * Get the name of the selected LAF. This may be a class name or a human readable look
-     * and feel name.
+     * Gets the name of the selected LAF. This may be a class name or a human readable
+     * look and feel name.
      * <p>
      * <em>NOTE:</em> the returned value can be any string. There is <em>no</em> guarantee
      * that the returned string:
@@ -169,7 +168,7 @@ public class JLAFSelector extends JPanel {
      * <li>is a LookAndFeel that is permitted on this system, or</li>
      * <li>is a valid class name at all.</li>
      * </ul>
-     * 
+     *
      * @return The selected Look and Feel.
      */
     public String getSelectedLAF() {
@@ -177,44 +176,42 @@ public class JLAFSelector extends JPanel {
     }
 
     /**
-     * Set if a small view area is to be used by this component. Currently only one
+     * Sets if a small view area is to be used by this component. Currently only one
      * {@link JComboBox} is used for this component, but it is planned that a future
      * release of the JLAFSelector will consist of two {@link JComboBox} and an optional
      * preview area.
      * <p>
      * If you do not have plenty of space in your GUI, you should invoke this method with
-     * <code>true</code>, to hide the preview area (and maybe some other components that
-     * are not really necessary).
+     * {@code true}, to hide the preview area (and maybe some other components that are
+     * not really necessary).
      * <p>
      * Currently this method does nothing, since there is no preview area yet.
-     * 
-     * @param small
      */
     public void setSmallView(boolean small) {
         this.small = small;
     }
 
     /**
-     * Check if there is only a small view area available for this component. This is
-     * <code>false</code> by default.
-     * 
-     * @return <code>true</code>: only a small area is available
+     * Checks if there is only a small view area available for this component. This is
+     * {@code false} by default.
+     *
+     * @return {@code true}: only a small area is available
      */
     public boolean isSmallView() {
         return small;
     }
 
     /**
-     * Try to set a look and feel that was selected by this component. This is a
+     * Tries to set a look and feel that was selected by this component. This is a
      * convenience method that tries to set the passed look and feel, which can be either
      * a human readable name or a class name. If this method is unable to set this look
      * and feel, the default look and feel is used.
-     * 
+     *
      * @param laf
-     *            Look and Feel string to be used. May be <code>null</code>.
+     *            Look and Feel string to be used. May be {@code null}.
      * @return The class name of the actual Look and Feel that has been set. If no Look
-     *         and Feel could be set, <code>null</code> will be returned (which should
-     *         never happen -- famous last words).
+     *         and Feel could be set, {@code null} will be returned (which should never
+     *         happen -- famous last words).
      */
     public static String setLookAndFeel(String laf) {
         // --- Convert human readable ---

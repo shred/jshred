@@ -30,9 +30,8 @@ import javax.swing.SwingConstants;
 /**
  * This {@link JPanel} shows a color gradient in the background. You can select the
  * direction and the starting and ending color.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JGradientPanel.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class JGradientPanel extends JPanel {
     private static final long serialVersionUID = 4123386540283015480L;
@@ -44,26 +43,27 @@ public class JGradientPanel extends JPanel {
     private int direction = VERTICAL;
 
     /**
-     * Create a vertical JGradientPanel with the given top and bottom color. If null is
-     * given as color, the standard background color will be used instead.
-     * 
+     * Creates a vertical {@link JGradientPanel} with the given top and bottom color. If
+     * {@code null} is given as color, the standard background color will be used instead.
+     *
      * @param top
-     *            Top color or <code>null</code>
+     *            Top color or {@code null}
      * @param bottom
-     *            Bottom color or <code>null</code>
+     *            Bottom color or {@code null}
      */
     public JGradientPanel(Color top, Color bottom) {
         this(top, bottom, VERTICAL);
     }
 
     /**
-     * Create a JGradientPanel with the given top and bottom color in the given direction.
-     * If null is given as color, the standard background color will be used instead.
-     * 
+     * Creates a {@link JGradientPanel} with the given top and bottom color in the given
+     * direction. If {@code null} is given as color, the standard background color will be
+     * used instead.
+     *
      * @param top
-     *            Top color or <code>null</code>
+     *            Top color or {@code null}
      * @param bottom
-     *            Bottom color or <code>null</code>
+     *            Bottom color or {@code null}
      * @param direction
      *            {@link #VERTICAL} or {@link #HORIZONTAL}
      */
@@ -78,10 +78,10 @@ public class JGradientPanel extends JPanel {
     }
 
     /**
-     * Change the top/left color. null means to use the background color instead.
-     * 
+     * Changes the top/left color. {@code null} means to use the background color instead.
+     *
      * @param top
-     *            New top/left color or <code>null</code>
+     *            New top/left color or {@code null}
      */
     public void setColorTop(Color top) {
         this.cTop = top;
@@ -89,20 +89,20 @@ public class JGradientPanel extends JPanel {
     }
 
     /**
-     * Get the current top/left color.
-     * 
-     * @return Top/left color or <code>null</code>.
+     * Gets the current top/left color.
+     *
+     * @return Top/left color or {@code null}
      */
     public Color getColorTop() {
         return cTop;
     }
 
     /**
-     * Change the bottom/right color. <code>null</code> means to use the background color
+     * Changes the bottom/right color. {@code null} means to use the background color
      * instead.
-     * 
+     *
      * @param bottom
-     *            New bottom/right color or <code>null</code>
+     *            New bottom/right color or {@code null}
      */
     public void setColorBottom(Color bottom) {
         this.cBottom = bottom;
@@ -110,17 +110,17 @@ public class JGradientPanel extends JPanel {
     }
 
     /**
-     * Get the current bottom/right color.
-     * 
-     * @return Bottom/right color or <code>null</code>.
+     * Gets the current bottom/right color.
+     *
+     * @return Bottom/right color or {@code null}.
      */
     public Color getColorBottom() {
         return cBottom;
     }
 
     /**
-     * Set the gradient direction.
-     * 
+     * Sets the gradient direction.
+     *
      * @param direction
      *            {@link #HORIZONTAL} or {@link #VERTICAL}
      */
@@ -133,20 +133,14 @@ public class JGradientPanel extends JPanel {
     }
 
     /**
-     * Get the gradient direction.
-     * 
+     * Gets the gradient direction.
+     *
      * @return {@link #HORIZONTAL} or {@link #VERTICAL}
      */
     public int getDirection() {
         return direction;
     }
 
-    /**
-     * Paint the gradient and the components.
-     * 
-     * @param g
-     *            {@link Graphics} context
-     */
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();

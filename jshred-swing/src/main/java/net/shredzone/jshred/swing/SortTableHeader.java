@@ -37,9 +37,8 @@ import javax.swing.table.TableModel;
 /**
  * This is a {@link JTableHeader} that shows the currently sorted column of a
  * {@link SortableTableModel} and allows to select columns to be sorted.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortTableHeader.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class SortTableHeader extends JTableHeader implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 3256728372658124082L;
@@ -52,15 +51,15 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     private Icon iconDesc;                  // Icon for descending sort order
 
     /**
-     * Create a new SortTableHeader.
+     * Creates a new SortTableHeader.
      */
     public SortTableHeader() {
         super(null);
     }
 
     /**
-     * Create a new SortTableHeader with the given {@link TableColumnModel}
-     * 
+     * Creates a new SortTableHeader with the given {@link TableColumnModel}
+     *
      * @param cm
      *            {@link TableColumnModel} to be used
      */
@@ -80,8 +79,8 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     }
 
     /**
-     * Set if the user is allowed to sort columns by clicking on their headline.
-     * 
+     * Sets if the user is allowed to sort columns by clicking on their headline.
+     *
      * @param b
      *            Sorting allowed? true=Yes (default), false=No
      */
@@ -90,8 +89,8 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     }
 
     /**
-     * Find out if sorting is allowed.
-     * 
+     * Finds out if sorting is allowed.
+     *
      * @return true: sorting is allowed, false: not allowed
      */
     public boolean isSortingAllowed() {
@@ -99,8 +98,8 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     }
 
     /**
-     * Set the icon for ascending order.
-     * 
+     * Sets the icon for ascending order.
+     *
      * @param icon
      *            Ascending icon, or null for none
      */
@@ -109,8 +108,8 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     }
 
     /**
-     * Get the current icon for ascending order.
-     * 
+     * Gets the current icon for ascending order.
+     *
      * @return Ascending icon, may be null
      */
     public Icon getIconAsc() {
@@ -118,8 +117,8 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     }
 
     /**
-     * Set the icon for descending order.
-     * 
+     * Sets the icon for descending order.
+     *
      * @param icon
      *            Descending icon, or null for none
      */
@@ -128,20 +127,14 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
     }
 
     /**
-     * Get the current icon for descending order.
-     * 
+     * Gets the current icon for descending order.
+     *
      * @return Descending icon, may be null
      */
     public Icon getIconDesc() {
         return iconDesc;
     }
 
-    /**
-     * Internal MouseListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mousePressed(MouseEvent e) {
         pressed = true;
@@ -149,12 +142,6 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         repaint();
     }
 
-    /**
-     * Internal MouseListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if (!dragged) {
@@ -183,12 +170,6 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         repaint();
     }
 
-    /**
-     * Internal MouseMotionListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mouseDragged(MouseEvent e) {
         dragged = true;
@@ -196,41 +177,17 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         repaint();
     }
 
-    /**
-     * Internal MouseMotionListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mouseMoved(MouseEvent e) {
         dragged = false;
     }
 
-    /**
-     * Internal MouseListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mouseClicked(MouseEvent e) {}
 
-    /**
-     * Internal MouseListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mouseEntered(MouseEvent e) {}
 
-    /**
-     * Internal MouseListener implementation, do not use!
-     * 
-     * @param e
-     *            MouseEvent
-     */
     @Override
     public void mouseExited(MouseEvent e) {}
 
@@ -243,10 +200,10 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
         private TableCellRenderer parent;
 
         /**
-         * Create a new SortTableCellRenderer. A parent {@link TableCellRenderer} is
+         * Creates a new SortTableCellRenderer. A parent {@link TableCellRenderer} is
          * given, its result will be manipulated. Usually you will pass the
          * {@link JTableHeader}'s default {@link TableCellRenderer} here.
-         * 
+         *
          * @param parent
          *            Parent {@link TableCellRenderer}
          */
@@ -254,23 +211,6 @@ public class SortTableHeader extends JTableHeader implements MouseListener, Mous
             this.parent = parent;
         }
 
-        /**
-         * Get a Component that renders the table cell.
-         * 
-         * @param table
-         *            Referred {@link JTable}
-         * @param value
-         *            Value to render
-         * @param isSelected
-         *            Selection state, usually ignored
-         * @param hasFocus
-         *            Focus state, usually ignored
-         * @param row
-         *            Row, usually ignored
-         * @param column
-         *            Column
-         * @return A component that renders the table cell
-         */
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             // --- Get the original Component ---

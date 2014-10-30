@@ -24,7 +24,7 @@ package org.shredzone.jshred.web;
  * in JSPs, e.g. for rendering each row of a table in a different color.
  * <p>
  * Example:
- * 
+ *
  * <pre>
  * &lt;% pageContext.setAttribute(&quot;sequence&quot;, new Sequencer(&quot;oddrow&quot;, &quot;evenrow&quot;)); %&gt;
  * &lt;c:forEach var=&quot;entry&quot; items=&quot;${entryList}&quot;&gt;
@@ -33,9 +33,8 @@ package org.shredzone.jshred.web;
  *   &lt;/tr&gt;
  * &lt;/c:forEach&gt;
  * </pre>
- * 
+ *
  * @author Richard "Shred" Körber
- * @version $Revision: 302 $
  */
 public class Sequencer {
     private int pos = 0;
@@ -43,7 +42,7 @@ public class Sequencer {
 
     /**
      * Creates a new Sequencer with the given sequence.
-     * 
+     *
      * @param sequence
      *            The sequence of strings to be used. Must have at least one entry.
      */
@@ -58,7 +57,7 @@ public class Sequencer {
     /**
      * Gets the next entry of the sequence. If the last entry was returned, it will start
      * again with the first entry.
-     * 
+     *
      * @return Sequence entry
      */
     public String getNext() {

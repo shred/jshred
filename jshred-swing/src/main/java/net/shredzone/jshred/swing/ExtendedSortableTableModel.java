@@ -22,19 +22,18 @@ package net.shredzone.jshred.swing;
 /**
  * This is an extension of the {@link SortableTableModel}. It provides a method to
  * selectively exclude columns from sorting.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
+ *
+ * @author Richard "Shred" Körber
  * @since R15
- * @version $Id: SortableTableModel.java 169 2008-07-10 22:01:03Z shred $
  */
 public interface ExtendedSortableTableModel extends SortableTableModel {
 
     /**
-     * Returns <code>true</code> if the given column index is sortable.
-     * 
+     * Returns {@code true} if the given column index is sortable.
+     *
      * @param columnIndex
      *            Column to be sorted
-     * @return <code>true</code> if this column can be sorted, false otherwise.
+     * @return {@code true} if this column can be sorted, false otherwise.
      */
     public boolean isColumnSortable(int columnIndex);
 

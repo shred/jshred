@@ -55,21 +55,19 @@ import javax.swing.table.TableModel;
 
 /**
  * This is a collection of static methods for your convenience.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SwingUtils.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
-public class SwingUtils {
+public final class SwingUtils {
+
+    private SwingUtils() {
+        // Utility class without constructor
+    }
 
     /**
-     * There are only static methods, nothing to be constructed.
-     */
-    private SwingUtils() {}
-
-    /**
-     * Set the width of a {@link JComponent} to its minimum. Use this to stack multiple
+     * Sets the width of a {@link JComponent} to its minimum. Use this to stack multiple
      * {@link JTextField} and {@link JComboBox} in a {@link BoxLayout} along the x axis.
-     * 
+     *
      * @param comp
      *            {@link JComponent} to be minimized.
      */
@@ -80,9 +78,9 @@ public class SwingUtils {
     }
 
     /**
-     * Set the height of a {@link JComponent} to its minimum. Use this to stack multiple
+     * Sets the height of a {@link JComponent} to its minimum. Use this to stack multiple
      * {@link JTextField} and {@link JComboBox} in a {@link BoxLayout} along the y axis.
-     * 
+     *
      * @param comp
      *            {@link JComponent} to be minimized.
      */
@@ -93,18 +91,18 @@ public class SwingUtils {
     }
 
     /**
-     * Set the <code>NAME</code> and <code>MNEMONIC_KEY</code> of an {@link Action} to the
+     * Sets the {@code NAME} and {@code MNEMONIC_KEY} of an {@link Action} to the
      * menu string. The menu string (with stripped underscore) will be the
-     * <code>NAME</code>, and the first character after the underscore will be the
-     * <code>MNEMONIC_KEY</code>.
+     * {@code NAME}, and the first character after the underscore will be the
+     * {@code MNEMONIC_KEY}.
      * <p>
-     * Example: <tt>"_Undo"</t> results to a <code>NAME<code> <tt>"Undo"</tt> and a
-     * <code>MNEMONIC_KEY</code> of <tt>"U"</tt>.
+     * Example: <tt>"_Undo"</tt> results to a {@code NAME} <tt>"Undo"</tt> and a
+     * {@code MNEMONIC_KEY} of <tt>"U"</tt>.
      * <p>
-     * If no underscore was found, <code>MNEMONIC_KEY</code> is unchanged.
-     * 
+     * If no underscore was found, {@code MNEMONIC_KEY} is unchanged.
+     *
      * @param action
-     *            Action to set <code>NAME</code> and <code>MNEMONIC_KEY</code> for
+     *            Action to set {@code NAME} and {@code MNEMONIC_KEY} for
      * @param menu
      *            Menu name
      */
@@ -122,10 +120,10 @@ public class SwingUtils {
     }
 
     /**
-     * Get the name of a menu. The result is the given menu name, with the first
+     * Gets the name of a menu. The result is the given menu name, with the first
      * underscore being stripped. Subsequent underscores will be ignored. You can escape
      * underscores by doubling them.
-     * 
+     *
      * @param menu
      *            Menu name
      * @return Menu name without shortcut underscore
@@ -133,37 +131,55 @@ public class SwingUtils {
     public static String getMenuName(String menu) {
         int i = menu.indexOf("_");
         while (i >= 0) {
-            if (i == menu.length() - 1) return menu; // Last char cannot be a shortcut
-            if (menu.charAt(i + 1) != '_') // No double underscore -> found!
-            return menu.substring(0, i) + menu.substring(i + 1); // Remove underscore
-            i = menu.indexOf("_", i + 2); // Also skip the second underscore
+            // Last char cannot be a shortcut
+            if (i == menu.length() - 1) {
+                return menu;
+            }
+
+            // No double underscore -> found!
+            if (menu.charAt(i + 1) != '_') {
+                // Remove underscore
+                return menu.substring(0, i) + menu.substring(i + 1);
+            }
+
+            // Also skip the second underscore
+            i = menu.indexOf("_", i + 2);
         }
         return menu; // Nothing was found
     }
 
     /**
-     * Get the shortcut of a menu. The first char after an underscore will be returned.
+     * Gets the shortcut of a menu. The first char after an underscore will be returned.
      * Underscores can be doubled to escape them.
-     * 
+     *
      * @param menu
      *            Menu name
-     * @return Shortcut character or <code>null</code> if none was found
+     * @return Shortcut character or {@code null} if none was found
      */
     public static Character getMenuShortcut(String menu) {
         int i = menu.indexOf("_");
         char mnemo;
         while (i >= 0) {
-            if (i == menu.length() - 1) break; // Last char cannot be a shortcut
+            // Last char cannot be a shortcut
+            if (i == menu.length() - 1) {
+                break;
+            }
+
+            // Key was found
             mnemo = menu.charAt(i + 1);
-            if (mnemo != '_') return new Character(mnemo); // Key was found
-            i = menu.indexOf("_", i + 2); // Also skip the second underscore
+            if (mnemo != '_') {
+                return new Character(mnemo);
+            }
+
+            // Also skip the second underscore
+            i = menu.indexOf("_", i + 2);
         }
         return null;
     }
 
     /**
-     * Create a {@link JMenu} from a title. An underscore marks the menu shortcut.
-     * 
+     * Creates a {@link JMenu} from a title. An underscore marks the menu shortcut.
+     *
      * @param title
      *            Menu title
      * @return Created {@link JMenu} having this title and shortcut set
@@ -178,9 +194,9 @@ public class SwingUtils {
     }
 
     /**
-     * Get the {@link Frame} of a {@link Component}. If the {@link Component} was not
-     * shown in a frame, <code>null</code> will be returned.
-     * 
+     * Gets the {@link Frame} of a {@link Component}. If the {@link Component} was not
+     * shown in a frame, {@code null} will be returned.
+     *
      * @param comp
      *            {@link Component}
      * @return {@link Frame} this component belongs to, or <code>null</code>
@@ -201,10 +217,10 @@ public class SwingUtils {
     }
 
     /**
-     * Adjust each column of a {@link JTable} to show its entire content. There is no
+     * Adjusts each column of a {@link JTable} to show its entire content. There is no
      * maximum cell width given, which could result in unreadable tables on very long
      * content.
-     * 
+     *
      * @param table
      *            {@link JTable} to be adjusted
      */
@@ -213,17 +229,17 @@ public class SwingUtils {
     }
 
     /**
-     * Adjust each column of a {@link JTable} to show its entire content. The cell width
+     * Adjusts each column of a {@link JTable} to show its entire content. The cell width
      * is limited to the given maximum width, though.
      * <p>
-     * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code> to the
+     * It is suggested to apply {@code setAutoResizeMode(AUTO_RESIZE_OFF)} to the
      * appropriate table before invoking this method.
      * <p>
      * <b>WARNING:</b> In order to find out the maximum cell widths, this method will scan
      * the entire table model! This will result in a major performance penalty for large
      * models, and especial for dynamic models which will get their content from external
      * sources.
-     * 
+     *
      * @param table
      *            {@link JTable} to be adjusted
      * @param maxwidth
@@ -234,18 +250,18 @@ public class SwingUtils {
     }
 
     /**
-     * Adjust each column of a {@link JTable} to show its entire content. The cell width
+     * Adjusts each column of a {@link JTable} to show its entire content. The cell width
      * is limited to the given maximum width, though. The minimum cell width is either the
      * size of the title, or the given minimum width, whatever is bigger.
      * <p>
-     * It is suggested to apply <code>setAutoResizeMode(AUTO_RESIZE_OFF)</code> to the
+     * It is suggested to apply {@code setAutoResizeMode(AUTO_RESIZE_OFF)} to the
      * appropriate table before invoking this method.
      * <p>
      * <b>WARNING:</b> In order to find out the maximum cell widths, this method will scan
      * the entire table model! This will result in a major performance penalty for large
      * models, and especial for dynamic models which will get their content from external
      * sources.
-     * 
+     *
      * @param table
      *            {@link JTable} to be adjusted
      * @param minwidth
@@ -298,11 +314,11 @@ public class SwingUtils {
     }
 
     /**
-     * Set the confirmation button for a {@link RootPaneContainer}. Usually the
+     * Sets the confirmation button for a {@link RootPaneContainer}. Usually the
      * confirmation button has a broader frame, so the user can identify the default
      * confirmation option of a dialog. Pressing the return key will usually result in
      * triggering that button.
-     * 
+     *
      * @param dialog
      *            {@link RootPaneContainer} to set the confirmation button for
      * @param confirm
@@ -314,9 +330,9 @@ public class SwingUtils {
     }
 
     /**
-     * Set the cancel button for a {@link RootPaneContainer}. Pressing the escape key will
-     * also trigger that {@link JButton}.
-     * 
+     * Sets the cancel button for a {@link RootPaneContainer}. Pressing the escape key
+     * will also trigger that {@link JButton}.
+     *
      * @param dialog
      *            {@link RootPaneContainer} to set the cancel button for
      * @param cancel
@@ -342,8 +358,8 @@ public class SwingUtils {
     }
 
     /**
-     * Copy the given String content to the system's default clipboard.
-     * 
+     * Copies the given String content to the system's default clipboard.
+     *
      * @param content
      *            String content to be copied to the clipboard.
      * @since R8
@@ -355,17 +371,17 @@ public class SwingUtils {
     }
 
     /**
-     * Get a String content from the system's default clipboard. If the clipboard is
-     * empty, or if it does not contain a String, then <code>null</code> will be returned.
-     * On some systems <code>null</code> will also be returned if the clipboard is
-     * currently accessed by another application.
+     * Gets a String content from the system's default clipboard. If the clipboard is
+     * empty, or if it does not contain a String, then {@code null} will be returned. On
+     * some systems {@code null} will also be returned if the clipboard is currently
+     * accessed by another application.
      * <p>
      * The requestor parameter is required by the JDK, but currently unused. Anyhow please
-     * pass a reference to the invoking class (usually <code>this</code>).
-     * 
+     * pass a reference to the invoking class (usually {@code this}).
+     *
      * @param requestor
-     *            Requestor, usually <code>this</code>.
-     * @return The String currently found in the clipboard, or <code>null</code>.
+     *            Requestor, usually {@code this}.
+     * @return The String currently found in the clipboard, or {@code null}.
      * @since R8
      */
     public static String pasteFromClipboard(Object requestor) {
@@ -387,7 +403,7 @@ public class SwingUtils {
      * This method can be used to scale down images that are bigger than the displaying
      * pane. Smaller images are not scaled up, though, but are keeping their original
      * size.
-     * 
+     *
      * @param aspect
      *            {@link Dimension} to keep the aspect ratio
      * @param max
@@ -424,7 +440,7 @@ public class SwingUtils {
      * <p>
      * This method can be used to scale images to fit into the maximum dimensions at the
      * best.
-     * 
+     *
      * @param aspect
      *            {@link Dimension} to keep the aspect ratio
      * @param max
@@ -457,7 +473,7 @@ public class SwingUtils {
     /**
      * Recursively get a {@link Collection} of all {@link Component} in a
      * {@link Component}.
-     * 
+     *
      * @param comp
      *            Root {@link Component}
      * @return {@link Collection} of the {@link Component} and all its sub
@@ -483,7 +499,7 @@ public class SwingUtils {
      * Recursively enables a {@link Component} and all its subcomponents. Usually if you
      * disable a {@link Container}, only the container itself is disabled, but not the
      * children {@link Component}s.
-     * 
+     *
      * @param comp
      *            Root {@link Component}
      * @param enable

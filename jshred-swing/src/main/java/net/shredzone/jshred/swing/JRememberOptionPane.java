@@ -33,12 +33,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * This is a JOptionPane which offers a CheckBox with a text like "Remember this
- * decision". If this CheckBox is checked, the JRememberOptionPane will remember the
- * answer and will give this answer immediately next time it is invoked.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JRememberOptionPane.java 584 2011-07-30 20:42:48Z shred $
+ * This is a {@link JOptionPane} which offers a CheckBox with a text like "Remember this
+ * decision". If this CheckBox is checked, the {@link JRememberOptionPane} will remember
+ * the answer and will give this answer immediately next time it is invoked.
+ *
+ * @author Richard "Shred" Körber
  * @since R7
  */
 public class JRememberOptionPane extends JOptionPane {
@@ -47,9 +46,9 @@ public class JRememberOptionPane extends JOptionPane {
     private static Preferences prefs = Preferences.userNodeForPackage(JRememberOptionPane.class);
 
     /**
-     * Show a Remember dialog with a remember checkbox. This will be a
-     * <code>QUESTION_MESSAGE</code> dialog with <code>OK_CANCEL_OPTION</code>.
-     * 
+     * Shows a Remember dialog with a remember checkbox. This will be a
+     * {@code QUESTION_MESSAGE} dialog with {@code OK_CANCEL_OPTION}.
+     *
      * @param parentComponent
      *            parent component to block
      * @param message
@@ -69,9 +68,9 @@ public class JRememberOptionPane extends JOptionPane {
     }
 
     /**
-     * Show a Remember dialog with a remember checkbox. This will be a
-     * <code>QUESTION_MESSAGE</code> dialog.
-     * 
+     * Shows a Remember dialog with a remember checkbox. This will be a
+     * {@code QUESTION_MESSAGE} dialog.
+     *
      * @param parentComponent
      *            parent component to block
      * @param message
@@ -93,17 +92,17 @@ public class JRememberOptionPane extends JOptionPane {
     }
 
     /**
-     * Show a Remember dialog with a remember checkbox. If the user checked the checkbox
+     * Shows a Remember dialog with a remember checkbox. If the user checked the checkbox
      * before, to remember his decision, it will return immediately that decision, without
      * further user interaction.
      * <p>
      * Note that the key must be unique for all applications. It is recommended to use the
      * java package notation here (i.e. always start the key with your reversed domain).
      * <p>
-     * The <code>CLOSED_OPTION</code> and <code>CANCEL_OPTION</code> will never be
-     * remembered, so if the user just closes or cancels the dialog, he will be asked
-     * again next time, no matter whether he checked the checkbox or not.
-     * 
+     * The {@code CLOSED_OPTION} and {@code CANCEL_OPTION} will never be remembered, so if
+     * the user just closes or cancels the dialog, he will be asked again next time, no
+     * matter whether he checked the checkbox or not.
+     *
      * @param parentComponent
      *            parent component to block
      * @param message
@@ -170,9 +169,9 @@ public class JRememberOptionPane extends JOptionPane {
     }
 
     /**
-     * Forget a certain key. The user will be asked again next time the dialog is opened.
+     * Forgets a certain key. The user will be asked again next time the dialog is opened.
      * Nothing will happen if there was no decision stored for the key yet.
-     * 
+     *
      * @param key
      *            Key to forget.
      */
@@ -181,17 +180,17 @@ public class JRememberOptionPane extends JOptionPane {
     }
 
     /**
-     * Forget all the keys starting with the given base. The user will be asked again next
-     * time the appropriate dialogs are opened. If no matching keys were found, nothing
-     * will happen.
+     * Forgets all the keys starting with the given base. The user will be asked again
+     * next time the appropriate dialogs are opened. If no matching keys were found,
+     * nothing will happen.
      * <p>
-     * If you pass <code>null</code> as base, the user will be asked again for all
+     * If you pass {@code null} as base, the user will be asked again for all
      * {@link JRememberOptionPane}s in <em>all</em> applications. It is strongly
-     * discouraged to pass <code>null</code>!
-     * 
+     * discouraged to pass {@code null}!
+     *
      * @param base
-     *            Base of the keys to be forgotten, <code>null</code> will forget all
-     *            keys, even for other applications.
+     *            Base of the keys to be forgotten, {@code null} will forget all keys,
+     *            even for other applications.
      * @since R10
      */
     public static void forgetAll(String base) {

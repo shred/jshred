@@ -56,9 +56,8 @@ import javax.swing.SwingConstants;
  * <p>
  * The given {@link Printable} must be able to render the same page several times, but
  * does not need to be able to give random access to all the pages.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JPrintPreview.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R8
  */
 public class JPrintPreview extends JPanel {
@@ -66,8 +65,7 @@ public class JPrintPreview extends JPanel {
 
     private final static int SHADOW_X = 4;      // Shadow X size
     private final static int SHADOW_Y = 4;      // Shadow Y size
-    private final static int BORDER_SIZE = 3;   // Size of the border around the
-    // page
+    private final static int BORDER_SIZE = 3;   // Size of the border around the page
 
     private int currentPage;
     private double currentZoom;
@@ -81,7 +79,7 @@ public class JPrintPreview extends JPanel {
     private transient Cursor oldCursor;
 
     /**
-     * Create an empty JPrintPreview pane. It will show nothing.
+     * Creates an empty {@link JPrintPreview} pane. It will show nothing.
      */
     public JPrintPreview() {
         setLayout(new BorderLayout());
@@ -143,9 +141,9 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Create a JPrintPreview pane and initialize it with a {@link Printable} object,
-     * which is to be shown in the given {@link PageFormat}.
-     * 
+     * Creates a {@link JPrintPreview} pane and initialize it with a {@link Printable}
+     * object, which is to be shown in the given {@link PageFormat}.
+     *
      * @param printable
      *            {@link Printable} to be shown
      * @param format
@@ -157,8 +155,9 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Create a JPrintPreview pane and initialize it with a {@link Pageable} object.
-     * 
+     * Creates a {@link JPrintPreview} pane and initialize it with a {@link Pageable}
+     * object.
+     *
      * @param pageable
      *            {@link Pageable} to be shown
      */
@@ -168,11 +167,11 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Set a {@link Printable} to be shown in the given {@link PageFormat}. The first page
-     * of the {@link Printable} will be shown with a standard zoom factor.
+     * Sets a {@link Printable} to be shown in the given {@link PageFormat}. The first
+     * page of the {@link Printable} will be shown with a standard zoom factor.
      * <p>
      * You can always change to other {@link Printable} and {@link Pageable} objects.
-     * 
+     *
      * @param printable
      *            {@link Printable} to be shown
      * @param format
@@ -187,11 +186,11 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Set a {@link Pageable} to be shown. The first page of the {@link Pageable} will be
+     * Sets a {@link Pageable} to be shown. The first page of the {@link Pageable} will be
      * shown with a standard zoom factor.
      * <p>
      * You can always change to other {@link Printable} and {@link Pageable} objects.
-     * 
+     *
      * @param pageable
      *            {@link Pageable} to be shown
      */
@@ -207,7 +206,7 @@ public class JPrintPreview extends JPanel {
      * Sets if a low memory footprint is required. JPrintPreview will then try to reduce
      * memory consumption. For example, the printout will be grayscaled, which reduces
      * memory by about two third.
-     * 
+     *
      * @param val
      *            true: low memory
      */
@@ -217,7 +216,7 @@ public class JPrintPreview extends JPanel {
 
     /**
      * Returns if a low memory footprint is required.
-     * 
+     *
      * @return true: low memory
      */
     public boolean isLowMem() {
@@ -229,7 +228,7 @@ public class JPrintPreview extends JPanel {
      * will fit to the current size of this {@link Component}. If the {@link Component}
      * has currently no size (i.e. is not shown), a default size of 500x500 pixels will be
      * used. You can change the default behaviour by overriding this method.
-     * 
+     *
      * @param format
      *            {@link PageFormat} to be used.
      */
@@ -248,13 +247,13 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Draw the paper. The printout will be printed on this graphics. The default
+     * Draws the paper. The printout will be printed on this graphics. The default
      * behaviour is to print a white sheet (size: width x height) and a darker shadow at
      * the right and bottom side. You can change this behaviour by overriding this method.
      * <p>
      * The paper must start at the coordinates (0,0). There is no scaling set yet, and
      * antialiasing is disabled here.
-     * 
+     *
      * @param g
      *            {@link Graphics}. It is safe to cast it to {@link Graphics2D}.
      * @param width
@@ -295,7 +294,7 @@ public class JPrintPreview extends JPanel {
      * will show the page content, scaled to the current zoom factor.
      * <p>
      * Note that this method may require some time and memory.
-     * 
+     *
      * @return {@link Image} containing the printed and scaled page.
      * @throws PrinterException
      *             Could not print to this image, e.g. if the current page does not exist.
@@ -346,8 +345,8 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Get the page number of the currently shown page.
-     * 
+     * Gets the page number of the currently shown page.
+     *
      * @return Page number
      */
     public int getPage() {
@@ -355,13 +354,13 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Set the page number of the page to be shown. If the page does not exist, an empty
+     * Sets the page number of the page to be shown. If the page does not exist, an empty
      * image will be shown instead.
      * <p>
      * <em>NOTE:</em> some Printables are unable to give random access to the
      * printed document. You cannot go back to a page that has been printed already, or go
      * forward by more than one page.
-     * 
+     *
      * @param page
      *            New page index (starting from 0).
      */
@@ -373,7 +372,7 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Turn forward one page. If the page does not exist, nothing will happen (except of
+     * Turns forward one page. If the page does not exist, nothing will happen (except of
      * some wasted CPU time ;-) ).
      */
     public void turnForward() throws PrinterException {
@@ -388,7 +387,7 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Turn back one page. If the page does not exist, nothing will happen. If the
+     * Turns back one page. If the page does not exist, nothing will happen. If the
      * {@link Printable} is unable to go backward, weird things may happen.
      */
     public void turnBack() throws PrinterException {
@@ -405,9 +404,9 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Get the current zoom factor. Values smaller than 1 reduces the page, while values
+     * Gets the current zoom factor. Values smaller than 1 reduces the page, while values
      * larger than 1 magnifies it.
-     * 
+     *
      * @return The current zoom factor
      */
     public double getZoomFactor() {
@@ -415,14 +414,14 @@ public class JPrintPreview extends JPanel {
     }
 
     /**
-     * Set the current zoom factor. Values smaller than 1 reduces the page, while values
+     * Sets the current zoom factor. Values smaller than 1 reduces the page, while values
      * larger than 1 magnifies it. The smallest possible zoom factor is 0.01.
      * <p>
      * Note that this class creates an internal {@link Image} representation of the
      * current page, for performance reasons. It will consume a lot of memory on large
-     * zoom factors! Setting {@link #setLowMem(boolean)} to <code>true</code> could help
+     * zoom factors! Setting {@link #setLowMem(boolean)} to {@code true} could help
      * you save some memory.
-     * 
+     *
      * @param zoom
      *            The new zoom factor.
      */

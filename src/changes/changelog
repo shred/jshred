@@ -1,4 +1,12 @@
-CHANGELOG -- $Id: changelog 432 2010-04-21 22:06:11Z shred $
+CHANGELOG
+
+R19 (2014-10-29)
+  * Cleanups and fixes in usage of generics
+  * Moved to GitHub
+  * jshred is now available at Maven Central
+
+R18 (2012-02-09)
+  * Added a way to find parent proxied tags
 
 R17 (2010-04-22)
   * Added jshred-spring with Spring utility classes

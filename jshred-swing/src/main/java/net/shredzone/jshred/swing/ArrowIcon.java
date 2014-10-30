@@ -29,9 +29,8 @@ import javax.swing.SwingConstants;
 /**
  * This is an icon of a little arrow pointing in one of the four directions, either solid
  * or outlined.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: ArrowIcon.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R12
  */
 public class ArrowIcon implements Icon, Serializable {
@@ -42,8 +41,8 @@ public class ArrowIcon implements Icon, Serializable {
     private final int height;
 
     /**
-     * Create a new, solid ArrowIcon for the given direction.
-     * 
+     * Creates a new, solid {@link ArrowIcon} for the given direction.
+     *
      * @param w
      *            Arrow width
      * @param h
@@ -57,8 +56,8 @@ public class ArrowIcon implements Icon, Serializable {
     }
 
     /**
-     * Create a new, ArrowIcon for the given direction.
-     * 
+     * Creates a new {@link ArrowIcon} for the given direction.
+     *
      * @param w
      *            Arrow width
      * @param h
@@ -83,18 +82,6 @@ public class ArrowIcon implements Icon, Serializable {
         this.solid = solid;
     }
 
-    /**
-     * Paint this icon
-     * 
-     * @param c
-     *            {@link Component} (for reference)
-     * @param g
-     *            {@link Graphics} context
-     * @param x
-     *            X position
-     * @param y
-     *            Y position
-     */
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         final int w  = width - 1;
@@ -143,23 +130,14 @@ public class ArrowIcon implements Icon, Serializable {
         }
     }
 
-    /**
-     * Get the icon width.
-     * 
-     * @return Icon width
-     */
     @Override
     public int getIconWidth() {
         return width;
     }
 
-    /**
-     * Get the icon height.
-     * 
-     * @return Icon height
-     */
     @Override
     public int getIconHeight() {
         return height;
     }
+
 }

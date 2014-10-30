@@ -26,28 +26,21 @@ import javax.swing.table.TableModel;
  * This is just a mere empty {@link TableModel} which will never have any entries. It also
  * implements the {@link SortableTableModel}, so it can be used for {@link JSortedTable}
  * as well.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
+ *
+ * @author Richard "Shred" Körber
  * @since R14
- * @version $Id: EmptyTableModel.java 584 2011-07-30 20:42:48Z shred $
  */
 public final class EmptyTableModel implements SortableTableModel {
 
     /**
-     * Add a listener. Since this list will always be empty, the listeners are just
+     * Adds a listener. Since this list will always be empty, the listeners are just
      * ignored.
-     * 
-     * @param l
-     *            {@link TableModelListener} to be ignored.
-     * @see javax.swing.TableModel#addTableModelListener(javax.swing.event.TableModelListener)
      */
     @Override
     public void addTableModelListener(TableModelListener l) {}
 
     /**
-     * Get the column class. This is always Object, just to return anything.
-     * 
-     * @return Column class
+     * Gets the column class. This is always Object, just to return anything.
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -55,9 +48,7 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Get the column count. The table is empty, so there are 0 columns.
-     * 
-     * @return Column count
+     * Gets the column count. The table is empty, so there are 0 columns.
      */
     @Override
     public int getColumnCount() {
@@ -65,9 +56,7 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Get the column name. This is an empty string, but not null.
-     * 
-     * @return Column name
+     * Gets the column name. This is an empty string, but not {@code null}.
      */
     @Override
     public String getColumnName(int columnIndex) {
@@ -75,9 +64,7 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Get the row count. This is always 0 since the table is empty.
-     * 
-     * @return Row count
+     * Gets the row count. This is always 0 since the table is empty.
      */
     @Override
     public int getRowCount() {
@@ -85,13 +72,7 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Get the value at a certain position. This is always null.
-     * 
-     * @param rowIndex
-     *            Row
-     * @param columnIndex
-     *            Column
-     * @return Value of a cell
+     * Gets the value at a certain position. This is always {@code null}.
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -99,13 +80,7 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Check if a cell is editable. For this model, no cell is editable.
-     * 
-     * @param rowIndex
-     *            Row
-     * @param columnIndex
-     *            Column
-     * @return false: Cell is not editable
+     * Checks if a cell is editable. For this model, no cell is editable.
      */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -113,33 +88,20 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Remove a listener. Since this list will always be empty, the listeners are just
+     * Remove sa listener. Since this list will always be empty, the listeners are just
      * ignored.
-     * 
-     * @param l
-     *            {@link TableModelListener} to be ignored.
-     * @see javax.swing.TableModel#removeTableModelListener(javax.swing.event.TableModelListener)
      */
     @Override
     public void removeTableModelListener(TableModelListener l) {}
 
     /**
-     * Set a value of a cell. Changing an empty table is always ignored.
-     * 
-     * @param aValue
-     *            New value
-     * @param rowIndex
-     *            Row
-     * @param columnIndex
-     *            Column
+     * Sets a value of a cell. Changing an empty table is always ignored.
      */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {}
 
     /**
-     * Get the colum that is sorted. Always returns 0.
-     * 
-     * @return Sorted column.
+     * Gets the colum that is sorted. Always returns 0.
      */
     @Override
     public int getSortedColumn() {
@@ -147,9 +109,7 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Check if the sort order is descending. Always returns false.
-     * 
-     * @return Sort order.
+     * Checks if the sort order is descending. Always returns {@code false}.
      */
     @Override
     public boolean isDescending() {
@@ -157,14 +117,16 @@ public final class EmptyTableModel implements SortableTableModel {
     }
 
     /**
-     * Sort by a column. This is ignored for empty tables.
-     * 
+     * Sorts by a column. This is ignored for empty tables.
+     *
      * @param columnIndex
      *            Column index
      * @param desc
      *            Descending?
      */
     @Override
-    public void sortByColumn(int columnIndex, boolean desc) {}
+    public void sortByColumn(int columnIndex, boolean desc) {
+        // does nothing
+    }
 
 }

@@ -46,16 +46,15 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
 /**
- * An ImageViewer renders an image in the centre of the component. This image can be
- * scaled, and a transparency checkboard can also be drawn behind it.
+ * An {@link JImageViewer} renders an image in the centre of the component. This image can
+ * be scaled, and a transparency checkboard can also be drawn behind it.
  * <p>
  * As an extra feature, the image can be dragged with the mouse if the viewer is in a
  * JScrollPane.
  * <p>
  * This class also implements the {@link Printable} interface since R13.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JImageViewer.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R9
  */
 public class JImageViewer extends JComponent implements Printable {
@@ -117,15 +116,15 @@ public class JImageViewer extends JComponent implements Printable {
     private transient Cursor oldCursor;
 
     /**
-     * Create an empty JImageViewer.
+     * Creates an empty {@link JImageViewer}.
      */
     public JImageViewer() {
         init();
     }
 
     /**
-     * Create a JImageViewer showing the given {@link Image}.
-     * 
+     * Creates a {@link JImageViewer} showing the given {@link Image}.
+     *
      * @param image
      *            {@link Image} to be shown.
      */
@@ -135,8 +134,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Create a JImageViewer showing the given {@link ImageIcon}.
-     * 
+     * Creates a {@link JImageViewer} showing the given {@link ImageIcon}.
+     *
      * @param icon
      *            {@link ImageIcon} to be shown.
      */
@@ -146,9 +145,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Create a JImageViewer showing an image that is read from the given
+     * Creates a {@link JImageViewer} showing an image that is read from the given
      * {@link InputStream}.
-     * 
+     *
      * @param is
      *            {@link InputStream} to read the image data from.
      * @throws IOException
@@ -160,8 +159,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Create a JImageViewer showing an image that is read from the given {@link URL}.
-     * 
+     * Creates a {@link JImageViewer} showing an image that is read from the given
+     * {@link URL}.
+     *
      * @param url
      *            {@link URL} to read the image data from.
      */
@@ -170,9 +170,6 @@ public class JImageViewer extends JComponent implements Printable {
         setImage(url);
     }
 
-    /**
-     * Common initializer for an instance.
-     */
     private void init() {
         MouseListener lMouse = new MouseAdapter() {
             @Override
@@ -227,8 +224,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new {@link Image} to be shown.
-     * 
+     * Sets a new {@link Image} to be shown.
+     *
      * @param img
      *            New {@link Image} to be shown.
      */
@@ -240,9 +237,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new {@link ImageIcon} to be shown. This is a convenience method that will
+     * Sets a new {@link ImageIcon} to be shown. This is a convenience method that will
      * just invoke {@link ImageIcon#getImage()}.
-     * 
+     *
      * @param icon
      *            New {@link ImageIcon} to be shown.
      */
@@ -251,9 +248,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new image that is to be read from the {@link InputStream}. No fancy image
+     * Sets a new image that is to be read from the {@link InputStream}. No fancy image
      * formats are supported, just the one that are supported by {@link ImageIO}.
-     * 
+     *
      * @param in
      *            {@link InputStream} providing the image data.
      * @throws IOException
@@ -264,9 +261,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set a new image that is to be read from the {@link URL}. No fancy image formats are
-     * supported, just the one that are supported by {@link ImageIO}.
-     * 
+     * Sets a new image that is to be read from the {@link URL}. No fancy image formats
+     * are supported, just the one that are supported by {@link ImageIO}.
+     *
      * @param url
      *            {@link URL} to read the image from.
      */
@@ -275,23 +272,23 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the {@link Image} that is currently set.
-     * 
-     * @return Current {@link Image}, or <code>null</code> if none was set.
+     * Gets the {@link Image} that is currently set.
+     *
+     * @return Current {@link Image}, or {@code null} if none was set.
      */
     public Image getImage() {
         return image;
     }
 
     /**
-     * Draw the transparency checkboard. The checkboard is drawn behind the image and can
+     * Draws the transparency checkboard. The checkboard is drawn behind the image and can
      * be seen through the transparent parts of it.
      * <p>
      * By default, no transparency checkboard is shown since it slows down the performance
      * and might confuse the user.
-     * 
+     *
      * @param checkboard
-     *            true: show transparency checkboard.
+     *            {@code true}: show transparency checkboard.
      */
     public void setCheckboard(boolean checkboard) {
         firePropertyChange("checkboard", this.checkboard, checkboard);
@@ -300,22 +297,22 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Check if the transparency checkboard is to be drawn.
-     * 
-     * @return true: show transparency checkboard.
+     * Checks if the transparency checkboard is to be drawn.
+     *
+     * @return {@code true}: show transparency checkboard.
      */
     public boolean isCheckboard() {
         return checkboard;
     }
 
     /**
-     * Set the transparency checkboard color. By default (or if <code>null</code> is
-     * passed in here), the background color's {@link Color#brighter()} is used for the
-     * bright fields. For the dark fields, {@link #getBackground()} is always used if this
+     * Sets the transparency checkboard color. By default (or if {@code null} is passed in
+     * here), the background color's {@link Color#brighter()} is used for the bright
+     * fields. For the dark fields, {@link #getBackground()} is always used if this
      * component is opaque.
-     * 
+     *
      * @param color
-     *            Checkboard {@link Color}, <code>null</code> means default color.
+     *            Checkboard {@link Color}, {@code null} means default color.
      */
     public void setCheckboardColor(Color color) {
         firePropertyChange("checkboardColor", this.cbcolor, color);
@@ -324,9 +321,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the transparency checkboard color.
-     * 
-     * @return Checkboard {@link Color}, or <code>null</code> if the default color is
+     * Gets the transparency checkboard color.
+     *
+     * @return Checkboard {@link Color}, or {@code null} if the default color is
      *         used.
      */
     public Color getCheckboardColor() {
@@ -334,9 +331,9 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set the autoscale mode. The default is {@link Autoscale#OFF}, so you can embed a
-     * JImageViewer into a {@link JScrollPane}.
-     * 
+     * Sets the autoscale mode. The default is {@link Autoscale#OFF}, so you can embed a
+     * {@link JImageViewer} into a {@link JScrollPane}.
+     *
      * @param autoscale
      *            The new {@link Autoscale} mode.
      */
@@ -350,8 +347,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the current autoscale mode.
-     * 
+     * Gets the current autoscale mode.
+     *
      * @return Current autoscale mode.
      */
     public Autoscale getAutoscale() {
@@ -359,13 +356,13 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set the zoom factor for the shown image. A factor of 1.0f means that the image is
+     * Sets the zoom factor for the shown image. A factor of 1.0f means that the image is
      * shown in the original size. A factor &lt;1.0f will reduce the image, while a factor
      * &gt;1.0f will magnify it.
      * <p>
      * <em>NOTE</em> that {@link Autoscale#OFF} must be set in order to use zooming. This
      * might change in future releases though.
-     * 
+     *
      * @param zoom
      *            Zoom factor. Default is 1.0f.
      */
@@ -379,8 +376,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the current zoom factor.
-     * 
+     * Gets the current zoom factor.
+     *
      * @return Current zoom factor.
      */
     public float getZoomFactor() {
@@ -388,8 +385,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set the scaling quality.
-     * 
+     * Sets the scaling quality.
+     *
      * @param quality
      *            New scaling quality.
      */
@@ -400,8 +397,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the current scaling quality.
-     * 
+     * Gets the current scaling quality.
+     *
      * @return Current scaling quality.
      */
     public Quality getQuality() {
@@ -409,8 +406,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Get the final {@link Dimension} of the image after proper scaling was applied.
-     * 
+     * Gets the final {@link Dimension} of the image after proper scaling was applied.
+     *
      * @return {@link Dimension} of the image to be drawn. The returned {@link Dimension}
      *         object is a copy that can be manipulated by the caller.
      */
@@ -445,12 +442,6 @@ public class JImageViewer extends JComponent implements Printable {
         return dim;
     }
 
-    /**
-     * Get this component's minimum size. If {@link Autoscale#OFF} is set, it equals to
-     * the image size.
-     * 
-     * @return Minimum {@link Dimension}
-     */
     @Override
     public Dimension getMinimumSize() {
         if (image != null && autoscale == Autoscale.OFF) {
@@ -464,12 +455,6 @@ public class JImageViewer extends JComponent implements Printable {
         }
     }
 
-    /**
-     * Get the component's preferred size. This is always equal to the minimum size unless
-     * no image has been set.
-     * 
-     * @return Preferred dimensions
-     */
     @Override
     public Dimension getPreferredSize() {
         if (image != null) {
@@ -479,13 +464,6 @@ public class JImageViewer extends JComponent implements Printable {
         }
     }
 
-    /**
-     * Paint the component. It will paint the checkerboard (if enabled) and the Image on
-     * top of it.
-     * 
-     * @param g
-     *            {@link Graphics} context.
-     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -524,19 +502,6 @@ public class JImageViewer extends JComponent implements Printable {
         }
     }
 
-    /**
-     * Print this image. It will be printed on a single page, scaled to consume the entire
-     * paper (keeping the border).
-     * 
-     * @param graphics
-     *            Graphics context
-     * @param pageFormat
-     *            Page format to be used
-     * @param pageIndex
-     *            Page index.
-     * @return {@link Printable#PAGE_EXISTS} or {@link Printable#NO_SUCH_PAGE}
-     * @since R13
-     */
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
         final Graphics2D g2d = (Graphics2D) graphics;
@@ -580,8 +545,8 @@ public class JImageViewer extends JComponent implements Printable {
     }
 
     /**
-     * Set the rendering hints according to the quality.
-     * 
+     * Sets the rendering hints according to the quality.
+     *
      * @param g2d
      *            {@link Graphics2D} to set the rendering hints.
      * @param quality

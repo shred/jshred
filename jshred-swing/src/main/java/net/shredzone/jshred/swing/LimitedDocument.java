@@ -26,9 +26,8 @@ import javax.swing.text.PlainDocument;
 
 /**
  * This {@link PlainDocument} will limit the input to a certain length.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: LimitedDocument.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class LimitedDocument extends PlainDocument {
     private static final long serialVersionUID = 3258131358084904248L;
@@ -36,7 +35,7 @@ public class LimitedDocument extends PlainDocument {
 
     /**
      * Creates a new {@link Document} with the given maximum length.
-     * 
+     *
      * @param len
      *            Maximum length in characters
      */
@@ -45,17 +44,6 @@ public class LimitedDocument extends PlainDocument {
         maxLength = len;
     }
 
-    /**
-     * Overwrites {@link PlainDocument#insertString(int, String, AttributeSet)} to check
-     * the input.
-     * 
-     * @param offs
-     *            Offset
-     * @param str
-     *            String
-     * @param a
-     *            AttributeSet
-     */
     @Override
     public void insertString(int offs, String str, AttributeSet a)
         throws BadLocationException {
@@ -69,4 +57,5 @@ public class LimitedDocument extends PlainDocument {
             super.insertString(offs, str.substring(0, maxLength - getLength()), a);
         }
     }
+
 }

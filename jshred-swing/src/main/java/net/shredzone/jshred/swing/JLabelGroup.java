@@ -32,15 +32,14 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 /**
- * A JLabelGroup is a {@link JLabel} set left to a {@link Component}. At RTL systems, the
- * label is set to the right.
+ * A {@link JLabelGroup} is a {@link JLabel} set left to a {@link Component}. At RTL
+ * systems, the label is set to the right.
  * <p>
- * Multiple JLabelGroup can be connected together. On the last instance of this chain,
- * {@link #rearrange()} will be invoked, to rearrange all {@link JLabel}s within this
- * chain to the same, maximum width. This will result into a nicely aligned layout.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JLabelGroup.java 389 2009-11-11 23:47:30Z shred $
+ * Multiple {@link JLabelGroup} can be connected together. On the last instance of this
+ * chain, {@link #rearrange()} will be invoked, to rearrange all {@link JLabel}s within
+ * this chain to the same, maximum width. This will result into a nicely aligned layout.
+ *
+ * @author Richard "Shred" Körber
  */
 public class JLabelGroup extends JPanel {
     private static final long serialVersionUID = 4120855451547482167L;
@@ -49,8 +48,8 @@ public class JLabelGroup extends JPanel {
     private JLabelGroup pred;
 
     /**
-     * Creates the first JLabelGroup of a chain.
-     * 
+     * Creates the first {@link JLabelGroup} of a chain.
+     *
      * @param c
      *            {@link Component} to be labelled
      * @param text
@@ -61,14 +60,14 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Creates a new JLabelGroup element.
-     * 
+     * Creates a new {@link JLabelGroup} element.
+     *
      * @param c
      *            {@link Component} to be labelled
      * @param text
      *            Label text
      * @param pred
-     *            Predecessor JLabelGroup instance, or <code>null</code>
+     *            Predecessor {@link JLabelGroup} instance, or {@code null}
      */
     public JLabelGroup(Component c, String text, JLabelGroup pred) {
         this(c, createDefaultLabel(SwingUtils.getMenuName(text), null), pred);
@@ -77,8 +76,8 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Creates a new JLabelGroup label with an {@link Icon}.
-     * 
+     * Creates a new {@link JLabelGroup} label with an {@link Icon}.
+     *
      * @param c
      *            {@link Component} to be labelled
      * @param text
@@ -86,22 +85,22 @@ public class JLabelGroup extends JPanel {
      * @param icon
      *            {@link Icon}
      * @param pred
-     *            Predecessor JLabelGroup instance, or <code>null</code>
+     *            Predecessor {@link JLabelGroup} instance, or {@code null}
      */
     public JLabelGroup(Component c, String text, Icon icon, JLabelGroup pred) {
         this(c, createDefaultLabel(text, icon), pred);
     }
 
     /**
-     * Creates a new JLabelGroup label with a given label {@link JComponent}. Use this if
-     * you want to use a different label.
-     * 
+     * Creates a new {@link JLabelGroup} label with a given label {@link JComponent}. Use
+     * this if you want to use a different label.
+     *
      * @param c
      *            {@link Component} to be labelled
      * @param label
      *            Label {@link JComponent}
      * @param pred
-     *            Predecessor JLabelGroup instance, or <code>null</code>
+     *            Predecessor {@link JLabelGroup} instance, or {@code null}
      */
     public JLabelGroup(Component c, JComponent label, JLabelGroup pred) {
         this.comp = c;
@@ -119,9 +118,9 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Calculates the maximum label with of a JLabelGroup chain. {@link #rearrange()} will
-     * use this method to compute the width.
-     * 
+     * Calculates the maximum label with of a {@link JLabelGroup} chain.
+     * {@link #rearrange()} will use this method to compute the width.
+     *
      * @return Maximum width
      */
     protected int getMaximumWidth() {
@@ -133,9 +132,9 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Set the vertical alignment of the label, using {@link SwingConstants}. Default is
+     * Sets the vertical alignment of the label, using {@link SwingConstants}. Default is
      * {@link SwingConstants#CENTER}.
-     * 
+     *
      * @param pos
      *            Alignment: TOP, CENTER or BOTTOM.
      */
@@ -143,16 +142,16 @@ public class JLabelGroup extends JPanel {
         Border border;
 
         switch (pos) {
-        case SwingConstants.TOP:
-            border = new EmptyBorder(1, 0, 0, 5);
-            break;
+            case SwingConstants.TOP:
+                border = new EmptyBorder(1, 0, 0, 5);
+                break;
 
-        case SwingConstants.BOTTOM:
-            border = new EmptyBorder(0, 0, 1, 5);
-            break;
+            case SwingConstants.BOTTOM:
+                border = new EmptyBorder(0, 0, 1, 5);
+                break;
 
-        default:
-            border = new EmptyBorder(0, 0, 0, 5);
+            default:
+                border = new EmptyBorder(0, 0, 0, 5);
         }
 
         label.setBorder(border);
@@ -162,10 +161,10 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Recursively set the minimum width of this JLabelGroup chain. This method must be
+     * Recursively sets the minimum width of this JLabelGroup chain. This method must be
      * invoked on the <em>last</em> JLabelGroup of the chain. It is used by
      * {@link #rearrange()}.
-     * 
+     *
      * @param width
      *            New minimum width
      */
@@ -178,22 +177,23 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Rearrange the JLabelGroup chain. All labels in this chain are set to the width of
-     * the broadest label. This method must be invoked on the <em>last</em> JLabelGroup of
-     * a chain!
+     * Rearranges the {@link JLabelGroup} chain. All labels in this chain are set to the
+     * width of the broadest label. This method must be invoked on the <em>last</em>
+     * {@link JLabelGroup} of a chain!
      * <p>
-     * If further JLabelGroup objects are added later, this method must be invoked again,
-     * on the new last element of the chain.
+     * If further {@link JLabelGroup} objects are added later, this method must be invoked
+     * again, on the new last element of the chain.
      * <p>
-     * All JLabelGroups are regarded, even if they are currently invisible.
+     * All {@link JLabelGroup} instances are regarded, even if they are currently
+     * invisible.
      */
     public void rearrange() {
         setMinimumWidth(getMaximumWidth());
     }
 
     /**
-     * Set a mnemonic key for this label.
-     * 
+     * Sets a mnemonic key for this label.
+     *
      * @param key
      *            Key to be used
      */
@@ -204,8 +204,8 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Set a mnemonic code for this label.
-     * 
+     * Sets a mnemonic code for this label.
+     *
      * @param code
      *            Keycode to be used
      */
@@ -216,9 +216,9 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Get the {@link JComponent} that is used as a label for this JLabelGroup. Usually
-     * this is a {@link JLabel}, but you should not rely on this!
-     * 
+     * Gets the {@link JComponent} that is used as a label for this {@link JLabelGroup}.
+     * Usually this is a {@link JLabel}, but you should not rely on this!
+     *
      * @return {@link JComponent} used as a label.
      * @since R5
      */
@@ -227,13 +227,13 @@ public class JLabelGroup extends JPanel {
     }
 
     /**
-     * Create the default {@link JComponent} used as a label, if one of the text
+     * Creates the default {@link JComponent} used as a label, if one of the text
      * constructors is used.
-     * 
+     *
      * @param text
      *            Label text
      * @param icon
-     *            {@link Icon} to be used, or null
+     *            {@link Icon} to be used, or {@code null}
      * @return {@link JComponent} showing the text and the icon
      * @since R5
      */

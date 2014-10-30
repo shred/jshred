@@ -31,9 +31,8 @@ import javax.swing.text.PlainDocument;
 /**
  * A {@link JTextField} that only allows to enter digits. I wonder why Sun didn't supply
  * this obligatory input field.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JIntegerField.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R2
  */
 public class JIntegerField extends JTextField {
@@ -41,7 +40,7 @@ public class JIntegerField extends JTextField {
     private static final IntegerFilter filter = new IntegerFilter();
 
     /**
-     * Create a new JIntegerField.
+     * Creates a new {@link JIntegerField}.
      */
     public JIntegerField() {
         PlainDocument doc = new PlainDocument();
@@ -50,8 +49,8 @@ public class JIntegerField extends JTextField {
     }
 
     /**
-     * Create a new JIntegerField and set an integer.
-     * 
+     * Creates a new {@link JIntegerField} and set an integer.
+     *
      * @param value
      *            Value to be set
      */
@@ -61,8 +60,8 @@ public class JIntegerField extends JTextField {
     }
 
     /**
-     * Set an integer
-     * 
+     * Sets an integer
+     *
      * @param value
      *            Value to be set
      */
@@ -71,8 +70,8 @@ public class JIntegerField extends JTextField {
     }
 
     /**
-     * Get the current value, as integer.
-     * 
+     * Gets the current value, as integer.
+     *
      * @return integer
      */
     public int getInteger() {
@@ -80,7 +79,7 @@ public class JIntegerField extends JTextField {
     }
 
     /**
-     * A DocumentFilter that only allows digits.
+     * A {@link DocumentFilter} that only allows digits.
      */
     public static class IntegerFilter extends DocumentFilter {
 
@@ -88,7 +87,7 @@ public class JIntegerField extends JTextField {
          * String to be inserted into the Document. If it does not contain digits only,
          * the insertion will be refused and a beep will sound. Everything matching
          * <code>Character.isDigit()</code> will be accepted as a valid digit.
-         * 
+         *
          * @param fb
          *            FilterBypass
          * @param offset
@@ -119,7 +118,7 @@ public class JIntegerField extends JTextField {
          * contain digits only, the insertion will be refused and a beep will sound.
          * Everything matching {@link Character#isDigit(char)} will be accepted as a valid
          * digit.
-         * 
+         *
          * @param fb
          *            FilterBypass
          * @param offset

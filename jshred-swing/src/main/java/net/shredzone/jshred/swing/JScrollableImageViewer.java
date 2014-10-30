@@ -31,7 +31,7 @@ import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
 /**
- * A ScrollableImageViewer is an {@link JImageViewer} that also implements the
+ * A {@link JScrollableImageViewer} is an {@link JImageViewer} that also implements the
  * {@link Scrollable} interface.
  * <p>
  * The advantage of this class is that e.g. mouse wheel scrolling will feel more familiar
@@ -39,28 +39,25 @@ import javax.swing.SwingConstants;
  * <p>
  * The disadvantage is that the image will always be shown in the upper left corner,
  * instead of being centered like in the {@link JImageViewer} class.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: JScrollableImageViewer.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R9
  */
 public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     private static final long serialVersionUID = 3760844579779262261L;
 
-    private static final int SCROLL_UNITS = 20; // Number of pixels for a scroll
-
-    // unit
+    private static final int SCROLL_UNITS = 20; // Number of pixels for a scroll unit
 
     /**
-     * Create an empty JScrollableImageViewer.
+     * Creates an empty {@link JScrollableImageViewer}.
      */
     public JScrollableImageViewer() {
         super();
     }
 
     /**
-     * Create a JScrollableImageViewer showing the given {@link Image}.
-     * 
+     * Creates a {@link JScrollableImageViewer} showing the given {@link Image}.
+     *
      * @param image
      *            {@link Image} to be shown.
      */
@@ -69,8 +66,8 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     }
 
     /**
-     * Create a JScrollableImageViewer showing the given {@link ImageIcon}.
-     * 
+     * Creates a {@link JScrollableImageViewer} showing the given {@link ImageIcon}.
+     *
      * @param icon
      *            {@link ImageIcon} to be shown.
      */
@@ -79,9 +76,9 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     }
 
     /**
-     * Create a JScrollableImageViewer showing an image that is read from the given
-     * {@link InputStream}.
-     * 
+     * Creates a {@link JScrollableImageViewer} showing an image that is read from the
+     * given {@link InputStream}.
+     *
      * @param is
      *            {@link InputStream} to read the image data from.
      * @throws IOException
@@ -92,9 +89,9 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     }
 
     /**
-     * Create a JScrollableImageViewer showing an image that is read from the given
-     * {@link URL}.
-     * 
+     * Creates a {@link JScrollableImageViewer} showing an image that is read from the
+     * given {@link URL}.
+     *
      * @param url
      *            {@link URL} to read the image data from.
      */
@@ -103,9 +100,9 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     }
 
     /**
-     * Get the preferred viewport size, which is equal to the minimum size of this
+     * Gets the preferred viewport size, which is equal to the minimum size of this
      * component.
-     * 
+     *
      * @return Preferred scrollable viewport dimension
      */
     @Override
@@ -116,7 +113,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     /**
      * How many pixels of the image to be scrolled by an unit increment. This is when the
      * user pressed the arrow button or did one mouse wheel movement.
-     * 
+     *
      * @return A small number of pixels to be scrolled.
      */
     @Override
@@ -127,7 +124,7 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     /**
      * How many pixels of the image to be scrolled by a block increment. This is when the
      * user pressed at the area next to the scrollbar slider.
-     * 
+     *
      * @return A large number of pixels to be scrolled. The default is the visible
      *         width/height (respectively) minus one unit increment.
      */
@@ -145,8 +142,8 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     }
 
     /**
-     * Adjust own width to viewport width. This is not desired for an image.
-     * 
+     * Adjusts own width to viewport width. This is not desired for an image.
+     *
      * @return always false
      */
     @Override
@@ -155,8 +152,8 @@ public class JScrollableImageViewer extends JImageViewer implements Scrollable {
     }
 
     /**
-     * Adjust own height to viewport height. This is not desired for an image.
-     * 
+     * Adjusts own height to viewport height. This is not desired for an image.
+     *
      * @return always false
      */
     @Override

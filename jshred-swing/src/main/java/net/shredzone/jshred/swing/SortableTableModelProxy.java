@@ -37,20 +37,19 @@ import javax.swing.table.TableModel;
  * that the rows will be re-sorted after every single manipulation to the master
  * {@link TableModel}.
  * <p>
- * The liaison between the SortTableModel and its master {@link TableModel} is for a
- * lifetime. If you want to change the master {@link TableModel}, you will have to
+ * The liaison between the {@link SortableTableModel} and its master {@link TableModel} is
+ * for a lifetime. If you want to change the master {@link TableModel}, you will have to
  * generate a new SortTableModel and feed it to the {@link JTable}. This
  * {@link TableModel} is best suited for the {@link JSortedTable}, but not limited to it.
- * You can also use SortTableModelProxy instances for classic {@link JTable}, if you want
- * to keep control of the column sorting.
+ * You can also use {@link SortableTableModelProxy} instances for classic {@link JTable},
+ * if you want to keep control of the column sorting.
  * <p>
  * Note that this is just a proxy, not a {@link TableModel} itself. You should not extend
  * this class in order to create a sorted {@link TableModel}, but inherit from standard
  * {@link TableModel}s, and then pass your {@link TableModel} to the SortTableModelProxy
  * constructor.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: SortableTableModelProxy.java 584 2011-07-30 20:42:48Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class SortableTableModelProxy implements ExtendedSortableTableModel, TableModelListener, Serializable {
     static final long serialVersionUID = -668922708936078948L;
@@ -62,10 +61,10 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     private final ListenerManager<TableModelListener> listener = new ListenerManager<TableModelListener>();
 
     /**
-     * Create a new SortableTableModelProxy for a master {@link TableModel}. The object
+     * Creates a new SortableTableModelProxy for a master {@link TableModel}. The object
      * will give a modified view to the master {@link TableModel} that allows to sort it
      * by a certain column.
-     * 
+     *
      * @param master
      *            Master {@link TableModel}
      */
@@ -78,102 +77,44 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Get the master table that is connected to this SortableTableModelProxy.
-     * 
+     * Gets the master table that is connected to this SortableTableModelProxy.
+     *
      * @return The master {@link TableModel}
      */
     public TableModel getMasterTable() {
         return master;
     }
 
-    /**
-     * Get the number of rows. This call is forwarded to the master {@link TableModel}.
-     * 
-     * @return Number of rows
-     */
     @Override
     public int getRowCount() {
         return master.getRowCount();
     }
 
-    /**
-     * Get the number of columns. This call is forwarded to the master {@link TableModel}.
-     * 
-     * @return Number of columns
-     */
     @Override
     public int getColumnCount() {
         return master.getColumnCount();
     }
 
-    /**
-     * Get the column name of a certain column. This call is forwarded to the master
-     * {@link TableModel}.
-     * 
-     * @param columnIndex
-     *            Index
-     * @return Column name
-     */
     @Override
     public String getColumnName(int columnIndex) {
         return master.getColumnName(columnIndex);
     }
 
-    /**
-     * Get the column name of a certain column. This call is forwarded to the master
-     * {@link TableModel}.
-     * 
-     * @param columnIndex
-     *            Index
-     * @return Column name
-     */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return master.getColumnClass(columnIndex);
     }
 
-    /**
-     * Check if a cell is editable. This call is forwarded to the master
-     * {@link TableModel} after the row has been mapped according to the sort order.
-     * 
-     * @param rowIndex
-     *            Row
-     * @param columnIndex
-     *            Column
-     * @return true: is editable
-     */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return master.isCellEditable(mapRow(rowIndex), columnIndex);
     }
 
-    /**
-     * Get a cell value. This call is forwarded to the master {@link TableModel} after the
-     * row has been mapped according to the sort order.
-     * 
-     * @param rowIndex
-     *            Row
-     * @param columnIndex
-     *            Column
-     * @return The value of this cell.
-     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return master.getValueAt(mapRow(rowIndex), columnIndex);
     }
 
-    /**
-     * Set a cell value. This call is forwarded to the master {@link TableModel} after the
-     * row has been mapped according to the sort order. If the current sort column was
-     * modified, the table will be sorted again after this call.
-     * 
-     * @param aValue
-     *            New value
-     * @param rowIndex
-     *            Row
-     * @param columnIndex
-     *            Column
-     */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         master.setValueAt(aValue, mapRow(rowIndex), columnIndex);
@@ -184,8 +125,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Map a row number to the appropriate row number in the master {@link TableModel}.
-     * 
+     * Maps a row number to the appropriate row number in the master {@link TableModel}.
+     *
      * @param row
      *            Row number of this model
      * @return Row number of the row in the master {@link TableModel}.
@@ -196,9 +137,9 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Map a row number of the master {@link TableModel} to the current row number of the
+     * Maps a row number of the master {@link TableModel} to the current row number of the
      * SortableTableModel.
-     * 
+     *
      * @param row
      *            Row number of the master {@link TableModel}
      * @return Appropriate current row number of this model.
@@ -212,8 +153,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Sort by a certain column, ascending.
-     * 
+     * Sorts by a certain column, ascending.
+     *
      * @param columnIndex
      *            Column to sort at.
      */
@@ -222,8 +163,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Sort by a certain column, descending.
-     * 
+     * Sorts by a certain column, descending.
+     *
      * @param columnIndex
      *            Column to sort at.
      */
@@ -232,8 +173,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Sort by a certain column in the given order.
-     * 
+     * Sorts by a certain column in the given order.
+     *
      * @param columnIndex
      *            Column to sort at.
      * @param desc
@@ -248,8 +189,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Get the index of the column that is currently sorted.
-     * 
+     * Gets the index of the column that is currently sorted.
+     *
      * @return Currently sorted column.
      */
     @Override
@@ -258,8 +199,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Get the current sort order.
-     * 
+     * Gets the current sort order.
+     *
      * @return true: descending, false: ascending
      */
     @Override
@@ -268,7 +209,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Sort the entire TableModel again.
+     * Sorts the entire TableModel again.
      */
     protected void resort() {
         ColumnComparator comp = new ColumnComparator(currentColumn, currentDesc);
@@ -276,7 +217,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Rebuild the internal index map array. This is always required when the master
+     * Rebuilds the internal index map array. This is always required when the master
      * TableModel changed its number of rows.
      */
     protected void rebuildIndexMap() {
@@ -289,9 +230,6 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
 
     /**
      * Internal TableModelListener implementation, do not use!
-     * 
-     * @param e
-     *            TableModelEvent
      */
     @Override
     public void tableChanged(TableModelEvent e) {
@@ -300,10 +238,11 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Add a {@link TableModelListener}. It will be added to the master {@link TableModel}
-     * as well as to this SortTableModelProxy. The listener will be notified whenever the
-     * master {@link TableModel}, or the column to be sorted, was changed.
-     * 
+     * Adds a {@link TableModelListener}. It will be added to the master
+     * {@link TableModel} as well as to this SortTableModelProxy. The listener will be
+     * notified whenever the master {@link TableModel}, or the column to be sorted, was
+     * changed.
+     *
      * @param l
      *            {@link TableModelListener}
      */
@@ -314,10 +253,11 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Remove a {@link TableModelListener}. If it was not added, nothing will happen. Make
-     * sure that you use the proxy {@link #removeTableModelListener(TableModelListener)}
-     * when you have used the proxy {@link #addTableModelListener(TableModelListener)}.
-     * 
+     * Removes a {@link TableModelListener}. If it was not added, nothing will happen.
+     * Make sure that you use the proxy
+     * {@link #removeTableModelListener(TableModelListener)} when you have used the proxy
+     * {@link #addTableModelListener(TableModelListener)}.
+     *
      * @param l
      *            {@link TableModelListener}
      */
@@ -328,7 +268,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Notify all {@link TableModelListener} that the sort order was changed.
+     * Notifies all {@link TableModelListener} that the sort order was changed.
      */
     protected void fireTableDataChanged() {
         TableModelEvent e = new TableModelEvent(this);
@@ -346,8 +286,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
         private final boolean desc; // true: descending
 
         /**
-         * Create a new ColumnComparator for a certain column.
-         * 
+         * Creates a new ColumnComparator for a certain column.
+         *
          * @param column
          *            Column to be sorted
          * @param desc
@@ -359,8 +299,8 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
         }
 
         /**
-         * Compare two Integers containing the row numbers to be sorted.
-         * 
+         * Compares two Integers containing the row numbers to be sorted.
+         *
          * @param i1
          *            Integer 1
          * @param i2
@@ -391,12 +331,12 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     }
 
     /**
-     * Returns <code>true</code> if a column is sortable. This method always returns
-     * <code>true</code>. It can be overridden to avoid sorting of different columns.
-     * 
+     * Returns {@code true} if a column is sortable. This method always returns
+     * {@code true}. It can be overridden to avoid sorting of different columns.
+     *
      * @param columnIndex
      *            Column index to check
-     * @return Always <code>true</code>
+     * @return Always {@code true}
      * @since R15
      */
     @Override

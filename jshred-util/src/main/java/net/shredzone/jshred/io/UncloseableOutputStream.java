@@ -27,16 +27,15 @@ import java.io.OutputStream;
  * This is a {@link FilterOutputStream} where the close() method is disabled. Use this
  * class to pass an {@link OutputStream} to another method, to make sure that the method
  * is unable to close your stream unintentionally.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: UncloseableOutputStream.java 302 2009-05-12 22:19:11Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R13
  */
 public class UncloseableOutputStream extends FilterOutputStream {
 
     /**
      * Creates a new UncloseableOutputStream.
-     * 
+     *
      * @param out
      *            {@link OutputStream} to make sure it will not be closed.
      */
@@ -45,7 +44,7 @@ public class UncloseableOutputStream extends FilterOutputStream {
     }
 
     /**
-     * Will not close the {@link OutputStream}. It will only be flushed.
+     * Does not close the {@link OutputStream}. It will only be flushed.
      */
     @Override
     public void close() throws IOException {

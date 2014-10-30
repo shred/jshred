@@ -25,13 +25,11 @@ import javax.swing.JList;
 /**
  * This {@link DefaultListSelectionModel} also allows that no item can be selected at all.
  * Use this selection model if you want to disable a {@link JList}, but keep the content
- * readable. Besides allowing a fourth selection mode (<code>NO_SELECTION</code>), it
+ * readable. Besides allowing a fourth selection mode ({@code NO_SELECTION}), it
  * completely behaves like the {@link DefaultListSelectionModel}.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: NoListSelectionModel.java 389 2009-11-11 23:47:30Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R6
- * @see DefaultListSelectionModel
  */
 public class NoListSelectionModel extends DefaultListSelectionModel {
     private static final long serialVersionUID = 3976735869820483376L;
@@ -43,9 +41,6 @@ public class NoListSelectionModel extends DefaultListSelectionModel {
 
     private boolean noselect = false;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setSelectionInterval(int index0, int index1) {
         if (!noselect) {
@@ -53,9 +48,6 @@ public class NoListSelectionModel extends DefaultListSelectionModel {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addSelectionInterval(int index0, int index1) {
         if (!noselect) {
@@ -63,9 +55,6 @@ public class NoListSelectionModel extends DefaultListSelectionModel {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void insertIndexInterval(int index, int length, boolean before) {
         if (!noselect) {
@@ -73,9 +62,6 @@ public class NoListSelectionModel extends DefaultListSelectionModel {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setSelectionMode(int selectionMode) {
         if (selectionMode == NO_SELECTION) {
@@ -88,9 +74,6 @@ public class NoListSelectionModel extends DefaultListSelectionModel {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getSelectionMode() {
         if (noselect) {

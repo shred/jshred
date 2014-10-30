@@ -37,24 +37,23 @@ import java.util.ArrayList;
  * doubled.
  * <p>
  * CSVLine inherits the List interface for easier access.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: CSVLine.java 390 2009-11-11 23:48:36Z shred $
+ *
+ * @author Richard "Shred" Körber
  */
 public class CSVLine extends ArrayList<String> {
     private static final long serialVersionUID = 3544948840219359284L;
     private char delim;
 
     /**
-     * Create a new, empty CSVLine with ';' as delimiter.
+     * Creates a new, empty CSVLine with ';' as delimiter.
      */
     public CSVLine() {
         this(';');
     }
 
     /**
-     * Create a new, empty CSVLine with the given delimiter.
-     * 
+     * Creates a new, empty CSVLine with the given delimiter.
+     *
      * @param delim
      *            Delimiter
      */
@@ -63,8 +62,8 @@ public class CSVLine extends ArrayList<String> {
     }
 
     /**
-     * Create a new CSVLine, with the given text and ';' as default delimiter.
-     * 
+     * Creates a new CSVLine, with the given text and ';' as default delimiter.
+     *
      * @param text
      *            Text to be split up
      */
@@ -74,8 +73,8 @@ public class CSVLine extends ArrayList<String> {
     }
 
     /**
-     * Create a new CSVLine with the given text and the given delimiter.
-     * 
+     * Creates a new CSVLine with the given text and the given delimiter.
+     *
      * @param text
      *            Text to be split up
      * @param delim
@@ -87,16 +86,16 @@ public class CSVLine extends ArrayList<String> {
     }
 
     /**
-     * Add a CSV line to the current content. All columns are added to the end of the
+     * Adds a CSV line to the current content. All columns are added to the end of the
      * current column list. This is most probably not what you wanted to do!
      * <p>
-     * If you want to use this class with a new line, use <code>clear()</code> before:
-     * 
+     * If you want to use this class with a new line, use {@link #clear()} before:
+     *
      * <pre>
      * csvline.clear();
      * csvline.addLine(line);
      * </pre>
-     * 
+     *
      * @param text
      *            Line to be added
      */
@@ -143,9 +142,9 @@ public class CSVLine extends ArrayList<String> {
     }
 
     /**
-     * Set the delimiter character. The quote character '"' is not allowed as a delimiter,
-     * and will throw an IllegalArgumentException.
-     * 
+     * Sets the delimiter character. The quote character '"' is not allowed as a
+     * delimiter, and will throw an IllegalArgumentException.
+     *
      * @param delim
      *            Delimiter
      */
@@ -157,8 +156,8 @@ public class CSVLine extends ArrayList<String> {
     }
 
     /**
-     * Get the delimiter character.
-     * 
+     * Gets the delimiter character.
+     *
      * @return Delimiter
      */
     public char getDelimiter() {
@@ -166,10 +165,10 @@ public class CSVLine extends ArrayList<String> {
     }
 
     /**
-     * Get a valid CSV line of the current content, using the current delimiter char.
+     * Gets a valid CSV line of the current content, using the current delimiter char.
      * <p>
      * <em>Note:</em> There is no newline character at the end of the line!
-     * 
+     *
      * @return CSV line, without newline character
      */
     @Override

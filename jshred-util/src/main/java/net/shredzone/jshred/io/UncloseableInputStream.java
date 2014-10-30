@@ -27,16 +27,15 @@ import java.io.InputStream;
  * This is a {@link FilterInputStream} where the close() method is disabled. Use this
  * class to pass an {@link InputStream} to another method, to make sure that the method is
  * unable to close your stream unintentionally.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: UncloseableInputStream.java 302 2009-05-12 22:19:11Z shred $
+ *
+ * @author Richard "Shred" Körber
  * @since R13
  */
 public class UncloseableInputStream extends FilterInputStream {
 
     /**
      * Creates a new UncloseableInputStream.
-     * 
+     *
      * @param in
      *            {@link InputStream} which shall not be closed.
      */
@@ -45,9 +44,11 @@ public class UncloseableInputStream extends FilterInputStream {
     }
 
     /**
-     * Will not close the {@link InputStream}.
+     * Does not close the {@link InputStream}.
      */
     @Override
-    public void close() throws IOException {}
+    public void close() throws IOException {
+        // do nothing...
+    }
 
 }

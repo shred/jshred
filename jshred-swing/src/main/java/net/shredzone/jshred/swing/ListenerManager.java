@@ -28,12 +28,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * A ListenerManager helps you keep track of {@link EventListener} lists. The speciality
- * of this manager is to store the listeners weakly, so you won't need to remove the
- * listeners before you destroy the receiver object.
- * 
- * @author Richard Körber &lt;dev@shredzone.de&gt;
- * @version $Id: ListenerManager.java 302 2009-05-12 22:19:11Z shred $
+ * A {@link ListenerManager} helps you keep track of {@link EventListener} lists. The
+ * speciality of this manager is to store the listeners weakly, so you won't need to
+ * remove the listeners before you destroy the receiver object.
+ *
+ * @author Richard "Shred" Körber
  * @since R15
  */
 public class ListenerManager<T extends EventListener> {
@@ -42,7 +41,7 @@ public class ListenerManager<T extends EventListener> {
     /**
      * Adds a listener to this manager. If the listener was already added, nothing will
      * happen.
-     * 
+     *
      * @param listener
      *            Listener to be added
      */
@@ -56,7 +55,7 @@ public class ListenerManager<T extends EventListener> {
     /**
      * Removes the listener from this manager. If the listener was not added, nothing will
      * happen.
-     * 
+     *
      * @param listener
      *            Listener to be removed
      */
@@ -79,7 +78,7 @@ public class ListenerManager<T extends EventListener> {
      * listeners and will render the weak reference mechanism useless.
      * <p>
      * Example for proper usage:
-     * 
+     *
      * <pre>
      * for (ActionListener listener : manager.getListeners()) {
      *     listener.actionPerformed(event);
@@ -87,7 +86,7 @@ public class ListenerManager<T extends EventListener> {
      * </pre>
      * <p>
      * The listeners are returned in no special order.
-     * 
+     *
      * @return {@link Collection} of all current listeners.
      */
     public Collection<T> getListeners() {
