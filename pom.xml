@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.shredzone.jshred</groupId>
     <artifactId>jshred</artifactId>
-    <version>19-SNAPSHOT</version>
+    <version>19</version>
     <packaging>pom</packaging>
     <name>jShred</name>
     <description>jShred Java library</description>
@@ -47,7 +47,8 @@
         <url>scm:git:git@github.com:shred/jshred.git</url>
         <connection>scm:git:git@github.com:shred/jshred.git</connection>
         <developerConnection>scm:git:git@github.com:shred/jshred.git</developerConnection>
-    </scm>
+      <tag>r19</tag>
+  </scm>
     <issueManagement>
         <system>Redmine</system>
         <url>http://www.shredzone.org/projects/jshred/issues</url>
