@@ -47,7 +47,7 @@ public class XMLWriter extends BufferedWriter {
     private String indent = "  ";
     private String charset = "UTF-8";
     private int level = 0;
-    private Stack<String> sElements = new Stack<String>();
+    private Stack<String> sElements = new Stack<>();
     private StringBuilder bTag = new StringBuilder();
     private String store = null;
 

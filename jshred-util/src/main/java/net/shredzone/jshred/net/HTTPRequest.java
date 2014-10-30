@@ -106,14 +106,14 @@ public class HTTPRequest {
         this.method = method;
 
         // --- Initialize parameter hashes ---
-        hmParam = new HashMap<String, Object>();
-        hmStream = new HashMap<String, DataProvider>();
+        hmParam = new HashMap<>();
+        hmStream = new HashMap<>();
         connect = null;
         monitor = null;
 
         // --- Create a boundary string ---
         String bcomp = "---------------------bd";
-        bcomp += String.valueOf(Math.floor(Math.random() * 10000000));
+        bcomp += String.valueOf(Math.floor(Math.random() * 10_000_000));
         boundary = bcomp;
     }
 

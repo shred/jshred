@@ -36,7 +36,7 @@ import java.util.Set;
  * @since R15
  */
 public class ListenerManager<T extends EventListener> {
-    private Set<WeakReference<T>> sListener = new HashSet<WeakReference<T>>();
+    private Set<WeakReference<T>> sListener = new HashSet<>();
 
     /**
      * Adds a listener to this manager. If the listener was already added, nothing will
@@ -90,7 +90,7 @@ public class ListenerManager<T extends EventListener> {
      * @return {@link Collection} of all current listeners.
      */
     public Collection<T> getListeners() {
-        Set<T> result = new HashSet<T>();
+        Set<T> result = new HashSet<>();
         Iterator<WeakReference<T>> it = sListener.iterator();
         while (it.hasNext()) {
             WeakReference<T> wr = it.next();

@@ -103,7 +103,7 @@ public class BrightFilter extends RGBImageFilter {
         blue = (blue < 0 ? 0 : (blue > 255 ? 255 : blue));
 
         // --- Compose new color ---
-        return (rgb & 0xFF000000 | red << 16 | green << 8 | blue);
+        return (rgb & 0xFF_00_00_00 | red << 16 | green << 8 | blue);
     }
 
 }

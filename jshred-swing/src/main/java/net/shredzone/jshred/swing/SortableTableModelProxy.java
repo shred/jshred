@@ -58,7 +58,7 @@ public class SortableTableModelProxy implements ExtendedSortableTableModel, Tabl
     private int currentColumn = 0;
     private boolean currentDesc = false;
     private Integer[] indexMap;
-    private final ListenerManager<TableModelListener> listener = new ListenerManager<TableModelListener>();
+    private final ListenerManager<TableModelListener> listener = new ListenerManager<>();
 
     /**
      * Creates a new SortableTableModelProxy for a master {@link TableModel}. The object

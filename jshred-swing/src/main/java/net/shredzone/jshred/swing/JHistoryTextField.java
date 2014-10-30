@@ -50,7 +50,7 @@ public class JHistoryTextField extends JComponent {
     private int histSize;
     private boolean autoSelect = true;
     private String nodeName = null;
-    private final ListenerManager<ActionListener> listeners = new ListenerManager<ActionListener>();
+    private final ListenerManager<ActionListener> listeners = new ListenerManager<>();
 
     /**
      * Creates a new {@link JHistoryTextField}. The history will only be stored during the
@@ -75,7 +75,7 @@ public class JHistoryTextField extends JComponent {
 
         // --- Create the GUI ---
         setLayout(new BorderLayout());
-        jCombo = new JComboBox<String>();
+        jCombo = new JComboBox<>();
         jCombo.setEditable(true);
         add(jCombo, BorderLayout.CENTER);
 
@@ -249,7 +249,7 @@ public class JHistoryTextField extends JComponent {
     public List<String> getHistory() {
         synchronized (jCombo) {
             int cnt = jCombo.getItemCount();
-            List<String> lResult = new ArrayList<String>(cnt);
+            List<String> lResult = new ArrayList<>(cnt);
             for (int ix = 0; ix < cnt; ix++) {
                 lResult.add(jCombo.getItemAt(ix).toString());
             }

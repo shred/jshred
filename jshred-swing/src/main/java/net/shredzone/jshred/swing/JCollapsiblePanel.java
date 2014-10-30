@@ -57,7 +57,7 @@ public class JCollapsiblePanel extends JPanel {
     private Icon iconCollapsed;
     private Icon iconExpanded;
     private String id; // unique id for remembering the collapse state
-    private final ListenerManager<ChangeListener> listener = new ListenerManager<ChangeListener>();
+    private final ListenerManager<ChangeListener> listener = new ListenerManager<>();
 
     /**
      * Creates an empty {@link JCollapsiblePanel} with no title.

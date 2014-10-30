@@ -46,7 +46,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
  */
 public class JLAFSelector extends JPanel {
     private static final long serialVersionUID = 3689916188578691125L;
-    private static final Map<String, String> mLAFs = new HashMap<String, String>();
+    private static final Map<String, String> mLAFs = new HashMap<>();
 
     private final JComboBox<String> jcbSelector;
     private boolean small = false;
@@ -93,7 +93,7 @@ public class JLAFSelector extends JPanel {
      */
     public JLAFSelector() {
         setLayout(new BorderLayout());
-        List<String> lNames = new ArrayList<String>(mLAFs.values());
+        List<String> lNames = new ArrayList<>(mLAFs.values());
         Collections.sort(lNames);
         jcbSelector = new JComboBox<String>(lNames.toArray(new String[lNames.size()]));
         jcbSelector.setEditable(true);
