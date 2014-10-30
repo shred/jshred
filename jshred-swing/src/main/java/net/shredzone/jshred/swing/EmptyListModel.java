@@ -28,7 +28,7 @@ import javax.swing.event.ListDataListener;
  * @author Richard "Shred" Körber
  * @since R7
  */
-public final class EmptyListModel implements ListModel {
+public final class EmptyListModel<E> implements ListModel<E> {
 
     /**
      * Gets the size. It's always 0.
@@ -43,7 +43,7 @@ public final class EmptyListModel implements ListModel {
      * {@code null}.
      */
     @Override
-    public Object getElementAt(int index) {
+    public E getElementAt(int index) {
         return null;
     }
 

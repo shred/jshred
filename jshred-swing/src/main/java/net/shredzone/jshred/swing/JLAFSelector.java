@@ -48,7 +48,7 @@ public class JLAFSelector extends JPanel {
     private static final long serialVersionUID = 3689916188578691125L;
     private static final Map<String, String> mLAFs = new HashMap<String, String>();
 
-    private final JComboBox jcbSelector;
+    private final JComboBox<String> jcbSelector;
     private boolean small = false;
 
     static {
@@ -95,7 +95,7 @@ public class JLAFSelector extends JPanel {
         setLayout(new BorderLayout());
         List<String> lNames = new ArrayList<String>(mLAFs.values());
         Collections.sort(lNames);
-        jcbSelector = new JComboBox(lNames.toArray());
+        jcbSelector = new JComboBox<String>(lNames.toArray(new String[lNames.size()]));
         jcbSelector.setEditable(true);
         add(jcbSelector, BorderLayout.CENTER);
         setCurrentLAF();
@@ -144,7 +144,7 @@ public class JLAFSelector extends JPanel {
             // Locate the index of this entry
             final int cnt = jcbSelector.getItemCount();
             for (int ix = 0; ix < cnt; ix++) {
-                final String cmpName = (String) jcbSelector.getItemAt(ix);
+                final String cmpName = jcbSelector.getItemAt(ix);
                 if (cmpName.equals(hrName)) {
                     jcbSelector.setSelectedIndex(ix);
                     return;

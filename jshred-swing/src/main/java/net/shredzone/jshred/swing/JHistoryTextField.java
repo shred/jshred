@@ -46,7 +46,7 @@ import javax.swing.JTextField;
 public class JHistoryTextField extends JComponent {
     private static final long serialVersionUID = 3688784791113577272L;
 
-    private JComboBox jCombo;
+    private JComboBox<String> jCombo;
     private int histSize;
     private boolean autoSelect = true;
     private String nodeName = null;
@@ -75,7 +75,7 @@ public class JHistoryTextField extends JComponent {
 
         // --- Create the GUI ---
         setLayout(new BorderLayout());
-        jCombo = new JComboBox();
+        jCombo = new JComboBox<String>();
         jCombo.setEditable(true);
         add(jCombo, BorderLayout.CENTER);
 
