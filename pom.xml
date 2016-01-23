@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
  *
  * jshred - Shred's Toolbox
  *
@@ -44,14 +44,14 @@
         </license>
     </licenses>
     <scm>
-        <url>scm:git:git@github.com:shred/jshred.git</url>
+        <url>https://github.com/shred/jshred/</url>
         <connection>scm:git:git@github.com:shred/jshred.git</connection>
         <developerConnection>scm:git:git@github.com:shred/jshred.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
     <issueManagement>
-        <system>Redmine</system>
-        <url>http://www.shredzone.org/projects/jshred/issues</url>
+        <system>GitHub Issues</system>
+        <url>https://github.com/shred/jshred/issues</url>
     </issueManagement>
     <developers>
         <developer>
@@ -144,6 +144,7 @@
                     </links>
                     <charset>UTF-8</charset>
                     <linksource>true</linksource>
+                    <additionalparam>-Xdoclint:syntax,reference</additionalparam>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,25 @@
+jshred
+======
+
+*jshred* is a Java library containing classes I am frequently using. Maybe some are also useful for you?
+
+*jshred* is mainly a collection of Swing classes I wrote in the last couple of years. Since Swing seems to be almost dead, there will be only very minor changes in this library in the future.
+
+Note that `jshred-spring` has been moved to `commons-taglib` now. Please do not use `jshred-spring` on new projects and move old projects to `commons-tablib`.
+
+This software is part of the Shredzone Commons.
+
+_jshred_ is released under [GNU General Public License Version 3](http://www.gnu.org/licenses/gpl-3.0.html), [GNU Lesser General Public License Version 3](http://www.gnu.org/licenses/lgpl-3.0.html), [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt). It is free software. You may also use _jshred_ in a commercial software free of charge, without needing to buy a commercial license or release your source code.
+
+Installation
+------------
+
+_jshred_ is available at Maven Central. Just add this snippet to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>${project.artifactId}</artifactId>
+  <version>${project.version}</version>
+</dependency>
+```

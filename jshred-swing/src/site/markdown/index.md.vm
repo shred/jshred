@@ -1,0 +1,17 @@
+jshred-swing
+============
+
+This is the jShred Java library part that contains Swing classes.
+
+Installation
+------------
+
+_jshred_ is available at Maven Central. Just add this snippet to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>${project.artifactId}</artifactId>
+  <version>${project.version}</version>
+</dependency>
+```
