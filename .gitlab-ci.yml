@@ -17,7 +17,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 #
 
-image: maven:3-jdk-7
+image: maven:3-jdk-8
 
 # Cache local m2 repository
 # https://gitlab.com/gitlab-org/gitlab-ce/issues/15167#note_15206811
