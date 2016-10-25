@@ -1,4 +1,4 @@
-# jshred ![build status](https://jenkins.shredzone.net/project/jshred/builds/status.png?ref=master)
+# jshred ![build status](https://shredzone.org/badge/jshred.svg)
 
 *jshred* is a Java library containing classes I am frequently using. Maybe some are also useful for you?
 
@@ -26,7 +26,7 @@ This software is part of the Shredzone Commons.
 
 ## Documentation
 
-See the [online documentation](http://www.shredzone.org/maven/jshred/).
+See the [online documentation](https://shredzone.org/maven/jshred/).
 
 ## Requirements
 
