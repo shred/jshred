@@ -1,4 +1,4 @@
-# jshred ![build status](https://shredzone.org/badge/jshred.svg) ![maven central](https://maven-badges.herokuapp.com/maven-central/org.shredzone.jshred/jshred/badge.svg)
+# jshred ![build status](https://shredzone.org/badge/jshred.svg) ![maven central](https://shredzone.org/maven-central/org.shredzone.jshred/jshred/badge.svg)
 
 *jshred* is a Java library containing classes I am frequently using. Maybe some are also useful for you?
 
