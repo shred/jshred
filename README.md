@@ -41,8 +41,8 @@ If you are updating from R14 or earlier, note that R15 brought some changes in t
 
 ## Contribute
 
-* Fork the [Source code at GitHub](https://github.com/shred/jshred). Feel free to send pull requests.
-* Found a bug? [File a bug report!](https://github.com/shred/jshred/issues)
+* Fork the [Source code at Codeberg](https://codeberg.org/shred/jshred). Feel free to send pull requests.
+* Found a bug? [File a bug report!](https://codeberg.org/shred/jshred/issues)
 
 ## License
 

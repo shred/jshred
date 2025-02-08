@@ -44,14 +44,14 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/shred/jshred/</url>
-        <connection>scm:git:git@github.com:shred/jshred.git</connection>
-        <developerConnection>scm:git:git@github.com:shred/jshred.git</developerConnection>
+        <url>https://codeberg.org/shred/jshred/</url>
+        <connection>scm:git:git@codeberg.org:shred/jshred.git</connection>
+        <developerConnection>scm:git:git@codeberg.org:shred/jshred.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
     <issueManagement>
-        <system>GitHub Issues</system>
-        <url>https://github.com/shred/jshred/issues</url>
+        <system>Codeberg Issues</system>
+        <url>https://codeberg.org/shred/jshred/issues</url>
     </issueManagement>
     <developers>
         <developer>
